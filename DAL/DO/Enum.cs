@@ -8,10 +8,14 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct Enum
-        {
+       
+       
+           public enum WeightCategories{Light,Medium,Heavy};
+            public enum DroneStatuses { };
+        
 
-        }
+
+       
     }
    
 }

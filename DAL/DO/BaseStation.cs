@@ -15,10 +15,13 @@ namespace IDAL
             public int ID { get; set; }
             public string StationName { get; set; }
             public int FreeChargingSlots { get; set; }
-            public double longitude { get; set; }
+            public double Longitude { get; set; }
             public double Latitude { get; set; }
 
-
+            public override string ToString()
+            {
+                return string.Format("ID: {0}\t StationName:{1}\t FreeChargingSlots:{2}\t Longitude:{3}\t Latitude:{4}\t", ID, StationName, FreeChargingSlots, Longitude, Latitude);
+            }
 
         }
     }

@@ -17,9 +17,6 @@ namespace IDAL
             public int FreeChargingSlots { get; set; }
             public double longitude { get; set; }
             public double Latitude { get; set; }
-
-
-
         }
     }
     

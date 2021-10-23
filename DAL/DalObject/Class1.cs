@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL
+namespace DalObject
 {
-    namespace DO
+    public static class DataSource
     {
-       
+
     }
-   
 }

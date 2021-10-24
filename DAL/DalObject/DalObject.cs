@@ -4,20 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
-namespace DalObject 
+namespace DalObject
 {
+
     internal class DataSource
     {
-        internal List <Drone> DroneList = new List<Drone>();
-        internal List<BaseStation> BaseStationList = new List<BaseStation>();
-        internal List<Customer> CustomerList = new List<Customer>();
-        internal List<Parcel> ParcelList = new List<Parcel>();
-        internal List<DroneCharge> DroneChargeList = new List<DroneCharge>();
+        internal static List<Drone> DroneList = new List<Drone>();
+        internal static List<BaseStation> BaseStationList = new List<BaseStation>();
+        internal static List<Customer> CustomerList = new List<Customer>();
+        internal static List<Parcel> ParcelList = new List<Parcel>();
+        internal static List<DroneCharge> DroneChargeList = new List<DroneCharge>();
+
+        internal static Random r1 = new Random();
+
+        internal class Config
+        {
+            public static int IdCount = 0;
+        }
+        public static void Initialize()
+        {
+            InitializeBaseStation();
+            InitializeCustomer();
+            InitializeDrone();
+            InitializeParcel();
+        }
+
+         static void InitializeDrone() 
+        { 
+            for(int i=0;i<5;i++)
+            {
+                DroneList.Add(new Drone()
+                {
+                    ID = r1.Next(1000, 10000),
+
+                }
+                    );
+            }
+        
+        }
+         static void InitializeBaseStation() { }
+
+        static void InitializeCustomer() { }
+
+         static void InitializeParcel() { }
+
     }
-    internal class Config
-    {
-        static int D = 0, B = 0, C = 0, p = 0;
-    }
-    //static Initialize{}
+
 }
 

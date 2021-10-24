@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
-namespace DalObject 
+namespace DalObject
 {
     internal class DataSource
     {
@@ -12,7 +12,7 @@ namespace DalObject
         internal List<BaseStation> BaseStationList = new List<BaseStation>();
         internal List<Customer> CustomerList = new List<Customer>();
         internal List<Parcel> ParcelList = new List<Parcel>();
-        internal List<DroneCharge> DroneChargeList = new List<DroneCharge>();
+        internal List<DroneCharge> DroneChargeList = new List<DroneCharge>();  
     }
     internal class Config
     {

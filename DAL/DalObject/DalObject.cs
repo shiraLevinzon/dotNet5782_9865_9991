@@ -47,73 +47,21 @@ namespace DalObject
         static void InitializeCustomer() { }
 
          static void InitializeParcel() { }
-        public static void AddDrone()
+        public static void AddDrone(Drone tmp)
         {
-            Drone tmp=new Drone();
-            Console.WriteLine("enter the Drone's id");
-            tmp.ID = Console.Read();
-            Console.WriteLine("Insert the Drone model");
-            tmp.Model = Console.ReadLine();
-            Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
-            tmp.MaxWeight = Console.ReadLine();
-            Console.WriteLine("Enter Drone loading status");
-            tmp.BatteryStatus = Console.Read();
-            Console.WriteLine("Insert the Drone condition(Enter 0 if the glider is available 1 if the glider is in maintenance or 2 if the glider is on delivery)");
-            tmp.DroneCondition = Console.Read();
-            DroneList.Add(tmp);
+        DroneList.Add(tmp);
         }
-        public static void AddBaseStation()
+        public static void AddBaseStation(BaseStation tmp)
         {
-            BaseStation tmp = new BaseStation();
-            Console.WriteLine("Enter the ID number of the base station");
-            tmp.ID = Console.Read();
-            Console.WriteLine("Enter the name of the base station");
-            tmp.StationName = Console.ReadLine();
-            Console.WriteLine("Enter the number of available charging stations at the station");
-            tmp.FreeChargingSlots = Console.Read();
-            Console.WriteLine("Enter the Longitude of the station");
-            tmp.Longitude = Console.Read();
-            Console.WriteLine("Enter the latitude of the station");
-            tmp.Latitude = Console.Read();
             BaseStationList.Add(tmp);
         }
-        public static void AddCustomer()
+        public static void AddCustomer(Customer tmp)
         {
-            Customer tmp = new Customer();
-            Console.WriteLine("Enter the customer ID number");
-            tmp.ID = Console.Read();
-            Console.WriteLine("Enter the customer name");
-            tmp.Name = Console.ReadLine();
-            Console.WriteLine("Enter the customer's phone number");
-            tmp.Phone = Console.ReadLine();
-            Console.WriteLine("Enter the Longitude longitude");
-            tmp.Longitude = Console.Read();
-            Console.WriteLine("Enter the Latitude of the customer location");
-            tmp.Latitude = Console.Read();
             CustomerList.Add(tmp);
         }
-        public static void AddParcel()
+        public static void AddParcel(Parcel tmp)
         {
-            Parcel tmp = new Parcel();
-            Console.WriteLine("Enter an identification number of the package.");
-            tmp.ID = Console.Read();
-            Console.WriteLine("The conference identifies a sending customer");
-            tmp.SenderID = Console.Read();
-            Console.WriteLine("The conference identifies a receiving customer");
-            tmp.TargetID = Console.Read();
-            Console.WriteLine("Enter a weight category (light,normal,heavy)");
-            tmp.Weight = Console.Read();
-            Console.WriteLine("Enter Priority Level (Low, Normal, High)");
-            tmp.priority = Console.Read();
-            Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
-            tmp.DroneId = Console.Read();
-            tmp.Requested = DateTime.Now;
-            Console.WriteLine("Enter the time to assign the package to the Drone");
-            Console.WriteLine("Enter a package pick-up time from the sender");
-            Console.WriteLine("Enter the time of arrival of the package to the recipient");
-          //  tmp.Scheduled
-          //tmp.PickedUp
-          //tmp.Delivered
+            ParcelList.Add(tmp);
         }
     }
 

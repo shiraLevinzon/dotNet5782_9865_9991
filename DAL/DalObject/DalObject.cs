@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
+
 namespace DalObject
 {
-
-    internal class DataSource
+    public class DataSource
     {
         internal static List<Drone> DroneList = new List<Drone>();
         internal static List<BaseStation> BaseStationList = new List<BaseStation>();
@@ -21,7 +21,6 @@ namespace DalObject
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
         }
-
         internal class Config
         {
             public static int IdCount = 0;
@@ -34,9 +33,9 @@ namespace DalObject
             InitializeParcel();
         }
 
-         static void InitializeDrone() 
-         { 
-            for(int i=0;i<5;i++)
+        static void InitializeDrone()
+        {
+            for (int i = 0; i < 5; i++)
             {
                 DroneList.Add(new Drone()
                 {
@@ -45,12 +44,11 @@ namespace DalObject
                     MaxWeight = (WeightCategories)r1.Next(1, 4),
                     BatteryStatus = r1.NextDouble(),
                     DroneCondition = (DroneStatuses)r1.Next(1, 4),
-                }
-                    ) ;
-               ;
+                });
+                ;
             }
-        
-         }
+
+        }
         static void InitializeCustomer()
         {
             for (int i = 0; i < 10; i++)
@@ -60,16 +58,16 @@ namespace DalObject
                     ID = r1.Next(100000000, 1000000000),
                     Name = $"Customer {i}",
                     Phone = $"0{r1.Next(50, 60)}{r1.Next(1000000, 10000000)}",
-                    Latitude = GetRandomNumber(33.7 , 36.3),
-                    Longitude= GetRandomNumber(29.3, 33.5),
+                    Latitude = GetRandomNumber(33.7, 36.3),
+                    Longitude = GetRandomNumber(29.3, 33.5),
 
-                }
-                    ) ;
+                });
                 ;
             }
 
         }
-        static void InitializeBaseStation() {
+        static void InitializeBaseStation()
+        {
             for (int i = 0; i < 2; i++)
             {
                 BaseStationList.Add(new BaseStation()
@@ -80,13 +78,12 @@ namespace DalObject
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
 
-                }
-                    );
+                } );
                 ;
             }
         }
-
-         static void InitializeParcel() {
+        public static void InitializeParcel()
+        {
             for (int i = 0; i < 10; i++)
             {
                 ParcelList.Add(new Parcel()
@@ -97,29 +94,74 @@ namespace DalObject
                     Weight = (WeightCategories)r1.Next(1, 4),
                     priority = (Priorities)r1.Next(1, 4),
                     DroneId = r1.Next(1000, 10000),
-                    Requested =
-                    Scheduled =
-                    PickedUp =
-                    Delivered =
-
-         static void InitializeParcel() { }
+                    Requested = DateTime.Now,
+                    Scheduled = DateTime.Now,
+                });
+            }
+        }
+    }
+    public class DalObject
+    {
+        /// <summary>
+        /// Functions Add a new field to one of the lists
+        /// </summary>
+        /// <param name="tmp"></param>
         public static void AddDrone(Drone tmp)
         {
-        DroneList.Add(tmp);
+            DataSource.DroneList.Add(tmp);
         }
         public static void AddBaseStation(BaseStation tmp)
         {
-            BaseStationList.Add(tmp);
+            DataSource.BaseStationList.Add(tmp);
         }
         public static void AddCustomer(Customer tmp)
         {
-            CustomerList.Add(tmp);
+            DataSource.CustomerList.Add(tmp);
         }
         public static void AddParcel(Parcel tmp)
         {
-            ParcelList.Add(tmp);
+            DataSource.ParcelList.Add(tmp);
+        }
+        /// Update functions 
+        
+        
+        
+        /// Search functions
+        public static Drone DroneSearch(int p)
+        {
+            foreach(Drone tmp in DataSource.DroneList)
+            {
+                if (tmp.ID == p)
+                    return tmp;
+            }
+            return new Drone();
+        }
+        public static BaseStation BaseStationSearch(int p)
+        {
+            foreach (BaseStation tmp in DataSource.BaseStationList)
+            {
+                if (tmp.ID == p)
+                    return tmp;
+            }
+            return new BaseStation();
+        }
+        public static Customer CustomerSearch(int p)
+        {
+            foreach (Customer tmp in DataSource.CustomerList)
+            {
+                if (tmp.ID == p)
+                    return tmp;
+            }
+            return new Customer();
+        }
+        public static Parcel ParcelSearch(int p)
+        {
+            foreach (Parcel tmp in DataSource.ParcelList)
+            {
+                if (tmp.ID == p)
+                    return tmp;
+            }
+            return new Parcel();
         }
     }
-
 }
-

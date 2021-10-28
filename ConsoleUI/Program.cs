@@ -88,7 +88,7 @@ namespace ConsoleUI
                                     tmp2.priority = (Priorities)b;
                                     Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
                                     tmp2.DroneId = Console.Read();
-                                    // tmp.Requested = DateTime.Now;
+                                    tmp2.Requested = DateTime.Now;
                                     tmp2.Scheduled = DateTime.Now;
                                     DalObject.DalObject.AddParcel(tmp2);
                                     break;
@@ -100,9 +100,9 @@ namespace ConsoleUI
                         }
                         break;
                     case 2:
-
-
-
+                        ///
+                        ///
+                        ///
                         break;
                     case 3:
                         Console.WriteLine("To view Drone press 1,");
@@ -142,7 +142,49 @@ namespace ConsoleUI
                         }
                         break;
                     case 4:
-
+                        Console.WriteLine("To view all base stations Press 1");
+                        Console.WriteLine("To view all existing Drone press 2");
+                        Console.WriteLine("To view all customers in the press database 3");
+                        Console.WriteLine("To view the Parcels list, press 4");
+                        Console.WriteLine("To view a list of packages that have not yet been assigned to the Drone press 5");
+                        Console.WriteLine("To view base stations with available charging stations, press 6");
+                        int t = Console.Read();
+                        switch (t)
+                        {
+                            case 1:
+                                foreach(BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                    tmp.ToString();
+                                break;
+                            case 2:
+                                foreach (Drone tmp in DalObject.DalObject.printDrone())
+                                    tmp.ToString();
+                                break;
+                            case 3:
+                                foreach (Customer tmp in DalObject.DalObject.printCustomer())
+                                    tmp.ToString();
+                                break;
+                            case 4:
+                                foreach (Parcel tmp in DalObject.DalObject.printParcel())
+                                    tmp.ToString();
+                                break;
+                            case 5:
+                                foreach(Parcel tmp in DalObject.DalObject.printParcel())
+                                {
+                                    if(tmp.DroneId==0)
+                                        tmp.ToString();
+                                }
+                                break;
+                            case 6:
+                                foreach(BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                {
+                                    if (tmp.FreeChargingSlots != 0)
+                                        tmp.ToString();
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Option not found.");
+                                break;
+                        }
                         break;
                     case 5:
                         Console.WriteLine("have a nice day,");

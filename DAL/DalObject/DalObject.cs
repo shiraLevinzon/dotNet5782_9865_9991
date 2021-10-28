@@ -123,13 +123,13 @@ namespace DalObject
             DataSource.ParcelList.Add(tmp);
         }
         /// Update functions 
-        
-        
-        
+
+
+
         /// Search functions
         public static Drone DroneSearch(int p)
         {
-            foreach(Drone tmp in DataSource.DroneList)
+            foreach (Drone tmp in DataSource.DroneList)
             {
                 if (tmp.ID == p)
                     return tmp;
@@ -162,6 +162,23 @@ namespace DalObject
                     return tmp;
             }
             return new Parcel();
+        }
+        //פונקציות הדפסה 
+        public static List<Drone> printDrone()
+        {
+            return DataSource.DroneList;
+        }
+        public static List<BaseStation> printBaseStation()
+        {
+            return DataSource.BaseStationList;
+        }
+        public static List<Customer> printCustomer()
+        {
+            return DataSource.CustomerList;
+        }
+        public static List<Parcel> printParcel()
+        {
+            return DataSource.ParcelList;
         }
     }
 }

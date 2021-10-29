@@ -100,6 +100,61 @@ namespace ConsoleUI
                         }
                         break;
                     case 2:
+                        Console.WriteLine("To Assign A Package To Drone press 1,");
+                        Console.WriteLine("To Parcel Collection By Drone press 2,");
+                        Console.WriteLine("To Delivery Parcel To  Customer press 3,");
+                        Console.WriteLine("To Sending Drone To Base Station, press 4,");
+                        Console.WriteLine("To Release Drone From Charging At Base Station, press 5,");
+
+                        int u = Console.Read();
+
+                        switch (u)
+                        {
+                            case 1:
+                               
+                                Console.WriteLine("Enter the Parcel ID number");
+                                 int pID1 =int.Parse( Console.ReadLine());
+                                Console.WriteLine("Enter the Drone ID number");
+                                int dID1 = int.Parse( Console.ReadLine());
+                                DalObject.DalObject.AssignPackageToDrone(pID1,dID1);
+                                break;
+                            case 2:
+                                Console.WriteLine("Enter the Parcel ID number");
+                                int pID2 = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter the Drone ID number");
+                                int dID2 = int.Parse(Console.ReadLine());
+                                DalObject.DalObject.ParcelCollectionByDrone(pID2, dID2);
+                                break;
+                            case 3:
+                                Console.WriteLine("Enter the Parcel ID number");
+                                int pID3 = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter the Drone ID number");
+                                int dID3 = int.Parse(Console.ReadLine());
+                                DalObject.DalObject.DeliveryParcelToCustomer(pID3, dID3);
+                                break;
+                            case 4:
+                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                    tmp.ToString();
+                                Console.WriteLine("Enter the BaseStation ID number");
+                                int pID4 = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter the Drone ID number");
+                                int dID4 = int.Parse(Console.ReadLine());
+                                DalObject.DalObject.SendingDroneToBaseStation(pID4, dID4);
+                                break;
+
+                            case 5:
+                                
+                                Console.WriteLine("Enter the BaseStation ID number");
+                                int pID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter the Drone ID number");
+                                int dID = int.Parse(Console.ReadLine());
+                                DalObject.DalObject.ReleaseDroneFromChargingAtBaseStation(pID, dID);
+                                break;
+
+                            default:
+                                break;
+                        }
+
                         ///
                         ///
                         ///

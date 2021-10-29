@@ -180,5 +180,48 @@ namespace DalObject
         {
             return DataSource.ParcelList;
         }
+        //פונקציית עדכון
+        public static void AssignPackageToDrone(int pID, int dID)
+        {
+            Drone d = DroneSearch(dID);
+            Parcel p = ParcelSearch(pID);
+            p.DroneId = dID;
+            p.Scheduled = DateTime.Now;
+            d.DroneCondition = (DroneStatuses)2;
+        }
+        public static void ParcelCollectionByDrone(int pID, int dID)
+        {
+            Drone d = DroneSearch(dID);
+            Parcel p = ParcelSearch(pID);
+            p.PickedUp = DateTime.Now;
+            d.MaxWeight = p.Weight;
+        }
+        public static void DeliveryParcelToCustomer(int pID, int dID)
+        {
+            Drone d = DroneSearch(dID);
+            Parcel p = ParcelSearch(pID);
+            p.Delivered = DateTime.Now;
+            d.DroneCondition = (DroneStatuses)0;
+        }
+        public static void SendingDroneToBaseStation(int bsID, int dID)
+        {
+            Drone d = DroneSearch(dID);
+            BaseStation bs = BaseStationSearch(bsID);
+            d.DroneCondition = (DroneStatuses)1;
+            DroneCharge dc = new DroneCharge();
+            dc.DroneID = dID;
+            dc.StationID = bsID;
+            bs.FreeChargingSlots--;
+
+        }
+        public static void ReleaseDroneFromChargingAtBaseStation(int bsID,int dID)
+        {
+            Drone d = DroneSearch(dID);
+            BaseStation bs = BaseStationSearch(bsID);
+            d.DroneCondition = (DroneStatuses)0;
+            d.BatteryStatus = 1;
+            bs.FreeChargingSlots++;
+
+        }
     }
 }

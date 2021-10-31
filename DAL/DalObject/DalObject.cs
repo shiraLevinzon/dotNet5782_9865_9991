@@ -88,7 +88,7 @@ namespace DalObject
             {
                 ParcelList.Add(new Parcel()
                 {
-                    ID = r1.Next(1000, 10000),
+                    ID = Config.IdCount++,
                     SenderID = r1.Next(1000, 10000),
                     TargetID = r1.Next(1000, 10000),
                     Weight = (WeightCategories)r1.Next(1, 4),
@@ -96,7 +96,7 @@ namespace DalObject
                     DroneId = r1.Next(1000, 10000),
                     Requested = DateTime.Now,
                     Scheduled = DateTime.Now,
-                });
+                }) ;
             }
         }
     }
@@ -120,10 +120,11 @@ namespace DalObject
         }
         public static void AddParcel(Parcel tmp)
         {
+            tmp.ID = DataSource.Config.IdCount++;
             DataSource.ParcelList.Add(tmp);
         }
-        /// Update functions 
-
+       
+        
 
 
         /// Search functions
@@ -166,21 +167,31 @@ namespace DalObject
         //פונקציות הדפסה 
         public static List<Drone> printDrone()
         {
-            return DataSource.DroneList;
+            List<Drone> DroneListEzer = new List<Drone>();
+            DroneListEzer= DataSource.DroneList;
+            return DroneListEzer;
         }
         public static List<BaseStation> printBaseStation()
         {
-            return DataSource.BaseStationList;
+            List<BaseStation> BaseStationListEzer = new List<BaseStation>();
+            BaseStationListEzer = DataSource.BaseStationList;
+            return BaseStationListEzer;
         }
         public static List<Customer> printCustomer()
         {
-            return DataSource.CustomerList;
+
+            List<Customer> CustomerListEzer = new List<Customer>();
+            CustomerListEzer = DataSource.CustomerList;
+            return CustomerListEzer;
         }
         public static List<Parcel> printParcel()
         {
-            return DataSource.ParcelList;
+
+            List<Parcel> ParcelListEzer = new List<Parcel>();
+            ParcelListEzer = DataSource.ParcelList;
+            return ParcelListEzer;
         }
-        //פונקציית עדכון
+        /// Update functions 
         public static void AssignPackageToDrone(int pID, int dID)
         {
             Drone d = DroneSearch(dID);

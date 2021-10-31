@@ -5,7 +5,7 @@ using DalObject;
 namespace ConsoleUI
 {
     class Program
-    { 
+    {
         public static void Main(string[] args)
         {
             int i = 0;
@@ -24,78 +24,76 @@ namespace ConsoleUI
                         int b = 0;
                         Console.WriteLine("What do you want to add? to finish enter end");
                         a = Console.ReadLine();
-                            switch (a)
-                            {
-                                case "Drone":
-                                    Drone tmp = new Drone();
-                                    Console.WriteLine("enter the Drone's id");
-                                    tmp.ID = Console.Read();
-                                    Console.WriteLine("Insert the Drone model");
-                                    tmp.Model = Console.ReadLine();
-                                    Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
-                                    b = Console.Read();
-                                    tmp.MaxWeight = (WeightCategories)b;
-                                    Console.WriteLine("Enter Drone loading status");
-                                    tmp.BatteryStatus = Console.Read();
-                                    Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
-                                    b = Console.Read();
-                                    tmp.DroneCondition = (DroneStatuses)b;
-                                    DalObject.DalObject.AddDrone(tmp);
-                                    break;
-                                case "BaseStation":
-                                    BaseStation tmp3 = new BaseStation();
-                                    Console.WriteLine("Enter the ID number of the base station");
-                                    tmp3.ID = Console.Read();
-                                    Console.WriteLine("Enter the name of the base station");
-                                    tmp3.StationName = Console.ReadLine();
-                                    Console.WriteLine("Enter the number of available charging stations at the station");
-                                    tmp3.FreeChargingSlots = Console.Read();
-                                    Console.WriteLine("Enter the Longitude of the station");
-                                    tmp3.Longitude = Console.Read();
-                                    Console.WriteLine("Enter the latitude of the station");
-                                    tmp3.Latitude = Console.Read();
-                                    DalObject.DalObject.AddBaseStation(tmp3);
-                                    break;
-                                case "Customer":
-                                    Customer tmp1 = new Customer();
-                                    Console.WriteLine("Enter the customer ID number");
-                                    tmp1.ID = Console.Read();
-                                    Console.WriteLine("Enter the customer name");
-                                    tmp1.Name = Console.ReadLine();
-                                    Console.WriteLine("Enter the customer's phone number");
-                                    tmp1.Phone = Console.ReadLine();
-                                    Console.WriteLine("Enter the Longitude longitude");
-                                    tmp1.Longitude = Console.Read();
-                                    Console.WriteLine("Enter the Latitude of the customer location");
-                                    tmp1.Latitude = Console.Read();
-                                    DalObject.DalObject.AddCustomer(tmp1);
-                                    break;
-                                case "Parcel":
-                                    Parcel tmp2 = new Parcel();
-                                    Console.WriteLine("Enter an identification number of the package.");
-                                    tmp2.ID = Console.Read();
-                                    Console.WriteLine("The conference identifies a sending customer");
-                                    tmp2.SenderID = Console.Read();
-                                    Console.WriteLine("The conference identifies a receiving customer");
-                                    tmp2.TargetID = Console.Read();
-                                    Console.WriteLine("Enter a weight category (light,normal,heavy)");
-                                    b = Console.Read();
-                                    tmp2.Weight = (WeightCategories)b;
-                                    Console.WriteLine("Enter Priority Level (Low=0, Normal=1, High=2)");
-                                    b = Console.Read();
-                                    tmp2.priority = (Priorities)b;
-                                    Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
-                                    tmp2.DroneId = Console.Read();
-                                    tmp2.Requested = DateTime.Now;
-                                    tmp2.Scheduled = DateTime.Now;
-                                    DalObject.DalObject.AddParcel(tmp2);
-                                    break;
-                                default:
-                                    Console.WriteLine("Option not found Please re-enter given");
-                                    a = Console.ReadLine();
-                                    break;
-                            }
-                        
+                        switch (a)
+                        {
+                            case "Drone":
+                                Drone tmp = new Drone();
+                                Console.WriteLine("enter the Drone's id");
+                                tmp.ID = Console.Read();
+                                Console.WriteLine("Insert the Drone model");
+                                tmp.Model = Console.ReadLine();
+                                Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
+                                b = Console.Read();
+                                tmp.MaxWeight = (WeightCategories)b;
+                                Console.WriteLine("Enter Drone loading status");
+                                tmp.BatteryStatus = Console.Read();
+                                Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
+                                b = Console.Read();
+                                tmp.DroneCondition = (DroneStatuses)b;
+                                DalObject.DalObject.AddDrone(tmp);
+                                break;
+                            case "BaseStation":
+                                BaseStation tmp3 = new BaseStation();
+                                Console.WriteLine("Enter the ID number of the base station");
+                                tmp3.ID = Console.Read();
+                                Console.WriteLine("Enter the name of the base station");
+                                tmp3.StationName = Console.ReadLine();
+                                Console.WriteLine("Enter the number of available charging stations at the station");
+                                tmp3.FreeChargingSlots = Console.Read();
+                                Console.WriteLine("Enter the Longitude of the station");
+                                tmp3.Longitude = Console.Read();
+                                Console.WriteLine("Enter the latitude of the station");
+                                tmp3.Latitude = Console.Read();
+                                DalObject.DalObject.AddBaseStation(tmp3);
+                                break;
+                            case "Customer":
+                                Customer tmp1 = new Customer();
+                                Console.WriteLine("Enter the customer ID number");
+                                tmp1.ID = Console.Read();
+                                Console.WriteLine("Enter the customer name");
+                                tmp1.Name = Console.ReadLine();
+                                Console.WriteLine("Enter the customer's phone number");
+                                tmp1.Phone = Console.ReadLine();
+                                Console.WriteLine("Enter the Longitude longitude");
+                                tmp1.Longitude = Console.Read();
+                                Console.WriteLine("Enter the Latitude of the customer location");
+                                tmp1.Latitude = Console.Read();
+                                DalObject.DalObject.AddCustomer(tmp1);
+                                break;
+                            case "Parcel":
+                                Parcel tmp2 = new Parcel();
+                                Console.WriteLine("Enter an identification number of the package.");
+                                tmp2.ID = Console.Read();
+                                Console.WriteLine("The conference identifies a sending customer");
+                                tmp2.SenderID = Console.Read();
+                                Console.WriteLine("The conference identifies a receiving customer");
+                                tmp2.TargetID = Console.Read();
+                                Console.WriteLine("Enter a weight category (light,normal,heavy)");
+                                b = Console.Read();
+                                tmp2.Weight = (WeightCategories)b;
+                                Console.WriteLine("Enter Priority Level (Low=0, Normal=1, High=2)");
+                                b = Console.Read();
+                                tmp2.priority = (Priorities)b;
+                                Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
+                                tmp2.DroneId = Console.Read();
+                                tmp2.Requested = DateTime.Now;
+                                tmp2.Scheduled = DateTime.Now;
+                                DalObject.DalObject.AddParcel(tmp2);
+                                break;
+                            default:
+                                Console.WriteLine("Option not found Please re-enter given");
+                                break;
+                        }
                         break;
                     case 2:
                         Console.WriteLine("To Assign A Package To Drone press 1,");
@@ -109,12 +107,12 @@ namespace ConsoleUI
                         switch (u)
                         {
                             case 1:
-                               
+
                                 Console.WriteLine("Enter the Parcel ID number");
-                                 int pID1 =int.Parse( Console.ReadLine());
+                                int pID1 = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
-                                int dID1 = int.Parse( Console.ReadLine());
-                                DalObject.DalObject.AssignPackageToDrone(pID1,dID1);
+                                int dID1 = int.Parse(Console.ReadLine());
+                                DalObject.DalObject.AssignPackageToDrone(pID1, dID1);
                                 break;
                             case 2:
                                 Console.WriteLine("Enter the Parcel ID number");
@@ -141,7 +139,7 @@ namespace ConsoleUI
                                 break;
 
                             case 5:
-                                
+
                                 Console.WriteLine("Enter the BaseStation ID number");
                                 int pID = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
@@ -166,7 +164,7 @@ namespace ConsoleUI
                             case 1:
                                 Console.WriteLine("Enter the Drone ID number");
                                 s = Console.Read();
-                                Drone tmp=DalObject.DalObject.DroneSearch(s);
+                                Drone tmp = DalObject.DalObject.DroneSearch(s);
                                 tmp.ToString();
                                 break;
                             case 2:
@@ -203,7 +201,7 @@ namespace ConsoleUI
                         switch (t)
                         {
                             case 1:
-                                foreach(BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
                                     tmp.ToString();
                                 break;
                             case 2:
@@ -219,14 +217,14 @@ namespace ConsoleUI
                                     tmp.ToString();
                                 break;
                             case 5:
-                                foreach(Parcel tmp in DalObject.DalObject.printParcel())
+                                foreach (Parcel tmp in DalObject.DalObject.printParcel())
                                 {
-                                    if(tmp.DroneId==0)
+                                    if (tmp.DroneId == 0)
                                         tmp.ToString();
                                 }
                                 break;
                             case 6:
-                                foreach(BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
                                 {
                                     if (tmp.FreeChargingSlots != 0)
                                         tmp.ToString();

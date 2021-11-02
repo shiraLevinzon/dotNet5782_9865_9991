@@ -152,8 +152,6 @@ namespace ConsoleUI
                             default:
                                 break;
                         }
-
-
                         break;
                     case 3:
                         Console.WriteLine("To view Drone press 1,");

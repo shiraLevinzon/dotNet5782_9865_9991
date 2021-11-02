@@ -142,7 +142,6 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out dID4);
                                 dalobject.SendingDroneToBaseStation(pID4, dID4);
                                 break;
-
                             case 5:
                                 int pID = 0, dID = 0;
                                 Console.WriteLine("Enter the BaseStation ID number");

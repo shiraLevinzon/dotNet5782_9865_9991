@@ -106,30 +106,48 @@ namespace DalObject
     public class DalObject
     {
         public DalObject() { DataSource.Initialize(); }
+
+        #region add functions
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
-        #region add functions
         public void AddDrone(Drone tmp)
         {
             DataSource.DroneList.Add(tmp);
         }
-        public  void AddBaseStation(BaseStation tmp)
+        /// <summary>
+        /// Functions Add a new field to one of the lists
+        /// </summary>
+        /// <param name="tmp"></param>
+        public void AddBaseStation(BaseStation tmp)
         {
             DataSource.BaseStationList.Add(tmp);
         }
-        public  void AddCustomer(Customer tmp)
+        /// <summary>
+        /// Functions Add a new field to one of the lists
+        /// </summary>
+        /// <param name="tmp"></param>
+        public void AddCustomer(Customer tmp)
         {
             DataSource.CustomerList.Add(tmp);
         }
-        public  void AddParcel(Parcel tmp)
+        /// <summary>
+        /// Functions Add a new field to one of the lists
+        /// </summary>
+        /// <param name="tmp"></param>
+        public void AddParcel(Parcel tmp)
         {
             tmp.ID = DataSource.Config.IdCount++;
             DataSource.ParcelList.Add(tmp);
         }
         #endregion add functions
         #region Search functions
+        /// <summary>
+        /// Drone Search
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns> specific Drone</returns>
         public Drone DroneSearch(int p)
         {
             foreach (Drone tmp in DataSource.DroneList)
@@ -139,7 +157,12 @@ namespace DalObject
             }
             return new Drone();
         }
-        public  BaseStation BaseStationSearch(int p)
+        /// <summary>
+        /// BaseStationSearch
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>specific BaseStation</returns>
+        public BaseStation BaseStationSearch(int p)
         {
             foreach (BaseStation tmp in DataSource.BaseStationList)
             {
@@ -148,7 +171,12 @@ namespace DalObject
             }
             return new BaseStation();
         }
-        public  Customer CustomerSearch(int p)
+        /// <summary>
+        /// Customer Search
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>specific Customer</returns>
+        public Customer CustomerSearch(int p)
         {
             foreach (Customer tmp in DataSource.CustomerList)
             {
@@ -157,7 +185,12 @@ namespace DalObject
             }
             return new Customer();
         }
-        public  Parcel ParcelSearch(int p)
+        /// <summary>
+        /// Parcel Search
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns>spesific Parcel</returns>
+        public Parcel ParcelSearch(int p)
         {
             foreach (Parcel tmp in DataSource.ParcelList)
             {
@@ -168,55 +201,116 @@ namespace DalObject
         }
         #endregion Search functions
         #region print function
+        /// <summary>
+        /// print Drone
+        /// </summary>
+        /// <returns>drone list</returns>
         public List<Drone> printDrone()
         {
             return DataSource.DroneList.Take(DataSource.DroneList.Count).ToList();
 
         }
-        public  List<BaseStation> printBaseStation()
+        /// <summary>
+        /// print BaseStation
+        /// </summary>
+        /// <returns>BaseStation List</returns>
+        public List<BaseStation> printBaseStation()
         {
             return DataSource.BaseStationList.Take(DataSource.BaseStationList.Count).ToList();
         }
-        public  List<Customer> printCustomer()
+        /// <summary>
+        /// print Customer
+        /// </summary>
+        /// <returns>Customer List</returns>
+        public List<Customer> printCustomer()
         {
             return DataSource.CustomerList.Take(DataSource.CustomerList.Count).ToList();
 
         }
-        public  List<Parcel> printParcel()
+        /// <summary>
+        /// print Parcel
+        /// </summary>
+        /// <returns>Parcel List</returns>
+        public List<Parcel> printParcel()
         {
             return DataSource.ParcelList.Take(DataSource.ParcelList.Count).ToList();
         }
         #endregion print function
         #region Update functions 
+        /// <summary>
+        /// Assign A Package To A Drone
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
         public void AssignPackageToDrone(int pID, int dID)
         {
-            Drone d = DroneSearch(dID);
-            Parcel p = ParcelSearch(pID);
+            int index1 = DataSource.ParcelList.FindIndex(x => x.ID == pID);
+            int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
+
+            Parcel p = DataSource.ParcelList[index1];
+            Drone d = DataSource.DroneList[index2];
+
             p.DroneId = dID;
             p.Scheduled = DateTime.Now;
             d.DroneCondition = (DroneStatuses)2;
+
+            DataSource.ParcelList[index1] = p;
+            DataSource.DroneList[index2] = d;
+            
         }
-        public  void ParcelCollectionByDrone(int pID, int dID)
+        /// <summary>
+        /// Parcel Collection By A Drone
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
+        public void ParcelCollectionByDrone(int pID, int dID)
         {
-            Drone d = DroneSearch(dID);
-            Parcel p = ParcelSearch(pID);
+
+            int index1 = DataSource.ParcelList.FindIndex(x => x.ID == pID);
+            int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
+
+            Parcel p = DataSource.ParcelList[index1];
+            Drone d = DataSource.DroneList[index2];
+
             p.PickedUp = DateTime.Now;
             d.MaxWeight = p.Weight;
+
+            DataSource.ParcelList[index1] = p;
+            DataSource.DroneList[index2] = d;
+            
         }
-        public  void DeliveryParcelToCustomer(int pID, int dID)
+        /// <summary>
+        /// Delivery Parcel To Customer
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
+        public void DeliveryParcelToCustomer(int pID, int dID)
         {
-            Drone d = DroneSearch(dID);
-            Parcel p = ParcelSearch(pID);
+            int index1 = DataSource.ParcelList.FindIndex(x => x.ID == pID);
+            int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
+
+            Parcel p = DataSource.ParcelList[index1];
+            Drone d = DataSource.DroneList[index2];
+
             p.Delivered = DateTime.Now;
             d.DroneCondition = (DroneStatuses)0;
+
+            DataSource.ParcelList[index1] = p;
+            DataSource.DroneList[index2] = d;
+            
         }
-        public  void SendingDroneToBaseStation(int bsID, int dID)
+        /// <summary>
+        /// Sending Drone To BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
+        public void SendingDroneToBaseStation(int bsID, int dID)
         {
             int index1 = DataSource.BaseStationList.FindIndex(x => x.ID == bsID);
             int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
 
             BaseStation bs = DataSource.BaseStationList[index1];
-            Drone d = DataSource.DroneList[index1];
+            Drone d = DataSource.DroneList[index2];
 
             bs.FreeChargingSlots--;
             d.DroneCondition = (DroneStatuses)1;
@@ -231,14 +325,26 @@ namespace DalObject
             DataSource.DroneChargeList.Add(dc);
 
         }
-        public  void ReleaseDroneFromChargingAtBaseStation(int bsID,int dID)
+        /// <summary>
+        /// Release Drone From Charging At BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
+        public void ReleaseDroneFromChargingAtBaseStation(int bsID,int dID)
         {
-            Drone d = DroneSearch(dID);
-            BaseStation bs = BaseStationSearch(bsID);
-            d.DroneCondition = (DroneStatuses)0;
-            d.BatteryStatus = 1;
-            (bs.FreeChargingSlots)++;
+            int index1 = DataSource.BaseStationList.FindIndex(x => x.ID == bsID);
+            int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
 
+            BaseStation bs = DataSource.BaseStationList[index1];
+            Drone d = DataSource.DroneList[index2];
+
+            d.BatteryStatus = 1;
+            bs.FreeChargingSlots++;
+            d.DroneCondition = (DroneStatuses)0;
+
+
+            DataSource.BaseStationList[index1] = bs;
+            DataSource.DroneList[index2] = d;
         }
         #endregion Update functions
     }

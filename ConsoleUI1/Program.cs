@@ -22,6 +22,7 @@ namespace ConsoleUI
                 i= int.Parse(Console.ReadLine());
                 switch (i)
                 {
+                    // add options
                     case 1:
                         int a;
                         int b = 0;
@@ -91,7 +92,6 @@ namespace ConsoleUI
                                 Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
                                 tmp2.DroneId = int.Parse(Console.ReadLine());
                                 tmp2.Requested = DateTime.Now;
-                                tmp2.Scheduled = DateTime.Now;
                                 dalobject.AddParcel(tmp2);
                                 break;
                             default:
@@ -99,6 +99,7 @@ namespace ConsoleUI
                                 break;
                         }
                         break;
+                    // update options
                     case 2:
                         Console.WriteLine("To Assign A Package To Drone press 1,");
                         Console.WriteLine("To Parcel Collection By Drone press 2,");
@@ -153,6 +154,7 @@ namespace ConsoleUI
                                 break;
                         }
                         break;
+                    // spesific view options
                     case 3:
                         Console.WriteLine("To view Drone press 1,");
                         Console.WriteLine("To view base station press 2,");
@@ -190,6 +192,7 @@ namespace ConsoleUI
                                 break;
                         }
                         break;
+                    // view options
                     case 4:
                         Console.WriteLine("To view all base stations Press 1");
                         Console.WriteLine("To view all existing Drone press 2");

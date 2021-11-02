@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 
+
 namespace DalObject
 {
     public class DataSource
@@ -43,7 +44,7 @@ namespace DalObject
                     ID = r1.Next(1000, 10000),
                     Model = "p1",
                     MaxWeight = (WeightCategories)r1.Next(1, 4),
-                    BatteryStatus = r1.NextDouble(),
+                    BatteryStatus = Math.Round(r1.NextDouble(),2),
                     DroneCondition = (DroneStatuses)r1.Next(1, 4),
                 });
                 ;
@@ -96,7 +97,6 @@ namespace DalObject
                     priority = (Priorities)r1.Next(1, 4),
                     DroneId = r1.Next(1000, 10000),
                     Requested = DateTime.Now,
-                    Scheduled = DateTime.Now,
                 }) ;
             }
         }

@@ -39,12 +39,12 @@ namespace ConsoleUI
                                 Console.WriteLine("Insert the Drone model");
                                 tmp.Model = Console.ReadLine();
                                 Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
-                                b = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out b);
                                 tmp.MaxWeight = (WeightCategories)b;
                                 Console.WriteLine("Enter Drone loading status");
                                 tmp.BatteryStatus = double.Parse(Console.ReadLine());
                                 Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
-                                b = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out b);
                                 tmp.DroneCondition = (DroneStatuses)b;
                                 dalobject.AddDrone(tmp);
                                 break;
@@ -78,15 +78,15 @@ namespace ConsoleUI
                                 break;
                             case 4:
                                 Parcel tmp2 = new Parcel();
-                                Console.WriteLine("The conference identifies a sending customer");
+                                Console.WriteLine("Enter ID number of sending customer");
                                 tmp2.SenderID = int.Parse(Console.ReadLine());
-                                Console.WriteLine("The conference identifies a receiving customer");
+                                Console.WriteLine("Enter the ID number of the receiving customer");
                                 tmp2.TargetID = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter a weight category (light,normal,heavy)");
-                                b = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(),out b);
                                 tmp2.Weight = (WeightCategories)b;
-                                Console.WriteLine("Enter Priority Level (Low=0, Normal=1, High=2)");
-                                b = int.Parse(Console.ReadLine());
+                                Console.WriteLine("Enter Priority Level (Low, Normal, High)");
+                                int.TryParse(Console.ReadLine(), out b);
                                 tmp2.priority = (Priorities)b;
                                 Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");
                                 tmp2.DroneId = int.Parse(Console.ReadLine());
@@ -107,7 +107,7 @@ namespace ConsoleUI
                         Console.WriteLine("To Release Drone From Charging At Base Station, press 5,");
 
                         int u = int.Parse(Console.ReadLine());
-
+                        int pID4=0,dID4=0;
                         switch (u)
                         {
                             case 1:
@@ -136,21 +136,20 @@ namespace ConsoleUI
                                 foreach (BaseStation tmp in dalobject.printBaseStation())
                                     Console.WriteLine(tmp.ToString());
                                 Console.WriteLine("Enter the BaseStation ID number");
-                                int pID4 = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out pID4);
                                 Console.WriteLine("Enter the Drone ID number");
-                                int dID4 = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out dID4);
                                 dalobject.SendingDroneToBaseStation(pID4, dID4);
                                 break;
 
                             case 5:
-
+                                int pID = 0, dID = 0;
                                 Console.WriteLine("Enter the BaseStation ID number");
-                                int pID = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out pID);
                                 Console.WriteLine("Enter the Drone ID number");
-                                int dID = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out dID);
                                 dalobject.ReleaseDroneFromChargingAtBaseStation(pID, dID);
                                 break;
-
                             default:
                                 break;
                         }
@@ -167,25 +166,25 @@ namespace ConsoleUI
                         {
                             case 1:
                                 Console.WriteLine("Enter the Drone ID number");
-                                s = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out s);
                                 Drone tmp = dalobject.DroneSearch(s);
                                 Console.WriteLine(tmp.ToString());
                                 break;
                             case 2:
                                 Console.WriteLine("Enter the base station ID number");
-                                s = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out s);
                                 BaseStation tmp1 = dalobject.BaseStationSearch(s);
                                 Console.WriteLine(tmp1.ToString());
                                 break;
                             case 3:
                                 Console.WriteLine("Enter the customer ID number");
-                                s = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out s);
                                 Customer tmp2 = dalobject.CustomerSearch(s);
                                 Console.WriteLine(tmp2.ToString());
                                 break;
                             case 4:
                                 Console.WriteLine("Enter the ID number of the package");
-                                s = int.Parse(Console.ReadLine());
+                                int.TryParse(Console.ReadLine(), out s);
                                 Parcel tmp4 = dalobject.ParcelSearch(s);
                                 Console.WriteLine(tmp4.ToString());
                                 break;
@@ -201,7 +200,8 @@ namespace ConsoleUI
                         Console.WriteLine("To view the Parcels list, press 4");
                         Console.WriteLine("To view a list of packages that have not yet been assigned to the Drone press 5");
                         Console.WriteLine("To view base stations with available charging stations, press 6");
-                        int t = int.Parse(Console.ReadLine());
+                        int t = 0;
+                        int.TryParse(Console.ReadLine(), out t);
                         switch (t)
                         {
                             case 1:

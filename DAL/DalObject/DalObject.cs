@@ -25,6 +25,7 @@ namespace DalObject
         {
             public static int IdCount = 0;
         }
+        #region Initialize
         public static void Initialize()
         {
             InitializeBaseStation();
@@ -100,35 +101,36 @@ namespace DalObject
             }
         }
     }
+    #endregion Initialize
+
     public class DalObject
     {
+        public DalObject() { DataSource.Initialize(); }
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
-        public static void AddDrone(Drone tmp)
+        #region add functions
+        public void AddDrone(Drone tmp)
         {
             DataSource.DroneList.Add(tmp);
         }
-        public static void AddBaseStation(BaseStation tmp)
+        public  void AddBaseStation(BaseStation tmp)
         {
             DataSource.BaseStationList.Add(tmp);
         }
-        public static void AddCustomer(Customer tmp)
+        public  void AddCustomer(Customer tmp)
         {
             DataSource.CustomerList.Add(tmp);
         }
-        public static void AddParcel(Parcel tmp)
+        public  void AddParcel(Parcel tmp)
         {
             tmp.ID = DataSource.Config.IdCount++;
             DataSource.ParcelList.Add(tmp);
         }
-       
-        
-
-
-        /// Search functions
-        public static Drone DroneSearch(int p)
+        #endregion add functions
+        #region Search functions
+        public Drone DroneSearch(int p)
         {
             foreach (Drone tmp in DataSource.DroneList)
             {
@@ -137,7 +139,7 @@ namespace DalObject
             }
             return new Drone();
         }
-        public static BaseStation BaseStationSearch(int p)
+        public  BaseStation BaseStationSearch(int p)
         {
             foreach (BaseStation tmp in DataSource.BaseStationList)
             {
@@ -146,7 +148,7 @@ namespace DalObject
             }
             return new BaseStation();
         }
-        public static Customer CustomerSearch(int p)
+        public  Customer CustomerSearch(int p)
         {
             foreach (Customer tmp in DataSource.CustomerList)
             {
@@ -155,7 +157,7 @@ namespace DalObject
             }
             return new Customer();
         }
-        public static Parcel ParcelSearch(int p)
+        public  Parcel ParcelSearch(int p)
         {
             foreach (Parcel tmp in DataSource.ParcelList)
             {
@@ -164,35 +166,29 @@ namespace DalObject
             }
             return new Parcel();
         }
-        //פונקציות הדפסה 
-        public static List<Drone> printDrone()
+        #endregion Search functions
+        #region print function
+        public List<Drone> printDrone()
         {
-            List<Drone> DroneListEzer = new List<Drone>();
-            DroneListEzer= DataSource.DroneList;
-            return DroneListEzer;
-        }
-        public static List<BaseStation> printBaseStation()
-        {
-            List<BaseStation> BaseStationListEzer = new List<BaseStation>();
-            BaseStationListEzer = DataSource.BaseStationList;
-            return BaseStationListEzer;
-        }
-        public static List<Customer> printCustomer()
-        {
+            return DataSource.DroneList.Take(DataSource.DroneList.Count).ToList();
 
-            List<Customer> CustomerListEzer = new List<Customer>();
-            CustomerListEzer = DataSource.CustomerList;
-            return CustomerListEzer;
         }
-        public static List<Parcel> printParcel()
+        public  List<BaseStation> printBaseStation()
         {
-
-            List<Parcel> ParcelListEzer = new List<Parcel>();
-            ParcelListEzer = DataSource.ParcelList;
-            return ParcelListEzer;
+            return DataSource.BaseStationList.Take(DataSource.BaseStationList.Count).ToList();
         }
-        /// Update functions 
-        public static void AssignPackageToDrone(int pID, int dID)
+        public  List<Customer> printCustomer()
+        {
+            return DataSource.CustomerList.Take(DataSource.CustomerList.Count).ToList();
+
+        }
+        public  List<Parcel> printParcel()
+        {
+            return DataSource.ParcelList.Take(DataSource.ParcelList.Count).ToList();
+        }
+        #endregion print function
+        #region Update functions 
+        public void AssignPackageToDrone(int pID, int dID)
         {
             Drone d = DroneSearch(dID);
             Parcel p = ParcelSearch(pID);
@@ -200,39 +196,50 @@ namespace DalObject
             p.Scheduled = DateTime.Now;
             d.DroneCondition = (DroneStatuses)2;
         }
-        public static void ParcelCollectionByDrone(int pID, int dID)
+        public  void ParcelCollectionByDrone(int pID, int dID)
         {
             Drone d = DroneSearch(dID);
             Parcel p = ParcelSearch(pID);
             p.PickedUp = DateTime.Now;
             d.MaxWeight = p.Weight;
         }
-        public static void DeliveryParcelToCustomer(int pID, int dID)
+        public  void DeliveryParcelToCustomer(int pID, int dID)
         {
             Drone d = DroneSearch(dID);
             Parcel p = ParcelSearch(pID);
             p.Delivered = DateTime.Now;
             d.DroneCondition = (DroneStatuses)0;
         }
-        public static void SendingDroneToBaseStation(int bsID, int dID)
+        public  void SendingDroneToBaseStation(int bsID, int dID)
         {
-            Drone d = DroneSearch(dID);
-            BaseStation bs = BaseStationSearch(bsID);
+            int index1 = DataSource.BaseStationList.FindIndex(x => x.ID == bsID);
+            int index2 = DataSource.DroneList.FindIndex(x => x.ID == dID);
+
+            BaseStation bs = DataSource.BaseStationList[index1];
+            Drone d = DataSource.DroneList[index1];
+
+            bs.FreeChargingSlots--;
             d.DroneCondition = (DroneStatuses)1;
+
+            DataSource.BaseStationList[index1] = bs;
+            DataSource.DroneList[index2] = d;
+
+
             DroneCharge dc = new DroneCharge();
             dc.DroneID = dID;
             dc.StationID = bsID;
-            bs.FreeChargingSlots--;
+            DataSource.DroneChargeList.Add(dc);
 
         }
-        public static void ReleaseDroneFromChargingAtBaseStation(int bsID,int dID)
+        public  void ReleaseDroneFromChargingAtBaseStation(int bsID,int dID)
         {
             Drone d = DroneSearch(dID);
             BaseStation bs = BaseStationSearch(bsID);
             d.DroneCondition = (DroneStatuses)0;
             d.BatteryStatus = 1;
-            bs.FreeChargingSlots++;
+            (bs.FreeChargingSlots)++;
 
         }
+        #endregion Update functions
     }
 }

@@ -2,12 +2,15 @@
 using IDAL.DO;
 using IDAL;
 using DalObject;
+using System.Collections.Generic;
 namespace ConsoleUI
 {
     class Program
     {
         public static void Main(string[] args)
         {
+           
+            DalObject.DalObject dalobject=new DalObject.DalObject();
             int i = 0;
             while (i != 5)
             {
@@ -20,13 +23,16 @@ namespace ConsoleUI
                 switch (i)
                 {
                     case 1:
-                        string a;
+                        int a;
                         int b = 0;
-                        Console.WriteLine("What do you want to add? to finish enter end");
-                        a = Console.ReadLine();
+                        Console.WriteLine("To add Drone press 1,");
+                        Console.WriteLine("To add base station press 2,");
+                        Console.WriteLine("To add a client press 3,");
+                        Console.WriteLine("To add a package, press 4,");
+                        a = int.Parse( Console.ReadLine());
                         switch (a)
                         {
-                            case "Drone":
+                            case 1:
                                 Drone tmp = new Drone();
                                 Console.WriteLine("enter the Drone's id");
                                 tmp.ID = int.Parse(Console.ReadLine());
@@ -40,9 +46,9 @@ namespace ConsoleUI
                                 Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
                                 b = int.Parse(Console.ReadLine());
                                 tmp.DroneCondition = (DroneStatuses)b;
-                                DalObject.DalObject.AddDrone(tmp);
+                                dalobject.AddDrone(tmp);
                                 break;
-                            case "BaseStation":
+                            case 2:
                                 BaseStation tmp3 = new BaseStation();
                                 Console.WriteLine("Enter the ID number of the base station");
                                 tmp3.ID = int.Parse(Console.ReadLine());
@@ -54,9 +60,9 @@ namespace ConsoleUI
                                 tmp3.Longitude = double.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the latitude of the station");
                                 tmp3.Latitude = double.Parse(Console.ReadLine());
-                                DalObject.DalObject.AddBaseStation(tmp3);
+                                dalobject.AddBaseStation(tmp3);
                                 break;
-                            case "Customer":
+                            case 3:
                                 Customer tmp1 = new Customer();
                                 Console.WriteLine("Enter the customer ID number");
                                 tmp1.ID = int.Parse(Console.ReadLine());
@@ -68,9 +74,9 @@ namespace ConsoleUI
                                 tmp1.Longitude = double.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Latitude of the customer location");
                                 tmp1.Latitude = double.Parse(Console.ReadLine());
-                                DalObject.DalObject.AddCustomer(tmp1);
+                                dalobject.AddCustomer(tmp1);
                                 break;
-                            case "Parcel":
+                            case 4:
                                 Parcel tmp2 = new Parcel();
                                 Console.WriteLine("The conference identifies a sending customer");
                                 tmp2.SenderID = int.Parse(Console.ReadLine());
@@ -86,7 +92,7 @@ namespace ConsoleUI
                                 tmp2.DroneId = int.Parse(Console.ReadLine());
                                 tmp2.Requested = DateTime.Now;
                                 tmp2.Scheduled = DateTime.Now;
-                                DalObject.DalObject.AddParcel(tmp2);
+                                dalobject.AddParcel(tmp2);
                                 break;
                             default:
                                 Console.WriteLine("Option not found Please re-enter given");
@@ -110,30 +116,30 @@ namespace ConsoleUI
                                 int pID1 = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
                                 int dID1 = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.AssignPackageToDrone(pID1, dID1);
+                                dalobject.AssignPackageToDrone(pID1, dID1);
                                 break;
                             case 2:
                                 Console.WriteLine("Enter the Parcel ID number");
                                 int pID2 = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
                                 int dID2 = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.ParcelCollectionByDrone(pID2, dID2);
+                                dalobject.ParcelCollectionByDrone(pID2, dID2);
                                 break;
                             case 3:
                                 Console.WriteLine("Enter the Parcel ID number");
                                 int pID3 = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
                                 int dID3 = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.DeliveryParcelToCustomer(pID3, dID3);
+                                dalobject.DeliveryParcelToCustomer(pID3, dID3);
                                 break;
                             case 4:
-                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
-                                    tmp.ToString();
+                                foreach (BaseStation tmp in dalobject.printBaseStation())
+                                    Console.WriteLine(tmp.ToString());
                                 Console.WriteLine("Enter the BaseStation ID number");
                                 int pID4 = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
                                 int dID4 = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.SendingDroneToBaseStation(pID4, dID4);
+                                dalobject.SendingDroneToBaseStation(pID4, dID4);
                                 break;
 
                             case 5:
@@ -142,7 +148,7 @@ namespace ConsoleUI
                                 int pID = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the Drone ID number");
                                 int dID = int.Parse(Console.ReadLine());
-                                DalObject.DalObject.ReleaseDroneFromChargingAtBaseStation(pID, dID);
+                                dalobject.ReleaseDroneFromChargingAtBaseStation(pID, dID);
                                 break;
 
                             default:
@@ -162,26 +168,26 @@ namespace ConsoleUI
                             case 1:
                                 Console.WriteLine("Enter the Drone ID number");
                                 s = int.Parse(Console.ReadLine());
-                                Drone tmp = DalObject.DalObject.DroneSearch(s);
-                                tmp.ToString();
+                                Drone tmp = dalobject.DroneSearch(s);
+                                Console.WriteLine(tmp.ToString());
                                 break;
                             case 2:
                                 Console.WriteLine("Enter the base station ID number");
                                 s = int.Parse(Console.ReadLine());
-                                BaseStation tmp1 = DalObject.DalObject.BaseStationSearch(s);
-                                tmp1.ToString();
+                                BaseStation tmp1 = dalobject.BaseStationSearch(s);
+                                Console.WriteLine(tmp1.ToString());
                                 break;
                             case 3:
                                 Console.WriteLine("Enter the customer ID number");
                                 s = int.Parse(Console.ReadLine());
-                                Customer tmp2 = DalObject.DalObject.CustomerSearch(s);
-                                tmp2.ToString();
+                                Customer tmp2 = dalobject.CustomerSearch(s);
+                                Console.WriteLine(tmp2.ToString());
                                 break;
                             case 4:
                                 Console.WriteLine("Enter the ID number of the package");
                                 s = int.Parse(Console.ReadLine());
-                                Parcel tmp4 = DalObject.DalObject.ParcelSearch(s);
-                                tmp4.ToString();
+                                Parcel tmp4 = dalobject.ParcelSearch(s);
+                                Console.WriteLine(tmp4.ToString());
                                 break;
                             default:
                                 Console.WriteLine("Option not found,");
@@ -199,33 +205,34 @@ namespace ConsoleUI
                         switch (t)
                         {
                             case 1:
-                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
-                                    tmp.ToString();
+                                foreach (BaseStation tmp in dalobject.printBaseStation())
+                                    Console.WriteLine(tmp.ToString());
                                 break;
                             case 2:
-                                foreach (Drone tmp in DalObject.DalObject.printDrone())
-                                    tmp.ToString();
+                                foreach (Drone tmp in dalobject.printDrone())
+                                    Console.WriteLine(tmp.ToString());
                                 break;
                             case 3:
-                                foreach (Customer tmp in DalObject.DalObject.printCustomer())
-                                    tmp.ToString();
+                                foreach (Customer tmp in dalobject.printCustomer())
+                                    Console.WriteLine(tmp.ToString());
+
                                 break;
                             case 4:
-                                foreach (Parcel tmp in DalObject.DalObject.printParcel())
-                                    tmp.ToString();
+                                foreach (Parcel tmp in dalobject.printParcel())
+                                    Console.WriteLine(tmp.ToString());
                                 break;
                             case 5:
-                                foreach (Parcel tmp in DalObject.DalObject.printParcel())
+                                foreach (Parcel tmp in dalobject.printParcel())
                                 {
                                     if (tmp.DroneId == 0)
-                                        tmp.ToString();
+                                        Console.WriteLine(tmp.ToString() );
                                 }
                                 break;
                             case 6:
-                                foreach (BaseStation tmp in DalObject.DalObject.printBaseStation())
+                                foreach (BaseStation tmp in dalobject.printBaseStation())
                                 {
                                     if (tmp.FreeChargingSlots != 0)
-                                        tmp.ToString();
+                                        Console.WriteLine(tmp.ToString());
                                 }
                                 break;
                             default:

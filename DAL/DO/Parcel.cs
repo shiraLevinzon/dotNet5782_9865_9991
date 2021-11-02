@@ -22,8 +22,7 @@ namespace IDAL
             public DateTime Delivered { get; set; }
             public override string ToString()
             {
-                return "ID is" + ID + "Sender-id is" + SenderID + "Target-id is" + TargetID + "The Weight is" + Weight + "The priority is" + priority + "The Drone-id is" + DroneId
-                    + "the Requested time is" + Requested + "the Scheduled time is" + Scheduled + "The PickedUp time is" + PickedUp + "The Delivered time is" + Delivered;
+                return string.Format("ID: {0}\t SenderID:{1}\t TargetID:{2}\t Weight:{3}\t priority:{4}\t DroneId: {5}\t Requested:{6}\t Scheduled:{7}\t PickedUp:{8}\t Delivered:{9}\t", ID, SenderID, TargetID, Weight, priority, DroneId, Requested, Scheduled, PickedUp, Delivered);
             }
         }
     }

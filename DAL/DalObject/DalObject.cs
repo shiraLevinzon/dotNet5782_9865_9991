@@ -43,9 +43,9 @@ namespace DalObject
                 {
                     ID = r1.Next(1000, 10000),
                     Model = "p1",
-                    MaxWeight = (WeightCategories)r1.Next(1, 4),
+                    MaxWeight = (WeightCategories)r1.Next(0, 3),
                     BatteryStatus = Math.Round(r1.NextDouble(),2),
-                    DroneCondition = (DroneStatuses)r1.Next(1, 4),
+                    DroneCondition = (DroneStatuses)r1.Next(0, 3),
                 });
                 ;
             }
@@ -93,8 +93,8 @@ namespace DalObject
                     ID = Config.IdCount++,
                     SenderID = r1.Next(1000, 10000),
                     TargetID = r1.Next(1000, 10000),
-                    Weight = (WeightCategories)r1.Next(1, 4),
-                    priority = (Priorities)r1.Next(1, 4),
+                    Weight = (WeightCategories)r1.Next(0, 3),
+                    priority = (Priorities)r1.Next(0, 3),
                     DroneId = r1.Next(1000, 10000),
                     Requested = DateTime.Now,
                 }) ;

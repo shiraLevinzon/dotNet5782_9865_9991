@@ -25,7 +25,7 @@ namespace ConsoleUI
                     // add options
                     case 1:
                         int a;
-                        int b = 0;
+                        int b;
                         Console.WriteLine("To add Drone press 1,");
                         Console.WriteLine("To add base station press 2,");
                         Console.WriteLine("To add a client press 3,");
@@ -39,12 +39,12 @@ namespace ConsoleUI
                                 tmp.ID = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Insert the Drone model");
                                 tmp.Model = Console.ReadLine();
-                                Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
+                                Console.WriteLine("Enter the weight of the Drone (light / normal / heavy)");
                                 int.TryParse(Console.ReadLine(), out b);
                                 tmp.MaxWeight = (WeightCategories)b;
                                 Console.WriteLine("Enter Drone loading status");
                                 tmp.BatteryStatus = double.Parse(Console.ReadLine());
-                                Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
+                                Console.WriteLine("Enter Drone status (Available/maintenance/delivery)");
                                 int.TryParse(Console.ReadLine(), out b);
                                 tmp.DroneCondition = (DroneStatuses)b;
                                 dalobject.AddDrone(tmp);
@@ -83,10 +83,10 @@ namespace ConsoleUI
                                 tmp2.SenderID = int.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter the ID number of the receiving customer");
                                 tmp2.TargetID = int.Parse(Console.ReadLine());
-                                Console.WriteLine("Enter a weight category (light,normal,heavy)");
+                                Console.WriteLine("Enter a weight category (light/normal/heavy)");
                                 int.TryParse(Console.ReadLine(),out b);
                                 tmp2.Weight = (WeightCategories)b;
-                                Console.WriteLine("Enter Priority Level (Low, Normal, High)");
+                                Console.WriteLine("Enter Priority Level (Low/Normal/High)");
                                 int.TryParse(Console.ReadLine(), out b);
                                 tmp2.priority = (Priorities)b;
                                 Console.WriteLine("Enter Operation Drone ID (0 if not assigned)");

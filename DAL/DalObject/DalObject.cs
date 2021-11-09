@@ -204,7 +204,7 @@ namespace DalObject
         /// print Drone
         /// </summary>
         /// <returns>drone list</returns>
-        public List<Drone> printDrone()
+        public IEnumerable<Drone> printDrone()
         {
             return DataSource.DroneList.Take(DataSource.DroneList.Count).ToList();
 
@@ -213,7 +213,7 @@ namespace DalObject
         /// print BaseStation
         /// </summary>
         /// <returns>BaseStation List</returns>
-        public List<BaseStation> printBaseStation()
+        public IEnumerable<BaseStation> printBaseStation()
         {
             return DataSource.BaseStationList.Take(DataSource.BaseStationList.Count).ToList();
         }
@@ -221,7 +221,7 @@ namespace DalObject
         /// print Customer
         /// </summary>
         /// <returns>Customer List</returns>
-        public List<Customer> printCustomer()
+        public IEnumerable<Customer> printCustomer()
         {
             return DataSource.CustomerList.Take(DataSource.CustomerList.Count).ToList();
 
@@ -230,7 +230,7 @@ namespace DalObject
         /// print Parcel
         /// </summary>
         /// <returns>Parcel List</returns>
-        public List<Parcel> printParcel()
+        public IEnumerable<Parcel> printParcel()
         {
             return DataSource.ParcelList.Take(DataSource.ParcelList.Count).ToList();
         }

@@ -43,10 +43,8 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out b);
                                 tmp.MaxWeight = (WeightCategories)b;
                                 Console.WriteLine("Enter Drone loading status");
-                                tmp.BatteryStatus = double.Parse(Console.ReadLine());
                                 Console.WriteLine("Enter Drone status (Available/maintenance/delivery)");
                                 int.TryParse(Console.ReadLine(), out b);
-                                tmp.DroneCondition = (DroneStatuses)b;
                                 dalobject.AddDrone(tmp);
                                 break;
                             case 2:

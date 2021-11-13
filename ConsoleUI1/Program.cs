@@ -42,11 +42,6 @@ namespace ConsoleUI
                                 Console.WriteLine("Press 0 if the package weight is low. 1 If the weight of the omelet is normal. 12 If the weight of the package is high");
                                 int.TryParse(Console.ReadLine(), out b);
                                 tmp.MaxWeight = (WeightCategories)b;
-                                Console.WriteLine("Enter Drone loading status");
-                                tmp.BatteryStatus = double.Parse(Console.ReadLine());
-                                Console.WriteLine("Insert the Drone condition(Enter 0 if the Drone is available 1 if the Drone is in maintenance or 2 if the Drone is on delivery)");
-                                int.TryParse(Console.ReadLine(), out b);
-                                tmp.DroneCondition = (DroneStatuses)b;
                                 dalobject.AddDrone(tmp);
                                 break;
                             case 2:

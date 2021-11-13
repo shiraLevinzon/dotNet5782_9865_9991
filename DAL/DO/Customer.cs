@@ -18,7 +18,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return string.Format("ID: {0}\t Name:{1}\t Phone:{2}\t Longitude:{3}\t Latitude:{4}\t", ID, Name, Phone, Longitude, Latitude);
+                return this.ToStringProperty();
             }
         }
     }

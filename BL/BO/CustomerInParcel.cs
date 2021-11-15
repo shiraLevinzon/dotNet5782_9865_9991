@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Location
+    class CustomerInParcel
     {
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public int ID { get; set; }
+        public string CustomerName { get; set; }
     }
 }

@@ -12,6 +12,10 @@ namespace IBL.BO
         public string StationName { get; set; }
         public int FreeChargingSlots { get; set; }
         public int BusyChargingSlots { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

@@ -17,5 +17,9 @@ namespace IBL.BO
         public Customer_In_Parcel receives { get; set; }
         public Location Collection { get; set; }
         public Location PackageDestination { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

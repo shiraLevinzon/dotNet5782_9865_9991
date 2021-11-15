@@ -15,6 +15,10 @@ namespace IBL.BO
         public DroneConditions Conditions { get; set; }
         public Location location { get; set; }
         public Package_in_transfer PackageInTransfer { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

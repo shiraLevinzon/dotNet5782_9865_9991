@@ -14,5 +14,9 @@ namespace IBL.BO
         public WeightCategories Weight { get; set; }
         public Priorities ParcelPriority { get; set; }
         public ParcelConditions ParcelCondition { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace IBL.BO
 
         public int ID { get; set; }
         public Customer_In_Parcel Sender { get; set; }
-        public Customer_In_Parcel Receive { get; set; }
+        public Customer_In_Parcel Receiver { get; set; }
         public WeightCategories Weight { get; set; }
         public Priorities Priority { get; set; }
         public Drone_in_the_package DroneInParcel { get; set; }
@@ -19,5 +19,9 @@ namespace IBL.BO
         public DateTime Scheduled { get; set; }
         public DateTime PickedUp { get; set; }
         public DateTime Delivered { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

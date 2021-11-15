@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IDAL.DO;
 namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
         #region Drone
         public void AddDrone(Drone tmp);

@@ -12,5 +12,9 @@ namespace IBL.BO
         public Priorities priority { get; set; }
         public Situations Situation { get; set; }
         public Customer_In_Parcel CustomerInParcel { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

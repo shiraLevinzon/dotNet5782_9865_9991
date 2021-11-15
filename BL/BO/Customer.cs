@@ -13,6 +13,10 @@ namespace IBL.BO
         public Location ParcelLocation { get; set; }
         public List<Parcel> PackagesFromCustomer { get; set; }
         public List<Parcel> PackagesToCustomer { get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
 
     }
 }

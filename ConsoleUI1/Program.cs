@@ -9,8 +9,9 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-           
-            DalObject.DalObject dalobject=new DalObject.DalObject();
+
+
+            IDAL.IDal dalobject =new DalObject.DalObject();
             int i = 0;
             while (i != 5)
             {

@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class ParcelToList
+    class Parcel_To_List
     {
         public int ID { get; set; }
         public string SenderName { get; set; }
         public string RecieverName { get; set; }
-        public WeightCategory Weight { get; set; }
-        public Priority ParcelPriority { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities ParcelPriority { get; set; }
         public ParcelConditions ParcelCondition { get; set; }
-
-
     }
 }

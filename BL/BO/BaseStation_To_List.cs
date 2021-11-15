@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class CustomerInParcel
+    class BaseStation_To_List
     {
         public int ID { get; set; }
-        public string CustomerName { get; set; }
+        public string StationName { get; set; }
+        public int FreeChargingSlots { get; set; }
+        public int BusyChargingSlots { get; set; }
+
     }
 }

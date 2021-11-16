@@ -362,6 +362,5 @@ namespace DalObject
             PowerConsumption[4] = DataSource.Config.DroneLoadingRate;
             return PowerConsumption;
         }
-
     }
 }

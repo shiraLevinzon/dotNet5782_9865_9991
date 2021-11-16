@@ -10,8 +10,5 @@ namespace IBL.BO
     public  enum Situations {Created, associated, collected, provided}
     public enum ParcelConditions {Defined, associated, collected, provided }
     public enum DroneConditions { Available,delivery,charging }
-    public override string ToString()
-    {
-        return this.ToStringProperty();
-    }
+    
 }

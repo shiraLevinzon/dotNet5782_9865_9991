@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
+using DalObject;
 namespace IDAL
 {
     public interface IDal

@@ -34,15 +34,11 @@ namespace IDAL
         public IEnumerable<Customer> printCustomer();
         public void DeliveryParcelToCustomer(int pID, int dID);
             #endregion
-
         #region Parcel
-
         public void AddParcel(Parcel tmp);
         public Parcel ParcelSearch(int p);
-
         public IEnumerable<Parcel> printParcel();
         #endregion
-
-       public IEnumerable<double> RequestPowerConsumptionByDrone();
+        public Double[] RequestPowerConsumptionByDrone();
     }
 }

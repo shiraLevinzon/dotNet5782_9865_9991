@@ -7,7 +7,7 @@ using DalObject;
 using IDAL.DO;
 namespace DalObject
 {
-    class DalObjectCostumer
+    public class DalObjectCostumer:DalObject
     {
         /// <summary>
         /// Functions Add a new field to one of the lists

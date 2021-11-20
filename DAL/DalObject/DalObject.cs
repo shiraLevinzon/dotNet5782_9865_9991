@@ -106,10 +106,10 @@ namespace DalObject
     }
     #endregion Initialize
 
-    public class DalObject : IDal
+    public class DalObject :IDal
     { 
         public DalObject() { DataSource.Initialize(); }
-        public IEnumerable<double> RequestPowerConsumptionByDrone()
+        public Double[] RequestPowerConsumptionByDrone()
         {
             double[] PowerConsumption = new double[5];
             PowerConsumption[0] = DataSource.Config.available;

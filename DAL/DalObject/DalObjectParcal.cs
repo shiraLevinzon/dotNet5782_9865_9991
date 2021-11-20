@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
 using IDAL.DO;
 namespace DalObject
 {
-    class DalObjectParcal
+    public class DalObjectParcal : DalObject
     {
         /// <summary>
         /// Functions Add a new field to one of the lists

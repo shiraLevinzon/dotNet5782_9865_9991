@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
+using IDAL;
 using IDAL.DO;
 namespace DalObject
 {
-    class DalObjectDrone
+    public class DalObjectDrone : DalObject
     {
         /// <summary>
         /// Functions Add a new field to one of the lists
@@ -38,7 +38,6 @@ namespace DalObject
         public IEnumerable<Drone> printDrone()
         {
             return DataSource.drones.Take(DataSource.drones.Count).ToList();
-
         }
         /// <summary>
         /// Assign A Package To A Drone

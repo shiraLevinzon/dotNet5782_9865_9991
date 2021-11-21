@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL.DO;
 using IDAL;
+
 namespace DalObject
 {
     public class DataSource
@@ -26,7 +27,7 @@ namespace DalObject
             public static int IdCount = 0;
             public static double available = 0.04;
             public static double lightWeight = 0.08;
-            public static double mediumWeight =0.15 ;
+            public static double mediumWeight = 0.15;
             public static double heavyWeight = 0.20;
             public static double DroneLoadingRate = 0.30;
         }
@@ -48,7 +49,7 @@ namespace DalObject
                     ID = r1.Next(1000, 10000),
                     Model = "p1",
                     MaxWeight = (WeightCategories)r1.Next(0, 3),
-          
+
                 });
                 ;
             }
@@ -83,7 +84,7 @@ namespace DalObject
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
 
-                } );
+                });
                 ;
             }
         }
@@ -100,13 +101,14 @@ namespace DalObject
                     priority = (Priorities)r1.Next(0, 3),
                     DroneId = r1.Next(1000, 10000),
                     Requested = DateTime.Now,
-                }) ;
+                });
             }
         }
+        #endregion Initialize
     }
-    #endregion Initialize
 
-    public class DalObject : IDal
+
+    public class DalObject: IDal
     { 
         public DalObject() { DataSource.Initialize(); }
         public IEnumerable<double> RequestPowerConsumptionByDrone()

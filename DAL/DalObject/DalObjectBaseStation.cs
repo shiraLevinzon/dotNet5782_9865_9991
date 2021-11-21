@@ -6,39 +6,50 @@ using System.Threading.Tasks;
 using DalObject;
 using IDAL;
 using IDAL.DO;
+
+
 namespace DalObject
 {
-    class DalObjectBaseStation 
+    public class DalObjectBaseStation : IDal
     {
+        public BaseStation GetBaseStation(int id)
+        {
+            if (!CheckBaseStation(id))
+                throw new MissingIdException(id, "BaseStation");
+
+            BaseStation d = DataSource.baseStations.Find(par => par.ID == id);
+            return d;
+        }
+        public bool CheckBaseStation(int id)
+        {
+            return DataSource.baseStations.Any(par => par.ID == id);
+        }
+
+        public void UpdBaseStation(BaseStation tmp)
+        {
+            int count = DataSource.baseStations.RemoveAll(par => tmp.ID == par.ID);
+
+            if (count == 0)
+                throw new MissingIdException(tmp.ID, "BaseStation");
+
+            DataSource.baseStations.Add(tmp);
+        }
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
         public void AddBaseStation(BaseStation tmp)
         {
+            if (CheckBaseStation(tmp.ID))
+                throw new DuplicateIdException(tmp.ID, "BaseStation");
+
             DataSource.baseStations.Add(tmp);
         }
-        /// <summary>
-        /// BaseStationSearch
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns>specific BaseStation</returns>
-        public BaseStation BaseStationSearch(int p)
-        {
-            foreach (BaseStation tmp in DataSource.baseStations)
-            {
-                if (tmp.ID == p)
-                    return tmp;
-            }
-            return new BaseStation();
-        }
-        /// <summary>
-        /// print BaseStation
-        /// </summary>
-        /// <returns>BaseStation List</returns>
+
+      
         public IEnumerable<BaseStation> printBaseStation()
         {
-            return DataSource.baseStations.Take(DataSource.baseStations.Count).ToList();
+            return DataSource.baseStations.Take(DataSource.baseStations.Count);
         }
         /// <summary>
         /// Sending Drone To BaseStation

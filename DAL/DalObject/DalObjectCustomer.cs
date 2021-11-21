@@ -7,38 +7,45 @@ using DalObject;
 using IDAL.DO;
 namespace DalObject
 {
-    class DalObjectCostumer
+    class DalObjectCustomer
     {
+        public Customer GetCostumer(int id)
+        {
+            if (!CheckCustomer(id))
+                throw new MissingIdException(id, "Customer");
+
+            Customer d = DataSource.customers.Find(par => par.ID == id);
+            return d;
+        }
+        public bool CheckCustomer(int id)
+        {
+            return DataSource.customers.Any(par => par.ID == id);
+        }
+
+        public void UpdCustomer(Customer tmp)
+        {
+            int count = DataSource.customers.RemoveAll(par => tmp.ID == par.ID);
+
+            if (count == 0)
+                throw new MissingIdException(tmp.ID, "Customer");
+
+            DataSource.customers.Add(tmp);
+        }
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
         public void AddCustomer(Customer tmp)
         {
+            if (CheckCustomer(tmp.ID))
+                throw new DuplicateIdException(tmp.ID, "Customer");
+
             DataSource.customers.Add(tmp);
         }
-        /// <summary>
-        /// Customer Search
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns>specific Customer</returns>
 
-        public Customer CustomerSearch(int p)
-        {
-            foreach (Customer tmp in DataSource.customers)
-            {
-                if (tmp.ID == p)
-                    return tmp;
-            }
-            return new Customer();
-        }
-        /// <summary>
-        /// print Customer
-        /// </summary>
-        /// <returns>Customer List</returns>
         public IEnumerable<Customer> printCustomer()
         {
-            return DataSource.customers.Take(DataSource.customers.Count).ToList();
+            return DataSource.customers.Take(DataSource.customers.Count);
         }
         /// <summary>
         /// Delivery Parcel To Customer

@@ -9,11 +9,12 @@ namespace IBL.BL
 {
     class BL
     {
+
         public BL()
         {
             IDAL.IDal dalobject = new DalObject.DalObject();
             IEnumerable<double> l1 = dalobject.RequestPowerConsumptionByDrone();
-           droneList= dalobject.printDrone();
+            IEnumerable<IDAL.DO.Drone> droneList = dalobject.printDrone();
         }
         
     }

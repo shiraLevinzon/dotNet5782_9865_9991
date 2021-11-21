@@ -19,7 +19,5 @@ namespace IBL.BO
         {
             return this.ToStringProperty();
         }
-
-
     }
 }

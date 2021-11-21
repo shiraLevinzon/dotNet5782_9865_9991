@@ -40,9 +40,7 @@ namespace IDAL
         public IEnumerable<Customer> printCustomer();
         public void DeliveryParcelToCustomer(int pID, int dID);
             #endregion
-
         #region Parcel
-
         public void AddParcel(Parcel tmp);
         public Parcel GetParcel(int id);
         public IEnumerable<Parcel> printParcel();
@@ -50,7 +48,6 @@ namespace IDAL
         public bool CheckParcel(int id);
 
         #endregion
-
-       public IEnumerable<double> RequestPowerConsumptionByDrone();
+        public Double[] RequestPowerConsumptionByDrone();
     }
 }

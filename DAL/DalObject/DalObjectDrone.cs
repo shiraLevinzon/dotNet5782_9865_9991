@@ -51,7 +51,7 @@ namespace DalObject
 
         public IEnumerable<Drone> printDrone()
         {
-            return DataSource.drones.Take(DataSource.drones.Count);
+            return DataSource.drones.Take(DataSource.drones.Count).ToList();
 
         }
         /// <summary>

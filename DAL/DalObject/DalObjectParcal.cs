@@ -8,7 +8,7 @@ using IDAL.DO;
 using IDAL;
 namespace DalObject
 {
-    class DalObjectParcal:IDal
+    public partial class DalObject : IDal
     {
         /// <summary>
         /// Functions Add a new field to one of the lists

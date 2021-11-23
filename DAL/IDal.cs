@@ -48,6 +48,6 @@ namespace IDAL
         public bool CheckParcel(int id);
 
         #endregion
-        public Double[] RequestPowerConsumptionByDrone();
+        public double[] RequestPowerConsumptionByDrone();
     }
 }

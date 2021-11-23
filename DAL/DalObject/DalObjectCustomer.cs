@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using IDAL.DO;
+using IDAL;
 namespace DalObject
 {
-    class DalObjectCustomer
+   public partial class DalObject:IDal
     {
         public Customer GetCostumer(int id)
         {

@@ -38,4 +38,4 @@ namespace IDAL.DO
         public override string ToString() => base.ToString() + $", {EntityName} - duplicate id: {ID}";
     }
 }
-}
+

@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using IDAL.DO;
+using IDAL;
 namespace DalObject
 {
-    class DalObjectDrone
+    public partial class DalObject : IDal
     {
-    
+
         /// <summary>
         /// Parcel Search
         /// </summary>

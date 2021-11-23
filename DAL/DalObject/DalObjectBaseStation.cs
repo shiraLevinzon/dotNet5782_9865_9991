@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public class DalObjectBaseStation : IDal
+    public partial class DalObject : IDal
     {
         public BaseStation GetBaseStation(int id)
         {

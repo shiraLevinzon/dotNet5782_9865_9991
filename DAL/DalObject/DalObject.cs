@@ -108,10 +108,10 @@ namespace DalObject
     }
 
 
-    public class DalObject: IDal
-    { 
+    public partial class DalObject : IDal
+    {
         public DalObject() { DataSource.Initialize(); }
-        public IEnumerable<double> RequestPowerConsumptionByDrone()
+        public double[] RequestPowerConsumptionByDrone()
         {
             double[] PowerConsumption = new double[5];
             PowerConsumption[0] = DataSource.Config.available;

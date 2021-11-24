@@ -36,11 +36,8 @@ namespace IBL.BL
             droneLoadingRate =arr[4];
             //List<Drone> TMPdrone = new List<Drone>();
             //List<Parcel> TMPparcel = new List<Parcel>();
-
-
             List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
             TMPdrone = dalLayer.printDrone().ToList();
-            int i = 0;
             foreach (var item in TMPdrone)
             {
                 dronesToList.Add(new Drone_to_list
@@ -50,7 +47,6 @@ namespace IBL.BL
                     Model= item.Model
                 });
             }
-
             List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
             TMPcustomer = dalLayer.printCustomer().ToList();
             foreach (var item in TMPcustomer)
@@ -96,15 +92,7 @@ namespace IBL.BL
                     }
                 }
             }
-
-
-
-                ;
-
-
-
-
-
+            ;
             //foreach (var parcel in dalLayer.printParcel())
             //{
 

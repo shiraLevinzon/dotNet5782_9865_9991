@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Customer_In_Parcel
+    public class Customer_In_Parcel
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }

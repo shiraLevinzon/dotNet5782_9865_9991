@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Package_in_transfer
+    public class Package_in_transfer
     {
         public int ID { get; set; }
         public Priorities priority { get; set; }
@@ -14,7 +14,7 @@ namespace IBL.BO
         public bool Package_mode { get; set; }
         public WeightCategories Weight { get; set; }
         public Customer_In_Parcel Sender { get; set; }
-        public Customer_In_Parcel receives { get; set; }
+        public Customer_In_Parcel Receives { get; set; }
         public Location Collection { get; set; }
         public Location PackageDestination { get; set; }
         public override string ToString()

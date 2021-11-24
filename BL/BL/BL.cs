@@ -8,7 +8,7 @@ using IDAL;
 using DalObject;
 namespace IBL.BL
 {
-    class BL
+    public partial class BL : IBL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
         List<Drone_to_list> dronesToList;

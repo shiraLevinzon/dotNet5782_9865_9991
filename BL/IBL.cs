@@ -7,6 +7,7 @@ namespace IBL
 {
    public interface IBL
    {
+        public IEnumerable<BO.BaseStation> GetAllBaseStation();
 
    }
 }

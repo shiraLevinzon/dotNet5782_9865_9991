@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace IBL.BO
 {
-    class Package_at_customer
+    public class Package_at_customer
     {
         public int ID { get; set; }
         public WeightCategories Weight { get; set; }

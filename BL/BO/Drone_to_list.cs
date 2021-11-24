@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Drone_to_list
+    public class Drone_to_list
     {
         public int ID { get; set; }
         public string Model { get; set; }

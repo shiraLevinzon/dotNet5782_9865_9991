@@ -49,5 +49,7 @@ namespace IDAL
 
         #endregion
         public double[] RequestPowerConsumptionByDrone();
+        public double distanceCal(double lat1, double lon1, double lat2, double lon2);
+        public double Deg2rad(double deg);
     }
 }

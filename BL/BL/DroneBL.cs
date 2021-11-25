@@ -45,7 +45,7 @@ namespace IBL.BL
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             drone.CopyPropertiesTo(DroneDO);
             drone.BatteryStatus = random.Next(20, 40);
-            drone.Conditions = (BO.DroneConditions)2;
+            drone.Conditions = (BO.DroneConditions)3;
             drone.location = GetAllBaseStation().First(bas => bas.ID == id).BaseStationLocation;
 
 

@@ -77,24 +77,44 @@ namespace IBL.BL
 
                 }) ;
             }
-            List<IDAL.DO.Parcel> TMPparcel = dalLayer.printParcel().Where(par=> par.DroneId!=0).ToList();
+            List<IDAL.DO.Parcel> TMPparcel = dalLayer.printParcel().ToList();//Where(par=> par.DroneId!=0).ToList();
             foreach (var item in TMPparcel)
             {
-                if (item.Delivered == )
+                if(item.DroneId!=0)
                 {
-                    Drone_to_list d= dronesToList.Find(dro => dro.ID==item.DroneId);
+                    Drone_to_list d = dronesToList.Find(dro => dro.ID == item.DroneId);
+                    if(item.Requested!= new DateTime(0, 0, 0, 0, 0, 0))
+                    {
+                       if (item.Delivered == new DateTime(0,0,0,0,0,0))
+                       {                    
+                           d.Conditions = (DroneConditions)1;
+                            if (item.PickedUp == new DateTime(0, 0, 0, 0, 0, 0))
+                            {
+                                BO.BaseStation stationHalper = new BO.BaseStation();
+                                double min = double.MaxValue;
+                                foreach (var item2 in baseStationsBL)
+                                {
+                                    double dis = dalLayer.distanceCal(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, d.location.Latitude, d.location.Longitude);
+                                    if (dis < min)
+                                    {
+                                        min = dis;
+                                        stationHalper = item2;
+                                    }
+                                }
+                                d.location = stationHalper.BaseStationLocation;
+                            }
+                            else
+                            {
+                                d.location.Latitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Latitude;
+                                d.location.Longitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Longitude;
+                            }
+                       }
+                       
                     
-                    d.Conditions = (DroneConditions)1;
-                    if (item.PickedUp==)
-                    {
-                        d.location.Latitude= customersBL.Find(cu=> cu.ID==item.SenderID).
-                    }
-                    else
-                    {
-                        d.location.Latitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Latitude;
-                        d.location.Longitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Longitude;
+                        
                     }
                 }
+
             }
 
 
@@ -140,5 +160,6 @@ namespace IBL.BL
                 }
             }*/
         }
+        public 
     }
 }

@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace IBL.BO
 {
-    public class BaseStation_To_List
+    public class ParcelAtCustomer
     {
         public int ID { get; set; }
-        public string StationName { get; set; }
-        public int FreeChargingSlots { get; set; }
-        public int BusyChargingSlots { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities priority { get; set; }
+        public Situations Situation { get; set; }
+        public CustomerInParcel CustomerInParcel { get; set; }
         public override string ToString()
         {
             return this.ToStringProperty();
         }
-
     }
 }

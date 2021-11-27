@@ -25,7 +25,7 @@ namespace IBL.BL
 
                 foreach (var item in GetAllDrones().Where(dro => (dro.location == boBaseStation.BaseStationLocation) && (dro.Conditions == (BO.DroneConditions)2)))
                 {
-                    boBaseStation.DronesInCharge.Add(new BO.Drone_in_charging
+                    boBaseStation.DronesInCharge.Add(new BO.DroneInCharging
                     {
                         ID = item.ID,
                         BatteryStatus = item.BatteryStatus,

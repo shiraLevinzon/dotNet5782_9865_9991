@@ -17,9 +17,41 @@ namespace IBL.BL
                 doCustomer.CopyPropertiesTo(boCustomer);
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
-                boCustomer.PackagesFromCustomer = GetAllParcels().Where(par => par.Sender.ID == boCustomer.ID).ToList();
-                boCustomer.PackagesToCustomer = GetAllParcels().Where(par => par.Receiver.ID == boCustomer.ID).ToList();
-
+                foreach (var item in GetAllParcels().Where(par => par.Sender.ID == boCustomer.ID).ToList())
+                {
+                    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
+                    pat.ID = item.ID;
+                    pat.Weight = item.Weight;
+                    pat.priority = item.Priority;
+                    pat.CustomerInParcel = item.Receiver;
+                    if (item.Delivered != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)3;
+                    else if(item.PickedUp != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)2;
+                    else if (item.Scheduled != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)1;
+                    else
+                        pat.Situation = (BO.Situations)0;
+                    boCustomer.PackagesFromCustomer.Add(pat);
+                  
+                }
+                foreach (var item in GetAllParcels().Where(par => par.Receiver.ID == boCustomer.ID).ToList())
+                {
+                    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
+                    pat.ID = item.ID;
+                    pat.Weight = item.Weight;
+                    pat.priority = item.Priority;
+                    pat.CustomerInParcel = item.Sender;
+                    if (item.Delivered != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)3;
+                    else if (item.PickedUp != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)2;
+                    else if (item.Scheduled != DateTime.MinValue)
+                        pat.Situation = (BO.Situations)1;
+                    else
+                        pat.Situation = (BO.Situations)0;
+                    boCustomer.PackagesToCustomer.Add(pat);
+                }
             }
             catch (IDAL.DO.MissingIdException ex)
             {

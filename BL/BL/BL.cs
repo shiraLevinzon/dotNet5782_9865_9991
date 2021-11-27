@@ -11,7 +11,7 @@ namespace IBL.BL
     public partial class BL : IBL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
-        List<Drone_to_list> dronesToList;
+        List<DroneToList> dronesToList;
         private readonly DroneConditions delivery;
 
         public Random random = new Random();
@@ -23,7 +23,7 @@ namespace IBL.BL
         public double droneLoadingRate;
         public BL() 
         {
-            dronesToList = new List<Drone_to_list>();
+            dronesToList = new List<DroneToList>();
             List<Customer> customersBL = new List<Customer>();
             List<BaseStation> baseStationsBL = new List<BaseStation>();
 
@@ -40,7 +40,7 @@ namespace IBL.BL
             TMPdrone = dalLayer.printDrone().ToList();
             foreach (var item in TMPdrone)
             {
-                dronesToList.Add(new Drone_to_list
+                dronesToList.Add(new DroneToList
                 {
                     ID = item.ID,
                     MaxWeight=(WeightCategories)item.MaxWeight,
@@ -78,13 +78,13 @@ namespace IBL.BL
             {
                 if(item.DroneId!=0)
                 {
-                    Drone_to_list d = dronesToList.Find(dro => dro.ID == item.DroneId);
-                    if(item.Requested!= new DateTime(0, 0, 0, 0, 0, 0))
+                    DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
+                    if(item.Requested!= DateTime.MinValue)
                     {
-                       if (item.Delivered == new DateTime(0,0,0,0,0,0))
+                       if (item.Delivered == DateTime.MinValue)
                        {                    
-                           d.Conditions = (DroneConditions)1;
-                            if (item.PickedUp == new DateTime(0, 0, 0, 0, 0, 0))
+                           d.Conditions = (DroneConditions)2;
+                            if (item.PickedUp == DateTime.MinValue)
                             {
                                 BO.BaseStation stationHalper = new BO.BaseStation();
                                 double min = double.MaxValue;
@@ -106,13 +106,30 @@ namespace IBL.BL
                             }
                        }
                        
-                    
-                        
                     }
                 }
 
             }
-            ;
+            foreach (var item in dronesToList)
+            {
+                if (item.Conditions != (BO.DroneConditions)2)
+                {
+                    item.Conditions = (BO.DroneConditions)random.Next(1, 3);
+                }
+                if(item.Conditions==(BO.DroneConditions)0)
+                {
+                    int ran = random.Next(0, baseStationsBL.Count());
+                    item.location = baseStationsBL[ran].BaseStationLocation;
+                    item.BatteryStatus = (random.Next(0, 21)) % 100;
+                }
+                else
+                if(item.Conditions == (BO.DroneConditions)1)
+                {
+                  int ran= random.Next(0,  customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                    item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                    //להוסיף עדכון של מצב סוללה לפי הבקשות המטומטמות בתרגיל
+                }
+            }
             //foreach (var parcel in dalLayer.printParcel())
             //{
 
@@ -148,6 +165,6 @@ namespace IBL.BL
                 }
             }*/
         }
-        public 
+       
     }
 }

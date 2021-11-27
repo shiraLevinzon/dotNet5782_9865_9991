@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Drone_in_the_package
+    public class CustomerInParcel
     {
         public int ID { get; set; }
-        public double BatteryStatus { get; set; }
-        public Location location { get; set; }
+        public string CustomerName { get; set; }
         public override string ToString()
         {
             return this.ToStringProperty();
         }
-
     }
 }

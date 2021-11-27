@@ -14,7 +14,7 @@ namespace IBL.BL
             try
             {
                 dronesToList.Find(dro=>dro.ID==id).CopyPropertiesTo(boDrone);
-                if(boDrone.Conditions==(BO.DroneConditions)1)
+                if(boDrone.Conditions==(BO.DroneConditions)2)
                 {
                     BO.Parcel parcelHalper = new BO.Parcel();
                     parcelHalper = GetAllParcels().First(par => par.ID == dronesToList.Find(dro => dro.ID == id).PackagNumberOnTransferred);
@@ -44,12 +44,12 @@ namespace IBL.BL
             //Add DO.BaseStation            
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             drone.CopyPropertiesTo(DroneDO);
-            drone.BatteryStatus = random.Next(20, 40);
-            drone.Conditions = (BO.DroneConditions)3;
+            drone.BatteryStatus = (random.Next(20, 40)) % 100;
+            drone.Conditions = (BO.DroneConditions)0;
             drone.location = GetAllBaseStation().First(bas => bas.ID == id).BaseStationLocation;
 
 
-            BO.Drone_to_list droneToListTMP = new BO.Drone_to_list();
+            BO.DroneToList droneToListTMP = new BO.DroneToList();
             drone.CopyPropertiesTo(droneToListTMP);
             dronesToList.Add(droneToListTMP);
             try
@@ -64,7 +64,7 @@ namespace IBL.BL
         public void UpdateDrone(int id,string name)
         {          
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
-            BO.Drone_to_list dtl = new BO.Drone_to_list();
+            BO.DroneToList dtl = new BO.DroneToList();
 
             dronesToList.Find(dro => dro.ID == id).CopyPropertiesTo(dtl);
             dronesToList.Remove(dronesToList.Find(dro => dro.ID == id));

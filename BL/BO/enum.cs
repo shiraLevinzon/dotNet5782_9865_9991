@@ -9,6 +9,6 @@ namespace IBL.BO
     public enum Priorities { low, normal, hight }
     public  enum Situations {Created, associated, collected, provided}
     public enum ParcelConditions {Defined, associated, collected, provided }
-    public enum DroneConditions { Available,delivery,charging, maintenance }
+    public enum DroneConditions { maintenance ,Available,delivery,charging}
     
 }

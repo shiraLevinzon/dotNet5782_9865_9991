@@ -37,9 +37,9 @@ namespace IBL.BL
             //Add DO.Parcel            
             IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
             parcel.Requested = DateTime.Now;
-            parcel.Scheduled = new DateTime(0, 0, 0, 0, 0, 0);
-            parcel.PickedUp = new DateTime(0, 0, 0, 0, 0, 0);
-            parcel.Delivered = new DateTime(0, 0, 0, 0, 0, 0);
+            parcel.Scheduled = DateTime.MinValue;
+            parcel.PickedUp = DateTime.MinValue;
+            parcel.Delivered = DateTime.MinValue;
             parcel.CopyPropertiesTo(ParcelDO);
            // הרחפן מאותחל ב-נאל
             try

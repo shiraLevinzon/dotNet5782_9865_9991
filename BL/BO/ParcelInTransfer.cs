@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Package_in_transfer
+    public class ParcelInTransfer
     {
         public int ID { get; set; }
         public Priorities priority { get; set; }
         public float distance { get; set; }
         public bool Package_mode { get; set; }
         public WeightCategories Weight { get; set; }
-        public Customer_In_Parcel Sender { get; set; }
-        public Customer_In_Parcel Receives { get; set; }
+        public CustomerInParcel Sender { get; set; }
+        public CustomerInParcel Receives { get; set; }
         public Location Collection { get; set; }
         public Location PackageDestination { get; set; }
         public override string ToString()

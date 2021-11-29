@@ -10,7 +10,7 @@ namespace IDAL
     public interface IDal
     {
         #region Drone
-        public void AddDrone(Drone tmp);
+         void AddDrone(Drone tmp);
         public Drone GetDrone(int id);
         public bool CheckDrone(int id);
         public void UpdDrone(Drone tmp);

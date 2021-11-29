@@ -136,12 +136,10 @@ namespace DalObject
                 return d;
             
             
-        }
-            
+        }   
         public double Deg2rad(double deg)
         {
                 return deg * (Math.PI / 180);
         }
-
     }
 }

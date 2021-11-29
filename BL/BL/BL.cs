@@ -11,31 +11,26 @@ namespace IBL.BL
     public partial class BL : IBL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
-        List<DroneToList> dronesToList;
+        List<DroneToList> dronesToList= new List<DroneToList>();;
         private readonly DroneConditions delivery;
-
         public Random random = new Random();
-
         public double free;
         public double light;
         public double normal;
         public double heavy;
         public double droneLoadingRate;
+        List<Customer> customersBL = new List<Customer>();
+        List<BaseStation> baseStationsBL = new List<BaseStation>();
         public BL() 
         {
-            dronesToList = new List<DroneToList>();
-            List<Customer> customersBL = new List<Customer>();
-            List<BaseStation> baseStationsBL = new List<BaseStation>();
-
-
+            
             double[] arr = dalLayer.RequestPowerConsumptionByDrone();
             free = arr[0];
             light = arr[1];
             normal = arr[2];
             heavy = arr[3];
             droneLoadingRate =arr[4];
-            //List<Drone> TMPdrone = new List<Drone>();
-            //List<Parcel> TMPparcel = new List<Parcel>();
+            #region מילוי רשימת רחפנים מסוג דאל
             List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
             TMPdrone = dalLayer.printDrone().ToList();
             foreach (var item in TMPdrone)
@@ -47,6 +42,8 @@ namespace IBL.BL
                     Model= item.Model
                 });
             }
+            #endregion
+            #region מילוי רשימת הלקוחות מסוג דאל 
             List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
             TMPcustomer = dalLayer.printCustomer().ToList();
             foreach (var item in TMPcustomer)
@@ -60,7 +57,9 @@ namespace IBL.BL
 
                 }) ;
             }
-             List<IDAL.DO.BaseStation> TMPbaseStation = new List<IDAL.DO.BaseStation>();
+            #endregion
+            #region מילוי רשימת תחנות בסיס מסוג דאל
+            List<IDAL.DO.BaseStation> TMPbaseStation = new List<IDAL.DO.BaseStation>();
             TMPbaseStation = dalLayer.printBaseStation().ToList();
             foreach (var item in TMPbaseStation)
             {
@@ -73,6 +72,8 @@ namespace IBL.BL
 
                 }) ;
             }
+            #endregion
+            #region מילוי רשימת חבילה מסוג דאל
             List<IDAL.DO.Parcel> TMPparcel = dalLayer.printParcel().ToList();//Where(par=> par.DroneId!=0).ToList();
             foreach (var item in TMPparcel)
             {
@@ -110,6 +111,8 @@ namespace IBL.BL
                 }
 
             }
+            #endregion
+            #region אין לי מושג מה זה 
             foreach (var item in dronesToList)
             {
                 if (item.Conditions != (BO.DroneConditions)2)
@@ -127,44 +130,53 @@ namespace IBL.BL
                 {
                   int ran= random.Next(0,  customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
                     item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
-                    //להוסיף עדכון של מצב סוללה לפי הבקשות המטומטמות בתרגיל
+                    //להוסיף עדכון של מצב סוללה לפי הבקשות המטומטמות(חחחחח גדול!!) בתרגיל
                 }
             }
-            //foreach (var parcel in dalLayer.printParcel())
-            //{
-
-
-
-            //    TMPparcel[i].Delivered= parcel.Delivered;
-            //    TMPparcel[i].ID = parcel.ID;
-            //    TMPparcel[i].PickedUp = parcel.PickedUp;
-            //    TMPparcel[i].Priority = (Priorities)parcel.priority;
-            //    TMPparcel[i].Requested = parcel.Requested;
-            //    TMPparcel[i].Scheduled = parcel.Scheduled;
-            //    TMPparcel[i].Weight = (WeightCategories)parcel.Weight;
-            //    i++;
-            //}
-            //i = 0;
-            //foreach(var drone in dalLayer.printDrone())
-            //{
-            //    TMPdrone[i].BatteryStatus = drone.BatteryStatus;
-            //    TMPdrone[i].ID = drone.ID;
-            //    TMPdrone[i].Model = drone.Model;
-            //    TMPdrone[i].MaxWeight = (WeightCategories)drone.MaxWeight;
-            //    i++;
-            //}
-            /*foreach (var drone in dalLayer.printDrone())
-            {
-                int index = TMPparcel.FindIndex(x=>x.DroneId == drone.ID);
-                int index1 = dronesToList.FindIndex(x => x.ID == drone.ID);
-                if (TMPparcel[index].PickedUp > DateTime.Now) 
-                {
-                    Drone p = drone;
-                    p.Conditions = delivery;
-                    TMPdrone[index1] = p;
-                }
-            }*/
         }
-       
+        public void DroneToCharging(int id)
+        {
+            BO.Drone drone = GetDrone(id);
+            if (drone.Conditions != (DroneConditions)1)
+                throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
+            float distance1 = (float)(baseStationsBL[0].BaseStationLocation.Latitude - drone.location.Latitude);
+            float distance2 = (float)(baseStationsBL[0].BaseStationLocation.Longitude - drone.location.Longitude);
+            int idbasetation = 0;
+            foreach (var item in baseStationsBL)
+            {
+                if(item.BaseStationLocation.Longitude - drone.location.Latitude< distance1 && item.BaseStationLocation.Longitude - drone.location.Longitude< distance2)
+                {
+                    distance1 = (float)(item.BaseStationLocation.Longitude - drone.location.Latitude);
+                    distance2 = (float)(item.BaseStationLocation.Longitude - drone.location.Longitude);
+                    idbasetation = item.ID;
+                } 
+            }
+            if(free* distance1+free*distance2>drone.BatteryStatus)
+                 throw new BO.ImproperMaintenanceCondition(id, "Drone Battery low");
+            if(GetBaseStation(idbasetation).FreeChargingSlots==0)
+                throw new BO.ImproperMaintenanceCondition(id, "no free charging slot left");
+            //עדכון כמות הטעינות עבור תחנת הבסיס אליה נשלח הרחפן 
+            IDAL.DO.BaseStation basestation = dalLayer.GetBaseStation(idbasetation);
+            basestation.FreeChargingSlots--;
+            dalLayer.UpdBaseStation(basestation);
+            //עדכון שדות הרחפן בהתאם למצב בחדש
+            drone.location.Latitude = basestation.Latitude;
+            drone.location.Longitude = basestation.Longitude;
+            drone.Conditions = (DroneConditions)0;
+            drone.BatteryStatus = drone.BatteryStatus - (free * distance1 + free * distance2 );
+            //צריך עבור על הפונקציה הזאת לא בטוח שהיא מתפקדת באמת כמו שצריך
+        }
+        public void ReleaseDroneFromCharging(int id,DateTime time)
+        {
+            BO.Drone drone = GetDrone(id);
+            if(drone.Conditions!=(DroneConditions)0)
+                throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
+            drone.Conditions = (DroneConditions)1;
+
+        }
+        public void AssignPackageToDrone(int id)
+        {
+
+        }
     }
 }

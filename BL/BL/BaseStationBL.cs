@@ -69,7 +69,6 @@ namespace IBL.BL
         }
         public void UpdateBaseStation(BO.BaseStation baseStation)
         {
-
             //Update DO.BaseStation            
             IDAL.DO.BaseStation BaseStationDO = new IDAL.DO.BaseStation();
             baseStation.CopyPropertiesTo(BaseStationDO);

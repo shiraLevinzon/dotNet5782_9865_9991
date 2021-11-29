@@ -80,7 +80,6 @@ namespace IBL.BL
             {
                 throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
-
         }
     }
 }

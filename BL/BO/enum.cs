@@ -10,5 +10,5 @@ namespace IBL.BO
     public  enum Situations {Created, associated, collected, provided}
     public enum ParcelConditions {Defined, associated, collected, provided }
     public enum DroneConditions { maintenance ,Available,delivery,charging}
-    
+    //תחזוקה=maintenance
 }

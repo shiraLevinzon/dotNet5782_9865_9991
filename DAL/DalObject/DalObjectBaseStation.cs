@@ -24,7 +24,6 @@ namespace DalObject
         {
             return DataSource.baseStations.Any(par => par.ID == id);
         }
-
         public void UpdBaseStation(BaseStation tmp)
         {
             int count = DataSource.baseStations.RemoveAll(par => tmp.ID == par.ID);
@@ -45,8 +44,6 @@ namespace DalObject
 
             DataSource.baseStations.Add(tmp);
         }
-
-      
         public IEnumerable<BaseStation> printBaseStation()
         {
             return DataSource.baseStations.Take(DataSource.baseStations.Count);

@@ -139,19 +139,16 @@ namespace IBL.BL
             BO.Drone drone = GetDrone(id);
             if (drone.Conditions != (DroneConditions)1)
                 throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
-            float distance1 = (float)(baseStationsBL[0].BaseStationLocation.Latitude - drone.location.Latitude);
-            float distance2 = (float)(baseStationsBL[0].BaseStationLocation.Longitude - drone.location.Longitude);
+            double distance = DistanceTo(baseStationsBL[0].BaseStationLocation.Latitude, baseStationsBL[0].BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
             int idbasetation = 0;
             foreach (var item in baseStationsBL)
             {
-                if(item.BaseStationLocation.Longitude - drone.location.Latitude< distance1 && item.BaseStationLocation.Longitude - drone.location.Longitude< distance2)
+                if (DistanceTo(item.BaseStationLocation.Latitude,item.BaseStationLocation.Longitude,drone.location.Latitude,drone.location.Longitude)< distance)
                 {
-                    distance1 = (float)(item.BaseStationLocation.Longitude - drone.location.Latitude);
-                    distance2 = (float)(item.BaseStationLocation.Longitude - drone.location.Longitude);
-                    idbasetation = item.ID;
+                    distance= DistanceTo(item.BaseStationLocation.Latitude,item.BaseStationLocation.Longitude,drone.location.Latitude,drone.location.Longitude);
                 } 
             }
-            if(free* distance1+free*distance2>drone.BatteryStatus)
+            if(free* distance>drone.BatteryStatus)
                  throw new BO.ImproperMaintenanceCondition(id, "Drone Battery low");
             if(GetBaseStation(idbasetation).FreeChargingSlots==0)
                 throw new BO.ImproperMaintenanceCondition(id, "no free charging slot left");
@@ -163,7 +160,7 @@ namespace IBL.BL
             drone.location.Latitude = basestation.Latitude;
             drone.location.Longitude = basestation.Longitude;
             drone.Conditions = (DroneConditions)0;
-            drone.BatteryStatus = drone.BatteryStatus - (free * distance1 + free * distance2 );
+            drone.BatteryStatus = drone.BatteryStatus - (free * distance);
             //צריך עבור על הפונקציה הזאת לא בטוח שהיא מתפקדת באמת כמו שצריך
         }
         public void ReleaseDroneFromCharging(int id,DateTime time)
@@ -177,6 +174,20 @@ namespace IBL.BL
         public void AssignPackageToDrone(int id)
         {
 
+        }
+        private double DistanceTo(double lat1, double lon1, double lat2, double lon2)
+        {
+            double rlat1 = Math.PI * lat1 / 180;
+            double rlat2 = Math.PI * lat2 / 180;
+            double theta = lon1 - lon2;
+            double rtheta = Math.PI * theta / 180;
+            double dist =
+                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                Math.Cos(rlat2) * Math.Cos(rtheta);
+            dist = Math.Acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+            return dist * 1.609344;
         }
     }
 }

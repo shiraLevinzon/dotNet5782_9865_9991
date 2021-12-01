@@ -260,6 +260,11 @@ namespace IBL.BL
             }
         }
         #endregion
+
+        public void CollectParcelByDrone(int id)//להעתיק מהמאגר שלי
+        {
+
+        }
         #region אספקת חבילה ע"י רחפן
         public void DeliveryOfPackageByDrone(int id)
         {

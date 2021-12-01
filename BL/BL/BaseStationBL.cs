@@ -65,11 +65,19 @@ namespace IBL.BL
                 throw new BO.DuplicateIdException(baseStationDO.ID,"BaseStation", "Student ID is illegal", ex);
             }
         }
-        public void UpdateBaseStation(BO.BaseStation baseStation)
+        public void UpdateBaseStation(int id, string name, int sum)
         {
             //Update DO.BaseStation            
             IDAL.DO.BaseStation BaseStationDO = new IDAL.DO.BaseStation();
-            baseStation.CopyPropertiesTo(BaseStationDO);
+            BaseStationDO = dalLayer.GetBaseStation(id);
+            if (name!=null)
+            {
+                BaseStationDO.StationName = name;
+            }
+            if (sum!=0)
+            {
+                BaseStationDO.FreeChargingSlots = sum - dronesToList.Count(dro => dro.Conditions == (BO.DroneConditions)0);
+            }
             try
             {
                 dalLayer.UpdBaseStation(BaseStationDO);

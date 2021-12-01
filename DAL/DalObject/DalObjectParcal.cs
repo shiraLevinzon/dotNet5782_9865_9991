@@ -70,8 +70,8 @@ namespace DalObject
             Parcel p = DataSource.parcels[index1];
             Drone d = DataSource.drones[index2];
 
-            p.PickedUp = DateTime.Now;
-            d.MaxWeight = p.Weight;
+            p.PickedUp = DateTime.Now;//עדכון זמן
+            d.MaxWeight = p.Weight;//עדכון משקל
 
             DataSource.parcels[index1] = p;
             DataSource.drones[index2] = d;

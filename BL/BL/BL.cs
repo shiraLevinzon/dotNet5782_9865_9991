@@ -11,7 +11,7 @@ namespace IBL.BL
     public partial class BL : IBL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
-        List<DroneToList> dronesToList= new List<DroneToList>();;
+        List<DroneToList> dronesToList= new List<DroneToList>();
         private readonly DroneConditions delivery;
         public Random random = new Random();
         public double free;
@@ -112,7 +112,7 @@ namespace IBL.BL
 
             }
             #endregion
-            #region אין לי מושג מה זה 
+            #region היית צריכה לעשות לזה אנד לכן זה עושה באאאאג
             foreach (var item in dronesToList)
             {
                 if (item.Conditions != (BO.DroneConditions)2)
@@ -133,6 +133,7 @@ namespace IBL.BL
                     //להוסיף עדכון של מצב סוללה לפי הבקשות המטומטמות(חחחחח גדול!!) בתרגיל
                 }
             }
+            #endregion אין לי מושג מה זה
         }
         public void DroneToCharging(int id)
         {
@@ -173,7 +174,19 @@ namespace IBL.BL
         }
         public void AssignPackageToDrone(int id)
         {
+            
 
+        }
+
+        public void CollectParcelByDrone(int id)
+        {
+            BO.Drone drone = GetDrone(id);
+            if (drone.Conditions != (DroneConditions)2)
+                throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
+            dalLayer.ParcelCollectionByDrone(drone.PackageInTransfer.ID, id);
+            double dis = DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
+            drone.BatteryStatus = dis * free;
+            drone.location = drone.PackageInTransfer.Collection;
         }
         private double DistanceTo(double lat1, double lon1, double lat2, double lon2)
         {

@@ -11,7 +11,7 @@ namespace IBL
         public IEnumerable<BO.BaseStation> GetAllBaseStation();
         public BO.BaseStation GetBaseStation(int id);
         public void AddBaseStation(BO.BaseStation baseStation);
-        public void UpdateBaseStation(BO.BaseStation baseStation);
+        public void UpdateBaseStation(int id, string name, int sum);
         #endregion
         #region פונקציות רחפן של שיכבה 2
         public BO.Drone GetDrone(int id);
@@ -23,7 +23,7 @@ namespace IBL
         public BO.Customer GetCustomer(int id);
         public IEnumerable<BO.Customer> GetAllCustome();
         public void AddCustomer(BO.Customer customer);
-        public void UpdateCustomer(BO.Customer customer);
+        public void UpdateCustomer(int id, string name, string phone);
         #endregion
         #region פונקציות חבילה של שיכבה 2
         public BO.Parcel GetParcel(int id);
@@ -35,6 +35,7 @@ namespace IBL
         public void DroneToCharging(int id);
         public void ReleaseDroneFromCharging(int id, TimeSpan time);
         public void AssignPackageToDrone(int id);
+        public void CollectParcelByDrone(int id);
         public void DeliveryOfPackageByDrone(int id);
         #endregion
     }

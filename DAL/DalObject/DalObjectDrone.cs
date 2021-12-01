@@ -49,30 +49,11 @@ namespace DalObject
 
             DataSource.drones.Add(tmp);
         }
-
         public IEnumerable<Drone> printDrone()
         {
             return DataSource.drones.Take(DataSource.drones.Count).ToList();
 
         }
-        /// <summary>
-        /// Assign A Package To A Drone
-        /// </summary>
-        /// <param name="pID"></param>
-        /// <param name="dID"></param>
-        public void AssignPackageToDrone(int pID, int dID)
-        {
-            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
-
-            Parcel p = DataSource.parcels[index1];
-            Drone d = DataSource.drones[index2];
-
-            p.DroneId = dID;
-            p.Scheduled = DateTime.Now;
-
-            DataSource.parcels[index1] = p;
-            DataSource.drones[index2] = d;
-        }
+       
     }
 }

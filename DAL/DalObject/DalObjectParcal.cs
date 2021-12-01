@@ -20,6 +20,7 @@ namespace DalObject
                 throw new DuplicateIdException(tmp.ID, "Parcel");
 
             tmp.ID = DataSource.Config.IdCount++;
+            tmp.Requested = DateTime.Now;
             DataSource.parcels.Add(tmp);
         }
         /// <summary>

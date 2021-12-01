@@ -84,12 +84,20 @@ namespace IBL.BL
                 throw new BO.DuplicateIdException(customerDO.ID, "Customer", "Customer ID is illegal", ex);
             }
         }
-        public void UpdateCustomer(BO.Customer customer)
+        public void UpdateCustomer(int id,string name,string phone)
         {
 
             //Update DO.Customer            
             IDAL.DO.Customer CustomerDO = new IDAL.DO.Customer();
-            customer.CopyPropertiesTo(CustomerDO);
+            CustomerDO = dalLayer.GetCostumer(id);
+            if (name!=null)
+            {
+                CustomerDO.Name = name;
+            }
+            if (phone != null)
+            {
+                CustomerDO.Phone = phone;
+            }
             try
             {
                 dalLayer.UpdCustomer(CustomerDO);

@@ -1,4 +1,4 @@
-﻿using System;
+﻿/using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,7 +61,7 @@ namespace IBL.BL
                 throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
         }
-        public void UpdateDrone(int id,string name)
+        public void UpdateDrone(int id,string model)
         {          
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             BO.DroneToList dtl = new BO.DroneToList();
@@ -69,7 +69,7 @@ namespace IBL.BL
             dronesToList.Find(dro => dro.ID == id).CopyPropertiesTo(dtl);
             dronesToList.Remove(dronesToList.Find(dro => dro.ID == id));
 
-            dtl.Model = name;
+            dtl.Model = model;
             dronesToList.Add(dtl);
             dtl.CopyPropertiesTo(DroneDO);
             try

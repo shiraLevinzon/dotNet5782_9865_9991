@@ -171,7 +171,7 @@ namespace ConsoleUI
                             case 2:
                                 Console.WriteLine("Enter the base station ID number");
                                 int.TryParse(Console.ReadLine(), out s);
-                                BaseStation tmp1 = dalobject.BaseStationSearch(s);
+                                BaseStation tmp1 = dalobject.UpdBaseStation(s);
                                 Console.WriteLine(tmp1.ToString());
                                 break;
                             case 3:

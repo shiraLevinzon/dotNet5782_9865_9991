@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using DalObject;
 using IDAL;
 using IDAL.DO;
-
-
 namespace DalObject
 {
     public partial class DalObject : IDal
@@ -60,19 +58,13 @@ namespace DalObject
 
             BaseStation bs = DataSource.baseStations[index1];
             Drone d = DataSource.drones[index2];
-
             bs.FreeChargingSlots--;
-
-
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
-
-
             DroneCharge dc = new DroneCharge();
             dc.DroneID = dID;
             dc.StationID = bsID;
             DataSource.droneCharges.Add(dc);
-
         }
         /// <summary>
         /// Release Drone From Charging At BaseStation
@@ -83,14 +75,14 @@ namespace DalObject
         {
             int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID);
             int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
-
+            int index3 = DataSource.droneCharges.FindIndex(x => x.DroneID == dID);
             BaseStation bs = DataSource.baseStations[index1];
             Drone d = DataSource.drones[index2];
-
             bs.FreeChargingSlots++;
 
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
+            DataSource.droneCharges.RemoveAt(index3);
         }
     }
 }

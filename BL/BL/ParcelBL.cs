@@ -51,23 +51,22 @@ namespace IBL.BL
                 throw new BO.DuplicateIdException(ParcelDO.ID, "Parcel", "Student ID is illegal", ex);
             }
         }
+        public void UpdateParcel(BO.Parcel Parcel)
+        {
 
-        //public void UpdateParcel(BO.Parcel Parcel)
-        //{
+            //Update DO.BaseStation            
+            IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
+            Parcel.CopyPropertiesTo(ParcelDO);
+            try
+            {
+                dalLayer.UpdParcel(ParcelDO);
+            }
+            catch (IDAL.DO.DuplicateIdException ex)
+            {
+                throw new BO.DuplicateIdException(ParcelDO.ID, "Parcel", "Student ID is illegal", ex);
+            }
 
-        //    //Update DO.BaseStation            
-        //    IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
-        //    Parcel.CopyPropertiesTo(ParcelDO);
-        //    try
-        //    {
-        //        dalLayer.UpdParcel(ParcelDO);
-        //    }
-        //    catch (IDAL.DO.DuplicateIdException ex)
-        //    {
-        //        throw new BO.DuplicateIdException(ParcelDO.ID, "Parcel", "Student ID is illegal", ex);
-        //    }
-
-        //}
+        }
 
     }
 }

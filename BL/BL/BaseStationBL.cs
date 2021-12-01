@@ -30,8 +30,6 @@ namespace IBL.BL
                         ID = item.ID,
                         BatteryStatus = item.BatteryStatus,
                     }) ;
-                    
-
                 }
             }
             catch (IDAL.DO.MissingIdException ex)

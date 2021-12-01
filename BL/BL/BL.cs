@@ -12,7 +12,7 @@ namespace IBL.BL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
         List<DroneToList> dronesToList= new List<DroneToList>();
-        private readonly DroneConditions delivery;
+       /// private readonly DroneConditions delivery;
         public Random random = new Random();
         public double free;
         public double light;
@@ -163,7 +163,6 @@ namespace IBL.BL
                 dro.location.Longitude = basestation.Longitude;
                 dro.Conditions = (DroneConditions)0;
                 dalLayer.SendingDroneToBaseStation(basestation.ID, dro.ID);
-                //צריך לבדוק מאיזה סוג זה הוספת מופע קיים
             }
             catch(IDAL.DO.DuplicateIdException ex)
             {
@@ -265,12 +264,33 @@ namespace IBL.BL
         {
             try
             {
-                
-
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
+                IDAL.DO.Parcel parcel = dalLayer.printParcel().ToList().Find(x => x.DroneId == id);
+                if (parcel.Delivered!=DateTime.MinValue || parcel.PickedUp==DateTime.MinValue)
+                    throw new BO.PackageTimesException(id, "Parcel can't be Delivere- Time Problem");
+                IDAL.DO.Customer customer = dalLayer.printCustomer().ToList().Find(x => x.ID == parcel.TargetID);
+                double distance = DistanceTo(drone.location.Latitude,drone.location.Longitude, customer.Latitude, customer.Longitude);
+                int a = (int)parcel.Weight;
+                double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);
+                if (distance * decrease > drone.BatteryStatus)
+                    throw new BO.PackageTimesException(drone.ID, "not enough battery left");
+                drone.BatteryStatus = drone.BatteryStatus - distance * decrease;
+                drone.location.Latitude = customer.Latitude;
+                drone.location.Longitude = customer.Longitude;
+                drone.Conditions = (DroneConditions)1;
+                dalLayer.DeliveryParcelToCustomer(parcel.ID,drone.ID);
             }
-            catch
+            catch (IDAL.DO.DuplicateIdException ex)
             {
-
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+            }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
         }
         #endregion

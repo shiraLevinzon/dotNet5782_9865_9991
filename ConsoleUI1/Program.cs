@@ -165,25 +165,25 @@ namespace ConsoleUI
                             case 1:
                                 Console.WriteLine("Enter the Drone ID number");
                                 int.TryParse(Console.ReadLine(), out s);
-                                Drone tmp = dalobject.DroneSearch(s);
+                                Drone tmp = dalobject.GetDrone(s);
                                 Console.WriteLine(tmp.ToString());
                                 break;
                             case 2:
                                 Console.WriteLine("Enter the base station ID number");
                                 int.TryParse(Console.ReadLine(), out s);
-                                BaseStation tmp1 = dalobject.UpdBaseStation(s);
+                                BaseStation tmp1 = dalobject.GetBaseStation(s);
                                 Console.WriteLine(tmp1.ToString());
                                 break;
                             case 3:
                                 Console.WriteLine("Enter the customer ID number");
                                 int.TryParse(Console.ReadLine(), out s);
-                                Customer tmp2 = dalobject.CustomerSearch(s);
+                                Customer tmp2 = dalobject.GetCostumer(s);
                                 Console.WriteLine(tmp2.ToString());
                                 break;
                             case 4:
                                 Console.WriteLine("Enter the ID number of the package");
                                 int.TryParse(Console.ReadLine(), out s);
-                                Parcel tmp4 = dalobject.ParcelSearch(s);
+                                Parcel tmp4 = dalobject.GetParcel(s);
                                 Console.WriteLine(tmp4.ToString());
                                 break;
                             default:

@@ -20,6 +20,7 @@ namespace DalObject
                 throw new DuplicateIdException(tmp.ID, "Parcel");
 
             tmp.ID = DataSource.Config.IdCount++;
+            tmp.Requested = DateTime.Now;
             DataSource.parcels.Add(tmp);
         }
         /// <summary>
@@ -56,26 +57,6 @@ namespace DalObject
 
             DataSource.parcels.Add(tmp);
         }
-        /// <summary>
-        /// Parcel Collection By A Drone
-        /// </summary>
-        /// <param name="pID"></param>
-        /// <param name="dID"></param>
-        public void ParcelCollectionByDrone(int pID, int dID)
-        {
-
-            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
-
-            Parcel p = DataSource.parcels[index1];
-            Drone d = DataSource.drones[index2];
-
-            p.PickedUp = DateTime.Now;
-            d.MaxWeight = p.Weight;
-
-            DataSource.parcels[index1] = p;
-            DataSource.drones[index2] = d;
-
-        }
+        
     }
 }

@@ -3,7 +3,8 @@ using IBL;
 using IBL.BL;
 using IBL.BO;
 using System.Collections.Generic;
-namespace ConsoleUI_BL
+
+namespace ConsoleUIBL
 {
     class Program
     {
@@ -11,7 +12,7 @@ namespace ConsoleUI_BL
         {
             IBL.IBL blObject = new BL();
             int i = 0;
-            while (i!=5)
+            while (i != 5)
             {
                 Console.WriteLine("To add an option, press 1,");
                 Console.WriteLine("For the Update option, press 2,");
@@ -42,7 +43,7 @@ namespace ConsoleUI_BL
                                 drone.PackageInTransfer = new ParcelInTransfer { };
                                 Console.WriteLine("enter base station id to put the drone to the first charge ");
                                 blObject.AddDrone(drone, int.Parse(Console.ReadLine()));
-                                
+
                                 break;
                             case 2:
                                 Console.WriteLine("enter id");
@@ -52,9 +53,9 @@ namespace ConsoleUI_BL
                                 baseStation.StationName = Console.ReadLine();
                                 Console.WriteLine("enter location- latitude");
                                 Console.WriteLine("location- longtitude");
-                                baseStation.BaseStationLocation = new Location { Latitude = double.Parse(Console.ReadLine()),Longitude= double.Parse(Console.ReadLine()) };
+                                baseStation.BaseStationLocation = new Location { Latitude = double.Parse(Console.ReadLine()), Longitude = double.Parse(Console.ReadLine()) };
                                 Console.WriteLine("enter number of free slots charge");
-                                baseStation.FreeChargingSlots= int.Parse(Console.ReadLine());
+                                baseStation.FreeChargingSlots = int.Parse(Console.ReadLine());
                                 baseStation.DronesInCharge = new List<DroneInCharging>();
                                 blObject.AddBaseStation(baseStation);
                                 break;
@@ -91,7 +92,7 @@ namespace ConsoleUI_BL
                                 break;
                         }
                         break;
-                    case 2:                       
+                    case 2:
                         Console.WriteLine("To Assign A Package To Drone press 1,");
                         Console.WriteLine("To Parcel Collection By Drone press 2,");
                         Console.WriteLine("To Delivery Parcel To  Customer press 3,");
@@ -125,7 +126,7 @@ namespace ConsoleUI_BL
                                 break;
                             case 6:
                                 Console.WriteLine("enter id, model");
-                                blObject.UpdateDrone(int.Parse(Console.ReadLine()),Console.ReadLine());
+                                blObject.UpdateDrone(int.Parse(Console.ReadLine()), Console.ReadLine());
                                 break;
                             case 7:
                                 Console.WriteLine("enter id, station name, Total amount of charging stations");
@@ -133,7 +134,7 @@ namespace ConsoleUI_BL
                                 break;
                             case 8:
                                 Console.WriteLine("enter id, name, phone");
-                                blObject.UpdateCustomer(int.Parse(Console.ReadLine()), Console.ReadLine(),Console.ReadLine());
+                                blObject.UpdateCustomer(int.Parse(Console.ReadLine()), Console.ReadLine(), Console.ReadLine());
                                 break;
 
                             default:
@@ -180,16 +181,40 @@ namespace ConsoleUI_BL
                         switch (t)
                         {
                             case 1:
+                                foreach (var item in blObject.GetAllBaseStation())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 2:
+                                foreach (var item in blObject.GetAllDrones())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 3:
+                                foreach (var item in blObject.GetAllCustomer())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 4:
+                                foreach (var item in blObject.GetAllParcels())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 5:
+                                foreach (var item in blObject.GetAllParcels(par =>par.ParcelCondition==(Situations)0))
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 6:
+                                foreach (var item in blObject.GetAllBaseStation(bs => bs.FreeChargingSlots>0))
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             default:
                                 break;

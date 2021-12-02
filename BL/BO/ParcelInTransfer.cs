@@ -10,7 +10,7 @@ namespace IBL.BO
     {
         public int ID { get; set; }
         public Priorities priority { get; set; }
-        public double distance { get; set; }
+        public float distance { get; set; }
         public bool Package_mode { get; set; }
         public WeightCategories Weight { get; set; }
         public CustomerInParcel Sender { get; set; }

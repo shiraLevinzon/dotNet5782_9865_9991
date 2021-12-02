@@ -62,21 +62,21 @@ namespace DalObject
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
-        //public void ParcelCollectionByDrone(int pID, int dID)
-        //{
+        public void ParcelCollectionByDrone(int pID, int dID)
+        {
 
-        //    int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
-        //    int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
+            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
 
-        //    Parcel p = DataSource.parcels[index1];
-        //    Drone d = DataSource.drones[index2];
+            Parcel p = DataSource.parcels[index1];
+            Drone d = DataSource.drones[index2];
 
-        //    p.PickedUp = DateTime.Now;//עדכון זמן
-        //    d.MaxWeight = p.Weight;//עדכון משקל
+            p.PickedUp = DateTime.Now;//עדכון זמן
+            d.MaxWeight = p.Weight;//עדכון משקל
 
-        //    DataSource.parcels[index1] = p;
-        //    DataSource.drones[index2] = d;
+            DataSource.parcels[index1] = p;
+            DataSource.drones[index2] = d;
 
-        //}
+        }
     }
 }

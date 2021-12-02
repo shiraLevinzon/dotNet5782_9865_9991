@@ -11,7 +11,7 @@ namespace ConsoleUI_BL
         {
             IBL.IBL blObject = new BL();
             int i = 0;
-            while (i!=5)
+            while (i != 5)
             {
                 Console.WriteLine("To add an option, press 1,");
                 Console.WriteLine("For the Update option, press 2,");
@@ -31,53 +31,117 @@ namespace ConsoleUI_BL
                         switch (a)
                         {
                             case 1:
-                                Console.WriteLine("enter id, model, max wight (0-light, 1-normal, 2-heavy), base station id to put the drone to the first charge ");
                                 Drone drone = new Drone();
+                                Console.WriteLine("enter id");
                                 drone.ID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter model");
                                 drone.Model = Console.ReadLine();
+                                Console.WriteLine("enter max wight (0-light, 1-normal");
                                 drone.MaxWeight = (WeightCategories)int.Parse(Console.ReadLine());
                                 drone.location = new Location { };
                                 drone.PackageInTransfer = new ParcelInTransfer { };
-                                blObject.AddDrone(drone, int.Parse(Console.ReadLine()));
-                                
+                                Console.WriteLine("enter base station id to put the drone to the first charge ");
+                                try
+                                {
+                                    blObject.AddDrone(drone, int.Parse(Console.ReadLine()));
+
+                                }
+                                catch(IBL.BO.DuplicateIdException)
+                                {
+                                    Console.WriteLine("this id already exist in the program");
+                                }
+                                catch (IBL.BO.MissingIdException)
+                                {
+                                    Console.WriteLine("this id station dont exist");
+                                }
+                                catch(Exception)
+                                {
+                                    Console.WriteLine("error");
+                                }
+
+
+
                                 break;
                             case 2:
-                                Console.WriteLine("enter id, station name, location- latitude and longtitude, number of free slots charge");
+                                Console.WriteLine("enter id");
                                 BaseStation baseStation = new BaseStation();
                                 baseStation.ID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter station name");
                                 baseStation.StationName = Console.ReadLine();
-                                baseStation.BaseStationLocation = new Location { Latitude = double.Parse(Console.ReadLine()),Longitude= double.Parse(Console.ReadLine()) };
-                                baseStation.FreeChargingSlots= int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter location- latitude");
+                                Console.WriteLine("location- longtitude");
+                                baseStation.BaseStationLocation = new Location { Latitude = double.Parse(Console.ReadLine()), Longitude = double.Parse(Console.ReadLine()) };
+                                Console.WriteLine("enter number of free slots charge");
+                                baseStation.FreeChargingSlots = int.Parse(Console.ReadLine());
                                 baseStation.DronesInCharge = new List<DroneInCharging>();
-                                blObject.AddBaseStation(baseStation);
+                                try 
+                                { 
+                                    blObject.AddBaseStation(baseStation);
+                                }
+                                catch (IBL.BO.DuplicateIdException)
+                                {
+                                    Console.WriteLine("this id already exist in the program");
+                                }                      
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("error");
+                                }
                                 break;
                             case 3:
-                                Console.WriteLine("enter id, name, phone, location- latitude and longtitude");
+                                Console.WriteLine("enter id");
                                 Customer customer = new Customer();
                                 customer.ID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter name");
                                 customer.Name = Console.ReadLine();
-                                customer.Phone = Console.ReadLine();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                Console.WriteLine("enter phone");
+                                customer.Phone = Console.ReadLine();
+                                Console.WriteLine("enter  latitude");
+                                Console.WriteLine("enter location-longtitude");
                                 customer.Location = new Location { Latitude = double.Parse(Console.ReadLine()), Longitude = double.Parse(Console.ReadLine()) };
                                 customer.PackagesFromCustomer = new List<ParcelAtCustomer>();
                                 customer.PackagesToCustomer = new List<ParcelAtCustomer>();
-                                blObject.AddCustomer(customer);
+                                try
+                                {
+                                    blObject.AddCustomer(customer);
+                                }
+                                catch (IBL.BO.DuplicateIdException)
+                                {
+                                    Console.WriteLine("this id already exist in the program");
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("error");
+                                }
                                 break;
                             case 4:
-                                Console.WriteLine("enter sender id, reciver id, wight (0-light, 1-normal, 2-heavy), Priority (0-low, 1-normal, 2-hight)");
+                                Console.WriteLine("enter sender id,");
                                 Parcel parcel = new Parcel();
                                 parcel.Sender.ID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter reciver id,");
                                 parcel.Receiver.ID = int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter  wight (0-light, 1-normal, 2-heavy)");
                                 parcel.Weight = (WeightCategories)int.Parse(Console.ReadLine());
+                                Console.WriteLine("enter Priority (0-low, 1-normal, 2-hight)");
                                 parcel.Priority = (Priorities)int.Parse(Console.ReadLine());
                                 parcel.DroneInParcel = new DroneInParcel();
-                                blObject.AddParcel(parcel);
-
+                                try
+                                {
+                                    blObject.AddParcel(parcel);
+                                }
+                                catch (IBL.BO.DuplicateIdException)
+                                {
+                                    Console.WriteLine("this id already exist in the program");
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("error");
+                                }
                                 break;
                             default:
                                 break;
                         }
                         break;
-                    case 2:                       
+                    case 2:
                         Console.WriteLine("To Assign A Package To Drone press 1,");
                         Console.WriteLine("To Parcel Collection By Drone press 2,");
                         Console.WriteLine("To Delivery Parcel To  Customer press 3,");
@@ -111,7 +175,7 @@ namespace ConsoleUI_BL
                                 break;
                             case 6:
                                 Console.WriteLine("enter id, model");
-                                blObject.UpdateDrone(int.Parse(Console.ReadLine()),Console.ReadLine());
+                                blObject.UpdateDrone(int.Parse(Console.ReadLine()), Console.ReadLine());
                                 break;
                             case 7:
                                 Console.WriteLine("enter id, station name, Total amount of charging stations");
@@ -119,7 +183,7 @@ namespace ConsoleUI_BL
                                 break;
                             case 8:
                                 Console.WriteLine("enter id, name, phone");
-                                blObject.UpdateCustomer(int.Parse(Console.ReadLine()), Console.ReadLine(),Console.ReadLine());
+                                blObject.UpdateCustomer(int.Parse(Console.ReadLine()), Console.ReadLine(), Console.ReadLine());
                                 break;
 
                             default:
@@ -166,16 +230,40 @@ namespace ConsoleUI_BL
                         switch (t)
                         {
                             case 1:
+                                foreach (var item in blObject.GetAllBaseStation())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 2:
+                                foreach (var item in blObject.GetAllDrones())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 3:
+                                foreach (var item in blObject.GetAllCustomer())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 4:
+                                foreach (var item in blObject.GetAllParcels())
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 5:
+                                foreach (var item in blObject.GetAllParcels(par => par.ParcelCondition == (Situations)0))
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             case 6:
+                                foreach (var item in blObject.GetAllBaseStation(bs => bs.FreeChargingSlots > 0))
+                                {
+                                    Console.WriteLine(item.ToString());
+                                }
                                 break;
                             default:
                                 break;

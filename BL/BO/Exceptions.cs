@@ -67,5 +67,20 @@ namespace IBL.BO
         { ID = id; EntityName = entity; }
         public override string ToString() => base.ToString() + $", {EntityName} - Drone: {ID} -mode is not available:";
     }
+    public class TheDroneDnotShip : Exception
+    {
+        public int ID;
+
+        public string EntityName;
+        public TheDroneDnotShip(int id, string entity) : base() { ID = id; EntityName = entity; }
+        public TheDroneDnotShip(int id, string entity, string message) :
+            base(message)
+        { ID = id; EntityName = entity; }
+        public TheDroneDnotShip(int id, string entity, string message, Exception innerException) :
+            base(message, innerException)
+        { ID = id; EntityName = entity; }
+        public override string ToString() => base.ToString() + $", {EntityName} - Drone: {ID} -mode is not available:";
+    }
+    
 
 }

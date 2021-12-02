@@ -17,39 +17,29 @@ namespace IBL.BL
                 doCustomer.CopyPropertiesTo(boCustomer);
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
-                foreach (var item in GetAllParcels().Where(par => par.Sender.ID == boCustomer.ID).ToList())
+                foreach (var item in GetAllParcels().Where(par => par.SenderID == boCustomer.ID).ToList())
                 {
                     BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
                     pat.ID = item.ID;
                     pat.Weight = item.Weight;
-                    pat.priority = item.Priority;
-                    pat.CustomerInParcel = item.Receiver;
-                    if (item.Delivered != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)3;
-                    else if(item.PickedUp != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)2;
-                    else if (item.Scheduled != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)1;
-                    else
-                        pat.Situation = (BO.Situations)0;
+                    pat.priority = item.ParcelPriority;
+                    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.RecieverID);
+                    pat.CustomerInParcel.ID = customerTo.ID;
+                    pat.CustomerInParcel.CustomerName = customerTo.Name;
+                    pat.Situation = item.ParcelCondition;
                     boCustomer.PackagesFromCustomer.Add(pat);
-                  
+
                 }
-                foreach (var item in GetAllParcels().Where(par => par.Receiver.ID == boCustomer.ID).ToList())
+                foreach (var item in GetAllParcels().Where(par => par.RecieverID == boCustomer.ID).ToList())
                 {
                     BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
                     pat.ID = item.ID;
                     pat.Weight = item.Weight;
-                    pat.priority = item.Priority;
-                    pat.CustomerInParcel = item.Sender;
-                    if (item.Delivered != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)3;
-                    else if (item.PickedUp != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)2;
-                    else if (item.Scheduled != DateTime.MinValue)
-                        pat.Situation = (BO.Situations)1;
-                    else
-                        pat.Situation = (BO.Situations)0;
+                    pat.priority = item.ParcelPriority;
+                    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.SenderID);
+                    pat.CustomerInParcel.ID = customerTo.ID;
+                    pat.CustomerInParcel.CustomerName = customerTo.Name;
+                    pat.Situation = item.ParcelCondition;
                     boCustomer.PackagesToCustomer.Add(pat);
                 }
             }
@@ -60,11 +50,26 @@ namespace IBL.BL
 
             return boCustomer;
         }
-        public IEnumerable<BO.Customer> GetAllCustome()
+        public IEnumerable<BO.CustomerToList> GetAllCustomer()
         {
-            return from CustomerDO in dalLayer.printCustomer()
-                   orderby CustomerDO.ID//מיון לפי תז
-                   select GetCustomer(CustomerDO.ID);
+            IEnumerable<BO.Customer> cust = from CustomerDO in dalLayer.printCustomer()
+                                            orderby CustomerDO.ID//מיון לפי תז
+                                            select GetCustomer(CustomerDO.ID);
+            List<BO.CustomerToList> customerToLists = new List<BO.CustomerToList>();
+            foreach (var item in cust)
+            {
+                BO.CustomerToList customer = new BO.CustomerToList();
+                customer.ID = item.ID;
+                customer.Name = item.Name;
+                customer.Phone = item.Phone;
+                customer.NumberofPackagesSentandDelivered = item.PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)3);
+                customer.NumberofPackagesSentButNotDelivered = item.PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)2);
+                customer.NumberOfPackagesHeReceived = item.PackagesToCustomer.Count(par => par.Situation == (BO.Situations)3);
+                customer.NumberofPackagesOnTheWayToCustomer = item.PackagesToCustomer.Count(par => par.Situation == (BO.Situations)2);
+                customerToLists.Add(customer);
+            }
+            return customerToLists;
+
         }
         public void AddCustomer(BO.Customer customer)
         {

@@ -39,11 +39,25 @@ namespace IBL.BL
 
             return boBaseStation;
         }
-        public IEnumerable<BO.BaseStation> GetAllBaseStation()
+        public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null)
         {
-            return from BaseStationDO in dalLayer.printBaseStation()
-                   orderby BaseStationDO.ID//מיון לפי תז
-                   select GetBaseStation(BaseStationDO.ID);
+            IEnumerable<BO.BaseStation> baseStations = from BaseStationDO in dalLayer.printBaseStation()
+                                                       orderby BaseStationDO.ID//מיון לפי תז
+                                                       select GetBaseStation(BaseStationDO.ID);
+            List<BO.BaseStationToList> baseStationToLists = new List<BO.BaseStationToList>();
+            foreach (var item in baseStations)
+            {
+                BO.BaseStationToList bs = new BO.BaseStationToList();
+                bs.ID = item.ID;
+                bs.StationName = item.StationName;
+                bs.FreeChargingSlots = item.FreeChargingSlots;
+                bs.BusyChargingSlots = item.DronesInCharge.Count();
+                baseStationToLists.Add(bs);
+            }
+            if (predicate == null)
+                return baseStationToLists;
+            return baseStationToLists.FindAll(p => predicate(p));
+
         }
         public void AddBaseStation(BO.BaseStation baseStation)
         {

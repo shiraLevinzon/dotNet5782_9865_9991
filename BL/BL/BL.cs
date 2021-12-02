@@ -80,39 +80,58 @@ namespace IBL.BL
                 if (item.DroneId != 0)
                 {
                     DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
-                    if(item.Requested!= DateTime.MinValue)
+                    d.Conditions = (DroneConditions)2;
+
+
+                    if (item.Requested != DateTime.MinValue)
                     {
                         if (item.Delivered == DateTime.MinValue)
                         {
                             d.Conditions = (DroneConditions)2;
                             if (item.PickedUp == DateTime.MinValue)
                             {
-                                BO.BaseStation stationHalper = new BO.BaseStation();
-                                double min = double.MaxValue;
+                                BO.BaseStation basestationHalper = new BO.BaseStation();
+                                double mini = double.MaxValue;
                                 foreach (var item2 in baseStationsBL)
                                 {
                                     double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, d.location.Latitude, d.location.Longitude);
-                                    if (dis < min)
+                                    if (dis < mini)
                                     {
-                                        min = dis;
-                                        stationHalper = item2;
+                                        mini = dis;
+                                        basestationHalper = item2;
                                     }
                                 }
-                                d.location = stationHalper.BaseStationLocation;
+                                d.location = basestationHalper.BaseStationLocation;
                             }
                             else
                             {
                                 d.location.Latitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Latitude;
                                 d.location.Longitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Longitude;
+
                             }
-                       }
-                       
+                        }
+                        //עדכון מצב בטריה
+                        BO.BaseStation stationHalper = new BO.BaseStation();
+                        double min = double.MaxValue;
+                        foreach (var item2 in baseStationsBL)
+                        {
+                            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, GetDrone(d.ID).PackageInTransfer.PackageDestination.Latitude, GetDrone(d.ID).PackageInTransfer.PackageDestination.Longitude);
+                            if (dis < min)
+                            {
+                                min = dis;
+                                stationHalper = item2;
+                            }
+                        }
+                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude, GetDrone(d.ID).PackageInTransfer.Collection.Latitude, GetDrone(d.ID).PackageInTransfer.Collection.Longitude);
+                        distans += min + GetDrone(d.ID).PackageInTransfer.distance;
+                        d.BatteryStatus = random.Next((int)(distans * free * 100) / 100, 100) % 100;
                     }
+
                 }
 
             }
             #endregion
-            #region אין לי מושג מה זה 
+            #region היית צריכה לעשות לזה אנד לכן זה עושה באאאאג
             foreach (var item in dronesToList)
             {
                 if (item.Conditions != (BO.DroneConditions)2)
@@ -128,11 +147,24 @@ namespace IBL.BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                  int ran= random.Next(0,customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
-                    //להוסיף עדכון של מצב סוללה לפי הבקשות המטומטמות(חחחחח גדול!!) בתרגיל
+                    int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                    item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                    //עדכון מצב בטריה
+                    BO.BaseStation basestationHalper = new BO.BaseStation();
+                    double mini = double.MaxValue;
+                    foreach (var item2 in baseStationsBL)
+                    {
+                        double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, item.location.Latitude, item.location.Longitude);
+                        if (dis < mini)
+                        {
+                            mini = dis;
+                            basestationHalper = item2;
+                        }
+                    }
+                    item.BatteryStatus = random.Next((int)(mini * free * 100) / 100, 100) % 100;
                 }
             }
+            #endregion
         }
         #endregion
         #region פונקציית שליחת רחפן לטעינה יש צורך בבדיקה!!
@@ -212,6 +244,76 @@ namespace IBL.BL
         #region פונקציית שיוך חבילה לרחפן
         public void AssignPackageToDrone(int id)
         {
+            try
+            {
+                BO.Drone drone = GetDrone(id);
+                if (drone.Conditions != (DroneConditions)1)
+                    throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone Conditions stuck");
+                IDAL.DO.Parcel parcel = dalLayer.printParcel().ToList()[0];
+                foreach (IDAL.DO.Parcel item in dalLayer.printParcel())
+                {
+                    if (item.priority > parcel.priority)
+                        parcel = item;
+                    else if (item.priority == parcel.priority)
+                    {
+                        if (item.Weight > parcel.Weight && item.Weight <= (IDAL.DO.WeightCategories)drone.MaxWeight)
+                            parcel = item;
+                        else if (item.Weight == parcel.Weight)
+                        {
+                            double distance1 = DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);
+                            double distance2 = DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(item.SenderID).Latitude, dalLayer.GetCostumer(item.SenderID).Longitude);
+                            if (distance2 < distance1)
+                                parcel = item;
+                        }
+                    }
+                }
+                int a = (int)parcel.Weight;
+                double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);
+                decrease = decrease * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
+                    + free * DistanceTo(dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude, GetDrone(helpbasestation(drone)).location.Latitude, GetDrone(helpbasestation(drone)).location.Longitude);
+                if (decrease > drone.BatteryStatus)
+                    throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone's battery too low "); ;
+                drone.Conditions = (DroneConditions)2;
+                dalLayer.AssignPackageToDrone(parcel.ID, drone.ID);
+            }
+            catch (IDAL.DO.DuplicateIdException ex)
+            {
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+            }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
+        #endregion
+        #region איסוף חבילה עי רחפן
+        public void CollectParcelByDrone(int id)
+        {
+            try
+            {
+                BO.Drone drone = GetDrone(id);
+                if ((drone.Conditions != (DroneConditions)2) || (drone.PackageInTransfer.Package_mode!))
+                    throw new BO.TheDroneDnotShip(id, "Drone condition is not correct");
+                drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
+                drone.location = drone.PackageInTransfer.Collection;
+                dalLayer.ParcelCollectionByDrone(drone.PackageInTransfer.ID, id);
+            }
+            catch (IDAL.DO.DuplicateIdException ex)
+            {
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+            }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
 
         }
         #endregion

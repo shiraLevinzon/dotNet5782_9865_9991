@@ -87,7 +87,7 @@ namespace IBL.BL
                     {
                         if (item.Delivered == DateTime.MinValue)
                         {
-                            d.Conditions = (DroneConditions)2;
+                           // d.Conditions = (DroneConditions)2;
                             if (item.PickedUp == DateTime.MinValue)
                             {
                                 BO.BaseStation basestationHalper = new BO.BaseStation();
@@ -124,7 +124,7 @@ namespace IBL.BL
                         }
                         double distans = DistanceTo(d.location.Latitude, d.location.Longitude, GetDrone(d.ID).PackageInTransfer.Collection.Latitude, GetDrone(d.ID).PackageInTransfer.Collection.Longitude);
                         distans += min + GetDrone(d.ID).PackageInTransfer.distance;
-                        d.BatteryStatus = random.Next((int)(distans * free * 100) / 100, 100) % 100;
+                        d.BatteryStatus = random.Next((int)(distans * free * 100) / 100, 100);
                     }
 
                 }
@@ -291,15 +291,18 @@ namespace IBL.BL
         }
         #endregion
         #region איסוף חבילה עי רחפן
-        public void CollectParcelByDrone(int id)
+        public void CollectParcelByDrone(int id)//לסדר פונקציה כדי שרשימת הרחפנים תתעדכן
         {
             try
             {
+                BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id);
                 BO.Drone drone = GetDrone(id);
-                if ((drone.Conditions != (DroneConditions)2) || (drone.PackageInTransfer.Package_mode!))
-                    throw new BO.TheDroneDnotShip(id, "Drone condition is not correct");
+                if ((drone.Conditions != (DroneConditions)2))
+                    throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");   
                 drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
                 drone.location = drone.PackageInTransfer.Collection;
+                droneTOlist.BatteryStatus = drone.BatteryStatus;
+                droneTOlist.location = drone.location;
                 dalLayer.ParcelCollectionByDrone(drone.PackageInTransfer.ID, id);
             }
             catch (IDAL.DO.DuplicateIdException ex)

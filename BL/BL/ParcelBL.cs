@@ -15,9 +15,13 @@ namespace IBL.BL
             {
                 IDAL.DO.Parcel doParcel = dalLayer.GetParcel(id);
                 doParcel.CopyPropertiesTo(boParcel);
-                IDAL.DO.Drone d = dalLayer.GetDrone(doParcel.ID);
-                d.CopyPropertiesTo(boParcel.DroneInParcel);
-                //איך אני מוצאת את המיקום של הרחפן בחבילה (אין שדה של מיקום בדו דרון
+                if(boParcel.Scheduled!=DateTime.MinValue)
+                {
+                    BO.Drone d = GetDrone(doParcel.ID);
+                    boParcel.DroneInParcel.ID = d.ID;
+                    boParcel.DroneInParcel.BatteryStatus = d.BatteryStatus;
+                    boParcel.DroneInParcel.location = d.location;
+                }
             }
             catch (IDAL.DO.MissingIdException ex)
             {

@@ -59,7 +59,7 @@ namespace IBL.BL
             try
             {
             drone.CopyPropertiesTo(DroneDO);
-            drone.BatteryStatus = (random.Next(20, 40)) % 100;
+            drone.BatteryStatus = (random.Next(20, 40));
             drone.Conditions = (BO.DroneConditions)0;
             drone.location = GetBaseStation(id).BaseStationLocation;
 

@@ -92,6 +92,7 @@ namespace DalObject
         {
             for (int i = 0; i < 10; i++)
             {
+                
                 parcels.Add(new Parcel()
                 {
                     ID = Config.IdCount++,
@@ -99,7 +100,7 @@ namespace DalObject
                     TargetID = r1.Next(1000, 10000),
                     Weight = (WeightCategories)r1.Next(0, 3),
                     priority = (Priorities)r1.Next(0, 3),
-                    DroneId = r1.Next(1000, 10000),
+                    DroneId = drones[i%5].ID,
                     Requested = DateTime.Now,
                 });
             }

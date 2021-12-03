@@ -11,8 +11,8 @@ namespace ConsoleBLUI
         
             public static void Main(string[] args)
             {
-                try
-                {
+                //try
+                //{
                     IBL.IBL blObject = new BL();
                     int i = 0;
                     while (i != 5)
@@ -291,33 +291,33 @@ namespace ConsoleBLUI
                                 break;
                         }
                     }
-                }
-                catch (IBL.BO.MissingIdException ex)
-                {
-                    Console.WriteLine("{0} id is not exist", ex.EntityName);
-                }
-                catch (IBL.BO.DuplicateIdException ex)
-                {
-                    Console.WriteLine("{0} id is already exist", ex.EntityName);
+                //}
+                //catch (IBL.BO.MissingIdException ex)
+                //{
+                //    Console.WriteLine("{0} id is not exist", ex.EntityName);
+                //}
+                //catch (IBL.BO.DuplicateIdException ex)
+                //{
+                //    Console.WriteLine("{0} id is already exist", ex.EntityName);
 
-                }
-                catch (IBL.BO.ImproperMaintenanceCondition ex)
-                {
+                //}
+                //catch (IBL.BO.ImproperMaintenanceCondition ex)
+                //{
 
-                }
-                catch (IBL.BO.PackageTimesException ex)
-                {
+                //}
+                //catch (IBL.BO.PackageTimesException ex)
+                //{
 
-                }
-                catch (IBL.BO.TheDroneDnotShip ex)
-                {
-                    Console.WriteLine("Only a {0} that delivers a package that has been associated with it but has not yet been collected will be able to pick it up", ex.EntityName);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Something went wrong");
+                //}
+                //catch (IBL.BO.TheDroneDnotShip ex)
+                //{
+                //    Console.WriteLine("Only a {0} that delivers a package that has been associated with it but has not yet been collected will be able to pick it up", ex.EntityName);
+                //}
+                //catch (Exception)
+                //{
+                //    Console.WriteLine("Something went wrong");
 
-                }
+                //}
             }
         
     }

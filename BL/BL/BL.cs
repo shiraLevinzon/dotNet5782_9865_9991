@@ -23,7 +23,8 @@ namespace IBL.BL
         List<BaseStation> baseStationsBL = new List<BaseStation>();
         #region בנאי 
         public BL() 
-        { 
+        {
+           
             double[] arr = dalLayer.RequestPowerConsumptionByDrone();
             free = arr[0];
             light = arr[1];
@@ -33,14 +34,14 @@ namespace IBL.BL
             #region מילוי רשימת רחפנים מסוג דאל
             List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
             TMPdrone = dalLayer.printDrone().ToList();
+            DroneToList dtl = new DroneToList();
             foreach (var item in TMPdrone)
             {
-                dronesToList.Add(new DroneToList
-                {
-                    ID = item.ID,
-                    MaxWeight = (WeightCategories)item.MaxWeight,
-                    Model = item.Model
-                });
+                dtl.ID = item.ID; 
+                dtl.MaxWeight = (WeightCategories)item.MaxWeight;
+                dtl.Model = item.Model;
+                dronesToList.Add(dtl);
+                
             }
             #endregion
             #region מילוי רשימת הלקוחות מסוג דאל 
@@ -172,7 +173,7 @@ namespace IBL.BL
         {
             try
             {
-                BO.Drone drone = GetDrone(id);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
                 double distance = DistanceTo(baseStationsBL[0].BaseStationLocation.Latitude, baseStationsBL[0].BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
@@ -215,7 +216,7 @@ namespace IBL.BL
         {
             try
             {
-                BO.Drone drone = GetDrone(id);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)0)
                     throw new BO.ImproperMaintenanceCondition(id, "Drone condition is not correct");
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
@@ -246,7 +247,7 @@ namespace IBL.BL
         {
             try
             {
-                BO.Drone drone = GetDrone(id);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone Conditions stuck");
                 IDAL.DO.Parcel parcel = dalLayer.printParcel().ToList()[0];
@@ -372,7 +373,7 @@ namespace IBL.BL
         }
         #endregion
         #region פונקציית עזר למציאת תחנת בסיס קרובה
-        private int helpbasestation(BO.Drone drone)
+        private int helpbasestation(BO.DroneToList drone)
         {
             double distance = DistanceTo(baseStationsBL[0].BaseStationLocation.Latitude, baseStationsBL[0].BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
             int idbasetation = 0;

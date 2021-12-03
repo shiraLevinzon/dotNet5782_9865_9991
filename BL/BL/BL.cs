@@ -31,19 +31,6 @@ namespace IBL.BL
             normal = arr[2];
             heavy = arr[3];
             droneLoadingRate = arr[4];
-            #region מילוי רשימת רחפנים מסוג דאל
-            List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
-            TMPdrone = dalLayer.printDrone().ToList();
-            DroneToList dtl = new DroneToList();
-            foreach (var item in TMPdrone)
-            {
-                dtl.ID = item.ID; 
-                dtl.MaxWeight = (WeightCategories)item.MaxWeight;
-                dtl.Model = item.Model;
-                dronesToList.Add(dtl);
-                
-            }
-            #endregion
             #region מילוי רשימת הלקוחות מסוג דאל 
             List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
             TMPcustomer = dalLayer.printCustomer().ToList();
@@ -59,6 +46,25 @@ namespace IBL.BL
                 });
             }
             #endregion
+            #region מילוי רשימת רחפנים מסוג דאל
+            List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
+            TMPdrone = dalLayer.printDrone().ToList();
+            foreach (var item in TMPdrone)
+            {
+                DroneToList dtl = new DroneToList();
+                dtl.ID = item.ID; 
+                dtl.MaxWeight = (WeightCategories)item.MaxWeight;
+                dtl.Model = item.Model;
+                dtl.BatteryStatus = 0;
+                dtl.Conditions = (DroneConditions)2;
+                dtl.PackagNumberOnTransferred = 0;
+                dtl.location.Latitude = TMPcustomer[0].Latitude;
+                dtl.location.Longitude = TMPcustomer[0].Longitude; ;
+                dronesToList.Add(dtl);
+                
+            }
+            #endregion
+   
             #region מילוי רשימת תחנות בסיס מסוג דאל
             List<IDAL.DO.BaseStation> TMPbaseStation = new List<IDAL.DO.BaseStation>();
             TMPbaseStation = dalLayer.printBaseStation().ToList();

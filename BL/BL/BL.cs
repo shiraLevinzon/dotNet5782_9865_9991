@@ -11,6 +11,7 @@ namespace IBL.BL
     public partial class BL : IBL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
+        internal static Random r1 = new Random();
         List<DroneToList> dronesToList = new List<DroneToList>();
         /// private readonly DroneConditions delivery;
         public Random random = new Random();
@@ -36,14 +37,14 @@ namespace IBL.BL
             TMPcustomer = dalLayer.printCustomer().ToList();
             foreach (var item in TMPcustomer)
             {
-                customersBL.Add(new Customer
-                {
-                    ID = item.ID,
-                    Phone = item.Phone,
-                    Name = item.Name,
-                    Location = new Location { Latitude = item.Latitude, Longitude = item.Longitude },
-
-                });
+                BO.Customer cust = new Customer();
+                cust.ID = item.ID;
+                cust.Name = item.Name;
+                cust.Phone = item.Phone;
+                cust.Location = new Location();
+                cust.Location.Latitude = item.Latitude;
+                cust.Location.Longitude = item.Longitude;
+                customersBL.Add(cust);
             }
             #endregion
             #region מילוי רשימת רחפנים מסוג דאל
@@ -58,8 +59,9 @@ namespace IBL.BL
                 dtl.BatteryStatus = 0;
                 dtl.Conditions = (DroneConditions)2;
                 dtl.PackagNumberOnTransferred = 0;
-                dtl.location.Latitude = TMPcustomer[0].Latitude;
-                dtl.location.Longitude = TMPcustomer[0].Longitude; ;
+                dtl.location = new Location();
+                dtl.location.Latitude = TMPcustomer[r1.Next(0,9)].Latitude;
+                dtl.location.Longitude = TMPcustomer[r1.Next(0,9)].Longitude; ;
                 dronesToList.Add(dtl);
                 
             }
@@ -70,14 +72,15 @@ namespace IBL.BL
             TMPbaseStation = dalLayer.printBaseStation().ToList();
             foreach (var item in TMPbaseStation)
             {
-                baseStationsBL.Add(new BaseStation
+                BO.BaseStation bases = new BaseStation()
                 {
                     ID = item.ID,
                     StationName = item.StationName,
                     FreeChargingSlots = item.FreeChargingSlots,
                     BaseStationLocation = new Location { Latitude = item.Latitude, Longitude = item.Longitude },
 
-                });
+                };
+                baseStationsBL.Add(bases);
             }
             #endregion
             #region מילוי רשימת חבילה מסוג דאל
@@ -94,7 +97,6 @@ namespace IBL.BL
                     {
                         if (item.Delivered == DateTime.MinValue)
                         {
-                           // d.Conditions = (DroneConditions)2;
                             if (item.PickedUp == DateTime.MinValue)
                             {
                                 BO.BaseStation basestationHalper = new BO.BaseStation();

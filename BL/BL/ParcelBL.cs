@@ -28,7 +28,7 @@ namespace IBL.BL
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
 
-            return boParcel; ;
+            return boParcel; 
         }
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null)
         {
@@ -41,11 +41,7 @@ namespace IBL.BL
             foreach (var item in par)
             {
                 BO.ParcelToList parcel = new BO.ParcelToList();
-                parcel.ID = item.ID;
-                parcel.RecieverID = item.Receiver.ID;
-                parcel.SenderID = item.Sender.ID;
-                parcel.Weight = item.Weight;
-                parcel.ParcelPriority = item.Priority;
+                par.CopyPropertiesTo(parcel);
                 if (item.Delivered != DateTime.MinValue)
                     parcel.ParcelCondition = (BO.Situations)3;
                 else if (item.PickedUp != DateTime.MinValue)
@@ -55,8 +51,6 @@ namespace IBL.BL
                 else
                     parcel.ParcelCondition = (BO.Situations)0;
                 parcelToLists.Add(parcel);
-
-
             }
             
             if (predicate == null)

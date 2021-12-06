@@ -15,8 +15,10 @@ namespace IBL.BL
             {
                 IDAL.DO.Customer doCustomer = dalLayer.GetCostumer(id);
                 doCustomer.CopyPropertiesTo(boCustomer);
+                boCustomer.Location = new BO.Location();
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
+                boCustomer.PackagesFromCustomer = new List<BO.ParcelAtCustomer>();
                 foreach (var item in GetAllParcels().Where(par => par.SenderID == boCustomer.ID).ToList())
                 {
                     BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
@@ -30,6 +32,7 @@ namespace IBL.BL
                     boCustomer.PackagesFromCustomer.Add(pat);
 
                 }
+                boCustomer.PackagesToCustomer = new List<BO.ParcelAtCustomer>();
                 foreach (var item in GetAllParcels().Where(par => par.RecieverID == boCustomer.ID).ToList())
                 {
                     BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
@@ -52,9 +55,7 @@ namespace IBL.BL
         }
         public IEnumerable<BO.CustomerToList> GetAllCustomer()
         {
-            IEnumerable<BO.Customer> cust = from CustomerDO in dalLayer.printCustomer()
-                                            orderby CustomerDO.ID//מיון לפי תז
-                                            select GetCustomer(CustomerDO.ID);
+            IEnumerable<BO.Customer> cust = dalLayer.printCustomer().Select(cu => GetCustomer(cu.ID));     
             List<BO.CustomerToList> customerToLists = new List<BO.CustomerToList>();
             foreach (var item in cust)
             {
@@ -77,7 +78,6 @@ namespace IBL.BL
             //Add DO.Customer            
             IDAL.DO.Customer customerDO = new IDAL.DO.Customer();
             customer.CopyPropertiesTo(customerDO);
-
             customerDO.Latitude = customer.Location.Latitude;
             customerDO.Longitude = customer.Location.Longitude;
             try

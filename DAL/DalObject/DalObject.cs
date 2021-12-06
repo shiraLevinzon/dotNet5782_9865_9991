@@ -92,15 +92,17 @@ namespace DalObject
         {
             for (int i = 0; i < 10; i++)
             {
-                
+                int temp1 = r1.Next(0, 10);
+                int temp2 = r1.Next(0, 10);
+                int temp3 = r1.Next(0, 5);
                 parcels.Add(new Parcel()
                 {
                     ID = Config.IdCount++,
-                    SenderID = r1.Next(1000, 10000),
-                    TargetID = r1.Next(1000, 10000),
+                    SenderID = customers[temp1].ID,
+                    TargetID = customers[temp2].ID,
                     Weight = (WeightCategories)r1.Next(0, 3),
                     priority = (Priorities)r1.Next(0, 3),
-                    DroneId = drones[i%5].ID,
+                    DroneId = drones[temp3].ID,
                     Requested = DateTime.Now,
                 });
             }

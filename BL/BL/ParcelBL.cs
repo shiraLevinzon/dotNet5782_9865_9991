@@ -15,9 +15,17 @@ namespace IBL.BL
             {
                 IDAL.DO.Parcel doParcel = dalLayer.GetParcel(id);
                 doParcel.CopyPropertiesTo(boParcel);
-                if(boParcel.Scheduled!=DateTime.MinValue)
+                boParcel.Sender = new BO.CustomerInParcel();
+                boParcel.Receiver = new BO.CustomerInParcel();
+                boParcel.Sender.ID = doParcel.SenderID;
+                boParcel.Receiver.ID = doParcel.TargetID;
+                boParcel.Sender.CustomerName = GetAllCustomer().First(cu => cu.ID == boParcel.Sender.ID).Name;
+                boParcel.Receiver.CustomerName = GetAllCustomer().First(cu => cu.ID == boParcel.Receiver.ID).Name;
+
+                if (boParcel.Scheduled!=DateTime.MinValue)
                 {
-                    BO.Drone d = GetDrone(doParcel.ID);
+                    boParcel.DroneInParcel=new BO.DroneInParcel();
+                    BO.Drone d= GetDrone(doParcel.ID);
                     boParcel.DroneInParcel.ID = d.ID;
                     boParcel.DroneInParcel.BatteryStatus = d.BatteryStatus;
                     boParcel.DroneInParcel.location = d.location;
@@ -41,7 +49,9 @@ namespace IBL.BL
             foreach (var item in par)
             {
                 BO.ParcelToList parcel = new BO.ParcelToList();
-                par.CopyPropertiesTo(parcel);
+                item.CopyPropertiesTo(parcel);
+                parcel.SenderID = item.Sender.ID;
+                parcel.RecieverID = item.Receiver.ID;
                 if (item.Delivered != DateTime.MinValue)
                     parcel.ParcelCondition = (BO.Situations)3;
                 else if (item.PickedUp != DateTime.MinValue)
@@ -63,11 +73,11 @@ namespace IBL.BL
         {
             //Add DO.Parcel            
             IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
+            parcel.CopyPropertiesTo(ParcelDO);
             parcel.Requested = DateTime.Now;
             parcel.Scheduled = DateTime.MinValue;
             parcel.PickedUp = DateTime.MinValue;
             parcel.Delivered = DateTime.MinValue;
-            parcel.CopyPropertiesTo(ParcelDO);
             // הרחפן מאותחל ב-נאל
             try
             {

@@ -17,12 +17,10 @@ namespace IBL.BL
             {
                 IDAL.DO.BaseStation doBaseStation = dalLayer.GetBaseStation(id);
                 doBaseStation.CopyPropertiesTo(boBaseStation);
-                //boBaseStation.ID = doBaseStation.ID;
-                //boBaseStation.StationName = doBaseStation.StationName;
-                //boBaseStation.FreeChargingSlots = doBaseStation.FreeChargingSlots;
+                boBaseStation.BaseStationLocation=new BO.Location();
                 boBaseStation.BaseStationLocation.Latitude = doBaseStation.Latitude;
                 boBaseStation.BaseStationLocation.Longitude = doBaseStation.Longitude;
-
+                boBaseStation.DronesInCharge= new List<BO.DroneInCharging>();
                 foreach (var item in GetAllDrones().Where(dro => (dro.location == boBaseStation.BaseStationLocation) && (dro.Conditions == (BO.DroneConditions)2)))
                 {
                     boBaseStation.DronesInCharge.Add(new BO.DroneInCharging
@@ -65,9 +63,6 @@ namespace IBL.BL
             //Add DO.BaseStation            
             IDAL.DO.BaseStation baseStationDO = new IDAL.DO.BaseStation();
             baseStation.CopyPropertiesTo(baseStationDO);
-            //baseStationDO.ID = baseStation.ID;
-            //baseStationDO.StationName = baseStation.StationName;
-            //baseStationDO.FreeChargingSlots = baseStation.FreeChargingSlots;
             baseStationDO.Latitude = baseStation.BaseStationLocation.Latitude;
             baseStationDO.Longitude = baseStation.BaseStationLocation.Longitude;
             try

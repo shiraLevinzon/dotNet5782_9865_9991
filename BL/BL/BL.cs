@@ -44,6 +44,7 @@ namespace IBL.BL
                 cust.Location = new Location();
                 cust.Location.Latitude = item.Latitude;
                 cust.Location.Longitude = item.Longitude;
+            
                 customersBL.Add(cust);
             }
             #endregion
@@ -124,15 +125,16 @@ namespace IBL.BL
                         double min = double.MaxValue;
                         foreach (var item2 in baseStationsBL)
                         {
-                            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, GetDrone(d.ID).PackageInTransfer.PackageDestination.Latitude, GetDrone(d.ID).PackageInTransfer.PackageDestination.Longitude);
+
+                            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, customersBL.Find(cus =>item.TargetID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.TargetID==cus.ID).Location.Longitude);
                             if (dis < min)
                             {
                                 min = dis;
                                 stationHalper = item2;
                             }
                         }
-                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude, GetDrone(d.ID).PackageInTransfer.Collection.Latitude, GetDrone(d.ID).PackageInTransfer.Collection.Longitude);
-                        distans += min + GetDrone(d.ID).PackageInTransfer.distance;
+                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Longitude);
+                        distans += min + DistanceTo(customersBL.Find(cus =>item.TargetID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.TargetID==cus.ID).Location.Longitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Longitude);
                         d.BatteryStatus = random.Next((int)(distans * free * 100) / 100, 100);
                     }
 
@@ -170,7 +172,7 @@ namespace IBL.BL
                             basestationHalper = item2;
                         }
                     }
-                    item.BatteryStatus = random.Next((int)(mini * free * 100) / 100, 100) % 100;
+                    item.BatteryStatus = random.Next((int)(mini * free * 100) / 100, 100);
                 }
             }
             #endregion

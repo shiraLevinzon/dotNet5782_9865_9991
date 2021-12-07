@@ -24,51 +24,31 @@ namespace IBL.BL
                                                       ID = p.ID,
                                                       Weight = (BO.WeightCategories)p.Weight,
                                                       priority = (BO.Priorities)p.priority,
+                                                      Situation=(BO.Situations)func(p),
                                                       CustomerInParcel = new BO.CustomerInParcel()
                                                       {
                                                           ID = p.TargetID,
                                                           CustomerName = dalLayer.GetCostumer(p.TargetID).Name,
                                                       }
                                                       
+                                                      
                                                   };
 
+                boCustomer.PackagesToCustomer = from par in dalLayer.GetAllParcelsByPredicate(par => par.TargetID == id)
+                                                select new BO.ParcelAtCustomer()
+                                                {
+                                                    ID = par.ID,
+                                                    Weight = (BO.WeightCategories)par.Weight,
+                                                    priority = (BO.Priorities)par.priority,
+                                                    Situation = (BO.Situations)func(par),
+                                                    CustomerInParcel = new BO.CustomerInParcel()
+                                                    {
+                                                        ID = par.SenderID,
+                                                        CustomerName = dalLayer.GetCostumer(par.SenderID).Name,
+                                                    }
 
 
-
-
-
-
-
-
-
-
-                //boCustomer.PackagesFromCustomer = new List<BO.ParcelAtCustomer>();
-                //foreach (var item in GetAllParcels().Where(par => par.SenderID == boCustomer.ID).ToList())
-                //{
-                //    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
-                //    pat.ID = item.ID;
-                //    pat.Weight = item.Weight;
-                //    pat.priority = item.ParcelPriority;
-                //    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.RecieverID);
-                //    pat.CustomerInParcel.ID = customerTo.ID;
-                //    pat.CustomerInParcel.CustomerName = customerTo.Name;
-                //    pat.Situation = item.ParcelCondition;
-                //    boCustomer.PackagesFromCustomer.Add(pat);
-
-                //}
-                boCustomer.PackagesToCustomer = new List<BO.ParcelAtCustomer>();
-                foreach (var item in GetAllParcels().Where(par => par.RecieverID == boCustomer.ID).ToList())
-                {
-                    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
-                    pat.ID = item.ID;
-                    pat.Weight = item.Weight;
-                    pat.priority = item.ParcelPriority;
-                    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.SenderID);
-                    pat.CustomerInParcel.ID = customerTo.ID;
-                    pat.CustomerInParcel.CustomerName = customerTo.Name;
-                    pat.Situation = item.ParcelCondition;
-                    boCustomer.PackagesToCustomer=pat;
-                }
+                                                };
             }
             catch (IDAL.DO.MissingIdException ex)
             {

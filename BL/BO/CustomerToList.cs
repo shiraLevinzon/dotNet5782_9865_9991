@@ -11,9 +11,13 @@ namespace IBL.BO
         public int ID { get; set; }
          public string Name { get; set; }
         public string Phone { get; set; }
-    public int NumberofPackagesSentandDelivered { get; set; }
-public int NumberofPackagesSentButNotDelivered{ get; set; }
-public int NumberOfPackagesHeReceived{ get; set; }
-public int NumberofPackagesOnTheWayToCustomer{ get; set; }
+          public int NumberofPackagesSentandDelivered { get; set; }
+          public int NumberofPackagesSentButNotDelivered{ get; set; }
+           public int NumberOfPackagesHeReceived{ get; set; }
+          public int NumberofPackagesOnTheWayToCustomer{ get; set; }
+        public override string ToString()
+        {
+            return this.ToStringProperty();
+        }
     }
 }

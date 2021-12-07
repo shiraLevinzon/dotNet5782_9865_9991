@@ -72,6 +72,7 @@ namespace IBL.BL
             drone.CopyPropertiesTo(droneToListTMP);
             droneToListTMP.BatteryStatus = (random.Next(20, 40));
             droneToListTMP.Conditions = (BO.DroneConditions)0;
+            droneToListTMP.location = new BO.Location();
             droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
             droneToListTMP.location.Longitude = GetBaseStation(id).BaseStationLocation.Longitude;
 

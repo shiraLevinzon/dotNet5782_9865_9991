@@ -20,15 +20,13 @@ namespace IBL.BL
                 boBaseStation.BaseStationLocation=new BO.Location();
                 boBaseStation.BaseStationLocation.Latitude = doBaseStation.Latitude;
                 boBaseStation.BaseStationLocation.Longitude = doBaseStation.Longitude;
-                boBaseStation.DronesInCharge= new List<BO.DroneInCharging>();
-                foreach (var item in GetAllDrones().Where(dro => (dro.location == boBaseStation.BaseStationLocation) && (dro.Conditions == (BO.DroneConditions)2)))
-                {
-                    boBaseStation.DronesInCharge.Add(new BO.DroneInCharging
-                    {
-                        ID = item.ID,
-                        BatteryStatus = item.BatteryStatus,
-                    }) ;
-                }
+                boBaseStation.DronesInCharge = from d in GetAllDrones()
+                                               where d.location == boBaseStation.BaseStationLocation && d.Conditions == (BO.DroneConditions)2
+                                               select new BO.DroneInCharging()
+                                               {
+                                                   ID = d.ID,
+                                                   BatteryStatus = d.BatteryStatus,
+                                               };
             }
             catch (IDAL.DO.MissingIdException ex)
             {
@@ -39,24 +37,20 @@ namespace IBL.BL
         }
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null)
         {
-            IEnumerable<BO.BaseStation> baseStations = from BaseStationDO in dalLayer.printBaseStation()
-                                                       orderby BaseStationDO.ID//מיון לפי תז
-                                                       select GetBaseStation(BaseStationDO.ID);
-            List<BO.BaseStationToList> baseStationToLists = new List<BO.BaseStationToList>();
-            foreach (var item in baseStations)
-            {
-                BO.BaseStationToList bs = new BO.BaseStationToList();
-                bs.ID = item.ID;
-                bs.StationName = item.StationName;
-                bs.FreeChargingSlots = item.FreeChargingSlots;
-                bs.BusyChargingSlots = item.DronesInCharge.Count();
-                baseStationToLists.Add(bs);
-            }
+            IEnumerable<BO.BaseStationToList> baseStationToLists= from BaseStationDO in dalLayer.printBaseStation()
+                   select new BO.BaseStationToList()
+                   {
+                       ID = BaseStationDO.ID,
+                       StationName = BaseStationDO.StationName,
+                       FreeChargingSlots = BaseStationDO.FreeChargingSlots,
+                       BusyChargingSlots = GetBaseStation(BaseStationDO.ID).DronesInCharge.Count(),
+                   };
             if (predicate == null)
                 return baseStationToLists;
-            return baseStationToLists.FindAll(p => predicate(p));
+            return baseStationToLists.Where(p => predicate(p));
 
         }
+ 
         public void AddBaseStation(BO.BaseStation baseStation)
         {
 

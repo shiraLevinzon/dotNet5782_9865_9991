@@ -61,22 +61,18 @@ namespace IBL.BL
         }
         public IEnumerable<BO.CustomerToList> GetAllCustomer()
         {
-            IEnumerable<BO.Customer> cust = dalLayer.printCustomer().Select(cu => GetCustomer(cu.ID));     
-            List<BO.CustomerToList> customerToLists = new List<BO.CustomerToList>();
-            foreach (var item in cust)
-            {
-                BO.CustomerToList customer = new BO.CustomerToList();
-                customer.ID = item.ID;
-                customer.Name = item.Name;
-                customer.Phone = item.Phone;
-                customer.NumberofPackagesSentandDelivered = item.PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)3);
-                customer.NumberofPackagesSentButNotDelivered = item.PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)2);
-                customer.NumberOfPackagesHeReceived = item.PackagesToCustomer.Count(par => par.Situation == (BO.Situations)3);
-                customer.NumberofPackagesOnTheWayToCustomer = item.PackagesToCustomer.Count(par => par.Situation == (BO.Situations)2);
-                customerToLists.Add(customer);
-            }
-            return customerToLists;
-
+            //אססור להשתשמש בגט פרסל
+            return from c in dalLayer.printCustomer()
+                   select new BO.CustomerToList()
+                   {
+                       ID = c.ID,
+                       Name = c.Name,
+                       Phone = c.Phone,
+                       NumberofPackagesSentandDelivered = GetCustomer(c.ID).PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)3),
+                       NumberofPackagesSentButNotDelivered = GetCustomer(c.ID).PackagesFromCustomer.Count(par => par.Situation == (BO.Situations)2),
+                       NumberOfPackagesHeReceived = GetCustomer(c.ID).PackagesToCustomer.Count(par => par.Situation == (BO.Situations)3),
+                       NumberofPackagesOnTheWayToCustomer = GetCustomer(c.ID).PackagesToCustomer.Count(par => par.Situation == (BO.Situations)2),
+                   };
         }
         public void AddCustomer(BO.Customer customer)
         {

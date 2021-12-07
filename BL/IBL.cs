@@ -29,6 +29,8 @@ namespace IBL
         public BO.Parcel GetParcel(int id);
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null);
         public void AddParcel(BO.Parcel parcel);
+        public int func(IDAL.DO.Parcel p);
+
         //public void UpdateParcel(BO.Parcel Parcel);
         #endregion
         #region פונקציות עדכון ועזר נוספות מיכבה 2

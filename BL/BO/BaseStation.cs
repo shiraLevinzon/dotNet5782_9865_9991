@@ -12,7 +12,7 @@ namespace IBL.BO
         public string StationName { get; set; }
         public Location BaseStationLocation { get; set; }
         public int FreeChargingSlots { get; set; }
-        public List<DroneInCharging> DronesInCharge { get; set; }
+        public IEnumerable<DroneInCharging> DronesInCharge { get; set; }
         public override string ToString()
         {
             return this.ToStringProperty();

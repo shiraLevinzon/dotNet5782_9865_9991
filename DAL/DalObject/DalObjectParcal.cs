@@ -44,13 +44,9 @@ namespace DalObject
         /// print Parcel
         /// </summary>
         /// <returns>Parcel List</returns>
-        public IEnumerable<Parcel> GetAllParcels()
+        public IEnumerable<Parcel> printParcel()
         {
             return DataSource.parcels.Take(DataSource.parcels.Count);
-        }
-        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> pred)
-        {
-            return from p in DataSource.parcels  where pred(p) select p;
         }
         public void UpdParcel(Parcel tmp)
         {

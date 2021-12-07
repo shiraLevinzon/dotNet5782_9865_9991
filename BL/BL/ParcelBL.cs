@@ -41,34 +41,23 @@ namespace IBL.BL
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null)
         {
 
-            IEnumerable<IDAL.DO.Parcel> par = /*from ParcelDO in */dalLayer.GetAllParcels().ToList();
-                                         //orderby ParcelDO.ID//מיון לפי תז
-                                         //select GetParcel(ParcelDO.ID);
-            List<BO.ParcelToList> parcelToLists = new List<BO.ParcelToList>();
-
-            foreach (var item in par)
-            {
-                BO.ParcelToList parcel = new BO.ParcelToList();
-                item.CopyPropertiesTo(parcel);
-                parcel.SenderID = item.SenderID;
-                parcel.RecieverID = item.TargetID;
-                if (item.Delivered != DateTime.MinValue)
-                    parcel.ParcelCondition = (BO.Situations)3;
-                else if (item.PickedUp != DateTime.MinValue)
-                    parcel.ParcelCondition = (BO.Situations)2;
-                else if (item.Scheduled != DateTime.MinValue)
-                    parcel.ParcelCondition = (BO.Situations)1;
-                else
-                    parcel.ParcelCondition = (BO.Situations)0;
-                parcelToLists.Add(parcel);
-            }
-            
+            IEnumerable<BO.ParcelToList> parcelToLists= from ParcelDO in dalLayer.GetAllParcels()
+                   select new BO.ParcelToList()
+                   {
+                       ID = ParcelDO.ID,
+                       RecieverID = ParcelDO.TargetID,
+                       SenderID = ParcelDO.SenderID,
+                       ParcelPriority = (BO.Priorities)ParcelDO.priority,
+                       Weight=(BO.WeightCategories)ParcelDO.Weight,
+                       ParcelCondition= (BO.Situations)func(ParcelDO),
+                   };
             if (predicate == null)
                 return parcelToLists;
-            return parcelToLists.FindAll(p => predicate(p));
+            return parcelToLists.Where(p => predicate(p));
 
-
+            
         }
+
         public void AddParcel(BO.Parcel parcel)
         {
             //Add DO.Parcel            
@@ -104,6 +93,19 @@ namespace IBL.BL
         //    }
 
         //}
+        public int func(IDAL.DO.Parcel p)
+        {
+            int num = 0;
+            if (p.Delivered != DateTime.MinValue)
+                num = 3;
+            else if (p.PickedUp != DateTime.MinValue)
+                num = 2;
+            else if (p.Scheduled != DateTime.MinValue)
+                num = 1;
+            else
+                num = 0;
+            return num;
+        }
 
     }
 }

@@ -45,7 +45,23 @@ namespace ConsoleBLUI
                                         drone.location = new Location { };
                                         drone.PackageInTransfer = new ParcelInTransfer { };
                                         Console.WriteLine("enter base station id to put the drone to the first charge ");
-                                        blObject.AddDrone(drone, int.Parse(Console.ReadLine()));
+                                        try
+                                        {
+                                            blObject.AddDrone(drone, int.Parse(Console.ReadLine()));
+
+                                        }
+                                        catch (IBL.BO.DuplicateIdException)
+                                        {
+                                            Console.WriteLine("this id already exist in the program");
+                                        }
+                                        catch (IBL.BO.MissingIdException)
+                                        {
+                                            Console.WriteLine("this id station dont exist");
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("error");
+                                        }
                                         break;
                                     case 2:
                                         Console.WriteLine("enter id");

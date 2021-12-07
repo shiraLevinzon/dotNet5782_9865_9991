@@ -19,7 +19,25 @@ namespace IBL.BL
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
                 boCustomer.PackagesFromCustomer = from p in dalLayer.GetAllParcelsByPredicate(par => par.SenderID == id)
-                                                  select new BO.ParcelAtCustomer() { };
+                                                  select new BO.ParcelAtCustomer()
+                                                  {
+                                                      ID = p.ID,
+                                                      Weight = (BO.WeightCategories)p.Weight,
+                                                      priority = (BO.Priorities)p.priority,
+                                                      CustomerInParcel = new BO.CustomerInParcel()
+                                                      {
+                                                          ID = p.TargetID,
+                                                          CustomerName = dalLayer.GetCostumer(p.TargetID).Name,
+                                                      }
+                                                      
+                                                  };
+
+
+
+
+
+
+
 
 
 
@@ -49,7 +67,7 @@ namespace IBL.BL
                     pat.CustomerInParcel.ID = customerTo.ID;
                     pat.CustomerInParcel.CustomerName = customerTo.Name;
                     pat.Situation = item.ParcelCondition;
-                    boCustomer.PackagesToCustomer.Add(pat);
+                    boCustomer.PackagesToCustomer=pat;
                 }
             }
             catch (IDAL.DO.MissingIdException ex)

@@ -85,7 +85,7 @@ namespace IBL.BL
             }
             #endregion
             #region מילוי רשימת חבילה מסוג דאל
-            List<IDAL.DO.Parcel> TMPparcel = dalLayer.printParcel().ToList();//Where(par=> par.DroneId!=0).ToList();
+            List<IDAL.DO.Parcel> TMPparcel = dalLayer.GetAllParcels().ToList();//Where(par=> par.DroneId!=0).ToList();
             foreach (var item in TMPparcel)
             {
                 if (item.DroneId != 0)
@@ -260,8 +260,8 @@ namespace IBL.BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone Conditions stuck");
-                IDAL.DO.Parcel parcel = dalLayer.printParcel().ToList()[0];
-                foreach (IDAL.DO.Parcel item in dalLayer.printParcel())
+                IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
+                foreach (IDAL.DO.Parcel item in dalLayer.GetAllParcels())
                 {
                     if (item.priority > parcel.priority)
                         parcel = item;
@@ -337,7 +337,7 @@ namespace IBL.BL
             try
             {
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
-                IDAL.DO.Parcel parcel = dalLayer.printParcel().ToList().Find(x => x.DroneId == id);
+                IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "Parcel can't be Delivere- Time Problem");
                 IDAL.DO.Customer customer = dalLayer.printCustomer().ToList().Find(x => x.ID == parcel.TargetID);

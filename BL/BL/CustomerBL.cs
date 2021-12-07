@@ -18,20 +18,26 @@ namespace IBL.BL
                 boCustomer.Location = new BO.Location();
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
-                boCustomer.PackagesFromCustomer = new List<BO.ParcelAtCustomer>();
-                foreach (var item in GetAllParcels().Where(par => par.SenderID == boCustomer.ID).ToList())
-                {
-                    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
-                    pat.ID = item.ID;
-                    pat.Weight = item.Weight;
-                    pat.priority = item.ParcelPriority;
-                    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.RecieverID);
-                    pat.CustomerInParcel.ID = customerTo.ID;
-                    pat.CustomerInParcel.CustomerName = customerTo.Name;
-                    pat.Situation = item.ParcelCondition;
-                    boCustomer.PackagesFromCustomer.Add(pat);
+                boCustomer.PackagesFromCustomer = from p in dalLayer.GetAllParcelsByPredicate(par => par.SenderID == id)
+                                                  select new BO.ParcelAtCustomer() { };
 
-                }
+
+
+
+                //boCustomer.PackagesFromCustomer = new List<BO.ParcelAtCustomer>();
+                //foreach (var item in GetAllParcels().Where(par => par.SenderID == boCustomer.ID).ToList())
+                //{
+                //    BO.ParcelAtCustomer pat = new BO.ParcelAtCustomer();
+                //    pat.ID = item.ID;
+                //    pat.Weight = item.Weight;
+                //    pat.priority = item.ParcelPriority;
+                //    BO.CustomerToList customerTo = GetAllCustomer().First(cus => cus.ID == item.RecieverID);
+                //    pat.CustomerInParcel.ID = customerTo.ID;
+                //    pat.CustomerInParcel.CustomerName = customerTo.Name;
+                //    pat.Situation = item.ParcelCondition;
+                //    boCustomer.PackagesFromCustomer.Add(pat);
+
+                //}
                 boCustomer.PackagesToCustomer = new List<BO.ParcelAtCustomer>();
                 foreach (var item in GetAllParcels().Where(par => par.RecieverID == boCustomer.ID).ToList())
                 {

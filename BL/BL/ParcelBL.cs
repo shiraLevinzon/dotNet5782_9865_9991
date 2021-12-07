@@ -40,18 +40,18 @@ namespace IBL.BL
         }
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null)
         {
-             
-            IEnumerable<BO.Parcel> par = from ParcelDO in dalLayer.printParcel()
-                                         orderby ParcelDO.ID//מיון לפי תז
-                                         select GetParcel(ParcelDO.ID);
+
+            IEnumerable<IDAL.DO.Parcel> par = /*from ParcelDO in */dalLayer.GetAllParcels().ToList();
+                                         //orderby ParcelDO.ID//מיון לפי תז
+                                         //select GetParcel(ParcelDO.ID);
             List<BO.ParcelToList> parcelToLists = new List<BO.ParcelToList>();
 
             foreach (var item in par)
             {
                 BO.ParcelToList parcel = new BO.ParcelToList();
                 item.CopyPropertiesTo(parcel);
-                parcel.SenderID = item.Sender.ID;
-                parcel.RecieverID = item.Receiver.ID;
+                parcel.SenderID = item.SenderID;
+                parcel.RecieverID = item.TargetID;
                 if (item.Delivered != DateTime.MinValue)
                     parcel.ParcelCondition = (BO.Situations)3;
                 else if (item.PickedUp != DateTime.MinValue)

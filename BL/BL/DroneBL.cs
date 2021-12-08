@@ -17,27 +17,35 @@ namespace IBL.BL
                 //עדכון כל הפרופרטיז חוץ מחבילה בהעברה
                 BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id);
                 dtl.CopyPropertiesTo(boDrone);
+                /*boDrone.ID = dtl.ID;
+                boDrone.BatteryStatus = dtl.BatteryStatus;
+                boDrone.Conditions = dtl.Conditions;
+                boDrone.MaxWeight = dtl.MaxWeight;
+                boDrone.Model = dtl.Model;*/
                 boDrone.location = new BO.Location();
                 boDrone.location.Latitude = dtl.location.Latitude;
                 boDrone.location.Longitude = dtl.location.Longitude;
+                boDrone.PackageInTransfer = new BO.ParcelInTransfer();
                 //עדכון חבילה בעברה
                 if (boDrone.Conditions == (BO.DroneConditions)2)
                 {
+                    boDrone.PackageInTransfer.Package_mode = true;
                     //עדכון תז עדיפות ומצב חבילה 
                     BO.ParcelToList parcelHalper = new BO.ParcelToList();
-                    parcelHalper = GetAllParcels().First(par => par.ID == dronesToList.Find(dro => dro.ID == id).PackagNumberOnTransferred);
-                    boDrone.PackageInTransfer = new BO.ParcelInTransfer();
+                    parcelHalper = GetAllParcels().FirstOrDefault(par => par.ID == dronesToList.Find(dro => dro.ID == id).PackagNumberOnTransferred);
                     parcelHalper.CopyPropertiesTo(boDrone.PackageInTransfer);
                     //עדכון לקוח בחבילה (השולח)                    
                     BO.CustomerToList customerToListSender = GetAllCustomer().FirstOrDefault(cus => cus.ID == parcelHalper.SenderID);
                     boDrone.PackageInTransfer.Sender = new BO.CustomerInParcel();
-                    boDrone.PackageInTransfer.Sender.ID = customerToListSender.ID;
-                    boDrone.PackageInTransfer.Sender.CustomerName = customerToListSender.Name;
+                    boDrone.PackageInTransfer.Sender.CopyPropertiesTo(customerToListSender);
+                    // boDrone.PackageInTransfer.Sender.ID = customerToListSender.ID;
+                    //boDrone.PackageInTransfer.Sender.CustomerName = customerToListSender.Name;
                     //עדכון לקוח בחבילה (המקבל)
-                    BO.CustomerToList customerToListReciver = GetAllCustomer().First(cus => cus.ID == parcelHalper.RecieverID);
+                    customerToListSender = GetAllCustomer().FirstOrDefault(cus => cus.ID == parcelHalper.RecieverID);
                     boDrone.PackageInTransfer.Receives = new BO.CustomerInParcel();
-                    boDrone.PackageInTransfer.Receives.ID = customerToListSender.ID;
-                    boDrone.PackageInTransfer.Receives.CustomerName = customerToListSender.Name;
+                    boDrone.PackageInTransfer.Sender.CopyPropertiesTo(customerToListSender);
+                   // boDrone.PackageInTransfer.Receives.ID = customerToListSender.ID;
+                   // boDrone.PackageInTransfer.Receives.CustomerName = customerToListSender.Name;
                     //עדכון מקום איסוף ומקום יעד
                     boDrone.PackageInTransfer.Collection = new BO.Location();
                     boDrone.PackageInTransfer.PackageDestination= new BO.Location();
@@ -46,7 +54,6 @@ namespace IBL.BL
                     //עדכון מרחק הובלה
                     boDrone.PackageInTransfer.distance = DistanceTo(boDrone.PackageInTransfer.Collection.Latitude, boDrone.PackageInTransfer.Collection.Longitude, boDrone.PackageInTransfer.PackageDestination.Latitude, boDrone.PackageInTransfer.PackageDestination.Longitude);
                 }
-
             }
             catch (IDAL.DO.MissingIdException ex)
             {

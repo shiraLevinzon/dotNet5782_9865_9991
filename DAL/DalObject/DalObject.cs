@@ -46,7 +46,7 @@ namespace DalObject
             {
                 drones.Add(new Drone()
                 {
-                    ID = i+1,
+                    ID = r1.Next(1000, 10000),
                     Model = "p1",
                     MaxWeight = (WeightCategories)r1.Next(0, 3),
 
@@ -102,7 +102,7 @@ namespace DalObject
                     TargetID = customers[temp2].ID,
                     Weight = (WeightCategories)r1.Next(0, 3),
                     priority = (Priorities)r1.Next(0, 3),
-                    DroneId = temp3,
+                    DroneId = drones[temp3].ID,
                     Requested = DateTime.Now,
                    // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;

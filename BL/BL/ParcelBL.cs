@@ -61,18 +61,12 @@ namespace IBL.BL
         public void AddParcel(BO.Parcel parcel)
         {
             //Add DO.Parcel            
-            IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel()
-            {
-                TargetID = parcel.Receiver.ID,
-                SenderID = parcel.Sender.ID,
-                Weight = (IDAL.DO.WeightCategories)parcel.Weight,
-                priority= (IDAL.DO.Priorities)parcel.Priority,
-                DroneId=0,
-                Requested = DateTime.Now,
-                Scheduled = DateTime.MinValue,
-                PickedUp = DateTime.MinValue,
-                Delivered = DateTime.MinValue,
-            };
+            IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
+            parcel.CopyPropertiesTo(ParcelDO);
+            parcel.Requested = DateTime.Now;
+            parcel.Scheduled = DateTime.MinValue;
+            parcel.PickedUp = DateTime.MinValue;
+            parcel.Delivered = DateTime.MinValue;
             // הרחפן מאותחל ב-נאל
             try
             {

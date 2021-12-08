@@ -44,8 +44,6 @@ namespace IBL.BL
                                                         ID = par.SenderID,
                                                         CustomerName = dalLayer.GetCostumer(par.SenderID).Name,
                                                     }
-
-
                                                 };
             }
             catch (IDAL.DO.MissingIdException ex)
@@ -61,9 +59,7 @@ namespace IBL.BL
         }
         public IEnumerable<BO.CustomerToList> GetAllCustomer()
         {
-            //אססור להשתשמש בגט פרסל
             return from c in dalLayer.printCustomer()
-                   let cu = new BO.Customer()
                    select new BO.CustomerToList()
                    {
                        ID = c.ID,
@@ -79,15 +75,10 @@ namespace IBL.BL
         {
 
             //Add DO.Customer            
-            IDAL.DO.Customer customerDO = new IDAL.DO.Customer()
-            {
-                ID = customer.ID,
-                Name = customer.Name,
-                Phone = customer.Phone,
-                Latitude = customer.Location.Latitude,
-                Longitude = customer.Location.Longitude,
-
-            };
+            IDAL.DO.Customer customerDO = new IDAL.DO.Customer();
+            customer.CopyPropertiesTo(customerDO);
+            customerDO.Latitude = customer.Location.Latitude;
+            customerDO.Longitude = customer.Location.Longitude;
             try
             {
                 dalLayer.AddCustomer(customerDO);
@@ -98,9 +89,7 @@ namespace IBL.BL
             }
         }
         public void UpdateCustomer(int id,string name,string phone)
-        {
-
-            //Update DO.Customer            
+        {           
             IDAL.DO.Customer CustomerDO = new IDAL.DO.Customer();
             CustomerDO = dalLayer.GetCostumer(id);
             if (name!=null)

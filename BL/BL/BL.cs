@@ -162,8 +162,10 @@ namespace IBL.BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                  //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                  //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                    int ran = 0;
+                    //if ((customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))).Count!=0)
+                      //  ran = random.Next(0,customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                   // item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;

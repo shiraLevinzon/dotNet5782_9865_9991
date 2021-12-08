@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BO;
 using IDAL; 
 
 
@@ -20,7 +21,7 @@ namespace IBL.BL
                 boBaseStation.BaseStationLocation=new BO.Location();
                 boBaseStation.BaseStationLocation.Latitude = doBaseStation.Latitude;
                 boBaseStation.BaseStationLocation.Longitude = doBaseStation.Longitude;
-                boBaseStation.DronesInCharge = from d in GetAllDrones()
+                boBaseStation.DronesInCharge =from d in GetAllDrones()
                                                where d.location == boBaseStation.BaseStationLocation && d.Conditions == (BO.DroneConditions)2
                                                select new BO.DroneInCharging()
                                                {

@@ -39,7 +39,6 @@ namespace DalObject
         {
             if (CheckBaseStation(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "BaseStation");
-
             DataSource.baseStations.Add(tmp);
         }
         public IEnumerable<BaseStation> printBaseStation()

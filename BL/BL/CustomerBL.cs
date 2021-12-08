@@ -30,8 +30,6 @@ namespace IBL.BL
                                                           ID = p.TargetID,
                                                           CustomerName = dalLayer.GetCostumer(p.TargetID).Name,
                                                       }
-                                                      
-                                                      
                                                   };
 
                 boCustomer.PackagesToCustomer = from par in dalLayer.GetAllParcelsByPredicate(par => par.TargetID == id)
@@ -53,6 +51,10 @@ namespace IBL.BL
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
 
             return boCustomer;

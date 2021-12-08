@@ -69,8 +69,7 @@ namespace ConsoleBLUI
                                         baseStation.ID = int.Parse(Console.ReadLine());
                                         Console.WriteLine("enter station name");
                                         baseStation.StationName = Console.ReadLine();
-                                        Console.WriteLine("enter location- latitude");
-                                        Console.WriteLine("location- longtitude");
+                                        Console.WriteLine("enter location- latitude and location- longtitude");
                                         baseStation.BaseStationLocation = new Location { Latitude = double.Parse(Console.ReadLine()), Longitude = double.Parse(Console.ReadLine()) };
                                         Console.WriteLine("enter number of free slots charge");
                                         baseStation.FreeChargingSlots = int.Parse(Console.ReadLine());
@@ -117,6 +116,8 @@ namespace ConsoleBLUI
                                     case 4:
                                         Console.WriteLine("enter sender id");
                                         Parcel parcel = new Parcel();
+                                        parcel.Sender = new CustomerInParcel();
+                                        parcel.Receiver = new CustomerInParcel();
                                         parcel.Sender.ID = int.Parse(Console.ReadLine());
                                         Console.WriteLine("enter reciver id");
                                         parcel.Receiver.ID = int.Parse(Console.ReadLine());
@@ -250,36 +251,42 @@ namespace ConsoleBLUI
                                         foreach (var item in blObject.GetAllBaseStation())
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     case 2:
                                         foreach (var item in blObject.GetAllDrones())
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     case 3:
                                         foreach (var item in blObject.GetAllCustomer())
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     case 4:
                                         foreach (var item in blObject.GetAllParcels())
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     case 5:
                                         foreach (var item in blObject.GetAllParcels(par => par.ParcelCondition == (Situations)0))
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     case 6:
                                         foreach (var item in blObject.GetAllBaseStation(bs => bs.FreeChargingSlots > 0))
                                         {
                                             Console.WriteLine(item.ToString());
+                                    Console.WriteLine();
                                         }
                                         break;
                                     default:

@@ -24,7 +24,7 @@ namespace DalObject
         }
         internal class Config
         {
-            public static int IdCount = 0;
+            public static int IdCount = 1;
             public static double available = 0.04;
             public static double lightWeight = 0.08;
             public static double mediumWeight = 0.15;
@@ -104,7 +104,8 @@ namespace DalObject
                     priority = (Priorities)r1.Next(0, 3),
                     DroneId = drones[temp3].ID,
                     Requested = DateTime.Now,
-                });
+                   // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
+                }) ;
             }
         }
         #endregion Initialize

@@ -62,29 +62,24 @@ namespace IBL.BL
         }
         public void AddDrone(BO.Drone drone, int id)
         {
-
-            //Add DO.BaseStation
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             try
             {
             drone.CopyPropertiesTo(DroneDO);
-             BO.DroneToList droneToListTMP = new BO.DroneToList();
+            BO.DroneToList droneToListTMP = new BO.DroneToList();
             drone.CopyPropertiesTo(droneToListTMP);
             droneToListTMP.BatteryStatus = (random.Next(20, 40));
             droneToListTMP.Conditions = (BO.DroneConditions)0;
             droneToListTMP.location = new BO.Location();
             droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
             droneToListTMP.location.Longitude = GetBaseStation(id).BaseStationLocation.Longitude;
-
             dronesToList.Add(droneToListTMP);
-            
-                dalLayer.AddDrone(DroneDO);
+            dalLayer.AddDrone(DroneDO);
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
-            }
-            
+            } 
         }
         public void UpdateDrone(int id, string model)
         {

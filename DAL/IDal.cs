@@ -44,7 +44,7 @@ namespace IDAL
         public void AddParcel(Parcel tmp);
         public Parcel GetParcel(int id);
         public IEnumerable<Parcel> GetAllParcels();
-        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> pred);
+        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> predicate);
 
         public void UpdParcel(Parcel tmp);
         public bool CheckParcel(int id);

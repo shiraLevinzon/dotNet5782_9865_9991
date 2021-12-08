@@ -12,8 +12,12 @@ namespace IBL.BL
     {
         IDAL.IDal dalLayer = new DalObject.DalObject();
         internal static Random r1 = new Random();
+        internal static double GetRandomNumber(double minimum, double maximum)
+        {
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
         List<DroneToList> dronesToList = new List<DroneToList>();
-        /// private readonly DroneConditions delivery;
         public Random random = new Random();
         public double free;
         public double light;
@@ -58,7 +62,7 @@ namespace IBL.BL
                 dtl.MaxWeight = (WeightCategories)item.MaxWeight;
                 dtl.Model = item.Model;
                 dtl.BatteryStatus = 0;
-                dtl.Conditions = (DroneConditions)2;
+                dtl.Conditions = (DroneConditions)(r1.Next(0,2));
                 dtl.PackagNumberOnTransferred = 0;
                 dtl.location = new Location();
                 dtl.location.Latitude = TMPcustomer[r1.Next(0,9)].Latitude;
@@ -158,8 +162,8 @@ namespace IBL.BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                    int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                    item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                  //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                  //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;
@@ -220,7 +224,6 @@ namespace IBL.BL
             }
         }
         #endregion
-
         #region פונקציית שחרור רחפן מעמדת טעינה
         public void ReleaseDroneFromCharging(int id, TimeSpan time)
         {

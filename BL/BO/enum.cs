@@ -13,6 +13,6 @@ namespace IBL.BO
     //נוצר, שייך, נאסף, סיפק
     //public enum ParcelConditions {Defined, associated, collected, provided }
     //הוגדר, משויך, נאסף, מסופק
-    public enum DroneConditions { maintenance ,Available,delivery, /*charging*/}
+    public enum DroneConditions { maintenance ,Available, delivery, /*charging*/}
     //תחזוקה, זמינה, משלוח, טעינה
 }

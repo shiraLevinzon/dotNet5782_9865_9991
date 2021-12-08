@@ -63,6 +63,7 @@ namespace IBL.BL
         {
             //אססור להשתשמש בגט פרסל
             return from c in dalLayer.printCustomer()
+                   let cu = new BO.Customer()
                    select new BO.CustomerToList()
                    {
                        ID = c.ID,
@@ -78,10 +79,15 @@ namespace IBL.BL
         {
 
             //Add DO.Customer            
-            IDAL.DO.Customer customerDO = new IDAL.DO.Customer();
-            customer.CopyPropertiesTo(customerDO);
-            customerDO.Latitude = customer.Location.Latitude;
-            customerDO.Longitude = customer.Location.Longitude;
+            IDAL.DO.Customer customerDO = new IDAL.DO.Customer()
+            {
+                ID = customer.ID,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                Latitude = customer.Location.Latitude,
+                Longitude = customer.Location.Longitude,
+
+            };
             try
             {
                 dalLayer.AddCustomer(customerDO);

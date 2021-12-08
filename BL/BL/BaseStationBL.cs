@@ -55,10 +55,15 @@ namespace IBL.BL
         {
 
             //Add DO.BaseStation            
-            IDAL.DO.BaseStation baseStationDO = new IDAL.DO.BaseStation();
-            baseStation.CopyPropertiesTo(baseStationDO);
-            baseStationDO.Latitude = baseStation.BaseStationLocation.Latitude;
-            baseStationDO.Longitude = baseStation.BaseStationLocation.Longitude;
+            IDAL.DO.BaseStation baseStationDO = new IDAL.DO.BaseStation()
+            {
+                ID = baseStation.ID,
+                StationName = baseStation.StationName,
+                FreeChargingSlots = baseStation.FreeChargingSlots,
+                Latitude = baseStation.BaseStationLocation.Latitude,
+                Longitude = baseStation.BaseStationLocation.Longitude,
+            };
+            
             try
             {
                 dalLayer.AddBaseStation(baseStationDO);

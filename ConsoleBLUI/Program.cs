@@ -218,19 +218,23 @@ namespace ConsoleBLUI
                                 {
                                     case 1:
                                         Console.WriteLine("enter id");
-                                        blObject.GetDrone(int.Parse(Console.ReadLine()));
+                                blObject.GetDrone(int.Parse(Console.ReadLine())).ToString();
+                                
+                                
                                         break;
                                     case 2:
                                         Console.WriteLine("enter id");
-                                        blObject.GetBaseStation(int.Parse(Console.ReadLine()));
+                                
+                                         IBL.BO.BaseStation b=blObject.GetBaseStation(int.Parse(Console.ReadLine()));
+                                         Console.WriteLine("{}{}{}{}{}{}",b.ID,b.StationName,b.FreeChargingSlots,b.BaseStationLocation.Latitude,b.BaseStationLocation.Longitude);
                                         break;
                                     case 3:
                                         Console.WriteLine("enter id");
-                                        blObject.GetCustomer(int.Parse(Console.ReadLine()));
+                                        blObject.GetCustomer(int.Parse(Console.ReadLine())).ToString();
                                         break;
                                     case 4:
                                         Console.WriteLine("enter id");
-                                        blObject.GetParcel(int.Parse(Console.ReadLine()));
+                                        blObject.GetParcel(int.Parse(Console.ReadLine())).ToString();
                                         break;
                                     default:
                                         break;

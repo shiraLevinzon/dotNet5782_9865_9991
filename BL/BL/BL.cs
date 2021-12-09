@@ -20,9 +20,9 @@ namespace IBL.BL
         List<DroneToList> dronesToList = new List<DroneToList>();
         public Random random = new Random();
         public double free;
-        public double light;
-        public double normal;
-        public double heavy;
+        public double lightC;
+        public double normalC;
+        public double heavyC;
         public double droneLoadingRate;
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
@@ -32,9 +32,9 @@ namespace IBL.BL
            
             double[] arr = dalLayer.RequestPowerConsumptionByDrone();
             free = arr[0];
-            light = arr[1];
-            normal = arr[2];
-            heavy = arr[3];
+            lightC = arr[1];
+            normalC = arr[2];
+            heavyC = arr[3];
             droneLoadingRate = arr[4];
             #region מילוי רשימת הלקוחות מסוג דאל 
             List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
@@ -137,9 +137,10 @@ namespace IBL.BL
                                 stationHalper = item2;
                             }
                         }
-                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Longitude);
+                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Longitude);                   
                         distans += min + DistanceTo(customersBL.Find(cus =>item.TargetID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.TargetID==cus.ID).Location.Longitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Latitude,customersBL.Find(cus =>item.SenderID==cus.ID).Location.Longitude);
-                        d.BatteryStatus = random.Next((int)(distans * free * 100) / 100, 100);
+                        int i = (int)(IDAL.DO.WeightCategories)item.Weight;
+                        d.BatteryStatus = random.Next((int)distans*(int)arr[i+1], 100);
                     }
 
                 }
@@ -162,10 +163,8 @@ namespace IBL.BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                    int ran = 0;
-                    //if ((customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))).Count!=0)
-                      //  ran = random.Next(0,customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                   // item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                  //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                  //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;
@@ -178,7 +177,7 @@ namespace IBL.BL
                             basestationHalper = item2;
                         }
                     }
-                    item.BatteryStatus = random.Next((int)(mini * free * 100) / 100, 100);
+                    item.BatteryStatus = random.Next((int)(mini * free), 100);
                 }
             }
             #endregion
@@ -191,7 +190,7 @@ namespace IBL.BL
             {
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)1)
-                    throw new BO.ImproperMaintenanceCondition(id, "DroneConditions stuck");
+                    throw new BO.ImproperMaintenanceCondition(id, "The drone is not available");
                 double distance = DistanceTo(baseStationsBL[0].BaseStationLocation.Latitude, baseStationsBL[0].BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
                 int idbasetation = 0;
                 foreach (var item in baseStationsBL)
@@ -203,13 +202,14 @@ namespace IBL.BL
                     }
                 }
                 if (free * distance > drone.BatteryStatus || GetBaseStation(idbasetation).FreeChargingSlots == 0)
-                    throw new BO.ImproperMaintenanceCondition(id, "Drone");
-                IDAL.DO.BaseStation basestation = dalLayer.GetBaseStation(idbasetation);
+                    throw new BO.ImproperMaintenanceCondition(id, "There is not enough battery to get to the station or there is no space available at the station to recharge");
+                BO.BaseStation basestation = GetBaseStation(idbasetation);
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == drone.ID);
                 dro.BatteryStatus = dro.BatteryStatus - free * distance;
-                dro.location.Latitude = basestation.Latitude;
-                dro.location.Longitude = basestation.Longitude;
+                dro.location.Latitude = basestation.BaseStationLocation.Latitude;
+                dro.location.Longitude = basestation.BaseStationLocation.Longitude;
                 dro.Conditions = (DroneConditions)0;
+                
                 dalLayer.SendingDroneToBaseStation(basestation.ID, dro.ID);
             }
             catch (IDAL.DO.DuplicateIdException ex)
@@ -219,6 +219,10 @@ namespace IBL.BL
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (BO.ImproperMaintenanceCondition ex)
+            {
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
             }
             catch (Exception)
             {
@@ -233,7 +237,7 @@ namespace IBL.BL
             {
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)0)
-                    throw new BO.ImproperMaintenanceCondition(id, "Drone condition is not correct");
+                    throw new BO.ImproperMaintenanceCondition(id, "The drone is not available");
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
                 BO.BaseStation bases = baseStationsBL.FirstOrDefault(x => x.DronesInCharge.First(y => y.ID == dro.ID) == x.DronesInCharge.First(y => y.ID == dro.ID));
                 dro.Conditions = (DroneConditions)1;
@@ -250,6 +254,10 @@ namespace IBL.BL
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
+            }
+            catch (BO.ImproperMaintenanceCondition ex)
+            {
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
             }
             catch (Exception)
             {
@@ -290,6 +298,7 @@ namespace IBL.BL
                 if (decrease > drone.BatteryStatus)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone's battery too low "); ;
                 drone.Conditions = (DroneConditions)2;
+                drone.PackagNumberOnTransferred = parcel.ID;
                 dalLayer.AssignPackageToDrone(parcel.ID, drone.ID);
             }
             catch (IDAL.DO.DuplicateIdException ex)
@@ -300,9 +309,9 @@ namespace IBL.BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
+            catch (BO.ImproperMaintenanceCondition ex)
             {
-                throw new Exception();
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
             }
         }
         #endregion

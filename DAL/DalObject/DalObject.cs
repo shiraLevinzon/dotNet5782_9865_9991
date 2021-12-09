@@ -129,5 +129,9 @@ namespace DalObject
         {
                 return deg * (Math.PI / 180);
         }
+        public IEnumerable<DroneCharge> GetAllDroneCharge()
+        {
+            return DataSource.droneCharges.Take(DataSource.droneCharges.Count);
+        }
     }
 }

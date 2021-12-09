@@ -235,7 +235,7 @@ namespace IBL.BL
                 if (drone.Conditions != (DroneConditions)0)
                     throw new BO.ImproperMaintenanceCondition(id, "Drone condition is not correct");
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
-                BO.BaseStation bases = baseStationsBL.Find(x => x.DronesInCharge.First(y => y.ID == dro.ID) == x.DronesInCharge.First(y => y.ID == dro.ID));
+                BO.BaseStation bases = baseStationsBL.FirstOrDefault(x => x.DronesInCharge.First(y => y.ID == dro.ID) == x.DronesInCharge.First(y => y.ID == dro.ID));
                 dro.Conditions = (DroneConditions)1;
                 if (droneLoadingRate * time.TotalHours > 100)
                     dro.BatteryStatus = 100;

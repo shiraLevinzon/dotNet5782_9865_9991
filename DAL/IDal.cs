@@ -52,5 +52,6 @@ namespace IDAL
         #endregion
         public double[] RequestPowerConsumptionByDrone();
         public double Deg2rad(double deg);
+        public IEnumerable<DroneCharge> GetAllDroneCharge();
     }
 }

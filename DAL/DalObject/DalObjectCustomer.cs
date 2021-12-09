@@ -46,7 +46,7 @@ namespace DalObject
 
         public IEnumerable<Customer> printCustomer()
         {
-            return DataSource.customers.Take(DataSource.customers.Count).ToList();
+            return DataSource.customers.Take(DataSource.customers.Count);
         }
         
     }

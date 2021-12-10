@@ -92,20 +92,17 @@ namespace IBL.BL
 
             try
             {
-                BO.DroneToList dtl = new BO.DroneToList();
-
-                dronesToList.Find(dro => dro.ID == id).CopyPropertiesTo(dtl);
-                dronesToList.Remove(dronesToList.Find(dro => dro.ID == id));
-
+                BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id);
                 dtl.Model = model;
-                dronesToList.Add(dtl);
-                dtl.CopyPropertiesTo(DroneDO);
+                DroneDO.ID = dtl.ID;
+                DroneDO.Model = dtl.Model;
+                DroneDO.MaxWeight = (IDAL.DO.WeightCategories)dtl.MaxWeight;
 
                 dalLayer.UpdDrone(DroneDO);
             }
-            catch (IDAL.DO.DuplicateIdException ex)
+            catch (IDAL.DO.MissingIdException ex)
             {
-                throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
+                throw new BO.MissingIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
         }
     }

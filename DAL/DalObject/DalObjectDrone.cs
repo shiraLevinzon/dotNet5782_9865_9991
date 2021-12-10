@@ -31,7 +31,8 @@ namespace DalObject
 
         public void UpdDrone(Drone tmp)
         {
-            int count = DataSource.drones.RemoveAll(par => tmp.ID == par.ID);
+            int count = DataSource.drones.Count(par => tmp.ID == par.ID);
+            DataSource.drones.RemoveAll(par => tmp.ID == par.ID);
 
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "Drone");

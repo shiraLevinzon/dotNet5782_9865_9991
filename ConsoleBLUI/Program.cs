@@ -158,23 +158,7 @@ namespace ConsoleBLUI
                             {
                                 case 1:
                                     Console.WriteLine("enter id");
-                                    //try
-                                    //{
                                     blObject.AssignPackageToDrone(int.Parse(Console.ReadLine()));
-
-                                    //}
-                                    //catch (IBL.BO.DuplicateIdException)
-                                    //{
-                                    //    Console.WriteLine("this id already exist in the program");
-                                    //}
-                                    //catch (IBL.BO.MissingIdException)
-                                    //{
-                                    //    Console.WriteLine("this id station dont exist");
-                                    //}
-                                    //catch (Exception)
-                                    //{
-                                    //    Console.WriteLine("error");
-                                    //}
                                     break;
                                 case 2:
                                     Console.WriteLine("enter id");

@@ -266,6 +266,7 @@ namespace IBL.BL
         }
         #endregion
         #region פונקציית שיוך חבילה לרחפן
+        //עובדת!!
         public void AssignPackageToDrone(int id)
         {
             try
@@ -293,10 +294,12 @@ namespace IBL.BL
                 }
                 int a = (int)parcel.Weight;
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);
-                decrease = decrease * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
-                    + free * DistanceTo(dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude, GetDrone(helpbasestation(drone)).location.Latitude, GetDrone(helpbasestation(drone)).location.Longitude);
+                decrease = free * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
+                    + decrease * DistanceTo(dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude, dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude)
+                    + free * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(drone)).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(drone)).BaseStationLocation.Longitude);
                 if (decrease > drone.BatteryStatus)
-                    throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone's battery too low "); ;
+                    throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone's battery too low ");
+                drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);
                 drone.Conditions = (DroneConditions)2;
                 drone.PackagNumberOnTransferred = parcel.ID;
                 dalLayer.AssignPackageToDrone(parcel.ID, drone.ID);
@@ -350,7 +353,7 @@ namespace IBL.BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
+                BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id);
                 IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "Parcel can't be Delivere- Time Problem");

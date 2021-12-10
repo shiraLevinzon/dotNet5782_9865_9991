@@ -62,7 +62,7 @@ namespace IBL.BL
                 dtl.MaxWeight = (WeightCategories)item.MaxWeight;
                 dtl.Model = item.Model;
                 dtl.BatteryStatus = 0;
-                dtl.Conditions = (DroneConditions)(r1.Next(0,2));
+                dtl.Conditions = (DroneConditions)(r1.Next(0,3));
                 dtl.PackagNumberOnTransferred = 0;
                 dtl.location = new Location();
                 dtl.location.Latitude = TMPcustomer[r1.Next(0,9)].Latitude;
@@ -300,7 +300,7 @@ namespace IBL.BL
                     + free * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(drone)).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(drone)).BaseStationLocation.Longitude);
                 if (decrease > drone.BatteryStatus)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "Drone's battery too low ");
-                drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);
+                //drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);
                 drone.Conditions = (DroneConditions)2;
                 drone.PackagNumberOnTransferred = parcel.ID;
                 dalLayer.AssignPackageToDrone(parcel.ID, drone.ID);
@@ -329,9 +329,11 @@ namespace IBL.BL
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");   
                 drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
-                drone.location = drone.PackageInTransfer.Collection;
+                drone.location.Latitude = drone.PackageInTransfer.Collection.Latitude;
+                drone.location.Longitude = drone.PackageInTransfer.Collection.Longitude;
                 droneTOlist.BatteryStatus = drone.BatteryStatus;
-                droneTOlist.location = drone.location;
+                droneTOlist.location.Latitude = drone.location.Latitude;
+                droneTOlist.location.Longitude = drone.location.Longitude;
                 dalLayer.ParcelCollectionByDrone(drone.PackageInTransfer.ID, id);
             }
             catch (IDAL.DO.DuplicateIdException ex)

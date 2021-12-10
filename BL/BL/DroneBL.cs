@@ -47,6 +47,8 @@ namespace IBL.BL
                         boDrone.PackageInTransfer.Collection = new BO.Location();
                         boDrone.PackageInTransfer.PackageDestination = new BO.Location();
                         boDrone.PackageInTransfer.Collection.Latitude = GetCustomer(parcelHalper.SenderID).Location.Latitude;
+                        boDrone.PackageInTransfer.Collection.Longitude = GetCustomer(parcelHalper.SenderID).Location.Longitude;
+                        boDrone.PackageInTransfer.PackageDestination.Latitude = GetCustomer(parcelHalper.RecieverID).Location.Latitude;
                         boDrone.PackageInTransfer.PackageDestination.Longitude = GetCustomer(parcelHalper.RecieverID).Location.Longitude;
                         //עדכון מרחק הובלה
                         boDrone.PackageInTransfer.distance = DistanceTo(boDrone.PackageInTransfer.Collection.Latitude, boDrone.PackageInTransfer.Collection.Longitude, boDrone.PackageInTransfer.PackageDestination.Latitude, boDrone.PackageInTransfer.PackageDestination.Longitude);

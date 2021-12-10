@@ -18,7 +18,9 @@ namespace IBL.BL
                 BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id);
                 IDAL.DO.Drone d = dalLayer.GetDrone(id);
                 d.CopyPropertiesTo(boDrone);
+         //       boDrone.Conditions = dtl.Conditions;
                 boDrone.location = new BO.Location();
+                dtl.CopyPropertiesTo(boDrone);
                 boDrone.location.Latitude = dtl.location.Latitude;
                 boDrone.location.Longitude = dtl.location.Longitude;
                 //עדכון חבילה בעברה

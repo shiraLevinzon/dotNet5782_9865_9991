@@ -208,8 +208,7 @@ namespace IBL.BL
                 dro.BatteryStatus = dro.BatteryStatus - free * distance;
                 dro.location.Latitude = basestation.BaseStationLocation.Latitude;
                 dro.location.Longitude = basestation.BaseStationLocation.Longitude;
-                dro.Conditions = (DroneConditions)0;
-                
+                dro.Conditions = (DroneConditions)0;            
                 dalLayer.SendingDroneToBaseStation(basestation.ID, dro.ID);
             }
             catch (IDAL.DO.DuplicateIdException ex)
@@ -239,7 +238,9 @@ namespace IBL.BL
                 if (drone.Conditions != (DroneConditions)0)
                     throw new BO.ImproperMaintenanceCondition(id, "The drone is not available");
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
-                BO.BaseStation bases = baseStationsBL.FirstOrDefault(x => x.DronesInCharge.First(y => y.ID == dro.ID) == x.DronesInCharge.First(y => y.ID == dro.ID));
+                IEnumerable<BO.BaseStation> baseStations = from b in GetAllBaseStation()
+                                                           select GetBaseStation(b.ID);
+                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.DronesInCharge.First(d => d.ID == dro.ID)!=null);
                 dro.Conditions = (DroneConditions)1;
                 if (droneLoadingRate * time.TotalHours > 100)
                     dro.BatteryStatus = 100;

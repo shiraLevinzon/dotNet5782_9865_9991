@@ -48,10 +48,11 @@ namespace DalObject
         {
             return DataSource.parcels.Take(DataSource.parcels.Count);
         }
-        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> predicate)
+        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> predicate/*=null*/)
         {
             return from p in DataSource.parcels
                    where predicate(p)
+                  // where predicate!=null
                    select p;
         }
         public void UpdParcel(Parcel tmp)

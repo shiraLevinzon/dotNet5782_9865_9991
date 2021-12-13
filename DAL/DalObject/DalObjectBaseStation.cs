@@ -41,9 +41,16 @@ namespace DalObject
                 throw new DuplicateIdException(tmp.ID, "BaseStation");
             DataSource.baseStations.Add(tmp);
         }
-        public IEnumerable<BaseStation> printBaseStation()
+        public IEnumerable<BaseStation> GetAllBaseStations(Predicate<BaseStation> predicate=null)
         {
-            return DataSource.baseStations.Take(DataSource.baseStations.Count);
+            if (predicate != null)
+            {
+                return from b in DataSource.baseStations
+                       where predicate(b)
+                       select b;
+            }
+            return from b in DataSource.baseStations
+                   select b;
         }
         /// <summary>
         /// Sending Drone To BaseStation

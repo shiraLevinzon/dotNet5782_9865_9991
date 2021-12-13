@@ -15,19 +15,19 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="StatusSelector" Grid.Column="1" HorizontalAlignment="Stretch" Margin="73,10,0,0" VerticalAlignment="Stretch" Width="120"/>
+            <ComboBox x:Name="StatusSelector" Grid.Column="1" Margin="40,4,40,6" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
             <Label x:Name="status" Content="status&#xD;&#xA;" HorizontalAlignment="Left" Margin="22,11,0,0" VerticalAlignment="Top" Width="58" Height="24"/>
-            <ComboBox Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,12,0,0" VerticalAlignment="Stretch" Width="120"/>
-            <Label Content="" Grid.Column="2
-                   " HorizontalAlignment="Left" Margin="142,22,0,0" VerticalAlignment="Top" Width="58"/>
+            <ComboBox x:Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,12,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
+            <Label Content="Max weight" Grid.Column="2" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1" RenderTransformOrigin="0.509,0.514">
+        <ListView x:Name="DronesListView" RenderTransformOrigin="0.509,0.514" Margin="0,48,0,64" Grid.RowSpan="2" MouseDoubleClick="DronesListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="show" HorizontalAlignment="Left" Margin="566,327,0,0" Grid.Row="1" VerticalAlignment="Top" Height="51" Width="224" Click="Button_Click"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>

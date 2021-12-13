@@ -1,4 +1,5 @@
 ﻿using System;
+using IBL.BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,38 @@ namespace PL
             InitializeComponent();
             DronetoListWindewBL = blObject;
             DronesListView.ItemsSource = DronetoListWindewBL.GetAllDrones();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new Drone().Show();
+        }
+
+        private void StatusSelector_Selected(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = DronetoListWindewBL.GetAllDrones(dro => dro.Conditions == (DroneConditions)StatusSelector.SelectedItem);
+
+        }
+
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = DronetoListWindewBL.GetAllDrones(dro => dro.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
+
+        }
+
+        private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DroneToList d = (DroneToList)DronesListView.SelectedItem;
+            new Drone(d).Show();
         }
     }
 }

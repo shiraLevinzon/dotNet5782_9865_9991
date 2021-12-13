@@ -7,7 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
     <Grid RenderTransformOrigin="0.498,0.504">
-        <Grid/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="159,103,0,0" VerticalAlignment="Top" Height="36" Width="110" Click="Button_Click"/>
+        <Grid>
+            <Image HorizontalAlignment="Left" Height="403" Margin="49,40,0,0" VerticalAlignment="Top" Width="707" Source="/רחפן תמונה.jpg">
+                <Image.OpacityMask>
+                    <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
+                        <ImageBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform X="100" Y="1004"/>
+                            </TransformGroup>
+                        </ImageBrush.RelativeTransform>
+                    </ImageBrush>
+                </Image.OpacityMask>
+            </Image>
+        </Grid>
+        <Button Content="start" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="71" Width="483" Click="Button_Click" Background="#FF6A69EF" FontFamily="Arial Rounded MT Bold" FontSize="24"/>
     </Grid>
 </Window>

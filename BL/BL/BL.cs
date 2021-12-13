@@ -38,7 +38,7 @@ namespace IBL.BL
             droneLoadingRate = arr[4];
             #region מילוי רשימת הלקוחות מסוג דאל 
             List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
-            TMPcustomer = dalLayer.printCustomer().ToList();
+            TMPcustomer = dalLayer.GetAllCustomers().ToList();
             foreach (var item in TMPcustomer)
             {
                 BO.Customer cust = new Customer();
@@ -54,7 +54,7 @@ namespace IBL.BL
             #endregion
             #region מילוי רשימת רחפנים מסוג דאל
             List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
-            TMPdrone = dalLayer.printDrone().ToList();
+            TMPdrone = dalLayer.GetAllDrones().ToList();
             foreach (var item in TMPdrone)
             {
                 DroneToList dtl = new DroneToList();
@@ -74,7 +74,7 @@ namespace IBL.BL
    
             #region מילוי רשימת תחנות בסיס מסוג דאל
             List<IDAL.DO.BaseStation> TMPbaseStation = new List<IDAL.DO.BaseStation>();
-            TMPbaseStation = dalLayer.printBaseStation().ToList();
+            TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
             foreach (var item in TMPbaseStation)
             {
                 BO.BaseStation bases = new BaseStation()
@@ -360,7 +360,7 @@ namespace IBL.BL
                 IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "Parcel can't be Delivere- Time Problem");
-                IDAL.DO.Customer customer = dalLayer.printCustomer().ToList().Find(x => x.ID == parcel.TargetID);
+                IDAL.DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);
                 double distance = DistanceTo(drone.location.Latitude, drone.location.Longitude, customer.Latitude, customer.Longitude);
                 int a = (int)parcel.Weight;
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);

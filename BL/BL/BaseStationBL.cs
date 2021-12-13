@@ -37,7 +37,7 @@ namespace IBL.BL
         }
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null)
         {
-            IEnumerable<BO.BaseStationToList> baseStationToLists= from BaseStationDO in dalLayer.printBaseStation()
+            IEnumerable<BO.BaseStationToList> baseStationToLists= from BaseStationDO in dalLayer.GetAllBaseStations()
                    select new BO.BaseStationToList()
                    {
                        ID = BaseStationDO.ID,

@@ -44,9 +44,16 @@ namespace DalObject
             DataSource.customers.Add(tmp);
         }
 
-        public IEnumerable<Customer> printCustomer()
+        public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate=null)
         {
-            return DataSource.customers.Take(DataSource.customers.Count);
+            if(predicate!=null)
+            {
+                return from c in DataSource.customers
+                       where predicate(c)
+                       select c;
+            }
+            return from c in DataSource.customers              
+                   select c;
         }
         
     }

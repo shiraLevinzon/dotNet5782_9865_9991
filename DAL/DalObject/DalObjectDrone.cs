@@ -50,10 +50,16 @@ namespace DalObject
 
             DataSource.drones.Add(tmp);
         }
-        public IEnumerable<Drone> printDrone()
+        public IEnumerable<Drone> GetAllDrones(Predicate<Drone> predicate=null)
         {
-            return DataSource.drones.Take(DataSource.drones.Count).ToList();
-
+            if (predicate != null)
+            {
+                return from d in DataSource.drones
+                       where predicate(d)
+                       select d;
+            }
+            return from d in DataSource.drones
+                   select d;
         }
        
     }

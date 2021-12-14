@@ -15,7 +15,7 @@ namespace IBL
         #endregion
         #region פונקציות רחפן של שיכבה 2
         public BO.Drone GetDrone(int id);
-        public IEnumerable<BO.DroneToList> GetAllDrones();
+        public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate = null);
         public void AddDrone(BO.Drone drone, int id);
         public void UpdateDrone(int id, string name);
         #endregion

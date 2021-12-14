@@ -14,7 +14,7 @@ namespace IDAL
         public Drone GetDrone(int id);
         public bool CheckDrone(int id);
         public void UpdDrone(Drone tmp);
-        public IEnumerable<Drone> printDrone();
+        public IEnumerable<Drone> GetAllDrones(Predicate<Drone> predicate = null);
         public void AssignPackageToDrone(int pID, int dID);
 
         public void ParcelCollectionByDrone(int pID, int dID);
@@ -26,7 +26,7 @@ namespace IDAL
         public void UpdBaseStation(BaseStation tmp);
 
         public void AddBaseStation(BaseStation tmp);
-        public IEnumerable<BaseStation> printBaseStation();
+        public IEnumerable<BaseStation> GetAllBaseStations(Predicate<BaseStation> predicate = null);
         public void SendingDroneToBaseStation(int bsID, int dID);
 
         public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID);
@@ -37,14 +37,14 @@ namespace IDAL
         public bool CheckCustomer(int id);
         public void UpdCustomer(Customer tmp);
         public void AddCustomer(Customer tmp);
-        public IEnumerable<Customer> printCustomer();
+        public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate = null);
         public void DeliveryParcelToCustomer(int pID, int dID);
             #endregion
         #region Parcel
         public void AddParcel(Parcel tmp);
         public Parcel GetParcel(int id);
-        public IEnumerable<Parcel> GetAllParcels();
-        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> predicate);
+        public IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate = null);
+
 
         public void UpdParcel(Parcel tmp);
         public bool CheckParcel(int id);

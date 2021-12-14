@@ -64,8 +64,12 @@ namespace IBL.BL
 
             return boDrone;
         }
-        public IEnumerable<BO.DroneToList> GetAllDrones()
+        public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate=null)
         {
+            if(predicate!=null)
+            {
+                return dronesToList.FindAll(dro => predicate(dro));
+            }
             return dronesToList;
 
         }

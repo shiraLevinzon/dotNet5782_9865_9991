@@ -44,15 +44,16 @@ namespace DalObject
         /// print Parcel
         /// </summary>
         /// <returns>Parcel List</returns>
-        public IEnumerable<Parcel> GetAllParcels()
+        
+        public IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate = null)
         {
-            return DataSource.parcels.Take(DataSource.parcels.Count);
-        }
-        public IEnumerable<Parcel> GetAllParcelsByPredicate(Predicate<Parcel> predicate/*=null*/)
-        {
+            if (predicate != null)
+            {
+                return from p in DataSource.parcels
+                       where predicate(p)
+                       select p;
+            }
             return from p in DataSource.parcels
-                   where predicate(p)
-                  // where predicate!=null
                    select p;
         }
         public void UpdParcel(Parcel tmp)

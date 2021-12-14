@@ -21,7 +21,7 @@ namespace IBL.BL
                 boCustomer.Location = new BO.Location();
                 boCustomer.Location.Latitude = doCustomer.Latitude;
                 boCustomer.Location.Longitude = doCustomer.Longitude;
-                boCustomer.PackagesFromCustomer = from p in dalLayer.GetAllParcelsByPredicate(par => par.SenderID == id)
+                boCustomer.PackagesFromCustomer = from p in dalLayer.GetAllParcels(par => par.SenderID == id)
                                                   select new BO.ParcelAtCustomer()
                                                   {
                                                       ID = p.ID,
@@ -35,7 +35,7 @@ namespace IBL.BL
                                                       }
                                                   };
 
-                boCustomer.PackagesToCustomer = from par in dalLayer.GetAllParcelsByPredicate(par => par.TargetID == id)
+                boCustomer.PackagesToCustomer = from par in dalLayer.GetAllParcels(par => par.TargetID == id)
                                                 select new BO.ParcelAtCustomer()
                                                 {
                                                     ID = par.ID,
@@ -65,7 +65,7 @@ namespace IBL.BL
         public IEnumerable<BO.CustomerToList> GetAllCustomer()
         {
             //אססור להשתשמש בגט פרסל
-            return from c in dalLayer.printCustomer()
+            return from c in dalLayer.GetAllCustomers()
                    let cu = new BO.Customer()
                    select new BO.CustomerToList()
                    {

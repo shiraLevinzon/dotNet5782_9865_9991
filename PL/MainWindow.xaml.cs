@@ -31,5 +31,10 @@ namespace PL
         {
             new DronesListWindow(blObject).Show();
         }
+
+        private void listofbasestation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

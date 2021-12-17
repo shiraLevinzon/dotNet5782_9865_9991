@@ -22,7 +22,8 @@
                     </ImageBrush>
                 </Image.OpacityMask>
             </Image>
+            <Button x:Name="listofbasestation" Content="to show all drone press here:" HorizontalAlignment="Left" Margin="158,534,0,0" VerticalAlignment="Top" Width="480" Height="62" Click="listofbasestation_Click"/>
         </Grid>
-        <Button Content="start" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="71" Width="483" Click="Button_Click" Background="#FF6A69EF" FontFamily="Arial Rounded MT Bold" FontSize="24"/>
+        <Button Content="to show all drone press here:" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="71" Width="483" Click="Button_Click" Background="#FF6A69EF" FontFamily="Arial Rounded MT Bold" FontSize="24"/>
     </Grid>
 </Window>

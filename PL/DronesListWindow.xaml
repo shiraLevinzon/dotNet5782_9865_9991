@@ -27,7 +27,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="show" HorizontalAlignment="Left" Margin="566,327,0,0" Grid.Row="1" VerticalAlignment="Top" Height="51" Width="224" Click="Button_Click"/>
+        <Button Content="Add Option" HorizontalAlignment="Left" Margin="566,327,0,0" Grid.Row="1" VerticalAlignment="Top" Height="51" Width="224" Click="Button_Click"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>

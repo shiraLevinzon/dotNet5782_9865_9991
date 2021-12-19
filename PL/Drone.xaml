@@ -20,15 +20,14 @@
         <TextBox x:Name="conditionTextBox" Text="" TextWrapping="Wrap" Margin="347,222,284,170" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="latitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,269,284,123" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="longtitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,316,284,76" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="26,376,0,0" VerticalAlignment="Top" Height="31" Width="130" Click="AddBottun_Click"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="354,376,0,0" VerticalAlignment="Top" Height="31" Width="162" Click="UpdateButton_Click_1"/>
+        <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="252,376,0,0" VerticalAlignment="Top" Height="31" Width="130" Click="AddBottun_Click"/>
+        <Button x:Name="Button1" Content="update drone" HorizontalAlignment="Left" Margin="585,377,0,0" VerticalAlignment="Top" Height="31" Width="162" Click="Button1_Click"/>
         <Label x:Name="StationId" Content="Station Id:" HorizontalAlignment="Left" Margin="585,49,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24" Visibility="Hidden"/>
         <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="607,128,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
-        <Button x:Name="CancelAddBottun" Content="Cancel" HorizontalAlignment="Left" Margin="181,376,0,0" VerticalAlignment="Top" Height="31" Width="153" Click="CancelAddBottun_Click" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+        <Button x:Name="CancelAddBottun" Content="Cancel" HorizontalAlignment="Left" Margin="400,376,0,0" VerticalAlignment="Top" Height="32" Width="153" Click="CancelAddBottun_Click"/>
         <ComboBox x:Name="weightComboBox" HorizontalAlignment="Left" Margin="347,134,0,0" VerticalAlignment="Top" Width="169" Height="32"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="607,298,0,0" VerticalAlignment="Top" Height="27" Width="142" RenderTransformOrigin="0.528,8.207"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="607,341,0,0" VerticalAlignment="Top" Height="25" Width="142"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="607,382,0,0" VerticalAlignment="Top" Height="25" Width="142"/>
+        <Button x:Name="Button2" Content="Button" HorizontalAlignment="Left" Margin="607,216,0,0" VerticalAlignment="Top" Height="27" Width="142" RenderTransformOrigin="0.528,8.207" Click="Button2_Click"/>
+        <Button x:Name="Button3" Content="Button" HorizontalAlignment="Left" Margin="607,252,0,0" VerticalAlignment="Top" Height="25" Width="142"/>
 
 
 

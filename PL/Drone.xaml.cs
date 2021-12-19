@@ -23,6 +23,7 @@ namespace PL
         IBL.IBL bl;
         int Status;
         int Weight;
+        string temp;
         DronesListWindow dronesListWindow;
         public Drone(DroneToList d, IBL.IBL blobject)
         {
@@ -46,7 +47,24 @@ namespace PL
             latitudeTextBox.IsEnabled = false;
             longtitudeTextBox.IsEnabled = false;
 
-
+            if (d.Conditions == (IBL.BO.DroneConditions)1)
+            {
+                temp = "avilable";
+                Button2.Content = "sent drone to charge";
+                Button3.Content = "sent drone to delivery";
+            }
+            if (d.Conditions == (IBL.BO.DroneConditions)0)
+            {
+                temp = "maintenance";
+                Button2.Content = "relese drone from charge";
+                Button3.Visibility = Visibility.Hidden;
+            }
+            if (d.Conditions == (IBL.BO.DroneConditions)1)
+            {
+                temp = "delivery";
+                Button2.Content = "Package collection";
+                Button3.Content = "Package delivery";
+            }
         }
         public Drone(IBL.IBL blobject,int s, int w,DronesListWindow d)
         {
@@ -63,8 +81,6 @@ namespace PL
             conditionTextBox.Visibility = Visibility.Hidden;
             latitudeTextBox.Visibility = Visibility.Hidden;
             longtitudeTextBox.Visibility = Visibility.Hidden;
-            UpdateButton.Visibility = Visibility.Hidden;
-            CancelAddBottun.Visibility = Visibility.Visible;
             StationId.Visibility = Visibility.Visible;
             StationIdComboBox.Visibility = Visibility.Visible;
             weightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -126,13 +142,11 @@ namespace PL
         {
             if (idTextBox.Text.Length <= 5)
             {
-                AddBottun.IsEnabled = true;
-                UpdateButton.IsEnabled = true;
+                AddBottun.IsEnabled = true;    
             }
             else
             {
                 AddBottun.IsEnabled = false;
-                UpdateButton.IsEnabled = false;
             }
         }
 
@@ -140,7 +154,8 @@ namespace PL
         {
             this.Close();
         }
-        private void UpdateButton_Click_1(object sender, RoutedEventArgs e)
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -150,6 +165,36 @@ namespace PL
             catch (MissingIdException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+            if(temp == "avilable")
+            {
+                try
+                {
+                    bl.DroneToCharging(Convert.ToInt32(idTextBox));
+                    temp = "maintenance";
+                    MessageBox.Show("sending Drone To Charging sucess");
+                }
+                catch (MissingIdException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else if(temp == "maintenance")
+            {
+                try
+                {
+                    bl.ReleaseDroneFromCharging(Convert.ToInt32(idTextBox),)
+                    temp = "avilable";
+                    MessageBox.Show("relese drone from charge sucess");
+                }
+                catch (MissingIdException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

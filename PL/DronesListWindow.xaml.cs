@@ -45,8 +45,6 @@ namespace PL
             else
                 DronesListView.ItemsSource = DronetoListWindewBL.GetAllDrones(dro => dro.Conditions == (DroneConditions)StatusSelector.SelectedItem);
 
-
-
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

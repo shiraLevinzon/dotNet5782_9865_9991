@@ -30,8 +30,9 @@ namespace PL
             InitializeComponent();
 
             bl = blobject;
+
             AddBottun.Visibility = Visibility.Hidden;
-            CancelAddBottun.Visibility = Visibility.Hidden;
+            //Kלהראות נתונים
             idTextBox.Text = Convert.ToString(d.ID);
             modelTextBox.Text = Convert.ToString(d.Model);
             weightComboBox.Text = Convert.ToString(d.MaxWeight);
@@ -73,6 +74,7 @@ namespace PL
             Weight = w;
             dronesListWindow = d;
             bl = blobject;
+
             battery.Visibility = Visibility.Hidden;
             condition.Visibility = Visibility.Hidden;
             latitude.Visibility = Visibility.Hidden;
@@ -81,13 +83,15 @@ namespace PL
             conditionTextBox.Visibility = Visibility.Hidden;
             latitudeTextBox.Visibility = Visibility.Hidden;
             longtitudeTextBox.Visibility = Visibility.Hidden;
+
             StationId.Visibility = Visibility.Visible;
             StationIdComboBox.Visibility = Visibility.Visible;
+
             weightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
 
         }
-
+        //שהכפתור יהיה אינאבל עד שהוא יכניס נתונים
         private void AddBottun_Click(object sender, RoutedEventArgs e)
         {
             IBL.BO.Drone drone = new IBL.BO.Drone()
@@ -104,9 +108,8 @@ namespace PL
 
                 if (StationIdComboBox.SelectedIndex != -1)
                 {
-                    BaseStation b = bl.GetBaseStation(Convert.ToInt32(StationIdComboBox.SelectedItem));
-                    bl.AddDrone(drone, b.ID);
-                    MessageBoxResult mbResult = MessageBox.Show("add drone sucsess", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                    bl.AddDrone(drone,Convert.ToInt32(StationIdComboBox.SelectedItem));
+                    MessageBoxResult mbResult = MessageBox.Show("add drone sucsess", "avigail haniflaa", MessageBoxButton.OK, MessageBoxImage.Information);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
@@ -157,6 +160,7 @@ namespace PL
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
+            //לעשות בדיקה אם שונה המודל או לא
             try
             {
                 bl.UpdateDrone(Convert.ToInt32(idTextBox.Text), modelTextBox.Text);
@@ -170,32 +174,32 @@ namespace PL
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            if(temp == "avilable")
-            {
-                try
-                {
-                    bl.DroneToCharging(Convert.ToInt32(idTextBox));
-                    temp = "maintenance";
-                    MessageBox.Show("sending Drone To Charging sucess");
-                }
-                catch (MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else if(temp == "maintenance")
-            {
-                try
-                {
-                    bl.ReleaseDroneFromCharging(Convert.ToInt32(idTextBox),)
-                    temp = "avilable";
-                    MessageBox.Show("relese drone from charge sucess");
-                }
-                catch (MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
+            //if(temp == "avilable")
+            //{
+            //    try
+            //    {
+            //        bl.DroneToCharging(Convert.ToInt32(idTextBox));
+            //        temp = "maintenance";
+            //        MessageBox.Show("sending Drone To Charging sucess");
+            //    }
+            //    catch (MissingIdException ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+            //else if(temp == "maintenance")
+            //{
+            //    try
+            //    {
+            //        bl.ReleaseDroneFromCharging(Convert.ToInt32(idTextBox),)
+            //        temp = "avilable";
+            //        MessageBox.Show("relese drone from charge sucess");
+            //    }
+            //    catch (MissingIdException ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
         }
     }
 }

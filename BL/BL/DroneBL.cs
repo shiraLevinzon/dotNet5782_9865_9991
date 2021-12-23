@@ -73,13 +73,17 @@ namespace IBL.BL
             return dronesToList;
 
         }
+       
         public void AddDrone(BO.Drone drone, int id)
         {
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             try
             {
-            drone.CopyPropertiesTo(DroneDO);
-            BO.DroneToList droneToListTMP = new BO.DroneToList();
+                //drone.CopyPropertiesTo(DroneDO);
+                DroneDO.ID = drone.ID;
+                DroneDO.MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight;
+                DroneDO.Model = drone.Model;
+               BO.DroneToList droneToListTMP = new BO.DroneToList();
             drone.CopyPropertiesTo(droneToListTMP);
             droneToListTMP.BatteryStatus = (random.Next(20, 40));
             droneToListTMP.Conditions = (BO.DroneConditions)0;

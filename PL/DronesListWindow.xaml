@@ -7,6 +7,60 @@
         mc:Ignorable="d"
         Title="DroneToList" Height="450" Width="800">
     <Grid>
+        <ListView x:Name="droneToListListView" ItemsSource="{Binding}" Margin="52,41,52,89" SelectionMode="Single" Grid.Row="1" MouseDoubleClick="droneToListListView_MouseDoubleClick">
+            <ListView.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="batteryStatusColumn" Header="Battery Status" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="6,-1,-6,-1" Text="{Binding BatteryStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="conditionsColumn" Header="Conditions" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding Conditions, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="iDColumn" Header="ID" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="maxWeightColumn" Header="Max Weight" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding MaxWeight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="modelColumn" Header="Model" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="packagNumberOnTransferredColumn" Header="Packag Number On Transferred" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding PackagNumberOnTransferred, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
               VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
@@ -20,13 +74,6 @@
             <ComboBox x:Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,12,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
             <Label Content="Max weight" Grid.Column="2" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ListView x:Name="DronesListView" RenderTransformOrigin="0.509,0.514" Margin="0,48,0,64" Grid.RowSpan="2" MouseDoubleClick="DronesListView_MouseDoubleClick">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Button Content="Add Option" HorizontalAlignment="Left" Margin="566,327,0,0" Grid.Row="1" VerticalAlignment="Top" Height="51" Width="224" Click="Button_Click"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>

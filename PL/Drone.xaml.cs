@@ -108,24 +108,22 @@ namespace PL
             {
                 if (StationIdComboBox.SelectedIndex != -1)
                 {
-                    bl.AddDrone(drone,Convert.ToInt32(StationIdComboBox.SelectedItem));
+                    bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
                     MessageBoxResult mbResult = MessageBox.Show("add drone sucsess", "avigail haniflaa", MessageBoxButton.OK, MessageBoxImage.Information);
-                    switch (mbResult)
+                }/* switch (mbResult)
                     {
                         case MessageBoxResult.OK:
-                            if(Weight!=-1&&Status!=-1)
+                            if (Weight != -1 && Status != -1)
                                 dronesListWindow.DronesListView.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)Weight && dro.Conditions == (IBL.BO.DroneConditions)Status);
-                            else if(Weight != -1 && Status ==-1)
+                            else if (Weight != -1 && Status == -1)
                                 dronesListWindow.DronesListView.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)Weight);
                             else if (Weight == -1 && Status != -1)
                                 dronesListWindow.DronesListView.ItemsSource = bl.GetAllDrones(dro => dro.Conditions == (IBL.BO.DroneConditions)Status);
+                            else
+                                dronesListWindow.DronesListView.ItemsSource = bl.GetAllDrones();
                             this.Close();
                             break;
                     }
-                }
-                if (idTextBox.Text!=" " && idTextBox.Text!=" " && BatteryStatusTextBox.Text!=" "&& conditionTextBox.Text!=" "&& latitudeTextBox.Text!=" "&& longtitudeTextBox.Text!=" " && weightComboBox.Text!=" ")
-                {
-                    AddBottun.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -136,7 +134,7 @@ namespace PL
                             break;
                     }
 
-                }
+                }*/
 
             }
             catch(DuplicateIdException ex)
@@ -147,7 +145,7 @@ namespace PL
 
         private void idTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (idTextBox.Text.Length <= 5)
+            if (idTextBox.Text.Length >= 9)
             {
                 AddBottun.IsEnabled = true;    
             }
@@ -156,17 +154,17 @@ namespace PL
                 AddBottun.IsEnabled = false;
             }
         }
-
         private void CancelAddBottun_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
             //לעשות בדיקה אם שונה המודל או לא
             try
             {
+                IBL.BO.Drone tmpDrone = new Drone();
+                if(bl.GetDrone((Convert.ToInt32(idTextBox.Text))==)
                 bl.UpdateDrone(Convert.ToInt32(idTextBox.Text), modelTextBox.Text);
                 MessageBox.Show("update sucsess");
             }
@@ -204,11 +202,6 @@ namespace PL
             //        MessageBox.Show(ex.Message);
             //    }
             //}
-        }
-
-        private void sendDroneToCharging(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

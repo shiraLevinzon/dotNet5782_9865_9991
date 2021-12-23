@@ -55,8 +55,6 @@ namespace PL
             }
             else
                 DronesListView.ItemsSource = DronetoListWindewBL.GetAllDrones(dro => dro.MaxWeight == (WeightCategories)WeightSelector.SelectedItem);
-
-
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

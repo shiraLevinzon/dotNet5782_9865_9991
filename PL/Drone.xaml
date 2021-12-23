@@ -7,27 +7,36 @@
         mc:Ignorable="d"
         Title="Drone" Height="450" Width="800">
     <Grid>
-        <Label x:Name="id" Content="id:" HorizontalAlignment="Left" Margin="63,34,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="weight" Content="max weight:" HorizontalAlignment="Left" Margin="63,128,0,0" VerticalAlignment="Top" Width="185" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="model" Content="model:" HorizontalAlignment="Left" Margin="63,81,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="battery" Content="battery:" HorizontalAlignment="Left" Margin="63,175,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="condition" Content="condition:" HorizontalAlignment="Left" Margin="63,222,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="latitude" Content="latitude:" HorizontalAlignment="Left" Margin="63,269,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <Label x:Name="longtitude" Content="longtitude:" HorizontalAlignment="Left" Margin="63,311,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24"/>
-        <TextBox x:Name="idTextBox" Text="" TextWrapping="Wrap" Margin="347,34,284,358" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="idTextBox_TextChanged"/>
-        <TextBox x:Name="modelTextBox" Text="" TextWrapping="Wrap" Margin="347,81,284,311" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="BatteryStatusTextBox" Text="" TextWrapping="Wrap" Margin="347,175,284,217" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="conditionTextBox" Text="" TextWrapping="Wrap" Margin="347,222,284,170" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="latitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,269,284,123" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="longtitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,316,284,76" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="252,376,0,0" VerticalAlignment="Top" Height="31" Width="130" Click="AddBottun_Click"/>
-        <Button x:Name="Button1" Content="update drone" HorizontalAlignment="Left" Margin="585,377,0,0" VerticalAlignment="Top" Height="31" Width="162" Click="Button1_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="789*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="137*"/>
+            <RowDefinition Height="297*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="id" Content="   id:" HorizontalAlignment="Left" Margin="178,97,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.RowSpan="2"/>
+        <Label x:Name="weight" Content="max weight:" HorizontalAlignment="Left" Margin="178,46,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <Label x:Name="model" Content="model:" HorizontalAlignment="Left" Margin="183,3,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <Label x:Name="battery" Content="battery:" HorizontalAlignment="Left" Margin="178,88,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <Label x:Name="condition" Content="condition:" HorizontalAlignment="Left" Margin="178,129,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <Label x:Name="latitude" Content="latitude:" HorizontalAlignment="Left" Margin="178,168,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <Label x:Name="longtitude" Content="longtitude:" HorizontalAlignment="Left" Margin="178,207,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Gabriola" FontSize="24" Grid.Row="1"/>
+        <TextBox x:Name="idTextBox" Text="" TextWrapping="Wrap" Margin="347,80,273,8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="idTextBox_TextChanged" Background="White"/>
+        <TextBox x:Name="modelTextBox" Text="" TextWrapping="Wrap" Margin="347,136,273,249" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.RowSpan="2"/>
+        <TextBox x:Name="BatteryStatusTextBox" Text="" TextWrapping="Wrap" Margin="347,91,273,171" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"/>
+        <TextBox x:Name="conditionTextBox" Text="" TextWrapping="Wrap" Margin="347,132,273,130" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"/>
+        <TextBox x:Name="latitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,171,273,91" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"/>
+        <TextBox x:Name="longtitudeTextBox" Text="" TextWrapping="Wrap" Margin="347,210,273,52" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="1"/>
+        <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Center" Margin="0,258,0,0" VerticalAlignment="Top" Height="31" Width="130" Click="AddBottun_Click" Grid.Row="1"/>
+        <Button x:Name="Button1" Content="update drone" HorizontalAlignment="Left" Margin="627,259,0,0" VerticalAlignment="Top" Height="31" Width="162" Click="Button1_Click" Grid.Row="1"/>
         <Label x:Name="StationId" Content="Station Id:" HorizontalAlignment="Left" Margin="585,49,0,0" VerticalAlignment="Top" Width="164" Height="42" FontFamily="Arial Black" FontSize="24" Visibility="Hidden"/>
-        <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="607,128,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
-        <Button x:Name="CancelAddBottun" Content="Cancel" HorizontalAlignment="Left" Margin="400,376,0,0" VerticalAlignment="Top" Height="32" Width="153" Click="CancelAddBottun_Click"/>
-        <ComboBox x:Name="weightComboBox" HorizontalAlignment="Left" Margin="347,134,0,0" VerticalAlignment="Top" Width="169" Height="32"/>
-        <Button x:Name="Button2" Content="Button" HorizontalAlignment="Left" Margin="607,216,0,0" VerticalAlignment="Top" Height="27" Width="142" RenderTransformOrigin="0.528,8.207" Click="Button2_Click"/>
-        <Button x:Name="Button3" Content="Button" HorizontalAlignment="Left" Margin="607,252,0,0" VerticalAlignment="Top" Height="25" Width="142"/>
+        <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="607,128,0,0" VerticalAlignment="Top" Width="120" Visibility="Hidden" Grid.RowSpan="2" Height="22"/>
+        <Button x:Name="CancelAddBottun" Content="Cancel" HorizontalAlignment="Left" Margin="466,258,0,0" VerticalAlignment="Top" Height="32" Width="153" Click="CancelAddBottun_Click" Grid.Row="1"/>
+        <ComboBox x:Name="weightComboBox" HorizontalAlignment="Left" Margin="347,54,0,0" VerticalAlignment="Top" Width="169" Height="32" Grid.Row="1"/>
+        <Button x:Name="Button2" Content="Button" HorizontalAlignment="Left" Margin="61,-150,0,0" VerticalAlignment="Top" Height="27" Width="142" RenderTransformOrigin="0.528,8.207" Click="Button2_Click" Grid.Column="1"/>
+        <Button x:Name="Button3" Content="Button" HorizontalAlignment="Left" Margin="61,-17,0,0" VerticalAlignment="Top" Height="25" Width="142" Grid.Column="1"/>
+        <Label x:Name="taital" Content="Enter the Drone details :" HorizontalAlignment="Left" Margin="74,25,0,0" VerticalAlignment="Top" Width="442" Height="52" FontWeight="Bold" FontSize="24" FontFamily="Gabriola"/>
 
 
 

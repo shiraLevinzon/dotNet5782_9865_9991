@@ -94,6 +94,7 @@ namespace PL
         //שהכפתור יהיה אינאבל עד שהוא יכניס נתונים
         private void AddBottun_Click(object sender, RoutedEventArgs e)
         {
+            AddBottun.Visibility = Visibility.Hidden;
             IBL.BO.Drone drone = new IBL.BO.Drone()
             {
                 ID = int.Parse(idTextBox.Text),
@@ -105,7 +106,6 @@ namespace PL
             };
             try
             {
-
                 if (StationIdComboBox.SelectedIndex != -1)
                 {
                     bl.AddDrone(drone,Convert.ToInt32(StationIdComboBox.SelectedItem));
@@ -122,6 +122,10 @@ namespace PL
                             this.Close();
                             break;
                     }
+                }
+                if (idTextBox.Text!=" " && idTextBox.Text!=" " && BatteryStatusTextBox.Text!=" "&& conditionTextBox.Text!=" "&& latitudeTextBox.Text!=" "&& longtitudeTextBox.Text!=" " && weightComboBox.Text!=" ")
+                {
+                    AddBottun.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -200,6 +204,11 @@ namespace PL
             //        MessageBox.Show(ex.Message);
             //    }
             //}
+        }
+
+        private void sendDroneToCharging(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

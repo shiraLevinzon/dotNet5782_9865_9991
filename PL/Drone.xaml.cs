@@ -23,7 +23,7 @@ namespace PL
         IBL.IBL bl;
         int temp;
         bool a, b;
-        DateTime d;
+        DateTime d = DateTime.MinValue;
         DronesListWindow dronesListWindow;
         public Drone(DroneToList d, IBL.IBL blobject)
         {
@@ -176,8 +176,12 @@ namespace PL
             {
                 try
                 {
-
-                    bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content),(d - DateTime.Now));
+                    TimeSpan t = new TimeSpan(3, 0, 0);
+                    //if (d != DateTime.MinValue)
+                    //{
+                    //    t = d - DateTime.Now;
+                    //}
+                    bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content),t);
                     temp = 1;
                     refrash();
                     MessageBox.Show("relese drone from charge sucess");
@@ -202,6 +206,8 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
+            UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
+
         }
 
         private void Bottun2_Click(object sender, RoutedEventArgs e)
@@ -235,6 +241,8 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
+            UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
+
         }
 
         private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)

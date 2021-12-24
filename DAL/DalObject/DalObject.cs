@@ -94,7 +94,7 @@ namespace DalObject
             {
                 int temp1 = r1.Next(0, 10);
                 int temp2 = r1.Next(0, 10);
-                int temp3 = r1.Next(0, 5);
+                int temp3 = r1.Next(0, 2);
                 parcels.Add(new Parcel()
                 {
                     ID = Config.IdCount++,
@@ -104,7 +104,7 @@ namespace DalObject
                     priority = (Priorities)r1.Next(0, 3),
                     DroneId = temp3,
                     Requested = DateTime.Now,
-                   // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
+                    // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;
             }
         }

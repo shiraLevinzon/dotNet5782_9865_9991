@@ -96,8 +96,6 @@ namespace IBL.BL
                 {
                     DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
                     d.Conditions = (DroneConditions)2;
-
-
                     if (item.Requested != DateTime.MinValue)
                     {
                         if (item.Delivered == DateTime.MinValue)
@@ -158,7 +156,7 @@ namespace IBL.BL
                 {
                     int ran = random.Next(0, baseStationsBL.Count());
                     item.location = baseStationsBL[ran].BaseStationLocation;
-                    item.BatteryStatus = (random.Next(0, 21)) % 100;
+                    item.BatteryStatus = (random.Next(0, 21));
                 }
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
@@ -240,7 +238,8 @@ namespace IBL.BL
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
                 IEnumerable<BO.BaseStation> baseStations = from b in GetAllBaseStation()
                                                            select GetBaseStation(b.ID);
-                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.DronesInCharge.First(d => d.ID == dro.ID)!=null);
+                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.BaseStationLocation.Latitude== dro.location.Latitude&& bas.BaseStationLocation.Longitude == dro.location.Longitude);
+                bases.DronesInCharge.ToList().RemoveAll(dr => dr.ID == dro.ID);
                 dro.Conditions = (DroneConditions)1;
                 if (droneLoadingRate * time.TotalHours > 100)
                     dro.BatteryStatus = 100;
@@ -322,8 +321,10 @@ namespace IBL.BL
         #region איסוף חבילה עי רחפן
         public void CollectParcelByDrone(int id)//לסדר פונקציה כדי שרשימת הרחפנים תתעדכן
         {
+            
             try
             {
+                
                 BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id);
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))

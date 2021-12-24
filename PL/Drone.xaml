@@ -30,9 +30,10 @@
             <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox x:Name="modelTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox1_TextChanged"/>
         </Grid>
-        <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="439,120,0,0" VerticalAlignment="Top">
+        <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="434,0,0,0" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="174.137"/>
+                <ColumnDefinition Width="9.993"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -45,29 +46,29 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Battery Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <Label x:Name="batteryStatusLabel" Content="{Binding BatteryStatus}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <Label Content="Conditions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <Label x:Name="conditionsLabel" Content="{Binding Conditions, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <Label x:Name="iDLabel" Content="{Binding ID}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <Label Content="Max Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <Label x:Name="maxWeightLabel" Content="{Binding MaxWeight}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="modelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
-            <Label Content="Packag Number On Transferred:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <Label x:Name="packagNumberOnTransferredLabel" Content="{Binding PackagNumberOnTransferred}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <Label x:Name="latitudeLabel" Content="{Binding location.Latitude}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
-            <Label x:Name="longitudeLabel" Content="{Binding location.Longitude}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <Label Content="Battery Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
+            <Label x:Name="batteryStatusLabel" Content="{Binding BatteryStatus}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
+            <Label Content="Conditions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label x:Name="conditionsLabel" Content="{Binding Conditions, Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label x:Name="iDLabel" Content="{Binding ID}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="Max Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label x:Name="maxWeightLabel" Content="{Binding MaxWeight}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="modelTextBox" Grid.Column="2" HorizontalAlignment="Center" Height="23" Grid.Row="4" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
+            <Label Content="Packag Number On Transferred:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+            <Label x:Name="packagNumberOnTransferredLabel" Content="{Binding PackagNumberOnTransferred}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
+            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label x:Name="latitudeLabel" Content="{Binding location.Latitude}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
+            <Label x:Name="longitudeLabel" Content="{Binding location.Longitude}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
         </Grid>
         <Button Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="48,276,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click_1"/>
-        <Button Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="48,404,0,0" VerticalAlignment="Top" Width="64" Click="CancelBottun_Click"/>
+        <Button Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="48,358,0,0" VerticalAlignment="Top" Width="64" Click="CancelBottun_Click"/>
         <ComboBox Name="StationIdComboBox" HorizontalAlignment="Left" Margin="188,237,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="358,404,0,0" VerticalAlignment="Top" Width="151" Click="Bottun1_Click"/>
-        <Button Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="537,404,0,0" VerticalAlignment="Top" Height="25" Width="138" Click="Bottun2_Click"/>
-        <Button Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="702,399,0,0" VerticalAlignment="Top" Height="30" Width="69" Click="updateBottun_Click"/>
+        <Button Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="354,358,0,0" VerticalAlignment="Top" Width="151" Click="Bottun1_Click"/>
+        <Button Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="536,355,0,0" VerticalAlignment="Top" Height="25" Width="138" Click="Bottun2_Click"/>
+        <Button Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="706,353,0,0" VerticalAlignment="Top" Height="30" Width="69" Click="updateBottun_Click"/>
 
     </Grid>
 </Window>

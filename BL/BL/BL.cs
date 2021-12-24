@@ -223,10 +223,6 @@ namespace IBL.BL
             {
                 throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
             }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
         }
         #endregion
         #region פונקציית שחרור רחפן מעמדת טעינה
@@ -240,7 +236,7 @@ namespace IBL.BL
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
                 IEnumerable<BO.BaseStation> baseStations = from b in GetAllBaseStation()
                                                            select GetBaseStation(b.ID);
-                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.DronesInCharge.First(d => d.ID == dro.ID)!=null);
+                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.DronesInCharge.FirstOrDefault(d => d.ID == dro.ID)!=null);
                 dro.Conditions = (DroneConditions)1;
                 if (droneLoadingRate * time.TotalHours > 100)
                     dro.BatteryStatus = 100;
@@ -259,10 +255,6 @@ namespace IBL.BL
             catch (BO.ImproperMaintenanceCondition ex)
             {
                 throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
-            }
-            catch (Exception)
-            {
-                throw new Exception();
             }
         }
         #endregion
@@ -344,11 +336,6 @@ namespace IBL.BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-
         }
         #endregion
         #region אספקת חבילה ע"י רחפן
@@ -380,9 +367,9 @@ namespace IBL.BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
+            catch( BO.PackageTimesException ex)
             {
-                throw new Exception();
+                throw new BO.PackageTimesException(ex.ID, ex.EntityName);
             }
         }
         #endregion

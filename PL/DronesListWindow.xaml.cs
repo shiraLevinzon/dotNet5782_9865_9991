@@ -60,7 +60,6 @@ namespace PL
                 WeightSelector.SelectedIndex = -1;
                 StatusSelector.SelectedIndex = -1;
                 droneToListListView.ItemsSource = bl.GetAllDrones();
-
             }
                ;
         }

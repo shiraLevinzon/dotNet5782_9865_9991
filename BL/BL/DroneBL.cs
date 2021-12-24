@@ -53,15 +53,20 @@ namespace IBL.BL
                         //עדכון מרחק הובלה
                         boDrone.PackageInTransfer.distance = DistanceTo(boDrone.PackageInTransfer.Collection.Latitude, boDrone.PackageInTransfer.Collection.Longitude, boDrone.PackageInTransfer.PackageDestination.Latitude, boDrone.PackageInTransfer.PackageDestination.Longitude);
                     }
-                }
-             
-
+                    else
+                    {
+                        throw new BO.ImproperMaintenanceCondition(id, "no pakage found that are in transfer with this Drone");
+                    }
+                }       
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-
+            catch(BO.ImproperMaintenanceCondition ex)
+            {
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
+            }
             return boDrone;
         }
         public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate=null)

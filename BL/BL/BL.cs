@@ -221,10 +221,6 @@ namespace IBL.BL
             {
                 throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
             }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
         }
         #endregion
         #region פונקציית שחרור רחפן מעמדת טעינה
@@ -258,10 +254,6 @@ namespace IBL.BL
             catch (BO.ImproperMaintenanceCondition ex)
             {
                 throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
-            }
-            catch (Exception)
-            {
-                throw new Exception();
             }
         }
         #endregion
@@ -345,11 +337,6 @@ namespace IBL.BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-
         }
         #endregion
         #region אספקת חבילה ע"י רחפן
@@ -381,9 +368,9 @@ namespace IBL.BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
+            catch( BO.PackageTimesException ex)
             {
-                throw new Exception();
+                throw new BO.PackageTimesException(ex.ID, ex.EntityName);
             }
         }
         #endregion

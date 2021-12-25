@@ -25,10 +25,10 @@ namespace PL
         bool a, b;
         DateTime d = DateTime.MinValue;
         DronesListWindow dronesListWindow;
-        public Drone(DroneToList d, IBL.IBL blobject)
+        public Drone(DroneToList d, IBL.IBL blobject, DronesListWindow dro)
         {
             InitializeComponent();
-
+            dronesListWindow = dro;
             bl = blobject;
 
             AddBottun.Visibility = Visibility.Hidden;
@@ -38,9 +38,7 @@ namespace PL
             updateBottun.IsEnabled = false;
             StationIdComboBox.Visibility = Visibility.Hidden;
             temp = Convert.ToInt32(d.Conditions);
-            refrash();
-
-
+            Refresh();
         }
         public Drone(IBL.IBL blobject,DronesListWindow d)
         {
@@ -56,9 +54,8 @@ namespace PL
             updateBottun.Visibility = Visibility.Hidden;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
-
         }
-        public void refrash()
+        public void Refresh()
         {
             if (temp == 1)
             {
@@ -97,21 +94,34 @@ namespace PL
                 if (StationIdComboBox.SelectedIndex != -1)
                 {
                     bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
-                    MessageBox.Show("add drone sucsess", "avigail haniflaa", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("add drone sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
                     dronesListWindow.FilterByCombiBox();
-
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("choose base station id", "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                  
+                    MessageBox.Show("choose base station id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);                  
                 }
-
             }
-            catch (DuplicateIdException ex)
+            catch (ImproperMaintenanceCondition ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.TheDroneDnotShip ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.PackageTimesException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -132,117 +142,138 @@ namespace PL
                 bl.UpdateDrone(Convert.ToInt32(iDLabel.Content), modelTextBox.Text);
                 MessageBox.Show("update sucsess");
             }
-            catch (MissingIdException ex)
+            catch (ImproperMaintenanceCondition ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.TheDroneDnotShip ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.PackageTimesException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Bottun1_Click(object sender, RoutedEventArgs e)
         {
             //להוסיף קאצים לפי הפעולות
-            if (temp == 1)
+            try
             {
-                try
+                switch (temp)
                 {
-                    bl.DroneToCharging(Convert.ToInt32(iDLabel.Content));
-                    d = DateTime.Now;
-                    temp = 0;
-                    refrash();
-                    MessageBox.Show("sending Drone To Charging sucess");
-                    
-                }
-                catch (IDAL.DO.DuplicateIdException ex)
-                {
-                    MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (IDAL.DO.MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                }
-                catch (ImproperMaintenanceCondition ex)
-                {
-                    MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("something wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
-
+                    case 0:
+                        TimeSpan t = new TimeSpan(3, 0, 0);
+                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
+                        temp = 1;
+                        Refresh();
+                        MessageBox.Show("relese drone from charge sucess");
+                        break;
+                    case 1:
+                        bl.DroneToCharging(Convert.ToInt32(iDLabel.Content));
+                        d = DateTime.Now;
+                        temp = 0;
+                        Refresh();
+                        MessageBox.Show("sending Drone To Charging sucess");
+                        break;
+                    case 2:
+                        bl.CollectParcelByDrone(Convert.ToInt32(iDLabel.Content));
+                        temp = 2;
+                        Refresh();
+                        MessageBox.Show("Collect Parcel By Drone sucsses");
+                        break;
                 }
             }
-            else if (temp == 0)
+            catch (IBL.BO.MissingIdException ex)
             {
-                try
-                {
-                    TimeSpan t = new TimeSpan(3, 0, 0);
-                    //if (d != DateTime.MinValue)
-                    //{
-                    //    t = d - DateTime.Now;
-                    //}
-                    bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content),t);
-                    temp = 1;
-                    refrash();
-                    MessageBox.Show("relese drone from charge sucess");
-                }
-                catch (MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (temp == 2)
+            catch (IBL.BO.DuplicateIdException ex)
             {
-                try
-                {
-                    
-                    bl.CollectParcelByDrone(Convert.ToInt32(iDLabel.Content));
-                    temp = 2;
-                    refrash();
-                    MessageBox.Show("relese drone from charge sucess");
-                }
-                catch (MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.TheDroneDnotShip ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.PackageTimesException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IDAL.DO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IDAL.DO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            catch (ImproperMaintenanceCondition ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("something wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
-
+            dronesListWindow.FilterByCombiBox();
         }
+
 
         private void Bottun2_Click(object sender, RoutedEventArgs e)
         {
-            if (temp == 1)
+            try
             {
-                try
+                switch (temp)
                 {
-                    bl.AssignPackageToDrone(Convert.ToInt32(iDLabel.Content));
-                    temp = 2;
-                    refrash();
-                    MessageBox.Show("Assign Package To Drone sucess");
-                }             
-                catch (Exception)
-                {
-                    MessageBox.Show("something wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                }
-            }         
-            else if (temp == 2)
-            {
-                try
-                {
-                    bl.DeliveryOfPackageByDrone(Convert.ToInt32(iDLabel.Content));
-                    temp = 1;
-                    refrash();
-                    MessageBox.Show("relese drone from charge sucess");
-                }
-                catch (MissingIdException ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    case 1:
+                        bl.AssignPackageToDrone(Convert.ToInt32(iDLabel.Content));
+                        temp = 2;
+                        Refresh();
+                        MessageBox.Show("Assign Package To Drone sucess");
+                        break;
+                    case 2:
+                        bl.DeliveryOfPackageByDrone(Convert.ToInt32(iDLabel.Content));
+                        temp = 1;
+                        Refresh();
+                        MessageBox.Show("Delivery Of Package By Drone drone to customer sucess");
+                        break;
                 }
             }
+            catch (ImproperMaintenanceCondition ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.MissingIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.DuplicateIdException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.TheDroneDnotShip ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BO.PackageTimesException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
-
+            dronesListWindow.FilterByCombiBox();
         }
 
         private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -253,7 +284,6 @@ namespace PL
                 AddBottun.IsEnabled = true;
             }
         }
-
         private void modelTextBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
             b = true;

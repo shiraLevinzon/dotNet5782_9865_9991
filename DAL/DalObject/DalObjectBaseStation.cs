@@ -85,7 +85,6 @@ namespace DalObject
             BaseStation bs = DataSource.baseStations[index1];
             Drone d = DataSource.drones[index2];
             bs.FreeChargingSlots++;
-
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
             DataSource.droneCharges.RemoveAt(index3);

@@ -65,7 +65,8 @@ namespace DalObject
 
             p.Delivered = DateTime.Now;
 
-            DataSource.parcels[index1] = p;
+            //DataSource.parcels[index1] = p;
+            DataSource.parcels.Remove(p);
             DataSource.drones[index2] = d;
 
         }

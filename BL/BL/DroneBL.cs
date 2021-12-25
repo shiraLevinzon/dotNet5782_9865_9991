@@ -53,15 +53,20 @@ namespace IBL.BL
                         //עדכון מרחק הובלה
                         boDrone.PackageInTransfer.distance = DistanceTo(boDrone.PackageInTransfer.Collection.Latitude, boDrone.PackageInTransfer.Collection.Longitude, boDrone.PackageInTransfer.PackageDestination.Latitude, boDrone.PackageInTransfer.PackageDestination.Longitude);
                     }
-                }
-             
-
+                    else
+                    {
+                        throw new BO.ImproperMaintenanceCondition(id, "no pakage found that are in transfer with this Drone");
+                    }
+                }       
             }
             catch (IDAL.DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-
+            catch(BO.ImproperMaintenanceCondition ex)
+            {
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
+            }
             return boDrone;
         }
         public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate=null)
@@ -79,19 +84,24 @@ namespace IBL.BL
             IDAL.DO.Drone DroneDO = new IDAL.DO.Drone();
             try
             {
-                //drone.CopyPropertiesTo(DroneDO);
                 DroneDO.ID = drone.ID;
                 DroneDO.MaxWeight = (IDAL.DO.WeightCategories)drone.MaxWeight;
                 DroneDO.Model = drone.Model;
-               BO.DroneToList droneToListTMP = new BO.DroneToList();
-            drone.CopyPropertiesTo(droneToListTMP);
-            droneToListTMP.BatteryStatus = (random.Next(20, 40));
-            droneToListTMP.Conditions = (BO.DroneConditions)0;
-            droneToListTMP.location = new BO.Location();
-            droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
-            droneToListTMP.location.Longitude = GetBaseStation(id).BaseStationLocation.Longitude;
-            dronesToList.Add(droneToListTMP);
-            dalLayer.AddDrone(DroneDO);
+
+                BO.DroneToList droneToListTMP = new BO.DroneToList();
+                drone.CopyPropertiesTo(droneToListTMP);
+
+                droneToListTMP.BatteryStatus = (random.Next(20, 40));
+                droneToListTMP.Conditions = (BO.DroneConditions)0;
+                droneToListTMP.location = new BO.Location();
+                droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
+                droneToListTMP.location.Longitude = GetBaseStation(id).BaseStationLocation.Longitude;
+
+                dronesToList.Add(droneToListTMP);
+                dalLayer.AddDrone(DroneDO);
+                dalLayer.SendingDroneToBaseStation(id, drone.ID);
+
+
             }
             catch (IDAL.DO.DuplicateIdException ex)
             {

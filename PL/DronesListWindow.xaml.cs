@@ -60,14 +60,13 @@ namespace PL
                 WeightSelector.SelectedIndex = -1;
                 StatusSelector.SelectedIndex = -1;
                 droneToListListView.ItemsSource = bl.GetAllDrones();
-
             }
                ;
         }
         private void droneToListListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList d = (DroneToList)droneToListListView.SelectedItem;
-            new Drone(d, bl).ShowDialog();
+            new Drone(d, bl,this).ShowDialog();
         }
     }
 }

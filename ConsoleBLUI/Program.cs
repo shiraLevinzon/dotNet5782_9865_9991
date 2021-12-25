@@ -75,18 +75,7 @@ namespace ConsoleBLUI
                                     Console.WriteLine("enter number of free slots charge");
                                     baseStation.FreeChargingSlots = int.Parse(Console.ReadLine());
                                     baseStation.DronesInCharge = new List<DroneInCharging>();
-                                    //try 
-                                    //{ 
                                     blObject.AddBaseStation(baseStation);
-                                    //}
-                                    //catch (IBL.BO.DuplicateIdException)
-                                    //{
-                                    //    Console.WriteLine("this id already exist in the program");
-                                    //}                      
-                                    //catch (Exception)
-                                    //{
-                                    //    Console.WriteLine("error");
-                                    //}
                                     break;
                                 case 3:
                                     Console.WriteLine("enter id");
@@ -101,18 +90,7 @@ namespace ConsoleBLUI
                                     customer.Location = new Location { Latitude = double.Parse(Console.ReadLine()), Longitude = double.Parse(Console.ReadLine()) };
                                     customer.PackagesFromCustomer = new List<ParcelAtCustomer>();
                                     customer.PackagesToCustomer = new List<ParcelAtCustomer>();
-                                    //try
-                                    //{
                                     blObject.AddCustomer(customer);
-                                    //}
-                                    //catch (IBL.BO.DuplicateIdException)
-                                    //{
-                                    //    Console.WriteLine("this id already exist in the program");
-                                    //}
-                                    //catch (Exception)
-                                    //{
-                                    //    Console.WriteLine("error");
-                                    //}
                                     break;
                                 case 4:
                                     Console.WriteLine("enter sender id");
@@ -127,18 +105,7 @@ namespace ConsoleBLUI
                                     Console.WriteLine("enter Priority (0-low, 1-normal, 2-hight)");
                                     parcel.Priority = (Priorities)int.Parse(Console.ReadLine());
                                     parcel.DroneInParcel = new DroneInParcel();
-                                    //try
-                                    //{
                                     blObject.AddParcel(parcel);
-                                    //}
-                                    //catch (IBL.BO.DuplicateIdException)
-                                    //{
-                                    //    Console.WriteLine("this id already exist in the program");
-                                    //}
-                                    //catch (Exception)
-                                    //{
-                                    //    Console.WriteLine("error");
-                                    //}
                                     break;
                                 default:
                                     break;
@@ -216,7 +183,6 @@ namespace ConsoleBLUI
                                     {
                                         Console.WriteLine(item.ToString());
                                     }
-                                    //Console.WriteLine("{0} {1} {2} {3} {4} ",b.ID,b.StationName,b.FreeChargingSlots,b.BaseStationLocation.Latitude,b.BaseStationLocation.Longitude);
                                     break;
                                 case 3:
                                     Console.WriteLine("enter id");
@@ -315,23 +281,6 @@ namespace ConsoleBLUI
 
                     Console.WriteLine(ex.EntityName);
                 }
-
-
-
-                //                
-                //catch (IBL.BO.PackageTimesException ex)
-                //{
-
-                //}
-                //catch (IBL.BO.TheDroneDnotShip ex)
-                //{
-                //    Console.WriteLine("Only a {0} that delivers a package that has been associated with it but has not yet been collected will be able to pick it up", ex.EntityName);
-                //}
-                //                //catch (Exception)
-                //                //{
-                //                //    Console.WriteLine("Something went wrong");
-
-                //                //}
             }
          }
         

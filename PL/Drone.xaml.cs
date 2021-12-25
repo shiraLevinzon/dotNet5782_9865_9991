@@ -25,6 +25,7 @@ namespace PL
         bool a, b;
         DateTime d = DateTime.MinValue;
         DronesListWindow dronesListWindow;
+        enum spantimee { }
         public Drone(DroneToList d, IBL.IBL blobject, DronesListWindow dro)
         {
             InitializeComponent();
@@ -60,21 +61,35 @@ namespace PL
             if (temp == 1)
             {
                 Bottun2.Visibility = Visibility.Visible;
-
+                spantime.Visibility = Visibility.Hidden;
+                spantimeminuts.Visibility = Visibility.Hidden;
+                spantimeseconds.Visibility = Visibility.Hidden;
+                Dots1.Visibility = Visibility.Hidden;
+                Dots2.Visibility = Visibility.Hidden;
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
             }
             if (temp == 0)
             {
-                Bottun1.Content = "relese drone from charge";
-                Bottun2.Visibility = Visibility.Hidden;
+                Bottun1.Content = "relese drone from charge ";
+                Bottun2.Content = " Enter the length of time a Drone is charging ";
+                spantime.Visibility = Visibility.Visible;
+                spantimeminuts.Visibility = Visibility.Visible;
+                spantimeseconds.Visibility = Visibility.Visible;
+                Bottun2.Visibility = Visibility.Visible;
+                Bottun2.Visibility = Visibility.Visible;
+                Dots1.Visibility = Visibility.Visible;
+                Dots2.Visibility = Visibility.Visible;
             }
             if (temp == 2)
             {
-                Bottun2.Visibility = Visibility.Visible;
-
                 Bottun1.Content = "Package collection";
                 Bottun2.Content = "Package delivery";
+                Bottun2.Visibility = Visibility.Visible;
+                spantime.Visibility = Visibility.Hidden;
+                spantimeminuts.Visibility = Visibility.Hidden;
+                spantimeseconds.Visibility = Visibility.Hidden;
+
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -171,8 +186,8 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan t = new TimeSpan(3, 0, 0);
-                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
+                        TimeSpan s=new TimeSpan(int.Parse(spantime.Text), int.Parse(spantimeminuts.Text), int.Parse(spantimeseconds.Text));
+                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content),s);
                         temp = 1;
                         Refresh();
                         MessageBox.Show("relese drone from charge sucess");
@@ -283,6 +298,14 @@ namespace PL
             {
                 AddBottun.IsEnabled = true;
             }
+        }
+
+        private void spamtime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           if (temp == 0)
+                spantime.Visibility = Visibility.Visible;
+            else
+                spantime.Visibility = Visibility.Hidden;
         }
         private void modelTextBox1_TextChanged(object sender, TextChangedEventArgs e)
         {

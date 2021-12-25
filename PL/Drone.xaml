@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Drone" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="9,0,-9,0">
         <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="100,130,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -43,7 +43,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Battery Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
@@ -66,9 +66,23 @@
         <Button Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="48,276,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click_1"/>
         <Button Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="48,358,0,0" VerticalAlignment="Top" Width="64" Click="CancelBottun_Click"/>
         <ComboBox Name="StationIdComboBox" HorizontalAlignment="Left" Margin="188,237,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="354,358,0,0" VerticalAlignment="Top" Width="151" Click="Bottun1_Click"/>
-        <Button Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="536,355,0,0" VerticalAlignment="Top" Height="25" Width="138" Click="Bottun2_Click"/>
+        <Button Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="534,358,0,0" VerticalAlignment="Top" Width="150" Click="Bottun1_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.974"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="188,348,0,0" VerticalAlignment="Top" Height="25" Width="198" Click="Bottun2_Click"/>
         <Button Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="706,353,0,0" VerticalAlignment="Top" Height="30" Width="69" Click="updateBottun_Click"/>
+        <TextBox x:Name="spantime" HorizontalAlignment="Left" Margin="400,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22" TextChanged="spamtime_TextChanged"/>
+        <TextBox x:Name="spantimeminuts" HorizontalAlignment="Left" Margin="437,356,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22" Height="18" RenderTransformOrigin="0.548,0.21"/>
+        <TextBox x:Name="spantimeseconds" HorizontalAlignment="Left" Margin="472,356,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="22" RenderTransformOrigin="-0.551,0.085"/>
+        <Label x:Name="Dots2" Content=":&#xD;&#xA;" HorizontalAlignment="Left" Margin="460,348,0,0" VerticalAlignment="Top" Width="19" Height="30"/>
+        <Label x:Name="Dots1" Content=":" HorizontalAlignment="Left" Margin="424,348,0,0" VerticalAlignment="Top" Width="14" Height="29"/>
 
     </Grid>
 </Window>

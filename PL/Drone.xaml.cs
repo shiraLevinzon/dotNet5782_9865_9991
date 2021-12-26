@@ -171,7 +171,6 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan t = new TimeSpan(3, 0, 0);
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();

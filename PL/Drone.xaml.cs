@@ -24,12 +24,10 @@ namespace PL
         int temp;
         bool a, b;
         DateTime d = DateTime.MinValue;
-        DronesListWindow dronesListWindow;
-        enum spantimee { }
-        public Drone(DroneToList d, IBL.IBL blobject, DronesListWindow dro)
+        ListView dronesListWindow;
+        public Drone(DroneToList d, IBL.IBL blobject)
         {
             InitializeComponent();
-            dronesListWindow = dro;
             bl = blobject;
 
             AddBottun.Visibility = Visibility.Hidden;
@@ -41,10 +39,9 @@ namespace PL
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
         }
-        public Drone(IBL.IBL blobject,DronesListWindow d)
+        public Drone(IBL.IBL blobject)
         {
             InitializeComponent();         
-            dronesListWindow = d;
             bl = blobject;
             a = false;
             b = false;
@@ -110,7 +107,7 @@ namespace PL
                 {
                     bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
                     MessageBox.Show("add drone sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                    dronesListWindow.FilterByCombiBox();
+                    //dronesListWindow.FilterByCombiBox();
                     this.Close();
                 }
                 else
@@ -186,8 +183,9 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan s=new TimeSpan(int.Parse(spantime.Text), int.Parse(spantimeminuts.Text), int.Parse(spantimeseconds.Text));
-                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content),s);
+                        TimeSpan t = new TimeSpan(3, 0, 0);
+
+                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();
                         MessageBox.Show("relese drone from charge sucess");
@@ -243,7 +241,7 @@ namespace PL
 
             }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
-            dronesListWindow.FilterByCombiBox();
+            //dronesListWindow.FilterByCombiBox();
         }
 
 

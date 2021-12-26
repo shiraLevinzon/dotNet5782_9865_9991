@@ -75,7 +75,7 @@ namespace IBL.BL
             {
                 return dronesToList.FindAll(dro => predicate(dro));
             }
-            return dronesToList;
+            return dronesToList.FindAll(dro => 0 == 0);
 
         }
        

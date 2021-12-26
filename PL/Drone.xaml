@@ -84,5 +84,6 @@
         <Label x:Name="Dots2" Content=":&#xD;&#xA;" HorizontalAlignment="Left" Margin="460,348,0,0" VerticalAlignment="Top" Width="19" Height="30"/>
         <Label x:Name="Dots1" Content=":" HorizontalAlignment="Left" Margin="424,348,0,0" VerticalAlignment="Top" Width="14" Height="29"/>
 
+
     </Grid>
 </Window>

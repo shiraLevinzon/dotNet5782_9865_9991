@@ -1,0 +1,142 @@
+﻿<Window Name="listViewWindow" x:Class="PL.ListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Title="ListView" Height="650" Width="1000" Activated="listViewWindow_Activated">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400*"/>
+                <RowDefinition Height="70*"/>
+            </Grid.RowDefinitions>
+            <TabControl x:Name="TCview" Grid.Row="0" Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+              materialDesign:ColorZoneAssist.Mode="PrimaryMid"  TabStripPlacement="Top"
+              materialDesign:NavigationRailAssist.SelectionCornerRadius="50 10 10 10" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto"  Width="auto">
+                            <materialDesign:PackIcon Kind="Quadcopter" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="רחפנים" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="27*"/>
+                            <RowDefinition Height = "58*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,0,4"  Grid.Column="0">
+                                <Grid Height="53" Width="276">
+                                    <Grid.ColumnDefinitions>
+
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <Button Name="Clear1" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear1_Click"  />
+                                </Grid>
+                                <ComboBox x:Name="StatusSelector"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון סטטוס רחפן" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="StatusSelector_SelectionChanged" />
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,4"  Grid.Column="1">
+                                <Grid Height="53" Width="276">
+                                    <Grid.ColumnDefinitions>
+
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox1"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <Button  Name="Clear2" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear2_Click" />
+                                </Grid>
+                                <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="284" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
+                            </StackPanel>
+                        </Grid>
+                        <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="1" MouseDoubleClick="listOfDrones_MouseDoubleClick" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="מודל" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding MaxWeight}" Header="משקל"   />
+                                    <GridViewColumn DisplayMemberBinding="{Binding BatteryStatus, StringFormat=\{0:#0.0\}%}" Header="סוללה" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Conditions}" Header="סטטוס" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding location}" Header="  מיקום קו רוחב       מיקום קו אורך"  />
+                                    <GridViewColumn DisplayMemberBinding="{Binding PackagNumberOnTransferred}" Header="חבילה משויכת"   />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+
+                    </Grid>
+
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto"  Width="auto">
+                            <materialDesign:PackIcon Kind="ElectricCharger" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="תחנות" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <!--FDFGDFGFG-->
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto"  Width="auto">
+                            <materialDesign:PackIcon Kind="People" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="לקוחות" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto"  Width="auto">
+                            <materialDesign:PackIcon Kind="Package" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="חבילות" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+
+
+            </TabControl>
+            <Grid Grid.Row="1" Background="LightGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=" *"/>
+                    <ColumnDefinition Width=" *"/>
+                </Grid.ColumnDefinitions>
+                <Button  x:Name="Badd" Click="Badd_Click"
+  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+  ToolTip="MaterialDesignFloatingActionButton"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="424,10,36,44" Grid.Column="1" >
+                    <materialDesign:PackIcon
+    Kind="add"
+    Height="25"
+    Width="25" VerticalAlignment="Center" />
+                </Button>
+                
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

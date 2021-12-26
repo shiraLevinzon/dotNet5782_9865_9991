@@ -29,7 +29,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new DronesListWindow(blObject).Show();            
+            new ListView(blObject).Show();            
         }
 
         private void listofbasestation_Click(object sender, RoutedEventArgs e)

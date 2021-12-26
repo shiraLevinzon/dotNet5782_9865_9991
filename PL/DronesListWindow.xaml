@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneToList" Height="450" Width="800">
+        Title="DroneToList" Height="450" Width="800" Activated="Window_Activated">
     <Grid>
         <ListView x:Name="droneToListListView" ItemsSource="{Binding}" Margin="52,41,52,89" SelectionMode="Single" Grid.Row="1" MouseDoubleClick="droneToListListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>
@@ -70,9 +70,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <ComboBox x:Name="StatusSelector" Grid.Column="1" Margin="40,4,40,6" Width="120" SelectionChanged="StatusSelector_SelectionChanged"/>
-            <Label x:Name="status" Content="status&#xD;&#xA;" HorizontalAlignment="Left" Margin="22,11,0,0" VerticalAlignment="Top" Width="58" Height="24"/>
+            <Label x:Name="status" Content="status&#xD;&#xA;" HorizontalAlignment="Left" Margin="100,11,0,0" VerticalAlignment="Top" Width="64" Height="24"/>
             <ComboBox x:Name="WeightSelector" Grid.Column="3" HorizontalAlignment="Stretch" Margin="0,12,0,0" VerticalAlignment="Stretch" Width="120" SelectionChanged="WeightSelector_SelectionChanged"/>
             <Label Content="Max weight" Grid.Column="2" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="33,23,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
         </Grid>
         <Button Content="Add Option" HorizontalAlignment="Left" Margin="566,327,0,0" Grid.Row="1" VerticalAlignment="Top" Height="51" Width="224" Click="Button_Click"/>
         <Grid.RowDefinitions>

@@ -95,7 +95,7 @@ namespace PL
                 {
                     bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
                     MessageBox.Show("add drone sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                    dronesListWindow.FilterByCombiBox();
+                    //dronesListWindow.FilterByCombiBox();
                     this.Close();
                 }
                 else
@@ -171,6 +171,8 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
+                        TimeSpan t = new TimeSpan(3, 0, 0);
+
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();
@@ -227,7 +229,7 @@ namespace PL
 
             }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
-            dronesListWindow.FilterByCombiBox();
+            //dronesListWindow.FilterByCombiBox();
         }
 
 

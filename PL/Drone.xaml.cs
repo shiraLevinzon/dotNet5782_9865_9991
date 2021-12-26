@@ -24,11 +24,10 @@ namespace PL
         int temp;
         bool a, b;
         DateTime d = DateTime.MinValue;
-        DronesListWindow dronesListWindow;
-        public Drone(DroneToList d, IBL.IBL blobject, DronesListWindow dro)
+        ListView dronesListWindow;
+        public Drone(DroneToList d, IBL.IBL blobject)
         {
             InitializeComponent();
-            dronesListWindow = dro;
             bl = blobject;
 
             AddBottun.Visibility = Visibility.Hidden;
@@ -40,10 +39,9 @@ namespace PL
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
         }
-        public Drone(IBL.IBL blobject,DronesListWindow d)
+        public Drone(IBL.IBL blobject)
         {
             InitializeComponent();         
-            dronesListWindow = d;
             bl = blobject;
             a = false;
             b = false;

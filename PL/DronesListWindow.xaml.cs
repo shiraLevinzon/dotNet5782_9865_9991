@@ -37,7 +37,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, this).ShowDialog();
+            new Drone(bl).ShowDialog();
         }
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -67,7 +67,7 @@ namespace PL
         private void droneToListListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList d = (DroneToList)droneToListListView.SelectedItem;
-            new Drone(d, bl,this).ShowDialog();
+            new Drone(d, bl).ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

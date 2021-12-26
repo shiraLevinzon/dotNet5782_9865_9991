@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneToList" Height="450" Width="800" Activated="Window_Activated">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Title="DroneToList" Height="500" Width="850" Activated="Window_Activated">
     <Grid>
         <ListView x:Name="droneToListListView" ItemsSource="{Binding}" Margin="52,41,52,89" SelectionMode="Single" Grid.Row="1" MouseDoubleClick="droneToListListView_MouseDoubleClick">
             <ListView.ItemContainerStyle>

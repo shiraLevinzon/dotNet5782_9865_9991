@@ -33,6 +33,7 @@
                             <TextBlock Text="רחפנים" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
+                    
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="27*"/>
@@ -98,6 +99,7 @@
                             <TextBlock Text="תחנות" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
+ 
                 </TabItem>
                 <!--FDFGDFGFG-->
                 <TabItem>
@@ -120,19 +122,14 @@
 
 
             </TabControl>
+            
             <Grid Grid.Row="1" Background="LightGray">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=" *"/>
                     <ColumnDefinition Width=" *"/>
                 </Grid.ColumnDefinitions>
-                <Button  x:Name="Badd" Click="Badd_Click"
-  Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-  ToolTip="MaterialDesignFloatingActionButton"
-  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Margin="424,10,36,44" Grid.Column="1" >
-                    <materialDesign:PackIcon
-    Kind="add"
-    Height="25"
-    Width="25" VerticalAlignment="Center" />
+                <Button  x:Name="Badd" Click="Badd_Click" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionButton" Margin="211,10,36,10" Grid.Column="1" >
+                    <materialDesign:PackIcon Kind="Plus"  Height="40" Width="40" VerticalAlignment="Center" />
                 </Button>
                 
             </Grid>

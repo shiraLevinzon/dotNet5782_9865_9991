@@ -22,16 +22,12 @@ namespace PL
     {
         IBL.IBL bl;
         int temp;
-        bool a, b;
-        DateTime d = DateTime.MinValue;
-        ListView dronesListWindow;
         public Drone(DroneToList d, IBL.IBL blobject)
         {
             InitializeComponent();
             bl = blobject;
 
-            AddBottun.Visibility = Visibility.Hidden;
-            ADDgrid.Visibility = Visibility.Hidden;
+            addMode.Visibility = Visibility.Hidden;
             UPDATEgrid.DataContext = d;
             modelTextBox.IsEnabled = true;
             updateBottun.IsEnabled = false;
@@ -43,13 +39,8 @@ namespace PL
         {
             InitializeComponent();         
             bl = blobject;
-            a = false;
-            b = false;
-            UPDATEgrid.Visibility = Visibility.Hidden;
+            actMode.Visibility = Visibility.Hidden;
             AddBottun.IsEnabled = false;
-            Bottun1.Visibility = Visibility.Hidden;
-            Bottun2.Visibility = Visibility.Hidden;
-            updateBottun.Visibility = Visibility.Hidden;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
         }
@@ -85,7 +76,6 @@ namespace PL
                 MaxWeight = ((IBL.BO.WeightCategories)Convert.ToInt32(maxWeightComboBox.SelectedItem)),
                 location = new Location() { },
                 PackageInTransfer = new ParcelInTransfer() { }
-
             };
             try
             {
@@ -170,7 +160,7 @@ namespace PL
                 {
                     case 0:
                         TimeSpan t = new TimeSpan(3, 0, 0);
-
+                        
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();
@@ -178,7 +168,6 @@ namespace PL
                         break;
                     case 1:
                         bl.DroneToCharging(Convert.ToInt32(iDLabel.Content));
-                        d = DateTime.Now;
                         temp = 0;
                         Refresh();
                         MessageBox.Show("sending Drone To Charging sucess");
@@ -221,11 +210,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-            catch (Exception)
-            {
-                MessageBox.Show("something wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
+         
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
             //dronesListWindow.FilterByCombiBox();
         }
@@ -272,24 +257,21 @@ namespace PL
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
-            dronesListWindow.FilterByCombiBox();
         }
 
         private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            a = true;
-            if (a && b && maxWeightComboBox.SelectedIndex != -1)
+            if (int.TryParse(iDTextBox.Text, out int q) &&iDTextBox.Text!=null && modelTextBox1.Text!=null && maxWeightComboBox.SelectedIndex != -1)
             {
+                error.Visibility = Visibility.Hidden;
                 AddBottun.IsEnabled = true;
             }
-        }
-        private void modelTextBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            b = true;
-            if(a && b && maxWeightComboBox.SelectedIndex!=-1)
+            else if(!int.TryParse(iDTextBox.Text, out int p))
             {
-                AddBottun.IsEnabled = true;
+                error.Visibility = Visibility.Visible;
+                AddBottun.IsEnabled = false;
             }
+
         }
     }
 }

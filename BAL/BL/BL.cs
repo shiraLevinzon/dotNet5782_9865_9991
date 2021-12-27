@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
-using IDAL;
+using BO;
+using BlApi;
+using DalApi;
 using DalObject;
-namespace IBL.BL
+namespace BL
 {
-    public partial class BL : IBL
+     partial class BL : BlApi.IBL
     {
-        IDAL.IDal dalLayer = new DalObject.DalObject();
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+
+        internal IDal dalLayer = DalFactory.GetDal();
+
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -37,7 +42,7 @@ namespace IBL.BL
             heavyC = arr[3];
             droneLoadingRate = arr[4];
             #region מילוי רשימת הלקוחות מסוג דאל 
-            List<IDAL.DO.Customer> TMPcustomer = new List<IDAL.DO.Customer>();
+            List<DO.Customer> TMPcustomer = new List<DO.Customer>();
             TMPcustomer = dalLayer.GetAllCustomers().ToList();
             foreach (var item in TMPcustomer)
             {
@@ -53,7 +58,7 @@ namespace IBL.BL
             }
             #endregion
             #region מילוי רשימת רחפנים מסוג דאל
-            List<IDAL.DO.Drone> TMPdrone = new List<IDAL.DO.Drone>();
+            List<DO.Drone> TMPdrone = new List<DO.Drone>();
             TMPdrone = dalLayer.GetAllDrones().ToList();
             foreach (var item in TMPdrone)
             {
@@ -73,7 +78,7 @@ namespace IBL.BL
             #endregion
    
             #region מילוי רשימת תחנות בסיס מסוג דאל
-            List<IDAL.DO.BaseStation> TMPbaseStation = new List<IDAL.DO.BaseStation>();
+            List<DO.BaseStation> TMPbaseStation = new List<DO.BaseStation>();
             TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
             foreach (var item in TMPbaseStation)
             {
@@ -90,7 +95,7 @@ namespace IBL.BL
             #endregion
             #region מילוי רשימת חבילה מסוג דאל
             List<DroneToList> ezer = new List<DroneToList>();
-            List<IDAL.DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
+            List<DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
             foreach (var item in TMPparcel)
             {
                 DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
@@ -139,7 +144,7 @@ namespace IBL.BL
 
                         double distans = DistanceTo(d.location.Latitude, d.location.Longitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude);
                         distans += min + DistanceTo(customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Latitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Longitude);
-                        int i = (int)(IDAL.DO.WeightCategories)item.Weight;
+                        int i = (int)(DO.WeightCategories)item.Weight;
                     if (distans * arr[i + 1] > 100)
                     {
                         d.BatteryStatus = 100;
@@ -221,11 +226,11 @@ namespace IBL.BL
                 dro.Conditions = (DroneConditions)0;            
                 dalLayer.SendingDroneToBaseStation(basestation.ID, dro.ID);
             }
-            catch (IDAL.DO.DuplicateIdException ex)
+            catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
-            catch (IDAL.DO.MissingIdException ex)
+            catch (DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
@@ -255,11 +260,11 @@ namespace IBL.BL
                     dro.BatteryStatus = dro.BatteryStatus + droneLoadingRate * time.TotalHours;
                 dalLayer.ReleaseDroneFromChargingAtBaseStation(bases.ID, dro.ID);
             }
-            catch (IDAL.DO.DuplicateIdException ex)
+            catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
-            catch (IDAL.DO.MissingIdException ex)
+            catch (DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
@@ -278,14 +283,14 @@ namespace IBL.BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
-                IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
-                foreach (IDAL.DO.Parcel item in dalLayer.GetAllParcels())
+                DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
+                foreach (DO.Parcel item in dalLayer.GetAllParcels())
                 {
                     if (item.priority > parcel.priority)
                         parcel = item;
                     else if (item.priority == parcel.priority)
                     {
-                        if (item.Weight > parcel.Weight && item.Weight <= (IDAL.DO.WeightCategories)drone.MaxWeight)
+                        if (item.Weight > parcel.Weight && item.Weight <= (DO.WeightCategories)drone.MaxWeight)
                             parcel = item;
                         else if (item.Weight == parcel.Weight)
                         {
@@ -296,7 +301,7 @@ namespace IBL.BL
                         }
                     }
                 }
-                int a = (int)(IDAL.DO.WeightCategories)parcel.Weight;
+                int a = (int)(DO.WeightCategories)parcel.Weight;
                 double d = dalLayer.RequestPowerConsumptionByDrone()[a + 1];
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);
                 decrease = d * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
@@ -310,11 +315,11 @@ namespace IBL.BL
                 drone.PackagNumberOnTransferred = parcel.ID;
                 dalLayer.AssignPackageToDrone(parcel.ID, drone.ID);
             }
-            catch (IDAL.DO.DuplicateIdException ex)
+            catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
-            catch (IDAL.DO.MissingIdException ex)
+            catch (DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
@@ -335,7 +340,7 @@ namespace IBL.BL
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");
-                int a = (int)(IDAL.DO.WeightCategories)drone.PackageInTransfer.Weight;
+                int a = (int)(DO.WeightCategories)drone.PackageInTransfer.Weight;
                 double d = dalLayer.RequestPowerConsumptionByDrone()[a + 1];
                 drone.BatteryStatus -= d * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
                 drone.location.Latitude = drone.PackageInTransfer.Collection.Latitude;
@@ -345,11 +350,11 @@ namespace IBL.BL
                 droneTOlist.location.Longitude = drone.location.Longitude;
                 dalLayer.ParcelCollectionByDrone(drone.PackageInTransfer.ID, id);
             }
-            catch (IDAL.DO.DuplicateIdException ex)
+            catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
             }
-            catch (IDAL.DO.MissingIdException ex)
+            catch (DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
@@ -361,10 +366,10 @@ namespace IBL.BL
             try
             {
                 BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id);
-                IDAL.DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
+                DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivere- Time Problem");
-                IDAL.DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);
+                DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);
                 double distance = DistanceTo(drone.location.Latitude, drone.location.Longitude, customer.Latitude, customer.Longitude);
                 int a = (int)parcel.Weight;
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);

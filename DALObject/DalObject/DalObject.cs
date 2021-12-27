@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IDAL.DO;
-using IDAL;
+using DO;
+using DalApi;
 
 namespace DalObject
 {
@@ -112,7 +112,7 @@ namespace DalObject
     }
 
 
-    public partial class DalObject : IDal
+     partial class DalObject : DalApi.IDal
     {
         public DalObject() { DataSource.Initialize(); }
         public double[] RequestPowerConsumptionByDrone()

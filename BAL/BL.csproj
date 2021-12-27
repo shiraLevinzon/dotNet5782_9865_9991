@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DALFacade\DALFacade.csproj" />
+    <ProjectReference Include="..\DALObject\DALObject.csproj" />
+    <ProjectReference Include="..\DALXML\DALXML.csproj" />
+  </ItemGroup>
+
+</Project>

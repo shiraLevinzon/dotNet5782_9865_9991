@@ -68,6 +68,7 @@
                                 <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="284" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
                             </StackPanel>
                         </Grid>
+                        
                         <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="1" MouseDoubleClick="listOfDrones_MouseDoubleClick" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListViewItem}">

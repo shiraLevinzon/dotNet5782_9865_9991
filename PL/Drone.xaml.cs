@@ -49,35 +49,24 @@ namespace PL
             if (temp == 1)
             {
                 Bottun2.Visibility = Visibility.Visible;
-                spantime.Visibility = Visibility.Hidden;
-                spantimeminuts.Visibility = Visibility.Hidden;
-                spantimeseconds.Visibility = Visibility.Hidden;
-                Dots1.Visibility = Visibility.Hidden;
-                Dots2.Visibility = Visibility.Hidden;
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
+                Timegrid.Visibility = Visibility.Hidden;
+
             }
             if (temp == 0)
             {
                 Bottun1.Content = "relese drone from charge ";
-                Bottun2.Content = " Enter the length of time a Drone is charging ";
-                spantime.Visibility = Visibility.Visible;
-                spantimeminuts.Visibility = Visibility.Visible;
-                spantimeseconds.Visibility = Visibility.Visible;
-                Bottun2.Visibility = Visibility.Visible;
-                Bottun2.Visibility = Visibility.Visible;
-                Dots1.Visibility = Visibility.Visible;
-                Dots2.Visibility = Visibility.Visible;
+                Timegrid.Visibility = Visibility.Visible;
+                Bottun2.Visibility = Visibility.Hidden;
+
             }
             if (temp == 2)
             {
                 Bottun1.Content = "Package collection";
                 Bottun2.Content = "Package delivery";
                 Bottun2.Visibility = Visibility.Visible;
-                spantime.Visibility = Visibility.Hidden;
-                spantimeminuts.Visibility = Visibility.Hidden;
-                spantimeseconds.Visibility = Visibility.Hidden;
-
+                Timegrid.Visibility = Visibility.Hidden;
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -173,7 +162,7 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan t = new TimeSpan(3, 0, 0);
+                        TimeSpan t = new TimeSpan(Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text));
                         
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
@@ -209,15 +198,6 @@ namespace PL
             catch (IBL.BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IDAL.DO.DuplicateIdException ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IDAL.DO.MissingIdException ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
             catch (ImproperMaintenanceCondition ex)
             {
@@ -280,25 +260,12 @@ namespace PL
                 error.Visibility = Visibility.Hidden;
                 AddBottun.IsEnabled = true;
             }
-        }
-
-        private void spamtime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           if (temp == 0)
-                spantime.Visibility = Visibility.Visible;
-            else
-                spantime.Visibility = Visibility.Hidden;
-        }
-        private void modelTextBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            b = true;
-            if(a && b && maxWeightComboBox.SelectedIndex!=-1)
-            else if(!int.TryParse(iDTextBox.Text, out int p))
+            else if (!int.TryParse(iDTextBox.Text, out int p))
             {
                 error.Visibility = Visibility.Visible;
                 AddBottun.IsEnabled = false;
             }
-
         }
+       
     }
 }

@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL
 {
     /// <summary>
@@ -20,9 +19,9 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        IBL.IBL bl;
+         IBL.BO  bl =BlFactory.;
         int temp;
-        public Drone(DroneToList d, IBL.IBL blobject)
+        public Drone(DroneToList d, IBL.BO blobject)
         {
             InitializeComponent();
             bl = blobject;
@@ -49,21 +48,24 @@ namespace PL
             if (temp == 1)
             {
                 Bottun2.Visibility = Visibility.Visible;
-
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
+                Timegrid.Visibility = Visibility.Hidden;
+
             }
             if (temp == 0)
             {
-                Bottun1.Content = "relese drone from charge";
+                Bottun1.Content = "relese drone from charge ";
+                Timegrid.Visibility = Visibility.Visible;
                 Bottun2.Visibility = Visibility.Hidden;
+
             }
             if (temp == 2)
             {
-                Bottun2.Visibility = Visibility.Visible;
-
                 Bottun1.Content = "Package collection";
                 Bottun2.Content = "Package delivery";
+                Bottun2.Visibility = Visibility.Visible;
+                Timegrid.Visibility = Visibility.Hidden;
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -159,7 +161,7 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan t = new TimeSpan(3, 0, 0);
+                        TimeSpan t = new TimeSpan(Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text));
                         
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
@@ -195,15 +197,6 @@ namespace PL
             catch (IBL.BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IDAL.DO.DuplicateIdException ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IDAL.DO.MissingIdException ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
             catch (ImproperMaintenanceCondition ex)
             {
@@ -266,12 +259,12 @@ namespace PL
                 error.Visibility = Visibility.Hidden;
                 AddBottun.IsEnabled = true;
             }
-            else if(!int.TryParse(iDTextBox.Text, out int p))
+            else if (!int.TryParse(iDTextBox.Text, out int p))
             {
                 error.Visibility = Visibility.Visible;
                 AddBottun.IsEnabled = false;
             }
-
         }
+       
     }
 }

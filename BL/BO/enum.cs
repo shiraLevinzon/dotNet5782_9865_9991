@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ namespace IBL.BO
     //נוצר, שייך, נאסף, סיפק
     //public enum ParcelConditions {Defined, associated, collected, provided }
     //הוגדר, משויך, נאסף, מסופק
-    public enum DroneConditions { maintenance ,Available, delivery, /*charging*/}
-    //תחזוקה, זמינה, משלוח, טעינה
-}
+//    public enum DroneConditions { maintenance ,Available, delivery, /*charging*///}
+//    //תחזוקה, זמינה, משלוח, טעינה
+//}
+//*/

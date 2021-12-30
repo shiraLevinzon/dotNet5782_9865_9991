@@ -1,5 +1,5 @@
-﻿using IBL.BL;
-using IBL.BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +21,8 @@ namespace PL
     /// </summary>
     public partial class ListView : Window
     {
-        IBL.IBL bl;
-        public ListView(IBL.IBL bL)
+        IBL bl=BlFactory.GetBl();
+        public ListView(IBL bL)
         {
 
             InitializeComponent();
@@ -39,11 +39,11 @@ namespace PL
                 listOfDrones.ItemsSource = bl.GetAllDrones();
             }
             if (WeightSelector.SelectedIndex != -1 && StatusSelector.SelectedIndex != -1)
-                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedIndex && dro.Conditions == (IBL.BO.DroneConditions)StatusSelector.SelectedIndex);
+                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedIndex && dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
             else if (WeightSelector.SelectedIndex != -1 && StatusSelector.SelectedIndex == -1)
-                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedIndex);
+                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedIndex);
             else if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex != -1)
-                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.Conditions == (IBL.BO.DroneConditions)StatusSelector.SelectedIndex);
+                listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
 
 
         }

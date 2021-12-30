@@ -1,5 +1,6 @@
 ﻿using System;
-using IBL.BO;
+using BlApi;
+using BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,9 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-         IBL.BO  bl =BlFactory.;
+         IBL  bl =BlFactory.GetBl();
         int temp;
-        public Drone(DroneToList d, IBL.BO blobject)
+        public Drone(DroneToList d, BlApi.IBL blobject)
         {
             InitializeComponent();
             bl = blobject;
@@ -34,7 +35,7 @@ namespace PL
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
         }
-        public Drone(IBL.IBL blobject)
+        public Drone(BlApi.IBL blobject)
         {
             InitializeComponent();         
             bl = blobject;
@@ -71,11 +72,11 @@ namespace PL
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
         {
             
-            IBL.BO.Drone drone = new IBL.BO.Drone()
+            BO.Drone drone = new BO.Drone()
             {
                 ID = int.Parse(iDTextBox.Text),
                 Model = modelTextBox1.Text,
-                MaxWeight = ((IBL.BO.WeightCategories)Convert.ToInt32(maxWeightComboBox.SelectedItem)),
+                MaxWeight = ((BO.WeightCategories)Convert.ToInt32(maxWeightComboBox.SelectedItem)),
                 location = new Location() { },
                 PackageInTransfer = new ParcelInTransfer() { }
             };
@@ -97,19 +98,19 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.TheDroneDnotShip ex)
+            catch (BO.TheDroneDnotShip ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.PackageTimesException ex)
+            catch (BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -136,19 +137,19 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.TheDroneDnotShip ex)
+            catch (BO.TheDroneDnotShip ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.PackageTimesException ex)
+            catch (BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -182,19 +183,19 @@ namespace PL
                         break;
                 }
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.TheDroneDnotShip ex)
+            catch (BO.TheDroneDnotShip ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.PackageTimesException ex)
+            catch (BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -233,19 +234,19 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.MissingIdException ex)
+            catch (BO.MissingIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.DuplicateIdException ex)
+            catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.TheDroneDnotShip ex)
+            catch (BO.TheDroneDnotShip ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BO.PackageTimesException ex)
+            catch (BO.PackageTimesException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }

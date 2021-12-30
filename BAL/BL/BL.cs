@@ -11,8 +11,8 @@ namespace BL
 {
      partial class BL : BlApi.IBL
     {
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
+        static readonly /*Lazy< */IBL/*>*/ instance = /*new Lazy<IBL>(() => */new BL()/*)*/;
+        public static IBL Instance { get => instance/*.Value*/; }
 
         internal IDal dalLayer = DalFactory.GetDal();
 

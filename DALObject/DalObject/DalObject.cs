@@ -114,6 +114,8 @@ namespace DalObject
 
      partial class DalObject : DalApi.IDal
     {
+        static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
+        public static IDal Instance { get => instance.Value; }
         public DalObject() { DataSource.Initialize(); }
         public double[] RequestPowerConsumptionByDrone()
         {

@@ -1,5 +1,5 @@
 ﻿using System;
-using IBL.BO;
+using BlApi;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using BO;
 
 namespace PL
 {
@@ -23,8 +24,8 @@ namespace PL
     public partial class DronesListWindow : Window
     {
         
-        IBL.IBL bl;
-        public DronesListWindow(IBL.IBL blObject)
+        IBL bl=BlFactory.GetBl();
+        public DronesListWindow(IBL blObject)
         {
             InitializeComponent();
             bl = blObject;
@@ -56,11 +57,11 @@ namespace PL
                 droneToListListView.DataContext = bl.GetAllDrones();
             }
             if (WeightSelector.SelectedIndex != -1 && StatusSelector.SelectedIndex != -1)
-                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedIndex && dro.Conditions == (IBL.BO.DroneConditions)StatusSelector.SelectedIndex);
+                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedIndex && dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
             else if (WeightSelector.SelectedIndex != -1 && StatusSelector.SelectedIndex == -1)
-                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.MaxWeight == (IBL.BO.WeightCategories)WeightSelector.SelectedIndex);
+                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedIndex);
             else if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex != -1)
-                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.Conditions == (IBL.BO.DroneConditions)StatusSelector.SelectedIndex);
+                droneToListListView.DataContext = bl.GetAllDrones(dro => dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
             
                
         }

@@ -78,7 +78,7 @@ namespace PL
                 Model = modelTextBox1.Text,
                 MaxWeight = ((BO.WeightCategories)Convert.ToInt32(maxWeightComboBox.SelectedItem)),
                 location = new Location() { },
-                PackageInTransfer = new ParcelInTransfer() { }
+                PackageInTransfer = new BO.ParcelInTransfer() { }
             };
             try
             {
@@ -218,12 +218,14 @@ namespace PL
                 {
                     case 1:
                         bl.AssignPackageToDrone(Convert.ToInt32(iDLabel.Content));
+                        showParcel.IsEnabled = true;
                         temp = 2;
                         Refresh();
                         MessageBox.Show("Assign Package To Drone sucess");
                         break;
                     case 2:
                         bl.DeliveryOfPackageByDrone(Convert.ToInt32(iDLabel.Content));
+                        showParcel.IsEnabled = false;
                         temp = 1;
                         Refresh();
                         MessageBox.Show("Delivery Of Package By Drone drone to customer sucess");
@@ -266,6 +268,10 @@ namespace PL
                 AddBottun.IsEnabled = false;
             }
         }
-       
+
+        private void showParcel_Click(object sender, RoutedEventArgs e)
+        {
+            new ParInTransfer(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
+        }
     }
 }

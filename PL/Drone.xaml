@@ -95,7 +95,7 @@
                 <Label x:Name="Dots1" Grid.Column="4" Content=":" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="14" Height="29"/>
             
             </Grid>
-            <Button Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" Margin="325,199,0,253" />
+            <Button x:Name="showParcel" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" IsEnabled="False" Margin="325,199,0,253" Click="showParcel_Click" />
         </Grid>
 
 

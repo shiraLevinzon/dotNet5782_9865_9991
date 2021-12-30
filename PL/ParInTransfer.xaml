@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL.ParcelInTransfer"
+﻿<Window x:Class="PL.ParInTransfer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -16,7 +16,7 @@
         Title="ParcelInTransfer" Height="450" Width="400">
     <Grid>
 
-        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="107,28,0,0" HorizontalAlignment="Left" DataContext="{StaticResource parcelInTransferViewSource}">
+        <Grid x:Name="PITgrid" VerticalAlignment="Top" Margin="107,28,0,0" HorizontalAlignment="Left" DataContext="{StaticResource parcelInTransferViewSource}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

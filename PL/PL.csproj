@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BL\BLL.csproj" />
+    <ProjectReference Include="..\BAL\BL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

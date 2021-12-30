@@ -27,9 +27,18 @@ namespace PL
 
             InitializeComponent();
             bl = bL;
-            listOfDrones.ItemsSource = bl.GetAllDrones();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            switch (TCview.SelectedIndex)
+            {
+                case 0:
+                    listOfDrones.ItemsSource = bl.GetAllDrones();
+                    StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
+                    WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+                    break;
+                default:
+                    break;
+            }
+           
+            
         }
         public void FilterByCombiBox()
         {

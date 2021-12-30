@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.Drone"
         mc:Ignorable="d"
-        Title="Drone" Height="500" Width="900">
+        Title="Drone" Height="500" Width="400">
     <Grid>
         <Grid x:Name="addMode" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
@@ -93,7 +93,9 @@
                 <TextBox x:Name="spantimeseconds" Grid.Column="5" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="22" RenderTransformOrigin="-0.551,0.085" Height="25"/>
                 <Label x:Name="Dots2" Grid.Column="2" Content=":&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="19" Height="30"/>
                 <Label x:Name="Dots1" Grid.Column="4" Content=":" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="14" Height="29"/>
+            
             </Grid>
+            <Button Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" Margin="325,199,0,253" />
         </Grid>
 
 

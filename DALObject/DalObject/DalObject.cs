@@ -112,13 +112,22 @@ namespace DalObject
     }
 
 
-     partial class DalObject : DalApi.IDal
+    partial class DalObject : DalApi.IDal
     {
-        static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
-        public static IDal Instance { get => instance.Value; }
+        //static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
+        //public DalObject() { DataSource.Initialize(); }
+
+        //static DalObject() { }
+        //internal static DalObject Instance { get; } = new DalObject();
+        static readonly IDal instance = new DalObject();
+        public static IDal Instance { get => instance; }
+
+        internal IDal dal = DalFactory.GetDal();
         public DalObject() { DataSource.Initialize(); }
-        public double[] RequestPowerConsumptionByDrone()
-        {
+       
+            
+            public double[] RequestPowerConsumptionByDrone()
+            {
             double[] PowerConsumption = new double[5];
             PowerConsumption[0] = DataSource.Config.available;
             PowerConsumption[1] = DataSource.Config.lightWeight;

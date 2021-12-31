@@ -9,15 +9,18 @@ using DalApi;
 using DalObject;
 namespace BL
 {
-     partial class BL : BlApi.IBL
+    partial class BL : BlApi.IBL
     {
-        //static readonly /*Lazy< */IBL/*>*/ instance = /*new Lazy<IBL>(() => */new BL()/*)*/;
-        //public static IBL Instance { get => instance/*.Value*/; }
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
+        static readonly Lazy<IBL> instance = new Lazy<IBL>(new BL());
+        public static IBL Instance {get => instance.Value;}
+
+        //static BL() { }
+        //internal static BL Instance { get; } = new BL();
+        //static readonly IBL instance = new BL();
+        //public static IBL Instance { get => instance; }
 
         internal IDal dalLayer = DalFactory.GetDal();
-
+        
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {

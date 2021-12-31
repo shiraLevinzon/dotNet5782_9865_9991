@@ -11,10 +11,14 @@ namespace BL
 {
      partial class BL : BlApi.IBL
     {
-        static readonly /*Lazy< */IBL/*>*/ instance = /*new Lazy<IBL>(() => */new BL()/*)*/;
-        public static IBL Instance { get => instance/*.Value*/; }
+        static readonly Lazy< IBL> instance = new Lazy<IBL>(() => new BL());
+        public static IBL Instance { get => instance.Value; }
+       //  static readonly IBL instance = new BL();
 
-        internal IDal dalLayer = DalFactory.GetDal();
+        // The public Instance property to use 
+      //   public static IBL Instance { get { return instance; } }
+
+         internal IDal dalLayer = DalFactory.GetDal();
 
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
@@ -32,7 +36,7 @@ namespace BL
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
         #region בנאי 
-        public BL() 
+        internal BL() 
         {
            
             double[] arr = dalLayer.RequestPowerConsumptionByDrone();

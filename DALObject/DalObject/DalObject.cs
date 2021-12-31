@@ -116,6 +116,12 @@ namespace DalObject
     {
         static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
         public static IDal Instance { get => instance.Value; }
+       // static readonly IDal instance = new DalObject();
+
+        // The public Instance property to use 
+      //  public static IDal Instance { get { return instance; } }
+
+
         public DalObject() { DataSource.Initialize(); }
         public double[] RequestPowerConsumptionByDrone()
         {

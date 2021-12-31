@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-
 namespace DalApi
 {
     class DalConfig
@@ -26,3 +25,4 @@ namespace DalApi
         public DalConfigException(string msg, Exception ex) : base(msg, ex) { }
     }
 }
+

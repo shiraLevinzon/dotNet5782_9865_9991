@@ -79,7 +79,6 @@ namespace BL
                 return dronesToList.FindAll(dro => predicate(dro));
             }
             return dronesToList.FindAll(dro => 0 == 0);
-
         }
        
         public void AddDrone(BO.Drone drone, int id)

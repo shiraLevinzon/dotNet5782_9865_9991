@@ -114,15 +114,14 @@ namespace DalObject
 
     partial class DalObject : DalApi.IDal
     {
-        //static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
-        //public DalObject() { DataSource.Initialize(); }
+        static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
+        public static IDal Instance { get => instance.Value; }
+       // static readonly IDal instance = new DalObject();
 
-        //static DalObject() { }
-        //internal static DalObject Instance { get; } = new DalObject();
-        static readonly IDal instance = new DalObject();
-        public static IDal Instance { get => instance; }
+        // The public Instance property to use 
+      //  public static IDal Instance { get { return instance; } }
 
-        internal IDal dal = DalFactory.GetDal();
+
         public DalObject() { DataSource.Initialize(); }
        
             

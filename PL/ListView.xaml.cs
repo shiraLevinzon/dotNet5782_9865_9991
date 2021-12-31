@@ -13,9 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL
 {
+    public enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five };
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
@@ -31,6 +31,20 @@ namespace PL
             {
                 case 0:
                     listOfDrones.ItemsSource = bl.GetAllDrones();
+                    break;
+                case 1:
+                    listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
+                    break;
+                default:
+                    break;
+            }
+            listOfDrones.ItemsSource = bl.GetAllDrones();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            switch (TCview.SelectedIndex)
+            {
+                case 0:
+                    listOfDrones.ItemsSource = bl.GetAllDrones();
                     StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
                     WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
                     break;
@@ -40,7 +54,7 @@ namespace PL
            
             
         }
-        public void FilterByCombiBox()
+        public void FilterByCombiBoxOfDrone()
         {
             if (WeightSelector.SelectedItem == null && StatusSelector.SelectedItem == null)
             {
@@ -53,15 +67,17 @@ namespace PL
                 listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.MaxWeight == (BO.WeightCategories)WeightSelector.SelectedIndex);
             else if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex != -1)
                 listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
-
-
         }
-
-        
-
+        public void FilterByCombiBoxOfBaseStation()
+        {
+            if (FreeSlot.SelectedItem == null)
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
+            else
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases=>bases.FreeChargingSlots == (int)(TheNumberOfFreeeSlot)FreeSlot.SelectedIndex);
+        }
         private void Clear1_Click(object sender, RoutedEventArgs e)
         {
-            StatusSelector.SelectedItem = null;
+           StatusSelector.SelectedItem = null;
         }
 
         private void Clear2_Click(object sender, RoutedEventArgs e)
@@ -71,12 +87,12 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FilterByCombiBox();
+            FilterByCombiBoxOfDrone();
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FilterByCombiBox();
+            FilterByCombiBoxOfDrone();
 
         }
 
@@ -88,19 +104,66 @@ namespace PL
 
         private void Badd_Click(object sender, RoutedEventArgs e)
         {
-            switch(TCview.SelectedIndex)
+           /* switch(TCview.SelectedIndex)
             {
                 case 0:
                     new Drone(bl).ShowDialog();
                     break;
+                case 1:
+                    new BaseStation(bl).ShowDialog();
+                    break;
+                case 2:
+                    new Customer(bl).ShowDialog();
+                    break;
+                case 3:
+                    new Parcel(bl).ShowDialog();
+                    break;
                 default:
                     break;
-            }
+            }*/
         }
 
         private void listViewWindow_Activated(object sender, EventArgs e)
         {
-            FilterByCombiBox();
+            FilterByCombiBoxOfDrone();
+        }
+
+        private void listOfDrones_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listOfBaseStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void listOfbaseStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void TCview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Clear3_Click(object sender, RoutedEventArgs e)
+        {
+            FreeSlot.SelectedItem = null;
+        }
+
+        private void OutlinedComboBoxEnabledCheckBox2_Checked(object sender, RoutedEventArgs e)
+        {
+            if (OutlinedComboBoxEnabledCheckBox2.IsChecked == true)
+                FreeSlot.ItemsSource = null;
+            else
+                FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
+        }
+
+        private void FreeSlot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterByCombiBoxOfBaseStation();
         }
     }
 }

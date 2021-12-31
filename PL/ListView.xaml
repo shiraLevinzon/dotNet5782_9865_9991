@@ -24,8 +24,8 @@
             </Grid.RowDefinitions>
             <TabControl x:Name="TCview" Grid.Row="0" Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
               materialDesign:ColorZoneAssist.Mode="PrimaryMid"  TabStripPlacement="Top"
-              materialDesign:NavigationRailAssist.SelectionCornerRadius="50 10 10 10" materialDesign:NavigationRailAssist.ShowSelectionBackground="True">
-
+              materialDesign:NavigationRailAssist.SelectionCornerRadius="50 10 10 10" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="TCview_SelectionChanged">
+                <!--רחפנים-->
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Height="auto"  Width="auto">
@@ -33,16 +33,18 @@
                             <TextBlock Text="רחפנים" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
-                    
+
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="27*"/>
-                            <RowDefinition Height = "58*"/>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height = "319*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="9*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
+                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,319" Grid.RowSpan="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -65,11 +67,11 @@
                                     <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox1"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
                                     <Button  Name="Clear2" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear2_Click" />
                                 </Grid>
-                                <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="284" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
+                                <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
                             </StackPanel>
                         </Grid>
-                        
-                        <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="1" MouseDoubleClick="listOfDrones_MouseDoubleClick" >
+
+                        <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="2" MouseDoubleClick="listOfDrones_MouseDoubleClick" Grid.ColumnSpan="2" SelectionChanged="listOfDrones_SelectionChanged" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListViewItem}">
                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -87,22 +89,74 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
-
                     </Grid>
-
                 </TabItem>
-
+                <!--תחנות בסיס-->
                 <TabItem>
+
                     <TabItem.Header>
                         <StackPanel Height="auto"  Width="auto">
-                            <materialDesign:PackIcon Kind="ElectricCharger" Width="24" Height="24" HorizontalAlignment="Center" />
-                            <TextBlock Text="תחנות" HorizontalAlignment="Center" />
+                            <materialDesign:PackIcon Kind="EvStation" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="תחנות בסיס" Height="19" Width="102" FontSize="13"/>
                         </StackPanel>
                     </TabItem.Header>
- 
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height = "319*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="9*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,319" Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,0,4"  Grid.Column="0">
+                                <Grid Height="53" Width="276">
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox2"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" HorizontalAlignment="Right" Width="276" Checked="OutlinedComboBoxEnabledCheckBox2_Checked" />
+                                    <Button x:Name="Clear3" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" Click="Clear3_Click" Margin="211,10,0,11"  />
+                                </Grid>
+                                <ComboBox x:Name="FreeSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון עפ כמות עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="FreeSlot_SelectionChanged" />
+                            </StackPanel>
+                        </Grid>
+
+                        <ListView x:Name="listOfBaseStation" ItemsSource="{Binding Items1}" Margin="0,1,0,0" Grid.Row="2" MouseDoubleClick="listOfbaseStation_MouseDoubleClick" Grid.ColumnSpan="2" SelectionChanged="listOfBaseStation_SelectionChanged" RenderTransformOrigin="0.5,0.5" >
+                            <ListView.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0.350"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="-0.596"/>
+                                </TransformGroup>
+                            </ListView.RenderTransform>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה"  />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="שם " />
+                                    <GridViewColumn DisplayMemberBinding="{Binding MaxWeight}" Header="כמות עמדות פנויות"   />
+                                    <GridViewColumn DisplayMemberBinding="{Binding BatteryStatus, StringFormat=\{0:#0.0\}%}" Header="סוללה" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding location}" Header="  מיקום קו רוחב       מיקום קו אורך"  />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Conditions}" Header="מספרי רחפנים בטעינה " />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <!--תפריט בחירה לעמדות פנויות בתחת בסיס-->
+
+                    </Grid>
                 </TabItem>
-                <!--FDFGDFGFG-->
+                <!--לקוחות-->
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Height="auto"  Width="auto">
@@ -111,7 +165,7 @@
                         </StackPanel>
                     </TabItem.Header>
                 </TabItem>
-
+                <!--חבילות-->
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Height="auto"  Width="auto">
@@ -120,10 +174,8 @@
                         </StackPanel>
                     </TabItem.Header>
                 </TabItem>
-
-
             </TabControl>
-            
+            <!--לחצן הוספה-->
             <Grid Grid.Row="1" Background="LightGray">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=" *"/>
@@ -132,7 +184,7 @@
                 <Button  x:Name="Badd" Click="Badd_Click" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" ToolTip="MaterialDesignFloatingActionButton" Margin="211,10,36,10" Grid.Column="1" >
                     <materialDesign:PackIcon Kind="Plus"  Height="40" Width="40" VerticalAlignment="Center" />
                 </Button>
-                
+
             </Grid>
         </Grid>
 

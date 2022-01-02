@@ -41,10 +41,11 @@
                             <RowDefinition Height = "319*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="100*"/>
+                            <ColumnDefinition Width="157*"/>
+                            <ColumnDefinition Width="744*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,319" Grid.RowSpan="3">
+                        <Grid Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,319" Grid.RowSpan="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -71,7 +72,7 @@
                             </StackPanel>
                         </Grid>
 
-                        <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="2" MouseDoubleClick="listOfDrones_MouseDoubleClick" Grid.ColumnSpan="2" SelectionChanged="listOfDrones_SelectionChanged" >
+                        <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="2" MouseDoubleClick="listOfDrones_MouseDoubleClick" Grid.ColumnSpan="3" SelectionChanged="listOfDrones_SelectionChanged" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListViewItem}">
                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -173,6 +174,61 @@
                             <TextBlock Text="חבילות" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height="74*"/>
+                            <RowDefinition Height = "319*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="9*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,319" Grid.RowSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,0,4"  Grid.Column="0">
+                                <Grid Height="53" Width="276">
+                                    <Grid.ColumnDefinitions>
+
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="ComboBoxEnabledCheckBox"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <Button Name="ClearP1" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearP1_Click"  />
+                                </Grid>
+                                <ComboBox x:Name="StatusParcelSelector"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=ComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון סטטוס חבילה" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="StatusParcelSelector_SelectionChanged"  />
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,4"  Grid.Column="1">
+                                <Grid Height="53" Width="276">
+                                    <Grid.ColumnDefinitions>
+
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="parcelEnabledCheckBox1"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <Button  Name="ClearP2" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="ClearP2_Click"  />
+                                </Grid>
+                                <DatePicker Name="DATEcombobox" Width="278" IsEnabled="{Binding IsChecked, ElementName=parcelEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון לפי תאריך ייצור חבילה" Style="{StaticResource MaterialDesignOutlinedDatePicker}" SelectedDateChanged="DATEcombobox_SelectedDateChanged" />
+                            </StackPanel>
+                        </Grid>
+
+                        <ListView x:Name="listOfParcel" ItemsSource="{Binding Items1}" Margin="0,1,0,10" Grid.Row="2" Grid.ColumnSpan="2" MouseDoubleClick="listOfParcel_MouseDoubleClick"  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding SenderID}" Header="תז שולח" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding RecieverID}" Header="תז מקבל"   />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="משקל מירבי" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding ParcelPriority}" Header="דחיפות" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding ParcelCondition}" Header="מצב חבילה"  />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                 </TabItem>
             </TabControl>
             <!--לחצן הוספה-->

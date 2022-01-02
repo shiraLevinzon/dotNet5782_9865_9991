@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class ListView : Window
     {
-        IBL bl=BlFactory.GetBl();
+        IBL bl;
         public ListView(IBL bL)
         {
 
@@ -31,29 +31,23 @@ namespace PL
             {
                 case 0:
                     listOfDrones.ItemsSource = bl.GetAllDrones();
+                    StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
+                    WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
                     break;
                 case 1:
                     listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
                     break;
-                default:
-                    break;
-            }
-            listOfDrones.ItemsSource = bl.GetAllDrones();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            switch (TCview.SelectedIndex)
-            {
-                case 0:
-                    listOfDrones.ItemsSource = bl.GetAllDrones();
-                    StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
-                    WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+                case 3:
+                    listOfParcel.ItemsSource = bl.GetAllParcels();
+                    StatusParcelSelector.ItemsSource = Enum.GetValues(typeof(Situations));
                     break;
                 default:
                     break;
             }
-           
             
         }
+
+        #region Drone
         public void FilterByCombiBoxOfDrone()
         {
             if (WeightSelector.SelectedItem == null && StatusSelector.SelectedItem == null)
@@ -68,23 +62,16 @@ namespace PL
             else if (WeightSelector.SelectedIndex == -1 && StatusSelector.SelectedIndex != -1)
                 listOfDrones.ItemsSource = bl.GetAllDrones(dro => dro.Conditions == (BO.DroneConditions)StatusSelector.SelectedIndex);
         }
-        public void FilterByCombiBoxOfBaseStation()
-        {
-            if (FreeSlot.SelectedItem == null)
-                listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
-            else
-                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases=>bases.FreeChargingSlots == (int)(TheNumberOfFreeeSlot)FreeSlot.SelectedIndex);
-        }
+
         private void Clear1_Click(object sender, RoutedEventArgs e)
         {
-           StatusSelector.SelectedItem = null;
+            StatusSelector.SelectedItem = null;
         }
 
         private void Clear2_Click(object sender, RoutedEventArgs e)
         {
             WeightSelector.SelectedItem = null;
         }
-
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterByCombiBoxOfDrone();
@@ -95,59 +82,25 @@ namespace PL
             FilterByCombiBoxOfDrone();
 
         }
-
         private void listOfDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList d = (DroneToList)listOfDrones.SelectedItem;
             new Drone(d, bl).ShowDialog();
         }
+        #endregion
+        #region BaseStation
 
-        private void Badd_Click(object sender, RoutedEventArgs e)
+        public void FilterByCombiBoxOfBaseStation()
         {
-           /* switch(TCview.SelectedIndex)
-            {
-                case 0:
-                    new Drone(bl).ShowDialog();
-                    break;
-                case 1:
-                    new BaseStation(bl).ShowDialog();
-                    break;
-                case 2:
-                    new Customer(bl).ShowDialog();
-                    break;
-                case 3:
-                    new Parcel(bl).ShowDialog();
-                    break;
-                default:
-                    break;
-            }*/
+            if (FreeSlot.SelectedItem == null)
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
+            else
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases => bases.FreeChargingSlots == (int)(TheNumberOfFreeeSlot)FreeSlot.SelectedIndex);
         }
-
-        private void listViewWindow_Activated(object sender, EventArgs e)
-        {
-            FilterByCombiBoxOfDrone();
-        }
-
-        private void listOfDrones_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void listOfBaseStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
         private void listOfbaseStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }
-
-        private void TCview_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Clear3_Click(object sender, RoutedEventArgs e)
         {
             FreeSlot.SelectedItem = null;
@@ -160,10 +113,94 @@ namespace PL
             else
                 FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
         }
-
         private void FreeSlot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterByCombiBoxOfBaseStation();
         }
+        #endregion
+        #region Parcel
+        public void FilterByCombiBoxOfParcel()
+        {
+            if (DATEcombobox.SelectedDate == null && StatusParcelSelector.SelectedItem == null)
+            {
+                listOfParcel.ItemsSource = bl.GetAllParcels();
+            }
+            if (DATEcombobox.SelectedDate != null && StatusParcelSelector.SelectedIndex != -1)
+                listOfParcel.ItemsSource = bl.GetAllParcels(dro =>dro.ParcelCondition == (BO.Situations)StatusParcelSelector.SelectedIndex,DATEcombobox.SelectedDate);
+            else if (DATEcombobox.SelectedDate != null && StatusParcelSelector.SelectedIndex == -1)
+                listOfParcel.ItemsSource = bl.GetAllParcels(null,DATEcombobox.SelectedDate);
+            else if (DATEcombobox.SelectedDate == null && StatusParcelSelector.SelectedIndex != -1)
+                listOfParcel.ItemsSource = bl.GetAllParcels(dro => dro.ParcelCondition == (BO.Situations)StatusParcelSelector.SelectedIndex);
+        }
+        private void ClearP1_Click(object sender, RoutedEventArgs e)
+        {
+            StatusParcelSelector.SelectedItem = null;
+        }
+
+        private void ClearP2_Click(object sender, RoutedEventArgs e)
+        {
+            DATEcombobox.SelectedDate = null;
+        }
+        private void StatusParcelSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterByCombiBoxOfParcel();
+        }
+
+        private void DATEcombobox_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterByCombiBoxOfParcel();
+        }
+        private void listOfParcel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ParcelToList p = (ParcelToList)listOfParcel.SelectedItem;
+            new ParcelWindow(p.ID, bl).ShowDialog();
+        }
+        #endregion
+        private void Badd_Click(object sender, RoutedEventArgs e)
+        {
+            switch (TCview.SelectedIndex)
+            {
+                case 0:
+                    new Drone(bl).ShowDialog();
+                    break;
+                //case 1:
+                //    new BaseStation(bl).ShowDialog();
+                //    break;
+                //case 2:
+                //    new Customer(bl).ShowDialog();
+                //    break;
+                case 3:
+                    new ParcelWindow(bl).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void listViewWindow_Activated(object sender, EventArgs e)
+        {
+            FilterByCombiBoxOfDrone();
+            FilterByCombiBoxOfBaseStation();
+            FilterByCombiBoxOfParcel();
+        }
+
+        private void listOfDrones_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void listOfBaseStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        
+
+        private void TCview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+       
     }
 }

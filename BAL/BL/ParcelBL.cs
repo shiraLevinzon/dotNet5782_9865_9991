@@ -40,19 +40,28 @@ namespace BL
 
             return boParcel; 
         }
-        public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null)
+        public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null,DateTime? date=null)
         {
+            IEnumerable<DO.Parcel> parcels;
+            if (date!=default)
+            {
+                parcels = dalLayer.GetAllParcels(par => par.Scheduled.Day == date.Value.Day && par.Scheduled.Month == date.Value.Month && par.Scheduled.Year == date.Value.Year);
+            }
+            else
+            {
+               parcels = dalLayer.GetAllParcels();
+            }
+            IEnumerable<BO.ParcelToList> parcelToLists= from ParcelDO in parcels
+                                                         select new BO.ParcelToList()
+                                                         {
+                                                             ID = ParcelDO.ID,
+                                                             RecieverID = ParcelDO.TargetID,
+                                                             SenderID = ParcelDO.SenderID,
+                                                             ParcelPriority = (BO.Priorities)ParcelDO.priority,
+                                                             Weight = (BO.WeightCategories)ParcelDO.Weight,
+                                                             ParcelCondition = (BO.Situations)func(ParcelDO),
+                                                         };
 
-            IEnumerable<BO.ParcelToList> parcelToLists= from ParcelDO in dalLayer.GetAllParcels()
-                   select new BO.ParcelToList()
-                   {
-                       ID = ParcelDO.ID,
-                       RecieverID = ParcelDO.TargetID,
-                       SenderID = ParcelDO.SenderID,
-                       ParcelPriority = (BO.Priorities)ParcelDO.priority,
-                       Weight=(BO.WeightCategories)ParcelDO.Weight,
-                       ParcelCondition= (BO.Situations)func(ParcelDO),
-                   };
             if (predicate == null)
                 return parcelToLists;
             return parcelToLists.Where(p => predicate(p));

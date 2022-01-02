@@ -27,7 +27,7 @@ namespace BlApi
         #endregion
         #region פונקציות חבילה של שיכבה 2
         public BO.Parcel GetParcel(int id);
-        public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null);
+        public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null, DateTime? date = null);
         public void AddParcel(BO.Parcel parcel);
         public int func(DO.Parcel p);
 

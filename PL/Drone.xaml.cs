@@ -20,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-         IBL  bl =BlFactory.GetBl();
+         IBL  bl;
         int temp;
         public Drone(DroneToList d, BlApi.IBL blobject)
         {

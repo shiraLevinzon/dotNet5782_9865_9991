@@ -18,7 +18,45 @@
         Title="MainWindow" Height="640" Width="800">
     <Grid RenderTransformOrigin="0.498,0.504">
         <Grid>
-            <Image HorizontalAlignment="Left" Height="403" Margin="49,40,0,0" VerticalAlignment="Top" Width="707" Source="/רחפן תמונה.jpg">
+            <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="10,0,-10,0">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto" Width="auto">
+                            <materialDesign:PackIcon  Kind="Worker" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="עובד חברה" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <StackPanel Margin="44,119,407,392">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="הקש סיסמא" Height="26" HorizontalAlignment="Right"  />
+                            <CheckBox x:Name="MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox" Content="Enabled" />
+                            <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password" Height="99" />
+
+                        </StackPanel>
+                        <Button x:Name="enter" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="44,286,407,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="20" VerticalAlignment="Top" Click="enter_Click" />
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto" Width="auto">
+                            <materialDesign:PackIcon Kind="Person" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="לקוח קיים" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto" Width="auto">
+                            <materialDesign:PackIcon Kind="NewBox" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="רישום למערכת" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+
+            </TabControl>
+            <Image HorizontalAlignment="Left" Height="67" Margin="609,56,0,0" VerticalAlignment="Top" Width="107" Source="/רחפן תמונה.jpg">
                 <Image.OpacityMask>
                     <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
                         <ImageBrush.RelativeTransform>
@@ -33,6 +71,6 @@
                 </Image.OpacityMask>
             </Image>
         </Grid>
-        <Button Content="to show all drone press here:" HorizontalAlignment="Center" Margin="0,458,0,0" VerticalAlignment="Top" Height="71" Width="483" Click="Button_Click" Background="#FF6A69EF" FontFamily="Arial Rounded MT Bold" FontSize="24"/>
+
     </Grid>
 </Window>

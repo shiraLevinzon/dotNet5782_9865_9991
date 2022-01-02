@@ -26,14 +26,28 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new ListView(blObject).Show();            
-        }
+       
 
         private void listofbasestation_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void PackIcon_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
+        }
+
+        private void enter_Click(object sender, RoutedEventArgs e)
+        {
+            if(Password.Password=="1234")
+            {
+                new ListView(blObject).ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("The password is incorrect");
+            }
         }
     }
 }

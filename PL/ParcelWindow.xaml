@@ -18,7 +18,7 @@
         Title="ParcelWindow" Height="500" Width="500">
     <Grid Margin="0,0,0,-6">
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top" Width="140"  Height="46" Click="CancelBottun_Click"/>
-        <Grid x:Name="addMode" d:IsHidden="True">
+        <Grid x:Name="addMode">
             <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="64,100,0,0" VerticalAlignment="Top" Width="200">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -31,21 +31,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Priority:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                <ComboBox x:Name="priorityComboBox" Grid.Column="1" DisplayMemberPath="Priority" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120">
-                    <ComboBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel/>
-                        </ItemsPanelTemplate>
-                    </ComboBox.ItemsPanel>
-                </ComboBox>
+                <ComboBox x:Name="priorityComboBox" Grid.Column="1" DisplayMemberPath="Priority" HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                <ComboBox x:Name="weightComboBox" Grid.Column="1" DisplayMemberPath="Weight" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120">
-                    <ComboBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel/>
-                        </ItemsPanelTemplate>
-                    </ComboBox.ItemsPanel>
-                </ComboBox>
+                <ComboBox x:Name="weightComboBox" Grid.Column="1" DisplayMemberPath="Weight" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
+
                 <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
                 <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Receiver.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
@@ -55,7 +44,7 @@
             <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0" RenderTransformOrigin="0.438,0.572">
+        <Grid x:Name="actMode" Margin="-10,0,10,0" RenderTransformOrigin="0.438,0.572" d:IsHidden="True">
             <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Height="339" Width="248">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -98,10 +87,10 @@
             </Grid>
 
 
-            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Left" Margin="250,385,0,0" VerticalAlignment="Top" Height="46" Width="136" />
+            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Center" Margin="0,396,0,0" VerticalAlignment="Top" Height="46" Width="136" />
             <Button x:Name="showSender" Content="Show" HorizontalAlignment="Left" Margin="60,335,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showSender_Click"/>
             <Button x:Name="showResiver" Content="Show" HorizontalAlignment="Left" Margin="60,305,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showResiver_Click"/>
-            <Button x:Name="showDrone"  Content="Show" HorizontalAlignment="Left" Margin="60,275,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showDrone_Click" />
+            <Button x:Name="showDrone" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="60,275,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showDrone_Click" />
         </Grid>
     </Grid>
 </Window>

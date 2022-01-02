@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
-using DalObject;
+using Dal;
 namespace BL
 {
     partial class BL : BlApi.IBL
     {
-        static readonly Lazy< IBL> instance = new Lazy<IBL>(() => new BL());
-        public static IBL Instance { get => instance.Value; }
-       //  static readonly IBL instance = new BL();
+        //  static readonly Lazy< IBL> instance = new Lazy<IBL>(() => new BL());
+        //  public static IBL Instance { get => instance.Value; }
+        // //  static readonly IBL instance = new BL();
 
-        // The public Instance property to use 
-      //   public static IBL Instance { get { return instance; } }
-
+        //  // The public Instance property to use 
+        ////   public static IBL Instance { get { return instance; } }
+     
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
         internal IDal dalLayer = DalFactory.GetDal();
 
-        internal static Random r1 = new Random();
+        internal  Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
             Random random = new Random();

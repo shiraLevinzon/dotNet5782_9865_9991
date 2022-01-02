@@ -15,10 +15,10 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="ParcelWindow" Height="500" Width="400">
+        Title="ParcelWindow" Height="500" Width="500">
     <Grid Margin="0,0,0,-6">
-        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="43"/>
-        <Grid x:Name="addMode">
+        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top" Width="140"  Height="46" Click="CancelBottun_Click"/>
+        <Grid x:Name="addMode" d:IsHidden="True">
             <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="64,100,0,0" VerticalAlignment="Top" Width="200">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -55,8 +55,8 @@
             <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0" d:IsHidden="True">
-            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="47,46,0,0" VerticalAlignment="Top" Height="329" Width="273">
+        <Grid x:Name="actMode" Margin="-10,0,10,0" RenderTransformOrigin="0.438,0.572">
+            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Height="339" Width="248">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -64,14 +64,14 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto" MinHeight="41.333"/>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto" MinHeight="32"/>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto"/>
 
                 </Grid.RowDefinitions>
@@ -96,10 +96,12 @@
                 <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="10" VerticalAlignment="Center" Height="26" Width="65"/>
                 <TextBlock x:Name="iDTextBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,0,8.333" Grid.Row="10" Text="{Binding Sender.ID}" VerticalAlignment="Center" Height="16" Width="7"/>
             </Grid>
-            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Left" Margin="184,380,0,0" VerticalAlignment="Top" Height="46" Width="136" Click="updateBottun_Click"/>
-            <Button x:Name="showSender" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" IsEnabled="False" Margin="325,343,0,209" Click="showParcel_Click" RenderTransformOrigin="0.048,-0.885" />
-            <Button x:Name="showDrone" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" IsEnabled="False" Margin="325,279,0,273" Click="showParcel_Click" />
-            <Button x:Name="showResiver" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Content="SHOW" IsEnabled="False" Margin="325,311,0,241" Click="showParcel_Click" />
+
+
+            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Left" Margin="250,385,0,0" VerticalAlignment="Top" Height="46" Width="136" />
+            <Button x:Name="showSender" Content="Show" HorizontalAlignment="Left" Margin="60,335,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showSender_Click"/>
+            <Button x:Name="showResiver" Content="Show" HorizontalAlignment="Left" Margin="60,305,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showResiver_Click"/>
+            <Button x:Name="showDrone"  Content="Show" HorizontalAlignment="Left" Margin="60,275,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showDrone_Click" />
         </Grid>
     </Grid>
 </Window>

@@ -27,24 +27,14 @@ namespace PL
 
             InitializeComponent();
             bl = bL;
-            switch (TCview.SelectedIndex)
-            {
-                case 0:
-                    listOfDrones.ItemsSource = bl.GetAllDrones();
-                    StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
-                    WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-                    break;
-                case 1:
-                    listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
-                    break;
-                case 3:
-                    listOfParcel.ItemsSource = bl.GetAllParcels();
-                    StatusParcelSelector.ItemsSource = Enum.GetValues(typeof(Situations));
-                    break;
-                default:
-                    break;
-            }
-            
+            listOfDrones.ItemsSource = bl.GetAllDrones();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+
+            listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
+
+            listOfParcel.ItemsSource = bl.GetAllParcels();
+            StatusParcelSelector.ItemsSource = Enum.GetValues(typeof(Situations));
         }
 
         #region Drone
@@ -108,8 +98,10 @@ namespace PL
 
         private void OutlinedComboBoxEnabledCheckBox2_Checked(object sender, RoutedEventArgs e)
         {
+            int i = 0;
             if (OutlinedComboBoxEnabledCheckBox2.IsChecked == true)
-                FreeSlot.ItemsSource = null;
+                i= 0;
+            //FreeSlot.ItemsSource = null;
             else
                 FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
         }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalObject;
 using DO;
 using DalApi;
-namespace DalObject
+namespace Dal
 {
      partial class DalObject : DalApi.IDal
     {

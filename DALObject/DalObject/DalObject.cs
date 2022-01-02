@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DO;
 using DalApi;
 
-namespace DalObject
+namespace Dal
 {
     public class DataSource
     {
@@ -112,16 +112,17 @@ namespace DalObject
     }
 
 
-    partial class DalObject : DalApi.IDal
-    {
-        static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
-        public static IDal Instance { get => instance.Value; }
-       // static readonly IDal instance = new DalObject();
+     partial class DalObject : DalApi.IDal
+     {
+        //static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
+        //public static IDal Instance { get => instance.Value; }
+        // static readonly IDal instance = new DalObject();
 
         // The public Instance property to use 
-      //  public static IDal Instance { get { return instance; } }
+        //  public static IDal Instance { get { return instance; } }
 
-
+        static readonly IDal instance = new DalObject();
+        public static IDal Instance { get => instance; }
         public DalObject() { DataSource.Initialize(); }
        
             

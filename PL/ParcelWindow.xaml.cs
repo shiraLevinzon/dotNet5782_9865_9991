@@ -23,19 +23,25 @@ namespace PL
     public partial class ParcelWindow : Window
     {
         IBL bl;
+        BO.Parcel parcel;
         public ParcelWindow(int id, BlApi.IBL blobject)
         {
             InitializeComponent();
             bl = blobject;
+            parcel= bl.GetParcel(id);
             addMode.Visibility = Visibility.Hidden;
-            actMode.DataContext = bl.GetParcel(id);
-
+            actMode.DataContext = parcel;
+            if(parcel.DroneInParcel!=null)
+            {
+                showDrone.IsEnabled = true;
+            }
         }
         public ParcelWindow(BlApi.IBL blobject)
         {
             InitializeComponent();
             actMode.Visibility = Visibility.Hidden;
-
+            priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priorities));
+            weightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
         }
 
         private void AddBottun_Click(object sender, RoutedEventArgs e)
@@ -57,6 +63,28 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void CancelBottun_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void showSender_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerInParcelWindow(parcel.Sender).ShowDialog();
+
+        }
+
+        private void showResiver_Click(object sender, RoutedEventArgs e)
+        {
+            new CustomerInParcelWindow(parcel.Receiver).ShowDialog();
+        }
+
+        private void showDrone_Click(object sender, RoutedEventArgs e)
+        {
+            new DroneInParcelWindow(parcel.DroneInParcel).ShowDialog();
+
         }
     }
 }

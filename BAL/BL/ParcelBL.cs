@@ -9,7 +9,7 @@ using DalApi;
 namespace BL
 {
      partial class BL : BlApi.IBL
-    {
+     {
         public BO.Parcel GetParcel(int id)
         {
             BO.Parcel boParcel = new BO.Parcel();

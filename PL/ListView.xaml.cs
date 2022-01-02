@@ -98,10 +98,8 @@ namespace PL
 
         private void OutlinedComboBoxEnabledCheckBox2_Checked(object sender, RoutedEventArgs e)
         {
-            int i = 0;
-            if (OutlinedComboBoxEnabledCheckBox2.IsChecked == true)
-                i= 0;
-            //FreeSlot.ItemsSource = null;
+            if (OutlinedComboBoxEnabledCheckBox2.IsChecked == true) ;
+            // FreeSlot.ItemsSource;//= null;
             else
                 FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
         }

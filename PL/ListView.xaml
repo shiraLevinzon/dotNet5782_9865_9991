@@ -144,11 +144,10 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה"  />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="שם " />
-                                    <GridViewColumn DisplayMemberBinding="{Binding MaxWeight}" Header="כמות עמדות פנויות"   />
-                                    <GridViewColumn DisplayMemberBinding="{Binding BatteryStatus, StringFormat=\{0:#0.0\}%}" Header="סוללה" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding StationName}" Header="שם " />
+                                    <GridViewColumn DisplayMemberBinding="{Binding FreeChargingSlots}" Header="כמות עמדות פנויות"   />
                                     <GridViewColumn DisplayMemberBinding="{Binding location}" Header="  מיקום קו רוחב       מיקום קו אורך"  />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Conditions}" Header="מספרי רחפנים בטעינה " />
+                                    <GridViewColumn DisplayMemberBinding="{Binding DronesInCharge}" Header="מספרי רחפנים בטעינה " />
 
                                 </GridView>
                             </ListView.View>

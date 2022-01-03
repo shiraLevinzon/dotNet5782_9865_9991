@@ -29,8 +29,7 @@
                     <Grid>
                         <StackPanel Margin="44,119,407,392">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="הקש סיסמא" Height="26" HorizontalAlignment="Right"  />
-                            <CheckBox x:Name="MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox" Content="Enabled" />
-                            <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password" Height="99" />
+                            <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" materialDesign:HintAssist.Hint="Password" Height="72" />
 
                         </StackPanel>
                         <Button x:Name="enter" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="44,286,407,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="20" VerticalAlignment="Top" Click="enter_Click" />
@@ -56,7 +55,7 @@
                 </TabItem>
 
             </TabControl>
-            <Image HorizontalAlignment="Left" Height="67" Margin="609,56,0,0" VerticalAlignment="Top" Width="107" Source="/רחפן תמונה.jpg">
+            <Image HorizontalAlignment="Left" Height="63" Margin="601,56,0,0" VerticalAlignment="Top" Width="115" Source="/רחפן תמונה.jpg">
                 <Image.OpacityMask>
                     <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
                         <ImageBrush.RelativeTransform>

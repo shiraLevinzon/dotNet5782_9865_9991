@@ -34,29 +34,35 @@ namespace PL
             if(parcel.DroneInParcel!=null)
             {
                 showDrone.IsEnabled = true;
+                DeleteBottun.IsEnabled = false;
             }
         }
         public ParcelWindow(BlApi.IBL blobject)
         {
             InitializeComponent();
+            bl = blobject;
             actMode.Visibility = Visibility.Hidden;
             priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priorities));
             weightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            ReceiverIDComboBox.ItemsSource = bl.GetAllCustomer().Select(cu => cu.ID);
+            SenderIDComboBox.ItemsSource = bl.GetAllCustomer().Select(cu => cu.ID);
+
         }
 
         private void AddBottun_Click(object sender, RoutedEventArgs e)
         {
             BO.Parcel p = new Parcel()
             {
-                Sender = new CustomerInParcel { ID = Convert.ToInt32(iDTextBox1) },
-                Receiver = new CustomerInParcel { ID = Convert.ToInt32(iDTextBox1) },
+                Sender = new CustomerInParcel { ID = Convert.ToInt32(SenderIDComboBox.SelectedItem) },
+                Receiver = new CustomerInParcel { ID = Convert.ToInt32(ReceiverIDComboBox.SelectedItem) },
                 Weight=(WeightCategories)Convert.ToInt32(weightComboBox.SelectedItem),
                 Priority = (BO.Priorities)Convert.ToInt32(priorityComboBox.SelectedItem),
             };
             try
             {
                 bl.AddParcel(p);
-                MessageBox.Show("add drone sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("add parcel sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
 
             }
             catch (DuplicateIdException ex)
@@ -85,6 +91,34 @@ namespace PL
         {
             new DroneInParcelWindow(parcel.DroneInParcel).ShowDialog();
 
+        }
+
+        private void iDTextBlock1_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            if(iDTextBlock1.Text!=null)
+            {
+                showDrone.IsEnabled = true;
+            }
+            else
+            {
+                DeleteBottun.IsEnabled=true;
+            }
+        }
+
+        private void grid2_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+            if(priorityComboBox.SelectedIndex!=-1&&weightComboBox.SelectedIndex!=-1&&ReceiverIDComboBox.SelectedIndex!=-1&&SenderIDComboBox.SelectedIndex!=-1)
+            {
+                AddBottun.IsEnabled = true;
+            }
+        }
+
+        private void grid2_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (priorityComboBox.SelectedIndex != -1 && weightComboBox.SelectedIndex != -1 && ReceiverIDComboBox.SelectedIndex != -1 && SenderIDComboBox.SelectedIndex != -1)
+            {
+                AddBottun.IsEnabled = true;
+            }
         }
     }
 }

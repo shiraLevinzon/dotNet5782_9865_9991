@@ -68,7 +68,7 @@
                                     <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox1"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
                                     <Button  Name="Clear2" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear2_Click" />
                                 </Grid>
-                                <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
+                                <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
                             </StackPanel>
                         </Grid>
 

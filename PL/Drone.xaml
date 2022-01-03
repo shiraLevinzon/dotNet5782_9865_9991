@@ -69,7 +69,7 @@
                 <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="4" VerticalAlignment="Center"/>
                 <TextBox x:Name="modelTextBox" Grid.Column="2" HorizontalAlignment="Center" Height="23" Grid.Row="4" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="modelTextBox_TextChanged"/>
                 <Label Content="Packag Number On Transferred:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                <Label x:Name="packagNumberOnTransferredLabel" Content="{Binding PackagNumberOnTransferred}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,4,0,0" Grid.Row="5" VerticalAlignment="Top" Height="15" Width="57"/>
+                <TextBlock x:Name="packagNumberOnTransferred" Text="{Binding PackagNumberOnTransferred}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5"  VerticalAlignment="Center" Height="16" Width="111" />
                 <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label x:Name="latitudeLabel" Content="{Binding location.Latitude}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
                 <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>

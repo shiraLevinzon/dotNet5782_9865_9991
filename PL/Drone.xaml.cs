@@ -32,9 +32,6 @@ namespace PL
             modelTextBox.IsEnabled = true;
             updateBottun.IsEnabled = false;
             StationIdComboBox.Visibility = Visibility.Hidden;
-            
-                showParcel.IsEnabled = true;
-            
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
         }
@@ -276,5 +273,7 @@ namespace PL
         {
             new parcelInTransferWindow(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
         }
+
+     
     }
 }

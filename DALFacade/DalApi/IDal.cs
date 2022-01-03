@@ -8,8 +8,17 @@ namespace DalApi
 {
     public interface IDal
     {
+        #region User
+        public User GetUser(int id);
+        public bool CheckUser(int id);
+        public void UpdUser(User tmp);
+        public void AddUser(User tmp);
+        public IEnumerable<User> GetAllUser(Predicate<User> predicate = null);
+
+        #endregion
+
         #region Drone
-         void AddDrone(Drone tmp);
+        void AddDrone(Drone tmp);
         public Drone GetDrone(int id);
         public bool CheckDrone(int id);
         public void UpdDrone(Drone tmp);

@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 namespace BlApi
 {
    public interface IBL
    {
+        public User GetUser(int id);
+        public void UpdUser(User tmp);
+        public void AddUser(User tmp);
+        public IEnumerable<User> GetAllUser(Predicate<User> predicate = null);
+
         #region פונקציות תחנת בסיס של שיכבה 2
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null);
         public BO.BaseStation GetBaseStation(int id);

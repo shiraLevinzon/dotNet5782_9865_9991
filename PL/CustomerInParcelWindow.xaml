@@ -23,13 +23,14 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBlock x:Name="customerNameTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding CustomerName}" VerticalAlignment="Center"/>
             <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBlock x:Name="iDTextBlock4" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
+            <materialDesign:PackIcon Kind="AccountCheck" Margin="-54,2,62,1" Height="25" Width="41" materialDesign:ColorZoneAssist.Background="Aqua" />
         </Grid>
     </Grid>
 </Window>

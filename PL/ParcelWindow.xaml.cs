@@ -75,7 +75,6 @@ namespace PL
             new CustomerInParcelWindow(parcel.Sender).ShowDialog();
 
         }
-
         private void showResiver_Click(object sender, RoutedEventArgs e)
         {
             new CustomerInParcelWindow(parcel.Receiver).ShowDialog();

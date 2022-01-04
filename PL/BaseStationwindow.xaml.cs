@@ -25,6 +25,7 @@ namespace PL
         {
             InitializeComponent();
             bl = bll;
+            actMode.Visibility = Visibility.Collapsed;
 
         }
 

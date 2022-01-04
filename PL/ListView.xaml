@@ -24,7 +24,7 @@
             </Grid.RowDefinitions>
             <TabControl x:Name="TCview" Grid.Row="0" Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
               materialDesign:ColorZoneAssist.Mode="PrimaryMid"  TabStripPlacement="Top"
-              materialDesign:NavigationRailAssist.SelectionCornerRadius="50 10 10 10" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="TCview_SelectionChanged">
+              materialDesign:NavigationRailAssist.SelectionCornerRadius="50 10 10 10" materialDesign:NavigationRailAssist.ShowSelectionBackground="True" SelectionChanged="TCview_SelectionChanged"  >
                 <!--רחפנים-->
                 <TabItem>
                     <TabItem.Header>
@@ -119,10 +119,10 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Margin="0,0,0,4"  Grid.Column="0">
                                 <Grid Height="53" Width="276">
-                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox2"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" HorizontalAlignment="Right" Width="276" Checked="OutlinedComboBoxEnabledCheckBox2_Checked" />
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox2"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
                                     <Button x:Name="Clear3" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" Click="Clear3_Click" Margin="211,10,0,11"  />
                                 </Grid>
-                                <ComboBox x:Name="FreeSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון עפ כמות עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="FreeSlot_SelectionChanged" />
+                                <ComboBox x:Name="FreeSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox2}" materialDesign:HintAssist.Hint="סינון עפ כמות עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="FreeSlot_SelectionChanged" />
                             </StackPanel>
                         </Grid>
 
@@ -144,11 +144,9 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה"  />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="שם " />
-                                    <GridViewColumn DisplayMemberBinding="{Binding MaxWeight}" Header="כמות עמדות פנויות"   />
-                                    <GridViewColumn DisplayMemberBinding="{Binding BatteryStatus, StringFormat=\{0:#0.0\}%}" Header="סוללה" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding location}" Header="  מיקום קו רוחב       מיקום קו אורך"  />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Conditions}" Header="מספרי רחפנים בטעינה " />
+                                    <GridViewColumn DisplayMemberBinding="{Binding StationName}" Header="שם " />
+                                    <GridViewColumn DisplayMemberBinding="{Binding FreeChargingSlots}" Header="כמות עמדות פנויות"   />
+                                    <GridViewColumn DisplayMemberBinding="{Binding BusyChargingSlots}" Header="מספרי רחפנים בטעינה " />
 
                                 </GridView>
                             </ListView.View>

@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL
 {
-    public enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five };
+    public enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five,};
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
@@ -32,6 +32,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
 
             listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
+            FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
 
             listOfParcel.ItemsSource = bl.GetAllParcels();
             StatusParcelSelector.ItemsSource = Enum.GetValues(typeof(Situations));
@@ -95,16 +96,6 @@ namespace PL
         {
             FreeSlot.SelectedItem = null;
         }
-
-        private void OutlinedComboBoxEnabledCheckBox2_Checked(object sender, RoutedEventArgs e)
-        {
-            int i = 0;
-            if (OutlinedComboBoxEnabledCheckBox2.IsChecked == true)
-                i= 0;
-            //FreeSlot.ItemsSource = null;
-            else
-                FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
-        }
         private void FreeSlot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterByCombiBoxOfBaseStation();
@@ -155,9 +146,9 @@ namespace PL
                 case 0:
                     new Drone(bl).ShowDialog();
                     break;
-                //case 1:
-                //    new BaseStation(bl).ShowDialog();
-                //    break;
+                case 1:
+                   new BaseStationwindow(bl).ShowDialog();
+                   break;
                 //case 2:
                 //    new Customer(bl).ShowDialog();
                 //    break;
@@ -193,6 +184,9 @@ namespace PL
 
         }
 
-       
+        private void TCview_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
+        }
     }
 }

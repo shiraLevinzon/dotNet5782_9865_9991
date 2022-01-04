@@ -58,7 +58,7 @@
                             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="תעודת זהות" HorizontalAlignment="Right"  />
                             <TextBox x:Name="idTEXTBOX" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.HelperTextFontSize="16" Height="69" />
                             <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="סיסמה" HorizontalAlignment="Right"  />
-                            <PasswordBox x:Name="passwordCustomer" Style="{StaticResource MaterialDesignFilledPasswordBox}"  materialDesign:HintAssist.Hint="Password" Height="114" />
+                            <PasswordBox x:Name="passwordCustomer" Style="{StaticResource MaterialDesignFilledPasswordBox}"  materialDesign:HintAssist.Hint="Password" Height="89" />
                         </StackPanel>
                         <Button x:Name="enterCustomer" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="154,436,231,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="30" VerticalAlignment="Top" Height="55" Click="enterCustomer_Click" />
 
@@ -102,7 +102,7 @@
                 </TabItem>
 
             </TabControl>
-            <Image HorizontalAlignment="Left" Height="63" Margin="561,10,0,0" VerticalAlignment="Top" Width="114" Source="/רחפן תמונה.jpg" RenderTransformOrigin="1.232,0.001">
+            <Image HorizontalAlignment="Left" Height="80" Margin="561,10,0,0" VerticalAlignment="Top" Width="114" Source="/רחפן תמונה.jpg" RenderTransformOrigin="1.232,0.001">
                 <Image.OpacityMask>
                     <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
                         <ImageBrush.RelativeTransform>

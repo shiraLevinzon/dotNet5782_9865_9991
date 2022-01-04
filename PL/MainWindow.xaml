@@ -15,10 +15,10 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="MainWindow" Height="640" Width="800">
+        Title="MainWindow" Height="640" Width="700">
     <Grid RenderTransformOrigin="0.498,0.504">
         <Grid>
-            <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="10,0,-10,0">
+            <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="0,0,-10,0">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Height="auto" Width="auto">
@@ -26,14 +26,13 @@
                             <TextBlock Text="עובד חברה" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
-                        <StackPanel Margin="44,119,407,392">
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="הקש סיסמא" Height="26" HorizontalAlignment="Right"  />
-                            <CheckBox x:Name="MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox" Content="Enabled" />
-                            <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password" Height="99" />
+                    <Grid Width="618">
+                        <StackPanel Margin="79,219,181,229">
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="הקש סיסמא" Height="62" HorizontalAlignment="Stretch" FontSize="40" Width="227"  />
+                            <PasswordBox x:Name="Password" Style="{StaticResource MaterialDesignFilledPasswordBox}" materialDesign:HintAssist.Hint="Password" Height="72" />
 
                         </StackPanel>
-                        <Button x:Name="enter" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="44,286,407,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="20" VerticalAlignment="Top" Click="enter_Click" />
+                        <Button x:Name="enter" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="156,400,258,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="30" VerticalAlignment="Top" Click="enter_Click" Height="49" />
 
                     </Grid>
 
@@ -45,6 +44,27 @@
                             <TextBlock Text="לקוח קיים" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
+                    <Grid Margin="0,0,0,3" Width="622">
+                        <StackPanel Margin="38,120,147,226" RenderTransformOrigin="0.5,0.5">
+                            <StackPanel.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0.364"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="0.66"/>
+                                </TransformGroup>
+                            </StackPanel.RenderTransform>
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Welcome" Height="78" FontSize="60" HorizontalAlignment="Center" />
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="תעודת זהות" HorizontalAlignment="Right"  />
+                            <TextBox x:Name="idTEXTBOX" materialDesign:HintAssist.Hint="Id" materialDesign:HintAssist.HelperTextFontSize="16" Height="69" />
+                            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="סיסמה" HorizontalAlignment="Right"  />
+                            <PasswordBox x:Name="passwordCustomer" Style="{StaticResource MaterialDesignFilledPasswordBox}"  materialDesign:HintAssist.Hint="Password" Height="114" />
+                        </StackPanel>
+                        <Button x:Name="enterCustomer" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="כניסה" Margin="154,436,231,0" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" FontSize="30" VerticalAlignment="Top" Height="55" Click="enterCustomer_Click" />
+
+                    </Grid>
+
+
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
@@ -53,10 +73,36 @@
                             <TextBlock Text="רישום למערכת" HorizontalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
+                    <Grid>
+                        <Button x:Name="nerUser" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="הירשם" Margin="60,312,354,0"  FontSize="30" VerticalAlignment="Top"  Height="49" Click="nerUser_Click" />
+                        <Grid x:Name="newUser" HorizontalAlignment="Left" Margin="63,195,0,0" VerticalAlignment="Top" Height="101" Width="221">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="81.11"/>
+                                <ColumnDefinition Width="44.89"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+                            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                            <Label Content="Password:" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
+                            <TextBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="2" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                            <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+                            <TextBox x:Name="phoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,0,0,0" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                        </Grid>
+                    </Grid>
+
+
                 </TabItem>
 
             </TabControl>
-            <Image HorizontalAlignment="Left" Height="67" Margin="609,56,0,0" VerticalAlignment="Top" Width="107" Source="/רחפן תמונה.jpg">
+            <Image HorizontalAlignment="Left" Height="63" Margin="561,10,0,0" VerticalAlignment="Top" Width="114" Source="/רחפן תמונה.jpg" RenderTransformOrigin="1.232,0.001">
                 <Image.OpacityMask>
                     <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
                         <ImageBrush.RelativeTransform>

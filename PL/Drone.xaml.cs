@@ -271,7 +271,9 @@ namespace PL
 
         private void showParcel_Click(object sender, RoutedEventArgs e)
         {
-            new ParInTransfer(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
+            new parcelInTransferWindow(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
         }
+
+     
     }
 }

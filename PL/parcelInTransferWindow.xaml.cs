@@ -15,18 +15,16 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ParInTransfer.xaml
+    /// Interaction logic for parcelInTransferWindow.xaml
     /// </summary>
-    public partial class ParInTransfer : Window
+    public partial class parcelInTransferWindow : Window
     {
         BlApi.IBL bl;
-        public ParInTransfer(int id, BlApi.IBL blobject)
+        public parcelInTransferWindow(int id,BlApi.IBL bL)
         {
             InitializeComponent();
-            bl = blobject;
-            BO.Drone drone = new BO.Drone();
-            drone = bl.GetDrone(id);
-            PITgrid.DataContext = drone.PackageInTransfer;
+            bl = bL;
+            details.DataContext = bl.GetDrone(id).PackageInTransfer;
         }
     }
 }

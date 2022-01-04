@@ -35,7 +35,7 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName,"this id isnt existe");
             }
 
             return boParcel; 
@@ -45,7 +45,7 @@ namespace BL
             IEnumerable<DO.Parcel> parcels;
             if (date!=default)
             {
-                parcels = dalLayer.GetAllParcels(par => par.Scheduled.Day == date.Value.Day && par.Scheduled.Month == date.Value.Month && par.Scheduled.Year == date.Value.Year);
+                parcels = dalLayer.GetAllParcels(par => par.Requested.Day == date.Value.Day && par.Requested.Month == date.Value.Month && par.Requested.Year == date.Value.Year);
             }
             else
             {

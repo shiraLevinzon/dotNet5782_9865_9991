@@ -15,6 +15,8 @@ namespace Dal
         internal static List<Customer> customers = new List<Customer>();
         internal static List<Parcel> parcels = new List<Parcel>();
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
+        internal static List<User> users = new List<User>();
+
 
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)

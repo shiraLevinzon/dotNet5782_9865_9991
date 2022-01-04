@@ -1,0 +1,58 @@
+﻿<Window x:Class="PL.parcelInTransferWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="parcelInTransferWindow" Height="450" Width="400">
+    <Grid>
+        <Grid x:Name="details" HorizontalAlignment="Left" Margin="53,0,0,0" VerticalAlignment="Top" Width="262">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBlock x:Name="distanceTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding distance}" VerticalAlignment="Center"/>
+            <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
+            <Label Content="Package mode:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <CheckBox x:Name="package_modeCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Package_mode, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="priority:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBlock x:Name="priorityTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding priority}" VerticalAlignment="Center"/>
+            <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBlock x:Name="weightTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Weight}" VerticalAlignment="Center"/>
+            <Label Content="Collection Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBlock x:Name="latitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Collection.Latitude}" VerticalAlignment="Center"/>
+            <Label Content="Collection Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" Text="{Binding Collection.Longitude}" VerticalAlignment="Center"/>
+            <Label Content="Destination Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <TextBlock x:Name="latitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="7" Text="{Binding PackageDestination.Latitude}" VerticalAlignment="Center"/>
+            <Label Content="Destination Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <TextBlock x:Name="longitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="8" Text="{Binding PackageDestination.Longitude}" VerticalAlignment="Center"/>
+            <Label Content="Receiver Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+            <TextBlock x:Name="customerNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="9" Text="{Binding Receives.CustomerName}" VerticalAlignment="Center"/>
+            <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="10" Text="{Binding Receives.ID}" VerticalAlignment="Center"/>
+            <Label Content="Sender Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
+            <TextBlock x:Name="customerNameTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="11" Text="{Binding Sender.CustomerName}" VerticalAlignment="Center"/>
+            <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="12" VerticalAlignment="Center"/>
+            <TextBlock x:Name="iDTextBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="12" Text="{Binding Sender.ID}" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

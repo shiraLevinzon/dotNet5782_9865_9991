@@ -19,7 +19,7 @@
     <Grid Margin="0,0,0,-6">
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top" Width="140"  Height="46" Click="CancelBottun_Click"/>
         <Grid x:Name="addMode" d:IsHidden="True">
-            <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="64,100,0,0" VerticalAlignment="Top" Width="200">
+            <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="64,100,0,0" VerticalAlignment="Top" Width="200" SourceUpdated="grid2_SourceUpdated" DataContextChanged="grid2_DataContextChanged">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -34,18 +34,17 @@
                 <ComboBox x:Name="priorityComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
                 <ComboBox x:Name="weightComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
-
                 <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="iDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Receiver.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <ComboBox x:Name="ReceiverIDComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                <TextBox x:Name="iDTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Sender.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <ComboBox x:Name="SenderIDComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
             </Grid>
             <materialDesign:PackIcon Name="error" Visibility="Hidden" Kind="AlertCircleOutline" Height="65" Width="33" Margin="47,112,0,0" />
-            <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click"/>
+            <Button x:Name="AddBottun"  Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click"/>
         </Grid>
 
         <Grid x:Name="actMode" Margin="-10,0,10,0" RenderTransformOrigin="0.438,0.572">
-            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="163,46,0,0" VerticalAlignment="Top" Height="350" Width="260">
+            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Height="332" Width="248">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -65,25 +64,25 @@
 
                 </Grid.RowDefinitions>
                 <Label Content="Delivered:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="63"/>
-                <TextBlock x:Name="deliveredTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,-0.333,8.333" Grid.Row="5" Text="{Binding Delivered}" VerticalAlignment="Center" Height="16" Width="118"/>
+                <TextBlock x:Name="deliveredTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" Text="{Binding Delivered}" VerticalAlignment="Center" Height="16" Width="131"/>
                 <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="24"/>
-                <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,8,0,8" Grid.Row="0" Text="{Binding ID}" VerticalAlignment="Center" Height="16" Width="7"/>
-                <Label Content="Picked Up:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="65"/>
-                <TextBlock x:Name="pickedUpTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,-0.333,8.333" Grid.Row="4" Text="{Binding PickedUp}" VerticalAlignment="Center" Height="16" Width="118"/>
+                <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Text="{Binding ID}" VerticalAlignment="Center" Height="16" Width="37"/>
+                <Label Content="Picked Up:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="65"/>
+                <TextBlock x:Name="pickedUpTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,8" Grid.Row="4" Text="{Binding PickedUp}" VerticalAlignment="Bottom" Height="16" Width="141"/>
                 <Label Content="Priority:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="7" VerticalAlignment="Center" Height="26" Width="51"/>
                 <TextBlock x:Name="priorityTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" Text="{Binding Priority}" VerticalAlignment="Center" Height="16" Width="131"/>
                 <Label Content="Requested:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7,0,8.333" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="69"/>
-                <TextBlock x:Name="requestedTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,12,-0.333,13.333" Grid.Row="2" Text="{Binding Requested}" VerticalAlignment="Center" Height="16" Width="118"/>
+                <TextBlock x:Name="requestedTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" Text="{Binding Requested}" VerticalAlignment="Center" Height="16" Width="131"/>
                 <Label Content="Scheduled:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="68"/>
-                <TextBlock x:Name="scheduledTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,-0.333,8.333" Grid.Row="3" Text="{Binding Scheduled}" VerticalAlignment="Center" Height="16" Width="118"/>
+                <TextBlock x:Name="scheduledTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" Text="{Binding Scheduled}" VerticalAlignment="Center" Height="16" Width="131"/>
                 <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="51"/>
-                <TextBlock x:Name="weightTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,0,8.333" Grid.Row="6" Text="{Binding Weight}" VerticalAlignment="Center" Height="16" Width="30"/>
+                <TextBlock x:Name="weightTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="6" Text="{Binding Weight}" VerticalAlignment="Center" Height="16" Width="131"/>
                 <Label Content="DroneInParcel ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="8" VerticalAlignment="Center" Height="26" Width="101"/>
-                <TextBlock x:Name="iDTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,0,8.333" Grid.Row="8" Text="{Binding DroneInParcel.ID}" VerticalAlignment="Center" Height="16" Width="7"/>
+                <TextBlock x:Name="iDTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="8" Text="{Binding DroneInParcel.ID}" VerticalAlignment="Center" Height="16" Width="111" SourceUpdated="iDTextBlock1_SourceUpdated"/>
                 <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="9" VerticalAlignment="Center" Height="26" Width="71"/>
-                <TextBlock x:Name="iDTextBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,0,8.333" Grid.Row="9" Text="{Binding Receiver.ID}" VerticalAlignment="Center" Height="16" Width="7"/>
+                <TextBlock x:Name="iDTextBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="9" Text="{Binding Receiver.ID}" VerticalAlignment="Center" Height="16" Width="118"/>
                 <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,2.667,0,3.333" Grid.Row="10" VerticalAlignment="Center" Height="26" Width="65"/>
-                <TextBlock x:Name="iDTextBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="3,7.667,0,8.333" Grid.Row="10" Text="{Binding Sender.ID}" VerticalAlignment="Center" Height="16" Width="7"/>
+                <TextBlock x:Name="iDTextBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="10" Text="{Binding Sender.ID}" VerticalAlignment="Center" Height="16" Width="118"/>
             </Grid>
 
 

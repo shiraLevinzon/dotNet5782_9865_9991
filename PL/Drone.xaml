@@ -59,7 +59,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Battery Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                <Label x:Name="batteryStatusLabel" Content="{Binding BatteryStatus}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
+                <Label x:Name="batteryStatusLabel" Content="{Binding BatteryStatus ,StringFormat=\{0:#0.0\}%}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center"/>
                 <Label Content="Conditions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
                 <Label x:Name="conditionsLabel" Content="{Binding Conditions, Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
                 <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>

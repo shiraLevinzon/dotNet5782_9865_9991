@@ -234,15 +234,15 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (BO.ImproperMaintenanceCondition ex)
             {
-                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName, ex.Message);
             }
         }
         #endregion
@@ -268,11 +268,11 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (BO.ImproperMaintenanceCondition ex)
             {
@@ -323,15 +323,15 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (BO.ImproperMaintenanceCondition ex)
             {
-                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
+                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName,ex.Message);
             }
         }
         #endregion
@@ -358,11 +358,11 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, ex.Message);
             }
         }
         #endregion
@@ -390,15 +390,15 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(ex.ID, ex.EntityName);
+                throw new BO.DuplicateIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, ex.Message);
             }
             catch( BO.PackageTimesException ex)
             {
-                throw new BO.PackageTimesException(ex.ID, ex.EntityName);
+                throw new BO.PackageTimesException(ex.ID, ex.EntityName, ex.Message);
             }
         }
         #endregion

@@ -84,7 +84,7 @@ namespace PL
 
                 blObject.AddUser(user);
                 MessageBox.Show("add user sucsess");
-
+               
             }
             catch (BO.DuplicateIdException ex)
             {

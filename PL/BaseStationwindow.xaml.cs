@@ -35,7 +35,7 @@ namespace PL
         {
             InitializeComponent();
             bl = blobject;
-            actMode.DataContext = bs;
+            actMode.DataContext = bl.GetBaseStation(bs.ID);
             addMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "Update";
             string temp1 = "Station Details " + bs.ID;
@@ -51,20 +51,21 @@ namespace PL
                     MessageBox.Show("Enter All the Drone Details", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 else 
                 {
-                    BO.BaseStation bs = new BO.BaseStation()
-                    {
-                        ID = Convert.ToInt32(iDTextBox.Text),
-                        StationName = Convert.ToString(stationNameTextBox1.Text),
-                        BaseStationLocation = new Location()
-                        {
-                            Latitude = Convert.ToDouble(latitudeTextBox.Text),
-                            Longitude = Convert.ToDouble(longitudeTextBox.Text)
-                        },
-                        FreeChargingSlots = Convert.ToInt32(freeChargingSlotsTextBox1.Text)
-                    };
+                   
                     switch (temp)
                     {
                         case 0:
+                            BO.BaseStation bs = new BO.BaseStation()
+                            {
+                                ID = Convert.ToInt32(iDTextBox.Text),
+                                StationName = Convert.ToString(stationNameTextBox1.Text),
+                                BaseStationLocation = new Location()
+                                {
+                                    Latitude = Convert.ToDouble(latitudeTextBox.Text),
+                                    Longitude = Convert.ToDouble(longitudeTextBox.Text)
+                                },
+                                FreeChargingSlots = Convert.ToInt32(freeChargingSlotsTextBox1.Text)
+                            };
                             if (bs.FreeChargingSlots > 6)
                                 bs.FreeChargingSlots = 5;
                             bl.AddBaseStation(bs);
@@ -72,7 +73,7 @@ namespace PL
                             this.Close();
                             break;
                         case 1:
-                            bl.UpdateBaseStation(bs.ID, bs.StationName, bs.FreeChargingSlots);
+                            bl.UpdateBaseStation(Convert.ToInt32(iDTextBlock.Text), stationNameTextBox.Text, Convert.ToInt32(freeChargingSlotsTextBox.Text));
                             MessageBox.Show("update Base Station sucsess", "UPDATE OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
                             this.Close();
                             break;

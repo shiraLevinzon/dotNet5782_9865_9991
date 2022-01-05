@@ -26,7 +26,7 @@
         <materialDesign:ColorZone
   Mode="PrimaryLight" materialDesign:ColorZoneAssist.Foreground="White" Padding="25
             " Margin="-26,0,0,0" Height="50" Background="{StaticResource BaseStationColor}"/>
-        <Grid x:Name="actMode" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="252" Grid.Row="1" Margin="196,73,0,0" d:IsHidden="True">
+        <Grid x:Name="actMode" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="252" Grid.Row="1" Margin="196,73,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -49,7 +49,7 @@
             <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding BaseStationLocation.Longitude}" VerticalAlignment="Center"/>
         </Grid>
-        <Grid x:Name="addMode" HorizontalAlignment="Left" Margin="138,58,0,0" VerticalAlignment="Top" Height="120" Width="296" Grid.Row="1">
+        <Grid x:Name="addMode" HorizontalAlignment="Left" Margin="138,58,0,0" VerticalAlignment="Top" Height="120" Width="296" Grid.Row="1" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="133.8"/>
                 <ColumnDefinition Width="20.2"/>

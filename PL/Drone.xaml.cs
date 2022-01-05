@@ -34,6 +34,11 @@ namespace PL
             StationIdComboBox.Visibility = Visibility.Hidden;
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
+            if(Convert.ToInt32(packagNumberOnTransferred.Content) !=0)
+            {
+                showParcel.IsEnabled = true;
+
+            }
         }
         public Drone(BlApi.IBL blobject)
         {

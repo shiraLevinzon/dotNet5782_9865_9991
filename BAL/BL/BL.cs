@@ -387,6 +387,7 @@ namespace BL
                 drone.Conditions = (DroneConditions)1;
                 dalLayer.DeliveryParcelToCustomer(parcel.ID, drone.ID);
                 drone.PackagNumberOnTransferred = 0;
+                parcel.DroneId = 0;
             }
             catch (DO.DuplicateIdException ex)
             {

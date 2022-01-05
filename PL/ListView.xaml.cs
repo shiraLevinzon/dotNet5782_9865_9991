@@ -90,7 +90,8 @@ namespace PL
         }
         private void listOfbaseStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            BaseStationToList bs = (BaseStationToList)listOfBaseStation.SelectedItem;
+            new BaseStationwindow(bs, bl).ShowDialog();
         }
         private void Clear3_Click(object sender, RoutedEventArgs e)
         {

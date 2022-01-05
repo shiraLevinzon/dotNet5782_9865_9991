@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Drone" Height="500" Width="400">
     <Grid>
-        <Grid x:Name="addMode" d:IsHidden="True">
+        <Grid x:Name="addMode">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -41,7 +41,7 @@
             <materialDesign:PackIcon Name="error" Visibility="Hidden" Kind="AlertCircleOutline" Height="65" Width="33" Margin="47,112,0,0" />
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0">
+        <Grid x:Name="actMode" Margin="-10,0,10,0" d:IsHidden="True">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="96,73,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="174.137"/>

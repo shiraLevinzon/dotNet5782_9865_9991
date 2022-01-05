@@ -25,19 +25,14 @@ namespace PL
         {
             InitializeComponent();
         }
-
-       
-
         private void listofbasestation_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void PackIcon_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
 
         }
-
         private void enter_Click(object sender, RoutedEventArgs e)
         {
             if(Password.Password=="1234")

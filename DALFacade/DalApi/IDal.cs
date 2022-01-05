@@ -59,8 +59,15 @@ namespace DalApi
         public bool CheckParcel(int id);
 
         #endregion
+
+        #region DroneCharge
+        public DroneCharge GetDroneInCharging(int id);
+        public bool CheckDroneCharge(int id);
+        public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate = null);
+        #endregion
         public double[] RequestPowerConsumptionByDrone();
         public double Deg2rad(double deg);
         public IEnumerable<DroneCharge> GetAllDroneCharge();
+
     }
 }

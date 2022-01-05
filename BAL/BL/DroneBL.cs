@@ -102,7 +102,10 @@ namespace BL
                 dronesToList.Add(droneToListTMP);
                 dalLayer.AddDrone(DroneDO);
                 dalLayer.SendingDroneToBaseStation(id, drone.ID);
-
+            }
+            catch(DO.MissingIdException ex)
+            {
+                throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is missing", ex);
 
             }
             catch (DO.DuplicateIdException ex)
@@ -123,6 +126,10 @@ namespace BL
                 DroneDO.MaxWeight = (DO.WeightCategories)dtl.MaxWeight;
 
                 dalLayer.UpdDrone(DroneDO);
+            }
+            catch(DO.DuplicateIdException ex)
+            {
+                throw new BO.MissingIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
             catch (DO.MissingIdException ex)
             {

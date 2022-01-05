@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
-
 namespace BL
 {
     partial class BL: BlApi.IBL
@@ -69,9 +68,13 @@ namespace BL
             {
                 dalLayer.AddBaseStation(baseStationDO);
             }
+            catch(DO.MissingIdException ex)
+            {
+                throw new BO.DuplicateIdException(baseStationDO.ID, "BaseStation", "BaseStation ID is missing", ex);
+            }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(baseStationDO.ID,"BaseStation", "Student ID is illegal", ex);
+                throw new BO.DuplicateIdException(baseStationDO.ID,"BaseStation", "BaseStation ID is illegal", ex);
             }
         }
         public void UpdateBaseStation(int id, string name, int sum)
@@ -93,7 +96,7 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(BaseStationDO.ID, "BaseStation", "Student ID is illegal", ex);
+                throw new BO.DuplicateIdException(BaseStationDO.ID, "BaseStation", "BaseStation ID is illegal", ex);
             }
 
         }

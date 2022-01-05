@@ -151,8 +151,6 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <!--תפריט בחירה לעמדות פנויות בתחת בסיס-->
-
                     </Grid>
                 </TabItem>
                 <!--לקוחות-->

@@ -22,10 +22,8 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-
-                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this id isnt existe");
+             throw new BO.MissingIdException(ex.ID, ex.EntityName, "this id isnt existe");
             }
-
             return user;
         }
 
@@ -64,7 +62,6 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName, "this id isnt correct");
             }
         }
@@ -72,7 +69,6 @@ namespace BL
         {
             IEnumerable<BO.User> UserLists = from UserDO in dalLayer.GetAllUser()
                                              select GetUser(UserDO.Id);
-
             if (predicate == null)
                 return UserLists;
             return UserLists.Where(p => predicate(p));

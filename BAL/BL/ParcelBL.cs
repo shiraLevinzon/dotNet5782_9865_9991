@@ -24,10 +24,10 @@ namespace BL
                 boParcel.Sender.CustomerName = GetAllCustomer().First(cu => cu.ID == boParcel.Sender.ID).Name;
                 boParcel.Receiver.CustomerName = GetAllCustomer().First(cu => cu.ID == boParcel.Receiver.ID).Name;
 
-                if (boParcel.Scheduled!=DateTime.MinValue)
+                if (boParcel.Scheduled!=DateTime.MinValue&& boParcel.Delivered == DateTime.MinValue)
                 {
                     boParcel.DroneInParcel=new BO.DroneInParcel();
-                    BO.Drone d= GetDrone(doParcel.ID);
+                    BO.Drone d= GetDrone(doParcel.DroneId);
                     boParcel.DroneInParcel.ID = d.ID;
                     boParcel.DroneInParcel.BatteryStatus = d.BatteryStatus;
                     boParcel.DroneInParcel.location = d.location;

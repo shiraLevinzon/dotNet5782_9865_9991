@@ -388,6 +388,7 @@ namespace BL
                 dalLayer.DeliveryParcelToCustomer(parcel.ID, drone.ID);
                 drone.PackagNumberOnTransferred = 0;
                 parcel.DroneId = 0;
+                parcel.Delivered = DateTime.Now;
             }
             catch (DO.DuplicateIdException ex)
             {

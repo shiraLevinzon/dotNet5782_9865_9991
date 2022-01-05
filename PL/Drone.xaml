@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Drone" Height="500" Width="400">
     <Grid>
-        <Grid x:Name="addMode" d:IsHidden="True">
+        <Grid x:Name="addMode">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -21,7 +21,7 @@
                     <RowDefinition Height="Auto" MinHeight="24"/>
                 </Grid.RowDefinitions>
                 <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Width="22"/>
-                <TextBox x:Name="iDTextBox" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,5" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120" TextChanged="iDTextBox_TextChanged"/>
+                <TextBox x:Name="iDTextBox" MaxLength="10" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,5" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"  KeyDown="iDTextBox_KeyDown"/>
                 <Label Content="Max Weight:" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="24" Width="74"/>
                 <ComboBox x:Name="maxWeightComboBox" Grid.Column="2" HorizontalAlignment="Center" Height="25" SelectedItem="{Binding MaxWeight}" Grid.Row="1" VerticalAlignment="Center" Width="120">
                     <ComboBox.ItemsPanel>
@@ -33,15 +33,13 @@
                 <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Width="45"/>
                 <TextBox x:Name="modelTextBox1" Grid.Column="2" HorizontalAlignment="Center" Height="23" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             </Grid>
-            <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="43"/>
 
             <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click_1"/>
             <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="155,217,0,0" VerticalAlignment="Top" Width="95"/>
             <Label Content="station id:" HorizontalAlignment="Left" Margin="85,218,0,0" VerticalAlignment="Top" Width="77"/>
-            <materialDesign:PackIcon Name="error" Visibility="Hidden" Kind="AlertCircleOutline" Height="65" Width="33" Margin="47,112,0,0" />
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0">
+        <Grid x:Name="actMode" Margin="-10,0,10,0" d:IsHidden="True">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="96,73,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="174.137"/>
@@ -97,6 +95,7 @@
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showParcel_Click" />
         </Grid>
+        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="43"/>
 
 
 

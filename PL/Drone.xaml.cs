@@ -45,7 +45,6 @@ namespace PL
             InitializeComponent();         
             bl = blobject;
             actMode.Visibility = Visibility.Hidden;
-            AddBottun.IsEnabled = false;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
         }
@@ -87,16 +86,17 @@ namespace PL
             };
             try
             {
-                if (StationIdComboBox.SelectedIndex != -1)
+                if (StationIdComboBox.SelectedIndex == -1||iDTextBox.Text==null||modelTextBox1.Text==null||maxWeightComboBox.SelectedIndex==-1)
                 {
-                    bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
-                    MessageBox.Show("add drone sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //dronesListWindow.FilterByCombiBox();
-                    this.Close();
+                    MessageBox.Show("You did not fill in all the details", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
                 else
                 {
-                    MessageBox.Show("choose base station id", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);                  
+                    bl.AddDrone(drone, Convert.ToInt32(StationIdComboBox.SelectedItem));
+                    MessageBox.Show("add drone sucsses", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    this.Close();
+
                 }
             }
             catch (ImproperMaintenanceCondition ex)
@@ -260,25 +260,23 @@ namespace PL
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
         }
 
-        private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (int.TryParse(iDTextBox.Text, out int q) &&iDTextBox.Text!=null && modelTextBox1.Text!=null && maxWeightComboBox.SelectedIndex != -1)
-            {
-                error.Visibility = Visibility.Hidden;
-                AddBottun.IsEnabled = true;
-            }
-            else if (!int.TryParse(iDTextBox.Text, out int p))
-            {
-                error.Visibility = Visibility.Visible;
-                AddBottun.IsEnabled = false;
-            }
-        }
+     
 
         private void showParcel_Click(object sender, RoutedEventArgs e)
         {
             new parcelInTransferWindow(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
         }
 
-     
+        private void iDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if((e.Key>=Key.D0&& e.Key<= Key.D9)||(e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

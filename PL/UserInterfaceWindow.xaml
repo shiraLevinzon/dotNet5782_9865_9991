@@ -1,0 +1,49 @@
+﻿<Window x:Class="PL.UserInterfaceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="UserInterfaceWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition Width="183*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="listOfParcelFromCustomer" ItemsSource="{Binding Items1}" Margin="0,35,0,10" Grid.Column="0" Grid.Row="0" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="משקל"   />
+                    <GridViewColumn DisplayMemberBinding="{Binding priority}" Header="דחיפות" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Situation}" Header="מצב חבילה" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listOfParcelToCustomer"  ItemsSource="{Binding Items1}" Margin="0,35,0,0" Grid.Column="0" Grid.Row="1" Background="#FF28E0EB" BorderBrush="#8944AC13" Foreground="#DD46D4E8" OpacityMask="#FFC82222" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="מספר מזהה" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Weight}" Header="משקל"   />
+                    <GridViewColumn DisplayMemberBinding="{Binding priority}" Header="דחיפות" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Situation}" Header="מצב חבילה" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

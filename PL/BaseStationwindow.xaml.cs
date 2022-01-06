@@ -47,19 +47,16 @@ namespace PL
         {
             try
             {
-               
-                
-                   
-                    switch (temp)
-                    {
-                       case 0:
-                       if (iDTextBox.Text == "" || stationNameTextBox1.Text == "" || freeChargingSlotsTextBox1.Text == "" || latitudeTextBox.Text == "" || longitudeTextBox.Text == "")
-                       {
+                switch (temp)
+                {
+                    case 0:
+                        if (iDTextBox.Text == "" || stationNameTextBox1.Text == "" || freeChargingSlotsTextBox1.Text == "" || latitudeTextBox.Text == "" || longitudeTextBox.Text == "")
+                        {
                             MessageBox.Show("Enter All the Base Station Details", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                       }
-                       else
-                       { 
+                        }
+                        else
+                        {
                             BO.BaseStation bs = new BO.BaseStation()
                             {
                                 ID = Convert.ToInt32(iDTextBox.Text),
@@ -76,15 +73,16 @@ namespace PL
                             bl.AddBaseStation(bs);
                             MessageBox.Show("add Base Station sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
                             this.Close();
-                       }
+                        }
                         break;
-                        case 1:
-                            bl.UpdateBaseStation(Convert.ToInt32(iDTextBlock.Text), stationNameTextBox.Text, Convert.ToInt32(freeChargingSlotsTextBox.Text));
-                            MessageBox.Show("update Base Station sucsess", "UPDATE OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                            this.Close();
-                            break;
-                    }
-               
+                    case 1:
+                        bl.UpdateBaseStation(Convert.ToInt32(iDTextBlock.Text), stationNameTextBox.Text, Convert.ToInt32(freeChargingSlotsTextBox.Text));
+                        MessageBox.Show("update Base Station sucsess", "UPDATE OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                        break;
+                }
+
+
             }
             catch (ImproperMaintenanceCondition ex)
             {

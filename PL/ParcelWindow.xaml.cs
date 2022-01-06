@@ -60,9 +60,17 @@ namespace PL
             };
             try
             {
-                bl.AddParcel(p);
-                MessageBox.Show("add parcel sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+               if(priorityComboBox.SelectedIndex==-1|| weightComboBox.SelectedIndex == -1 || ReceiverIDComboBox.SelectedIndex == -1 || SenderIDComboBox.SelectedIndex == -1 )
+                {
+                    MessageBox.Show("You did not fill in all the details", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                else
+                {
+                    bl.AddParcel(p);
+                    MessageBox.Show("add parcel sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
+                 
 
             }
             catch (DuplicateIdException ex)

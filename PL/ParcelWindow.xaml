@@ -85,7 +85,6 @@
                 <TextBlock x:Name="iDTextBlock3" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="10" Text="{Binding Sender.ID}" VerticalAlignment="Center" Height="16" Width="118"/>
             </Grid>
 
-
             <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Center" Margin="0,396,0,0" VerticalAlignment="Top" Height="46" Width="136" />
             <Button x:Name="showSender" Content="Show" HorizontalAlignment="Left" Margin="60,335,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showSender_Click"/>
             <Button x:Name="showResiver" Content="Show" HorizontalAlignment="Left" Margin="60,305,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showResiver_Click"/>

@@ -49,9 +49,9 @@ namespace PL
         {
             try
             {
-                if (passwordCustomer.Password==blObject.GetUser(Convert.ToInt32(idTEXTBOX.Text)).Password)
+                if (passwordCustomer.Password == blObject.GetUser(Convert.ToInt32(idTEXTBOX.Text)).Password)
                 {
-                    new ListView(blObject);
+                    new UserInterfaceWindow(blObject).ShowDialog();
                 }
                 else
                 {
@@ -63,6 +63,8 @@ namespace PL
 
                 MessageBox.Show(ex.Message);
             }
+
+
         }
 
         private void nerUser_Click(object sender, RoutedEventArgs e)

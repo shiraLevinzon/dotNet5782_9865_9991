@@ -189,5 +189,69 @@ namespace PL
         {
 
         }
+
+     
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            IEnumerable<IGrouping<BO.DroneConditions, DroneToList>> droneGroup = from drone in bl.GetAllDrones() group drone by drone.Conditions;
+            List<DroneToList> droneList = new();
+
+            foreach (var group in droneGroup)
+            {
+                foreach (var drone in group)
+                {
+                    droneList.Add(drone);
+                }
+            }
+            listOfDrones.ItemsSource = droneList;
+        }
+
+        private void groupParcels_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<int, ParcelToList>> parcelGroup = from parcel in bl.GetAllParcels() group parcel by parcel.SenderID;
+            List<ParcelToList> parcels = new();
+
+            foreach (var group in parcelGroup)
+            {
+                foreach (var parcel in group)
+                {
+                    parcels.Add(parcel);
+                }
+            }
+            listOfParcel.ItemsSource = parcels;
+        }
+
+        private void groupStation_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<int, BaseStationToList>> StationGroup = from station in bl.GetAllBaseStation() group station by station.FreeChargingSlots;
+            List<BaseStationToList> BaseStationList = new();
+
+            foreach (var group in StationGroup)
+            {
+                foreach (var station in group)
+                {
+                    BaseStationList.Add(station);
+                }
+            }
+            listOfBaseStation.ItemsSource = BaseStationList;
+        }
+
+        private void groupParcels1_Click(object sender, RoutedEventArgs e)
+        {
+            IEnumerable<IGrouping<int, ParcelToList>> parcelGroup = from parcel in bl.GetAllParcels() group parcel by parcel.RecieverID;
+            List<ParcelToList> parcels = new();
+
+            foreach (var group in parcelGroup)
+            {
+                foreach (var parcel in group)
+                {
+                    parcels.Add(parcel);
+                }
+            }
+            listOfParcel.ItemsSource = parcels;
+
+        }
     }
 }

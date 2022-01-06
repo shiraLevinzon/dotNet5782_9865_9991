@@ -28,7 +28,7 @@ namespace PL
             bl = bll;
             actMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "ADD";
-            droneInCharge.Visibility = Visibility.Collapsed;
+            droneInChargeList.Visibility = Visibility.Collapsed;
             temp = 0;
         }
         public BaseStationwindow(BaseStationToList bs, BlApi.IBL blobject)
@@ -39,7 +39,7 @@ namespace PL
             addMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "Update";
             string temp1 = "Station Details " + bs.ID;
-            droneInCharge.Visibility = Visibility.Visible;
+            droneInChargeList.Visibility = Visibility.Visible;
             title.Content = temp1;
             temp = 1;
         }
@@ -95,6 +95,22 @@ namespace PL
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void droneInChargeList_Click(object sender, RoutedEventArgs e)
+        {
+            BO.BaseStation bs  = new BO.BaseStation()
+            {
+                ID = Convert.ToInt32(iDTextBlock.Text),
+                StationName = Convert.ToString(stationNameTextBox.Text),
+                BaseStationLocation = new Location()
+                {
+                    Latitude = Convert.ToDouble(latitudeTextBlock.Text),
+                    Longitude = Convert.ToDouble(longitudeTextBlock.Text)
+                },
+                FreeChargingSlots = Convert.ToInt32(freeChargingSlotsTextBox.Text)
+            };
+            new DroneInChargingWindow(bl,bs).ShowDialog();
         }
     }
 }

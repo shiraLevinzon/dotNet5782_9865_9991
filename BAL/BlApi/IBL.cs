@@ -8,11 +8,12 @@ namespace BlApi
 {
    public interface IBL
    {
+        #region פונקציות משתמשים של שיכבה 2
         public User GetUser(int id);
         public void UpdUser(User tmp);
         public void AddUser(User tmp);
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null);
-
+        #endregion
         #region פונקציות תחנת בסיס של שיכבה 2
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null);
         public BO.BaseStation GetBaseStation(int id);
@@ -39,12 +40,16 @@ namespace BlApi
 
         //public void UpdateParcel(BO.Parcel Parcel);
         #endregion
-        #region פונקציות עדכון ועזר נוספות מיכבה 2
+        #region פונקציות עדכון ועזר נוספות משיכבה 2
         public void DroneToCharging(int id);
         public void ReleaseDroneFromCharging(int id, TimeSpan time);
         public void AssignPackageToDrone(int id);
         public void CollectParcelByDrone(int id);
         public void DeliveryOfPackageByDrone(int id);
+        #endregion
+        #region פונקציות רחפנים בטעיה של שיכבה 2
+        public BO.DroneInCharging GetDroneInCharge(int id);
+        public IEnumerable<BO.DroneInCharging> GetAllDroneInCharge(int id, Predicate<BO.DroneInCharging> predicate = null);
         #endregion
     }
 }

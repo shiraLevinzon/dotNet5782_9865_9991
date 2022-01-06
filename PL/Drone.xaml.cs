@@ -26,7 +26,6 @@ namespace PL
         {
             InitializeComponent();
             bl = blobject;
-
             addMode.Visibility = Visibility.Hidden;
             UPDATEgrid.DataContext = d;
             modelTextBox.IsEnabled = true;

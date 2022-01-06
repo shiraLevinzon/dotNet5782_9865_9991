@@ -51,7 +51,7 @@ namespace PL
             {
                 if (passwordCustomer.Password==blObject.GetUser(Convert.ToInt32(idTEXTBOX.Text)).Password)
                 {
-                    new ListView(blObject).ShowDialog();
+                    new ListView(blObject);
                 }
                 else
                 {

@@ -68,7 +68,6 @@ namespace Dal
                     Phone = $"0{r1.Next(50, 60)}{r1.Next(1000000, 10000000)}",
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
-
                 });
                 ;
             }
@@ -85,7 +84,6 @@ namespace Dal
                     FreeChargingSlots = r1.Next(1, 6),
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
-
                 });
                 ;
             }

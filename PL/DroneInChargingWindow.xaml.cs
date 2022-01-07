@@ -24,8 +24,28 @@ namespace PL
         public DroneInChargingWindow(IBL bll,BaseStation bs)
         {
             InitializeComponent();
-            IBL bl = bll;
-            listOfDroneInCharge.ItemsSource = (System.Collections.IEnumerable)bl.GetDroneInCharge(bs.ID);
+            bl = bll;
+            listOfDroneInCharge.ItemsSource =bl.GetAllDroneInCharge(bs.ID);
+        }
+        private void listOfDroneInCharge_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            BO.DroneInCharging d = (BO.DroneInCharging)listOfDroneInCharge.SelectedItem;
+            BO.Drone dr = bl.GetDrone(d.ID);
+            BO.DroneToList droneTo = new DroneToList()
+            {
+                ID = dr.ID,
+                Conditions = dr.Conditions,
+                BatteryStatus = dr.BatteryStatus,
+                MaxWeight = dr.MaxWeight,
+                Model = dr.Model,
+                PackagNumberOnTransferred = 0,
+                location=new Location()
+                {
+                    Latitude=dr.location.Latitude,
+                    Longitude=dr.location.Longitude,
+                }
+            };
+            new Drone(droneTo, bl).ShowDialog();
         }
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Drone" Height="500" Width="400">
     <Grid>
-        <Grid x:Name="addMode">
+        <Grid x:Name="addMode" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -39,7 +39,7 @@
             <Label Content="station id:" HorizontalAlignment="Left" Margin="85,218,0,0" VerticalAlignment="Top" Width="77"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0" d:IsHidden="True">
+        <Grid x:Name="actMode" Margin="-10,0,10,0">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="96,73,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="174.137"/>

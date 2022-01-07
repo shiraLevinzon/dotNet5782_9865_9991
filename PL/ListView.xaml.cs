@@ -33,6 +33,7 @@ namespace PL
 
             listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
             FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
+            listOfCostumer.ItemsSource = bl.GetAllCustomer();
 
             listOfParcel.ItemsSource = bl.GetAllParcels();
             StatusParcelSelector.ItemsSource = Enum.GetValues(typeof(Situations));
@@ -150,13 +151,14 @@ namespace PL
                 case 1:
                    new BaseStationwindow(bl).ShowDialog();
                    break;
-                //case 2:
-                //    new Customer(bl).ShowDialog();
-                //    break;
+                case 2:
+                   new CostumerWindow(bl).ShowDialog();
+                   break;
                 case 3:
                     new ParcelWindow(bl).ShowDialog();
                     break;
                 default:
+                    MessageBox.Show("Choose One of The following Possibilities", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     break;
             }
         }
@@ -167,31 +169,22 @@ namespace PL
             FilterByCombiBoxOfBaseStation();
             FilterByCombiBoxOfParcel();
         }
-
         private void listOfDrones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void listOfBaseStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
         }
-
-        
-
         private void TCview_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void TCview_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
 
         }
-
-     
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -237,7 +230,6 @@ namespace PL
             }
             listOfBaseStation.ItemsSource = BaseStationList;
         }
-
         private void groupParcels1_Click(object sender, RoutedEventArgs e)
         {
             IEnumerable<IGrouping<int, ParcelToList>> parcelGroup = from parcel in bl.GetAllParcels() group parcel by parcel.RecieverID;
@@ -252,6 +244,11 @@ namespace PL
             }
             listOfParcel.ItemsSource = parcels;
 
+        }
+        private void listOfCostumer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.CustomerToList customer = (BO.CustomerToList)listOfCostumer.SelectedItem;
+            new CostumerWindow(customer,bl).ShowDialog();
         }
     }
 }

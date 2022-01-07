@@ -3,12 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneInChargingWindow" Height="450" Width="466">
     <Grid Margin="0,0,304,0">
+        <materialDesign:ColorZone
+  Mode="PrimaryLight"
+  Padding="16" Margin="0,0,-305,0" Height="50"/>
         <ListView Name="listOfDroneInCharge"
-  ItemsSource="{Binding Items1}" Height="424" VerticalAlignment="Top" Margin="0,10,-305,0" RenderTransformOrigin="1.078,0.206">
+  ItemsSource="{Binding Items1}" Height="384" VerticalAlignment="Top" Margin="0,50,-305,0" RenderTransformOrigin="1.078,0.206" MouseDoubleClick="listOfDroneInCharge_MouseDoubleClick_1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn

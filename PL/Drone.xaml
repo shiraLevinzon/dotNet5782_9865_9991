@@ -80,9 +80,9 @@
                 <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
                 <TextBlock x:Name="longitudeLabel" Text="{Binding location.Longitude, StringFormat=\{0:#0.00\}}" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
             </Grid>
-            <Button x:Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="38,338,0,0" VerticalAlignment="Top" Width="172" Click="Bottun1_Click"/>
-            <Button x:Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="38,386,0,0" VerticalAlignment="Top" Height="32" Width="155" Click="Bottun2_Click"/>
-            <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="102,292,0,0" VerticalAlignment="Top" Height="32" Width="108" Click="updateBottun_Click" RenderTransformOrigin="-0.033,-1.552"/>
+            <Button x:Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="211,380,0,0" VerticalAlignment="Top" Width="172" Click="Bottun1_Click"/>
+            <Button x:Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="43,379,0,0" VerticalAlignment="Top" Height="32" Width="155" Click="Bottun2_Click"/>
+            <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="-167,303,0,0" VerticalAlignment="Top" Height="32" Width="108" Click="updateBottun_Click" RenderTransformOrigin="-0.033,-1.552"/>
             <Grid x:Name="Timegrid" HorizontalAlignment="Left" Margin="102,423,0,0" VerticalAlignment="Top" Height="26" Width="225">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
@@ -101,8 +101,9 @@
 
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showParcel_Click" />
+            <Label x:Name="timeLabel" Content="Time Drone is in cgarge:" HorizontalAlignment="Left" Margin="81,292,0,0" VerticalAlignment="Top" Width="148"/>
         </Grid>
-        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="26,394,0,0" VerticalAlignment="Top" Width="108" Click="CancelBottun_Click" Height="34"/>
+        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="29,394,0,0" VerticalAlignment="Top" Width="108" Click="CancelBottun_Click" Height="34"/>
         <materialDesign:PackIcon Kind="Quadcopter" Height="248" Width="137" Margin="26,55,0,0" />
         <materialDesign:ColorZone
   Mode="PrimaryLight"
@@ -128,7 +129,6 @@
   materialDesign:HintAssist.Hint="With Seconds"
   Is24Hours="{Binding IsChecked, ElementName=Is24HourCheckbox}"
   x:Name="WithSecondsTimePicker"
-  WithSeconds="True"
-  Width="100" Margin="248,364,142,0" VerticalAlignment="Top" />
+  WithSeconds="True" Margin="420,330,30,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

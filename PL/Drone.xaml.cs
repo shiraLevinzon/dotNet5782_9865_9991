@@ -33,10 +33,19 @@ namespace PL
             StationIdComboBox.Visibility = Visibility.Hidden;
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
-            if(Convert.ToInt32(packagNumberOnTransferred.Content) !=0)
+            if (Convert.ToInt32(packagNumberOnTransferred.Content) != 0)
             {
                 showParcel.IsEnabled = true;
-
+            }
+            if(d.Conditions==(BO.DroneConditions)0)
+            {
+                timeLabel.Visibility = Visibility.Visible;
+                WithSecondsTimePicker.Visibility = Visibility.Visible;
+            }
+            if(d.Conditions!=(BO.DroneConditions)0)
+            {
+                timeLabel.Visibility = Visibility.Collapsed;
+                WithSecondsTimePicker.Visibility = Visibility.Collapsed;
             }
         }
         public Drone(BlApi.IBL blobject)
@@ -46,6 +55,8 @@ namespace PL
             actMode.Visibility = Visibility.Hidden;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
+            timeLabel.Visibility = Visibility.Collapsed;
+            WithSecondsTimePicker.Visibility = Visibility.Collapsed;
         }
         public void Refresh()
         {

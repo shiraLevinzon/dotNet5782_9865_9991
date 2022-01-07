@@ -6,42 +6,22 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParcelAtCustomerWindow" Height="450" Width="583">
+        Title="ParcelAtCustomerWindow" Height="450" Width="750">
     <Grid Margin="0,4,0,-4">
         <materialDesign:ColorZone
   Mode="PrimaryLight"
   Padding="16" Height="60"/>
-        <ListView x:Name="listOfPersonalParcel"
-  ItemsSource="{Binding Items1}" Margin="0,60,0,0" HorizontalAlignment="Center" Width="583">
+        <ListView x:Name="listOfPersonalParcel"  Margin="0,60,0,0" HorizontalAlignment="Center" Width="750">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn
-        DisplayMemberBinding="{Binding ID}"
-        Header="ID" />
-                    <GridViewColumn
-        DisplayMemberBinding="{Binding Weight}"
-        Header="Weight" />
-                    <GridViewColumn
-        DisplayMemberBinding="{Binding Situation}"
-        Header="Situation" />
-                    <GridViewColumn
-        DisplayMemberBinding="{Binding priority}"
-        Header="priority" />
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <ComboBox
-              Width="100">
-                                    <ComboBoxItem
-                Content="Test" />
-                                    <ComboBoxItem
-                Content="Test2" />
-                                    <ComboBoxItem
-                Content="Test3" />
-                                </ComboBox>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    <GridViewColumn   DisplayMemberBinding="{Binding ID}" Header="ID" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding Weight}" Header="Weight" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding Situation}" Header="Situation" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding priority}"  Header="priority" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding CustomerInParcel.ID}"  Header="reciver/sender id" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding CustomerInParcel.CustomerName}"  Header="reciver/sender name" />
+
+
                 </GridView>
             </ListView.View>
         </ListView>

@@ -21,14 +21,14 @@ namespace PL
     public partial class ParcelAtCustomerWindow : Window
     {
         IBL bl;
-        public ParcelAtCustomerWindow(BO.Customer custoer,IBL bll,int i)
+        public ParcelAtCustomerWindow(int id,IBL bll,int i)
         {
             InitializeComponent();
             bl = bll;
             if (i == 0)
-                listOfPersonalParcel.ItemsSource = bl.GetCustomer(custoer.ID).PackagesFromCustomer;
+                listOfPersonalParcel.ItemsSource = bl.GetCustomer(id).PackagesFromCustomer;
             else
-                listOfPersonalParcel.ItemsSource = bl.GetCustomer(custoer.ID).PackagesToCustomer;
+                listOfPersonalParcel.ItemsSource = bl.GetCustomer(id).PackagesToCustomer;
 
         }
 

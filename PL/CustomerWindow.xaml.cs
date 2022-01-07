@@ -22,10 +22,12 @@ namespace PL
     {
         IBL bl;
         int temp;
+        int id;
         public CostumerWindow(BO.CustomerToList customer,IBL bll)
         {
             InitializeComponent();
             bl = bll;
+            id = customer.ID;
             addMode.Visibility = Visibility.Collapsed;
             actMode.DataContext = bl.GetCustomer(customer.ID);
             AddOrUpdate.Content = "Update";
@@ -101,34 +103,46 @@ namespace PL
         }
         private void PackagesFromCustomer_Click(object sender, RoutedEventArgs e)
         {
-            BO.Customer cs = new BO.Customer()
-            {
-                ID = Convert.ToInt32(iDTextBlock.Text),
-                Name = Convert.ToString(nameTextBox.Text),
-                Location = new Location()
-                {
-                    Latitude = Convert.ToDouble(latitudeTextBlock.Text),
-                    Longitude = Convert.ToDouble(longitudeTextBlock.Text)
-                },
-                Phone = Convert.ToString(phoneTextBox.Text),
-            };
-            new ParcelAtCustomerWindow(cs, bl, 0).ShowDialog();
+            //BO.Customer cs = new BO.Customer()
+            //{
+            //    ID = Convert.ToInt32(iDTextBlock.Text),
+            //    Name = Convert.ToString(nameTextBox.Text),
+            //    Location = new Location()
+            //    {
+            //        Latitude = Convert.ToDouble(latitudeTextBlock.Text),
+            //        Longitude = Convert.ToDouble(longitudeTextBlock.Text)
+            //    },
+            //    Phone = Convert.ToString(phoneTextBox.Text),
+            //};
+            new ParcelAtCustomerWindow(id, bl, 0).ShowDialog();
         }
 
         private void PackagesToCustomer_Click(object sender, RoutedEventArgs e)
         {
-            BO.Customer cs = new BO.Customer()
+            //BO.Customer cs = new BO.Customer()
+            //{
+            //    ID = Convert.ToInt32(iDTextBlock.Text),
+            //    Name = Convert.ToString(nameTextBox.Text),
+            //    Location = new Location()
+            //    {
+            //        Latitude = Convert.ToDouble(latitudeTextBlock.Text),
+            //        Longitude = Convert.ToDouble(longitudeTextBlock.Text)
+            //    },
+            //    Phone = Convert.ToString(phoneTextBox.Text),
+            //};
+            new ParcelAtCustomerWindow(id, bl, 1).ShowDialog();
+        }
+
+        private void iDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
             {
-                ID = Convert.ToInt32(iDTextBlock.Text),
-                Name = Convert.ToString(nameTextBox.Text),
-                Location = new Location()
-                {
-                    Latitude = Convert.ToDouble(latitudeTextBlock.Text),
-                    Longitude = Convert.ToDouble(longitudeTextBlock.Text)
-                },
-                Phone = Convert.ToString(phoneTextBox.Text),
-            };
-            new ParcelAtCustomerWindow(cs, bl, 1).ShowDialog();
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

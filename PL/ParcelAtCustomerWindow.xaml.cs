@@ -33,8 +33,8 @@ namespace PL
         }
         private void listOfPersonalParcel_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            BO.ParcelAtCustomer parcelTo = (ParcelAtCustomer)listOfPersonalParcel.SelectedItem;
-            new parcelInTransferWindow(parcelTo.ID, bl).ShowDialog();
+            BO.ParcelAtCustomer parcel = (BO.ParcelAtCustomer)listOfPersonalParcel.SelectedItem;
+            new ParcelWindow(parcel.ID, bl).ShowDialog();
         }
 
         private void listOfPersonalParcel_SelectionChanged(object sender, SelectionChangedEventArgs e)

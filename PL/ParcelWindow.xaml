@@ -15,10 +15,12 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="ParcelWindow" Height="500" Width="500">
+        Title="ParcelWindow" Height="500" Width="650">
     <Grid Margin="0,0,0,-6">
-        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,392,0,0" VerticalAlignment="Top" Width="140"  Height="46" Click="CancelBottun_Click"/>
-        <Grid x:Name="addMode" d:IsHidden="True">
+        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="30,403,0,0" VerticalAlignment="Top" Width="140"  Height="46" Click="CancelBottun_Click"/>
+        <materialDesign:PackIcon Kind="Package" Width="210" Height="239" Margin="0,91,0,0" />
+
+        <Grid x:Name="addMode" Margin="262,10,0,0">
             <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="64,100,0,0" VerticalAlignment="Top" Width="200" SourceUpdated="grid2_SourceUpdated" DataContextChanged="grid2_DataContextChanged">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -43,7 +45,7 @@
             <Button x:Name="AddBottun"  Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0" RenderTransformOrigin="0.438,0.572">
+        <Grid x:Name="actMode" Margin="210,0,10,0" RenderTransformOrigin="0.438,0.572" d:IsHidden="True">
             <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Height="332" Width="248">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

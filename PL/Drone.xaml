@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.Drone"
         mc:Ignorable="d"
-        Title="Drone" Height="500" Width="400">
+        Title="Drone" Height="500" Width="680">
     <Grid>
-        <Grid x:Name="addMode" d:IsHidden="True">
+        <Grid x:Name="addMode" Margin="257,0,0,0" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -39,7 +39,7 @@
             <Label Content="station id:" HorizontalAlignment="Left" Margin="85,218,0,0" VerticalAlignment="Top" Width="77"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="-10,0,10,0">
+        <Grid x:Name="actMode" Margin="257,0,0,0">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="96,73,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="174.137"/>
@@ -95,7 +95,8 @@
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showParcel_Click" />
         </Grid>
-        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="43"/>
+        <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="47,391,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="43"/>
+        <materialDesign:PackIcon Kind="Quadcopter" Width="186" Height="218" Margin="24,90,0,0" />
 
 
 

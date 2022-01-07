@@ -15,9 +15,6 @@ namespace BO
         public DroneConditions Conditions { get; set; }
         public Location location { get; set; }
         public int PackagNumberOnTransferred { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 }

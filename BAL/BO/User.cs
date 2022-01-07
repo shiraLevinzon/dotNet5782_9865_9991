@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace BO
 {
-    public  class User
+    public class User
     {
-        
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Password { get; set; }
-            public string Phone { get; set; }
-
-        
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Phone { get; set; }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 }

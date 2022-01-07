@@ -49,25 +49,22 @@ namespace BL
                                                         ID = par.SenderID,
                                                         CustomerName = dalLayer.GetCostumer(par.SenderID).Name,
                                                     }
-
-
                                                 };
             }
             catch (DO.MissingIdException ex)
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-            catch (Exception)
+            catch(DO.EntityHasBeenDeleted ex)
             {
-                throw new Exception();
+                throw new BO.EntityHasBeenDeleted(ex.ID, ex.EntityName);
             }
-
             return boCustomer;
         }
-        public IEnumerable<BO.CustomerToList> GetAllCustomer()
+        public IEnumerable<BO.CustomerToList> GetAllCustomer(Predicate<BO.CustomerToList> predicate = null)
         {
-            //אססור להשתשמש בגט פרסל
-            return from c in dalLayer.GetAllCustomers()
+            //אסור להשתשמש בגט פרסל
+            IEnumerable<BO.CustomerToList> CustomerToLists = from c in dalLayer.GetAllCustomers()
                    let cu = new BO.Customer()
                    select new BO.CustomerToList()
                    {
@@ -79,6 +76,9 @@ namespace BL
                        NumberOfPackagesHeReceived = GetCustomer(c.ID).PackagesToCustomer.Count(par => par.Situation == (BO.Situations)3),
                        NumberofPackagesOnTheWayToCustomer = GetCustomer(c.ID).PackagesToCustomer.Count(par => par.Situation == (BO.Situations)2),
                    };
+            if (predicate == null)
+                return CustomerToLists;
+            return CustomerToLists.Where(p => predicate(p));
         }
         public void AddCustomer(BO.Customer customer)
         {
@@ -91,7 +91,7 @@ namespace BL
                 Phone = customer.Phone,
                 Latitude = customer.Location.Latitude,
                 Longitude = customer.Location.Longitude,
-
+                Deleted = (DO.Deleted)1,
             };
             try
             {
@@ -122,7 +122,7 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(CustomerDO.ID, "Customer", "Student ID is illegal", ex);
+                throw new BO.DuplicateIdException(CustomerDO.ID, "Customer", "Customer ID is illegal", ex);
             }
 
         }

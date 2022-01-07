@@ -24,6 +24,10 @@ namespace BL
             {
              throw new BO.MissingIdException(ex.ID, ex.EntityName, "this id isnt existe");
             }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
+            }
             return user;
         }
 
@@ -36,12 +40,16 @@ namespace BL
                 user.Id = tmp.Id;
                 user.Name = tmp.Name;
                 user.Password = tmp.Password;
+                user.Deleted = (DO.Deleted)tmp.Deleted;
                 user.Phone = tmp.Phone; dalLayer.UpdUser(user);
             }
             catch (DO.MissingIdException ex)
             {
-
                 throw new BO.MissingIdException(ex.ID, ex.EntityName, "this id isnt existe");
+            }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
         /// <summary>
@@ -58,11 +66,16 @@ namespace BL
                 user.Name = tmp.Name;
                 user.Password = tmp.Password;
                 user.Phone = tmp.Phone;
+                user.Deleted = (DO.Deleted)tmp.Deleted;
                 dalLayer.AddUser(user);
             }
             catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ex.ID, ex.EntityName, "this id isnt correct");
+            }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null)
@@ -73,6 +86,5 @@ namespace BL
                 return UserLists;
             return UserLists.Where(p => predicate(p));
         }
-
     }
 }

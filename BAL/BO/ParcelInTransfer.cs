@@ -17,9 +17,5 @@ namespace BO
         public CustomerInParcel Receives { get; set; }
         public Location Collection { get; set; }
         public Location PackageDestination { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
     }
 }

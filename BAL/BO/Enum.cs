@@ -11,8 +11,8 @@ namespace BO
     //נמוך, רגיל, גבוה
     public  enum Situations {Created, associated, collected, provided}
     //נוצר, שייך, נאסף, סיפק
-    //public enum ParcelConditions {Defined, associated, collected, provided }
-    //הוגדר, משויך, נאסף, מסופק
     public enum DroneConditions { maintenance ,Available, delivery, /*charging*/}
     //תחזוקה, זמינה, משלוח, טעינה
+    public enum Deleted { Uninitialized, False, True }
+
 }

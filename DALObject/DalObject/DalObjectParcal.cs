@@ -29,15 +29,16 @@ namespace Dal
         /// <returns>spesific Parcel</returns>
         public Parcel GetParcel(int id)
         {
-            if (!CheckParcel(id))
+            Parcel p = DataSource.parcels.FirstOrDefault(par => par.ID == id);
+            if (!CheckParcel(id)&& p.Deleted== (Deleted)0)
                 throw new MissingIdException(id, "Parcel");
-
-            Parcel p = DataSource.parcels.Find(par => par.ID == id);
+            if (!CheckParcel(id) && p.Deleted == (Deleted)2)
+                throw new EntityHasBeenDeleted(id, "The package no longer exists in the system");
             return p;
         }
         public bool CheckParcel(int id)
         {
-            return DataSource.parcels.Any(par => par.ID == id);
+            return DataSource.parcels.Any(par => par.ID == id && par.Deleted== (Deleted)1);
         }
         /// <summary>
         /// print Parcel
@@ -49,20 +50,28 @@ namespace Dal
             if (predicate != null)
             {
                 return from p in DataSource.parcels
-                       where predicate(p)
+                       where predicate(p) &&  p.Deleted == (Deleted)1
                        select p;
             }
             return from p in DataSource.parcels
+                   where p.Deleted == (Deleted)1
                    select p;
         }
         public void UpdParcel(Parcel tmp)
         {
-            int count = DataSource.parcels.RemoveAll(par => tmp.ID == par.ID);
-
+            int count = DataSource.parcels.RemoveAll(par => tmp.ID == par.ID && par.Deleted == (Deleted)1);
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "Parcel");
-
             DataSource.parcels.Add(tmp);
+        }
+        public void DeleteParcel(int pID)
+        {
+            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
+            Parcel ps = DataSource.parcels[index1];
+            if (ps.Deleted == (Deleted)2)
+                throw new EntityHasBeenDeleted(pID, "This Parcel has already been deleted");
+            ps.Deleted = (Deleted)2;
+            DataSource.parcels[index1] = ps;
         }
     }
 }

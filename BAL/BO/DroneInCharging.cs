@@ -10,9 +10,6 @@ namespace BO
     {
         public int ID { get; set; }
         public double BatteryStatus { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 }

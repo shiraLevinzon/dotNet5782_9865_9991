@@ -13,6 +13,7 @@ namespace DalApi
         public bool CheckUser(int id);
         public void UpdUser(User tmp);
         public void AddUser(User tmp);
+        public void DeleteUser(int uID);
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null);
 
         #endregion
@@ -26,6 +27,7 @@ namespace DalApi
         public void AssignPackageToDrone(int pID, int dID);
 
         public void ParcelCollectionByDrone(int pID, int dID);
+        public void DeleteDrone(int dID);
         #endregion
 
         #region BaseStation
@@ -36,8 +38,8 @@ namespace DalApi
         public void AddBaseStation(BaseStation tmp);
         public IEnumerable<BaseStation> GetAllBaseStations(Predicate<BaseStation> predicate = null);
         public void SendingDroneToBaseStation(int bsID, int dID);
-
         public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID);
+        public void DeleteBaseStatin(int bsID);
         #endregion
 
         #region Customer
@@ -47,13 +49,14 @@ namespace DalApi
         public void AddCustomer(Customer tmp);
         public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate = null);
         public void DeliveryParcelToCustomer(int pID, int dID);
+        public void DeleteCustomer(int csID);
             #endregion
 
         #region Parcel
         public void AddParcel(Parcel tmp);
         public Parcel GetParcel(int id);
         public IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate = null);
-
+        public void DeleteParcel(int pID);
 
         public void UpdParcel(Parcel tmp);
         public bool CheckParcel(int id);
@@ -64,6 +67,7 @@ namespace DalApi
         public DroneCharge GetDroneInCharging(int id);
         public bool CheckDroneCharge(int id);
         public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate = null);
+        public void DeleteDroneInCharge(int dgID);
         #endregion
         public double[] RequestPowerConsumptionByDrone();
         public double Deg2rad(double deg);

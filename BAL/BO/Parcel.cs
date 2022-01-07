@@ -19,9 +19,6 @@ namespace BO
         public DateTime Scheduled { get; set; }
         public DateTime PickedUp { get; set; }
         public DateTime Delivered { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 }

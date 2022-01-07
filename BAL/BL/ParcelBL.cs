@@ -37,7 +37,10 @@ namespace BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName,"this id isnt existe");
             }
-
+            catch(DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
+            }
             return boParcel; 
         }
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null,DateTime? date=null)
@@ -45,7 +48,7 @@ namespace BL
             IEnumerable<DO.Parcel> parcels;
             if (date!=default)
             {
-                parcels = dalLayer.GetAllParcels(par => par.Requested.Day == date.Value.Day && par.Requested.Month == date.Value.Month && par.Requested.Year == date.Value.Year);
+                parcels = dalLayer.GetAllParcels(par => par.Deleted == (DO.Deleted)1 && par.Requested.Day == date.Value.Day && par.Requested.Month == date.Value.Month && par.Requested.Year == date.Value.Year);
             }
             else
             {
@@ -77,8 +80,9 @@ namespace BL
                 TargetID = parcel.Receiver.ID,
                 SenderID = parcel.Sender.ID,
                 Weight = (DO.WeightCategories)parcel.Weight,
-                priority= (DO.Priorities)parcel.Priority,
-                DroneId=0,
+                priority = (DO.Priorities)parcel.Priority,
+                DroneId = 0,
+                Deleted = (DO.Deleted)parcel.Deleted,
                 Requested = DateTime.Now,
                 Scheduled = DateTime.MinValue,
                 PickedUp = DateTime.MinValue,
@@ -92,6 +96,10 @@ namespace BL
             catch (DO.DuplicateIdException ex)
             {
                 throw new BO.DuplicateIdException(ParcelDO.ID, "Parcel", "Student ID is illegal", ex);
+            }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
         //public void UpdateParcel(BO.Parcel Parcel)

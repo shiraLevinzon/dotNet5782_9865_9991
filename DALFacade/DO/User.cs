@@ -12,6 +12,6 @@ namespace DO
         public string Name { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
-
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 }

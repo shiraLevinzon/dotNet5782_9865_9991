@@ -18,7 +18,7 @@ namespace BL
             try
             {
                 //עדכון כל הפרופרטיז חוץ מחבילה בהעברה
-                BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id);
+                BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id && dro.Deleted==(Deleted)1);
                 DO.Drone d = dalLayer.GetDrone(id);
                 d.CopyPropertiesTo(boDrone);
          //       boDrone.Conditions = dtl.Conditions;
@@ -76,9 +76,9 @@ namespace BL
         {
             if(predicate!=null)
             {
-                return dronesToList.FindAll(dro => predicate(dro));
+                return dronesToList.FindAll(dro => predicate(dro)&& dro.Deleted==(Deleted)1);
             }
-            return dronesToList.FindAll(dro => 0 == 0);
+            return dronesToList.FindAll(dro => dro.Deleted == (Deleted)1);
         }
        
         public void AddDrone(BO.Drone drone, int id)
@@ -86,6 +86,7 @@ namespace BL
             DO.Drone DroneDO = new DO.Drone();
             try
             {
+                drone.Deleted = (Deleted)1;
                 DroneDO.ID = drone.ID;
                 DroneDO.MaxWeight = (DO.WeightCategories)drone.MaxWeight;
                 DroneDO.Model = drone.Model;
@@ -95,6 +96,7 @@ namespace BL
 
                 droneToListTMP.BatteryStatus = (random.Next(20, 40));
                 droneToListTMP.Conditions = (BO.DroneConditions)0;
+                droneToListTMP.Deleted=(Deleted)1;
                 droneToListTMP.location = new BO.Location();
                 droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
                 droneToListTMP.location.Longitude = GetBaseStation(id).BaseStationLocation.Longitude;
@@ -119,7 +121,7 @@ namespace BL
 
             try
             {
-                BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id);
+                BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id && dro.Deleted==(Deleted)1);
                 dtl.Model = model;
                 DroneDO.ID = dtl.ID;
                 DroneDO.Model = dtl.Model;

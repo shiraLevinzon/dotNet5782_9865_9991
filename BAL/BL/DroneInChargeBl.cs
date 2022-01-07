@@ -26,6 +26,10 @@ namespace BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
+            catch(DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(ex.ID, ex.EntityName);
+            }
         }
         public IEnumerable<BO.DroneInCharging> GetAllDroneInCharge(int id,Predicate<BO.DroneInCharging> predicate = null)
         {
@@ -37,7 +41,7 @@ namespace BL
                                                                        BatteryStatus=Drone.BatteryStatus,
                                                                    };
             if (predicate == null)
-                return droneInChargings;
+                return droneInChargings.Where(p=>p.Deleted==(BO.Deleted)1);
             return droneInChargings.Where(p => predicate(p));
 
         }

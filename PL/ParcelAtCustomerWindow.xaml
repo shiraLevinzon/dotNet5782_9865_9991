@@ -11,7 +11,7 @@
         <materialDesign:ColorZone
   Mode="PrimaryLight"
   Padding="16" Height="60"/>
-        <ListView x:Name="listOfPersonalParcel"  Margin="0,60,0,0" HorizontalAlignment="Center" Width="750">
+        <ListView x:Name="listOfPersonalParcel"  Margin="0,60,0,0" HorizontalAlignment="Center" Width="750" MouseDoubleClick="listOfPersonalParcel_MouseDoubleClick_1" SelectionChanged="listOfPersonalParcel_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn   DisplayMemberBinding="{Binding ID}" Header="ID" />

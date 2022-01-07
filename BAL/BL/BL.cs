@@ -112,7 +112,8 @@ namespace BL
                        
                             if (item.PickedUp == DateTime.MinValue)
                             {
-                                BO.BaseStation basestationHalper = new BO.BaseStation();
+
+                               BO.BaseStation basestationHalper = new BO.BaseStation();
                                 double mini = double.MaxValue;
                                 foreach (var item2 in baseStationsBL)
                                 {
@@ -125,7 +126,6 @@ namespace BL
                                 }
                                 d.location.Latitude = basestationHalper.BaseStationLocation.Latitude;
                                 d.location.Longitude = basestationHalper.BaseStationLocation.Longitude;
-
                             }
                             else
                             {

@@ -29,7 +29,9 @@ namespace PL
             actMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "ADD";
             droneInChargeList.Visibility = Visibility.Collapsed;
-            temp = 0;
+            title.Content = "ADD Base Station Details";
+            
+           temp = 0;
         }
         public BaseStationwindow(BaseStationToList bs, BlApi.IBL blobject)
         {

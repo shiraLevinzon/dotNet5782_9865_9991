@@ -17,22 +17,20 @@ namespace Dal
         /// <returns>spesific Parcel</returns>
         public Drone GetDrone(int id)
         {
-            Drone d = DataSource.drones.FirstOrDefault(par => par.ID == id);
-            if (!CheckDrone(id) && d.Deleted== (Deleted)0)
+            if (!CheckDrone(id))
                 throw new MissingIdException(id, "Drone");
-            if (!CheckDrone(id) && d.Deleted == (Deleted)2)
-                throw new EntityHasBeenDeleted(id, "The Drone no longer exists in the system");
+            Drone d = DataSource.drones.FirstOrDefault(par => par.ID == id);
             return d;
         }
         public bool CheckDrone(int id)
         {
-            return DataSource.drones.Any(par => par.ID == id && par.Deleted== (Deleted)1);
+            return DataSource.drones.Any(par => par.ID == id && par.Deleted== false);
         }
 
         public void UpdDrone(Drone tmp)
         {
-            int count = DataSource.drones.Count(par => tmp.ID == par.ID && par.Deleted == (Deleted)1);
-            DataSource.drones.RemoveAll(par => tmp.ID == par.ID && par.Deleted == (Deleted)1);
+            int count = DataSource.drones.Count(par => tmp.ID == par.ID && par.Deleted == false);
+            DataSource.drones.RemoveAll(par => tmp.ID == par.ID && par.Deleted == false);
 
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "Drone");
@@ -54,20 +52,20 @@ namespace Dal
             if (predicate != null)
             {
                 return from d in DataSource.drones
-                       where predicate(d) && d.Deleted== (Deleted)1
+                       where predicate(d) && d.Deleted== false
                        select d;
             }
             return from d in DataSource.drones
-                   where d.Deleted== (Deleted)1
+                   where d.Deleted== false
                    select d;
         }
         public void DeleteDrone(int dID)
         {
             int index1 = DataSource.customers.FindIndex(x => x.ID == dID);
             Drone cs = DataSource.drones[index1];
-            if (cs.Deleted == (Deleted)2)
+            if (cs.Deleted == true)
                 throw new EntityHasBeenDeleted(dID, "This Drones has already been deleted");
-            cs.Deleted = (Deleted)2;
+            cs.Deleted = true;
             DataSource.drones[index1] = cs;
         }
     }

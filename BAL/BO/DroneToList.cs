@@ -15,6 +15,6 @@ namespace BO
         public DroneConditions Conditions { get; set; }
         public Location location { get; set; }
         public int PackagNumberOnTransferred { get; set; }
-        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
+        public bool Deleted { get; set; }
     }
 }

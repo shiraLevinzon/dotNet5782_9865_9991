@@ -91,7 +91,7 @@ namespace BL
                 Phone = customer.Phone,
                 Latitude = customer.Location.Latitude,
                 Longitude = customer.Location.Longitude,
-                Deleted = (DO.Deleted)1,
+                Deleted = false,
             };
             try
             {

@@ -59,7 +59,7 @@ namespace BL
                 cust.Location = new Location();
                 cust.Location.Latitude = item.Latitude;
                 cust.Location.Longitude = item.Longitude;
-                cust.Deleted = (Deleted)item.Deleted;
+                cust.Deleted = item.Deleted;
                 customersBL.Add(cust);
             }
             #endregion
@@ -78,7 +78,7 @@ namespace BL
                 dtl.location = new Location();
                 dtl.location.Latitude = TMPcustomer[r1.Next(0,9)].Latitude;
                 dtl.location.Longitude = TMPcustomer[r1.Next(0,9)].Longitude;
-                dtl.Deleted = (Deleted)item.Deleted;
+                dtl.Deleted =item.Deleted;
                 dronesToList.Add(dtl);
                 
             }
@@ -95,7 +95,7 @@ namespace BL
                     StationName = item.StationName,
                     FreeChargingSlots = item.FreeChargingSlots,
                     BaseStationLocation = new Location { Latitude = item.Latitude, Longitude = item.Longitude },
-                    Deleted = (Deleted)item.Deleted,
+                    Deleted = item.Deleted,
                 };
                 baseStationsBL.Add(bases);
             }
@@ -211,7 +211,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(id, "ImproperMaintenanceCondition", "The drone is not available");
                 double distance = DistanceTo(baseStationsBL[0].BaseStationLocation.Latitude, baseStationsBL[0].BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
@@ -253,7 +253,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == (Deleted)1);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)0)
                     throw new BO.ImproperMaintenanceCondition(id, "The drone is not available");
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
@@ -288,7 +288,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted==(Deleted)1);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
                 DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
@@ -344,7 +344,7 @@ namespace BL
             try
             {
                 
-                BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id && x.Deleted==(Deleted)1);
+                BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id && x.Deleted==false);
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");
@@ -373,7 +373,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==(Deleted)1);
+                BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==false);
                 DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivere- Time Problem");

@@ -40,7 +40,7 @@ namespace BL
                 user.Id = tmp.Id;
                 user.Name = tmp.Name;
                 user.Password = tmp.Password;
-                user.Deleted = (DO.Deleted)tmp.Deleted;
+                user.Deleted = tmp.Deleted;
                 user.Phone = tmp.Phone; dalLayer.UpdUser(user);
             }
             catch (DO.MissingIdException ex)
@@ -66,7 +66,7 @@ namespace BL
                 user.Name = tmp.Name;
                 user.Password = tmp.Password;
                 user.Phone = tmp.Phone;
-                user.Deleted = (DO.Deleted)tmp.Deleted;
+                user.Deleted = tmp.Deleted;
                 dalLayer.AddUser(user);
             }
             catch (DO.DuplicateIdException ex)

@@ -10,6 +10,6 @@ namespace BO
     {
         public int ID { get; set; }
         public double BatteryStatus { get; set; }
-        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
+        public bool Deleted { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace BlApi
         public void DeliveryOfPackageByDrone(int id);
         #endregion
         #region פונקציות רחפנים בטעיה של שיכבה 2
-        public BO.DroneInCharging GetDroneInCharge(int id);
+     //   public BO.DroneInCharging GetDroneInCharge(int id);
         public IEnumerable<BO.DroneInCharging> GetAllDroneInCharge(int id, Predicate<BO.DroneInCharging> predicate = null);
         #endregion
     }

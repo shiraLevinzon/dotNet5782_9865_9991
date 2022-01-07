@@ -48,7 +48,7 @@ namespace BL
             IEnumerable<DO.Parcel> parcels;
             if (date!=default)
             {
-                parcels = dalLayer.GetAllParcels(par => par.Deleted == (DO.Deleted)1 && par.Requested.Day == date.Value.Day && par.Requested.Month == date.Value.Month && par.Requested.Year == date.Value.Year);
+                parcels = dalLayer.GetAllParcels(par => par.Deleted == false && par.Requested.Day == date.Value.Day && par.Requested.Month == date.Value.Month && par.Requested.Year == date.Value.Year);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace BL
                 Weight = (DO.WeightCategories)parcel.Weight,
                 priority = (DO.Priorities)parcel.Priority,
                 DroneId = 0,
-                Deleted = (DO.Deleted)parcel.Deleted,
+                Deleted = parcel.Deleted,
                 Requested = DateTime.Now,
                 Scheduled = DateTime.MinValue,
                 PickedUp = DateTime.MinValue,

@@ -12,20 +12,18 @@ namespace Dal
     {
         public User GetUser(int id)
         {
-            User d = DataSource.users.Find(par => par.Id == id);
-            if (!CheckUser(id) && d.Deleted== (Deleted)0)
+            if (!CheckUser(id)) 
                 throw new MissingIdException(id, "User");
-            if (!CheckUser(id) && d.Deleted == (Deleted)2)
-                throw new EntityHasBeenDeleted(id, "The user no longer exists in the system");
+            User d = DataSource.users.Find(par => par.Id == id);
             return d;
         }
         public bool CheckUser(int id)
         {
-            return DataSource.users.Any(par => par.Id == id && par.Deleted== (Deleted)1);
+            return DataSource.users.Any(par => par.Id == id && par.Deleted== false);
         }
         public void UpdUser(User tmp)
         {
-            int count = DataSource.users.RemoveAll(par => tmp.Id == par.Id && par.Deleted == (Deleted)1);
+            int count = DataSource.users.RemoveAll(par => tmp.Id == par.Id && par.Deleted == false);
             if (count == 0)
                 throw new MissingIdException(tmp.Id, "User");
             DataSource.users.Add(tmp);
@@ -45,20 +43,20 @@ namespace Dal
             if (predicate != null)
             {
                 return from b in DataSource.users
-                       where predicate(b) && b.Deleted == (Deleted)1
+                       where predicate(b) && b.Deleted == false
                        select b;
             }
             return from b in DataSource.users
-                   where b.Deleted == (Deleted)1
+                   where b.Deleted == false
                    select b;
         }
         public void DeleteUser(int uID)
         {
             int index1 = DataSource.users.FindIndex(x => x.Id == uID);
             User cs = DataSource.users[index1];
-            if (cs.Deleted == (Deleted)2)
+            if (cs.Deleted == true)
                 throw new EntityHasBeenDeleted(uID, "This User has already been deleted");
-            cs.Deleted = (Deleted)2;
+            cs.Deleted = true;
             DataSource.users[index1] = cs;
         } 
     }

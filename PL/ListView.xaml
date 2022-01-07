@@ -194,7 +194,7 @@
                                 </Grid>
                                 <ComboBox x:Name="StatusSelec"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון כמות חבילות במשלוח בשליחה" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="StatusSelector_SelectionChanged" />
                             </StackPanel>
-                            <StackPanel  Margin="282,4,51,4" Grid.ColumnSpan="3" Grid.Column="1">
+                            <StackPanel  Margin="226,8,107,0" Grid.ColumnSpan="3" Grid.Column="1">
                                 <Grid Height="37" Width="276">
                                     <Grid.ColumnDefinitions>
 
@@ -202,7 +202,7 @@
                                     <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox4"  IsChecked="True" Margin="10,-1,190,9" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
                                     <Button  Name="Clear5" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Click="Clear2_Click" RenderTransformOrigin="0.428,0.642" Margin="195,-1,0,-2" Width="81" />
                                 </Grid>
-                                <ComboBox x:Name="Weight" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון לפי שם לקוח" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
+                                <ComboBox x:Name="CostumerName" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון לפי שם לקוח" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
                             </StackPanel>
                         </Grid>
                         <ListView x:Name="listOfCostumer" ItemsSource="{Binding Items1}" Margin="0,24,0,0" MouseDoubleClick="listOfCostumer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" RenderTransformOrigin="0.539,0.535" >

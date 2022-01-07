@@ -65,7 +65,7 @@ namespace BL
                 FreeChargingSlots = baseStation.FreeChargingSlots,
                 Latitude = baseStation.BaseStationLocation.Latitude,
                 Longitude = baseStation.BaseStationLocation.Longitude,
-                Deleted = (DO.Deleted)1,
+                Deleted = false,
             };
             
             try

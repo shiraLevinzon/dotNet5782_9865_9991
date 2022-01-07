@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,7 @@ namespace DO
         public string Phone { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
+        public bool Deleted { get; set; }
     }
 
 }

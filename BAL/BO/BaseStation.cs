@@ -13,6 +13,7 @@ namespace BO
         public int FreeChargingSlots { get; set; }
         public Location BaseStationLocation { get; set; }
         public IEnumerable<DroneInCharging> DronesInCharge { get; set; }
-        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
+        public bool Deleted { get; set; }
+  
     }
 }

@@ -51,7 +51,7 @@ namespace Dal
                     ID = i+1,
                     Model = "p1",
                     MaxWeight = (WeightCategories)r1.Next(0, 3),
-
+                    Deleted = false,
                 });
                 ;
             }
@@ -68,7 +68,8 @@ namespace Dal
                     Phone = $"0{r1.Next(50, 60)}{r1.Next(1000000, 10000000)}",
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
-                });
+                    Deleted = false
+                }) ;
                 ;
             }
         }
@@ -83,6 +84,8 @@ namespace Dal
                     FreeChargingSlots = r1.Next(1, 6),
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
+                    Deleted = false
+
                 });
                 ;
             }
@@ -103,6 +106,11 @@ namespace Dal
                     priority = (Priorities)r1.Next(0, 3),
                     DroneId = temp3,
                     Requested = DateTime.Now,
+                    Deleted = false
+
+
+
+
                     // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;
             }

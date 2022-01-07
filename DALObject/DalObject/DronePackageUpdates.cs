@@ -16,8 +16,8 @@ namespace Dal
         /// <param name="dID"></param>
         public void AssignPackageToDrone(int pID, int dID)
         {
-            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted== (Deleted)1);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == (Deleted)1);
+            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted== false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
 
             Parcel p = DataSource.parcels[index1];
             Drone d = DataSource.drones[index2];
@@ -36,8 +36,8 @@ namespace Dal
         public void ParcelCollectionByDrone(int pID, int dID)
         {
 
-            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == (Deleted)1);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == (Deleted)1);
+            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
 
             Parcel p = DataSource.parcels[index1];
             Drone d = DataSource.drones[index2];
@@ -56,8 +56,8 @@ namespace Dal
         /// <param name="dID"></param>
         public void DeliveryParcelToCustomer(int pID, int dID)
         {
-            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == (Deleted)1);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == (Deleted)1);
+            int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
 
             Parcel p = DataSource.parcels[index1];
             Drone d = DataSource.drones[index2];

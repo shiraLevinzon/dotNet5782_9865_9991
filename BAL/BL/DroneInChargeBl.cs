@@ -11,7 +11,7 @@ namespace BL
 {
     partial class BL: BlApi.IBL
     {
-        public BO.DroneInCharging GetDroneInCharge(int id)
+        /*public BO.DroneInCharging GetDroneInCharge(int id)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace BL
             {
                 throw new BO.EntityHasBeenDeleted(ex.ID, ex.EntityName);
             }
-        }
+        }*/
         public IEnumerable<BO.DroneInCharging> GetAllDroneInCharge(int id,Predicate<BO.DroneInCharging> predicate = null)
         {
             BO.BaseStation bs = GetBaseStation(id);
@@ -41,7 +41,7 @@ namespace BL
                                                                        BatteryStatus=Drone.BatteryStatus,
                                                                    };
             if (predicate == null)
-                return droneInChargings.Where(p=>p.Deleted==(BO.Deleted)1);
+                return droneInChargings.Where(p=>p.Deleted==false);
             return droneInChargings.Where(p => predicate(p));
 
         }

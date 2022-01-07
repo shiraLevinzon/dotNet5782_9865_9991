@@ -13,6 +13,6 @@ namespace BO
         public Location Location { get; set; }
         public IEnumerable<ParcelAtCustomer> PackagesFromCustomer { get; set; }
         public IEnumerable<ParcelAtCustomer> PackagesToCustomer { get; set; }
-        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
+        public bool Deleted { get; set; }
     }
 }

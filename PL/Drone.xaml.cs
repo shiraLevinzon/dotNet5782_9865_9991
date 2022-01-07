@@ -166,8 +166,8 @@ namespace PL
                 switch (temp)
                 {
                     case 0:
-                        TimeSpan t = new TimeSpan(Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text), Convert.ToInt32(spantime.Text));
-                        
+                        TimeSpan t;
+                        bool tmp= TimeSpan.TryParse(WithSecondsTimePicker.Text,out t);
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();

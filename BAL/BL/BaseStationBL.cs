@@ -67,7 +67,8 @@ namespace BL
                 Longitude = baseStation.BaseStationLocation.Longitude,
                 Deleted = false,
             };
-            
+            if (baseStationDO.FreeChargingSlots < 0)
+                baseStationDO.FreeChargingSlots = 0;
             try
             {
                 dalLayer.AddBaseStation(baseStationDO);

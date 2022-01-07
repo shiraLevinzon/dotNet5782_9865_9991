@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="ParcelWindow" Height="500" Width="500">
+        Title="ParcelWindow" Height="500" Width="650">
     <Grid Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="111*"/>

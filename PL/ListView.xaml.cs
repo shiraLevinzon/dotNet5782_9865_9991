@@ -168,6 +168,7 @@ namespace PL
             FilterByCombiBoxOfDrone();
             FilterByCombiBoxOfBaseStation();
             FilterByCombiBoxOfParcel();
+            listOfCostumer.ItemsSource = bl.GetAllCustomer();
         }
         private void listOfDrones_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

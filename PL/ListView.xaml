@@ -15,7 +15,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="ListView" Height="800" Width="1000" Activated="listViewWindow_Activated">
+        Title="ListView" Height="700" Width="1100" Activated="listViewWindow_Activated">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -168,43 +168,14 @@
                     </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="269*"/>
-                            <ColumnDefinition Width="731*"/>
+                            
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="129*" />
-                            <RowDefinition Height="132*" />
+                            
                             <RowDefinition Height="13*"/>
                             <RowDefinition Height="219*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Margin="0,16,0,124" HorizontalAlignment="Left" Width="1000" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="333*"/>
-                                <ColumnDefinition Width="333*"/>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="324*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Margin="2,8,166,1"  Grid.Column="0" Grid.ColumnSpan="2">
-                                <Grid  >
-                                    <Grid.ColumnDefinitions>
-
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox3"  IsChecked="True" Margin="117,0,-76,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
-                                    <Button Name="Clear4" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Click="Clear1_Click" Margin="319,0,0,0"  />
-                                </Grid>
-                                <ComboBox x:Name="StatusSelec"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון כמות חבילות במשלוח בשליחה" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="StatusSelector_SelectionChanged" />
-                            </StackPanel>
-                            <StackPanel  Margin="226,8,107,0" Grid.ColumnSpan="3" Grid.Column="1">
-                                <Grid Height="37" Width="276">
-                                    <Grid.ColumnDefinitions>
-
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox4"  IsChecked="True" Margin="10,-1,190,9" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
-                                    <Button  Name="Clear5" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" Click="Clear2_Click" RenderTransformOrigin="0.428,0.642" Margin="195,-1,0,-2" Width="81" />
-                                </Grid>
-                                <ComboBox x:Name="CostumerName" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון לפי שם לקוח" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
-                            </StackPanel>
-                        </Grid>
+                        
                         <ListView x:Name="listOfCostumer" ItemsSource="{Binding Items1}" Margin="0,24,0,0" MouseDoubleClick="listOfCostumer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" RenderTransformOrigin="0.539,0.535" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListViewItem}">

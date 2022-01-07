@@ -122,7 +122,7 @@ namespace BL
             }
             catch (DO.DuplicateIdException ex)
             {
-                throw new BO.DuplicateIdException(CustomerDO.ID, "Customer", "Student ID is illegal", ex);
+                throw new BO.DuplicateIdException(CustomerDO.ID, "Customer", "Customer ID is illegal", ex);
             }
 
         }

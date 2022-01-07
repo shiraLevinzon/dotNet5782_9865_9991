@@ -11,20 +11,20 @@ namespace Dal
     {
         public Customer GetCostumer(int id)
         {
-            if (!CheckCustomer(id))
+            Customer d = DataSource.customers.FirstOrDefault(par => par.ID == id);
+            if (!CheckCustomer(id) && d.Deleted==false)
                 throw new MissingIdException(id, "Customer");
-
-            Customer d = DataSource.customers.Find(par => par.ID == id);
+            if (!CheckCustomer(id) && d.Deleted == true)
+                throw new EntityHasBeenDeleted(id, "A customer no longer exists in the system");
             return d;
         }
         public bool CheckCustomer(int id)
         {
-            return DataSource.customers.Any(par => par.ID == id);
+            return DataSource.customers.Any(par => par.ID == id && par.Deleted==false);
         }
-
         public void UpdCustomer(Customer tmp)
         {
-            int count = DataSource.customers.RemoveAll(par => tmp.ID == par.ID);
+            int count = DataSource.customers.RemoveAll(par => tmp.ID == par.ID && par.Deleted==false);
 
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "Customer");
@@ -42,18 +42,26 @@ namespace Dal
 
             DataSource.customers.Add(tmp);
         }
-
         public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate=null)
         {
             if(predicate!=null)
             {
                 return from c in DataSource.customers
-                       where predicate(c)
+                       where predicate(c) && c.Deleted==false
                        select c;
             }
-            return from c in DataSource.customers              
+            return from c in DataSource.customers
+                   where c.Deleted==false
                    select c;
         }
-        
+        public void DeleteCustomer(int csID)
+        {
+            int index1 = DataSource.customers.FindIndex(x => x.ID == csID);
+            Customer cs = DataSource.customers[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(csID, "This Customer has already been deleted");
+            cs.Deleted = true;
+            DataSource.customers[index1] = cs;
+        }
     }
 }

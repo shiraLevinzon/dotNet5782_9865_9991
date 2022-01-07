@@ -11,23 +11,23 @@ namespace Dal
     {
         public BaseStation GetBaseStation(int id)
         {
-            if (!CheckBaseStation(id))
+            BaseStation d = DataSource.baseStations.FirstOrDefault(par => par.ID == id);
+            if (!CheckBaseStation(id) && d.Deleted==false)
                 throw new MissingIdException(id, "BaseStation");
-
-            BaseStation d = DataSource.baseStations.Find(par => par.ID == id);
+            if (!CheckBaseStation(id) && d.Deleted == true)
+                throw new EntityHasBeenDeleted(id, "The base station no longer exists in the system");
             return d;
         }
         public bool CheckBaseStation(int id)
         {
-            return DataSource.baseStations.Any(par => par.ID == id);
+            return DataSource.baseStations.Any(par => par.ID == id && par.Deleted==false);
         }
         public void UpdBaseStation(BaseStation tmp)
         {
-            int count = DataSource.baseStations.RemoveAll(par => tmp.ID == par.ID);
+            int count = DataSource.baseStations.RemoveAll(par => tmp.ID == par.ID && par.Deleted==false);
 
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "BaseStation");
-
             DataSource.baseStations.Add(tmp);
         }
         /// <summary>
@@ -45,10 +45,11 @@ namespace Dal
             if (predicate != null)
             {
                 return from b in DataSource.baseStations
-                       where predicate(b)
+                       where predicate(b) && b.Deleted==false
                        select b;
             }
             return from b in DataSource.baseStations
+                   where b.Deleted==false
                    select b;
         }
         /// <summary>
@@ -58,8 +59,8 @@ namespace Dal
         /// <param name="dID"></param>
         public void SendingDroneToBaseStation(int bsID, int dID)
         {
-            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
+            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted==false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
 
             BaseStation bs = DataSource.baseStations[index1];
             Drone d = DataSource.drones[index2];
@@ -78,15 +79,24 @@ namespace Dal
         /// <param name="dID"></param>
         public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
         {
-            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID);
-            int index3 = DataSource.droneCharges.FindIndex(x => x.DroneID == dID);
+            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted==false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
+            int index3 = DataSource.droneCharges.FindIndex(x => x.DroneID == dID && x.Deleted == false);
             BaseStation bs = DataSource.baseStations[index1];
             Drone d = DataSource.drones[index2];
             bs.FreeChargingSlots++;
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
              DataSource.droneCharges.RemoveAt(index3);
+        }
+        public void DeleteBaseStatin(int bsID)
+        {
+            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID);
+            BaseStation bs = DataSource.baseStations[index1];
+            if (bs.Deleted == true)
+                throw new EntityHasBeenDeleted(bsID, "This base station has already been deleted");
+            bs.Deleted = true;
+            DataSource.baseStations[index1] = bs;
         }
     }
 }

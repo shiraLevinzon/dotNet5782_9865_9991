@@ -15,9 +15,5 @@ namespace BO
           public int NumberofPackagesSentButNotDelivered{ get; set; }
            public int NumberOfPackagesHeReceived{ get; set; }
           public int NumberofPackagesOnTheWayToCustomer{ get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
     }
 }

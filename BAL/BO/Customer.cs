@@ -13,9 +13,6 @@ namespace BO
         public Location Location { get; set; }
         public IEnumerable<ParcelAtCustomer> PackagesFromCustomer { get; set; }
         public IEnumerable<ParcelAtCustomer> PackagesToCustomer { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public bool Deleted { get; set; }
     }
 }

@@ -71,7 +71,6 @@ namespace Dal
                 });
                 ;
             }
-
         }
         static void InitializeBaseStation()
         {

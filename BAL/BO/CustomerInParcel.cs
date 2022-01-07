@@ -10,9 +10,5 @@ namespace BO
     {
         public int ID { get; set; }
         public string CustomerName { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
     }
 }

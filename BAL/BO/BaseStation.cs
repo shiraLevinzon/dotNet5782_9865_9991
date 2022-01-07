@@ -13,9 +13,6 @@ namespace BO
         public int FreeChargingSlots { get; set; }
         public Location BaseStationLocation { get; set; }
         public IEnumerable<DroneInCharging> DronesInCharge { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
+        public bool Deleted { get; set; }
     }
 }

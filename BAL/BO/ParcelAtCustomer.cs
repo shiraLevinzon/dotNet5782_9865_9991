@@ -12,9 +12,5 @@ namespace BO
         public Priorities priority { get; set; }
         public Situations Situation { get; set; }
         public CustomerInParcel CustomerInParcel { get; set; }
-        public override string ToString()
-        {
-            return this.ToStringProperty();
-        }
     }
 }

@@ -12,23 +12,22 @@ namespace Dal
     {
         public User GetUser(int id)
         {
-            if (!CheckUser(id))
-                throw new MissingIdException(id, "User");
-
             User d = DataSource.users.Find(par => par.Id == id);
+            if (!CheckUser(id) && d.Deleted==false)
+                throw new MissingIdException(id, "User");
+            if (!CheckUser(id) && d.Deleted == true)
+                throw new EntityHasBeenDeleted(id, "The user no longer exists in the system");
             return d;
         }
         public bool CheckUser(int id)
         {
-            return DataSource.users.Any(par => par.Id == id);
+            return DataSource.users.Any(par => par.Id == id && par.Deleted==false);
         }
         public void UpdUser(User tmp)
         {
-            int count = DataSource.users.RemoveAll(par => tmp.Id == par.Id);
-
+            int count = DataSource.users.RemoveAll(par => tmp.Id == par.Id && par.Deleted == false);
             if (count == 0)
                 throw new MissingIdException(tmp.Id, "User");
-
             DataSource.users.Add(tmp);
         }
         /// <summary>
@@ -46,11 +45,21 @@ namespace Dal
             if (predicate != null)
             {
                 return from b in DataSource.users
-                       where predicate(b)
+                       where predicate(b) && b.Deleted == false
                        select b;
             }
             return from b in DataSource.users
+                   where b.Deleted == false
                    select b;
         }
+        public void DeleteUser(int uID)
+        {
+            int index1 = DataSource.users.FindIndex(x => x.Id == uID);
+            User cs = DataSource.users[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(uID, "This User has already been deleted");
+            cs.Deleted = true;
+            DataSource.users[index1] = cs;
+        } 
     }
 }

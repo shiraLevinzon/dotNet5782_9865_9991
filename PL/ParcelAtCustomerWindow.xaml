@@ -11,8 +11,8 @@
         <materialDesign:ColorZone
   Mode="PrimaryLight"
   Padding="16" Height="60"/>
-        <ListView
-  ItemsSource="{Binding Items1}" Margin="0,60,0,0" HorizontalAlignment="Center" Width="583">
+        <ListView x:Name="listOfPersonalParcel"
+  ItemsSource="{Binding Items1}" Margin="0,60,0,0" HorizontalAlignment="Center" Width="583" MouseDoubleClick="listOfPersonalParcel_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -28,7 +28,7 @@
         DisplayMemberBinding="{Binding priority}"
         Header="priority" />
                     <GridViewColumn  DisplayMemberBinding="{Binding CustomerInParcel}"
-        Header="CustomerInParcel">
+        Header="Customer receives">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox

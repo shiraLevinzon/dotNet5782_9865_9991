@@ -99,5 +99,34 @@ namespace PL
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void PackagesToCustomer_Click(object sender, RoutedEventArgs e, BO.Customer css)
+        {
+            BO.Customer cs = new BO.Customer();
+            cs = css;
+            new ParcelAtCustomerWindow(cs, bl, p => p.RecieverID == cs.ID).ShowDialog();
+        }
+        private void PackagesFromCustomer_Click(object sender, RoutedEventArgs e, BO.Customer css)
+        {
+
+            BO.Customer cs = new BO.Customer();
+            cs = css;
+            new ParcelAtCustomerWindow(cs, bl,p=>p.SenderID==cs.ID).ShowDialog();
+        }
+        private BO.Customer CreateCostumer()
+        {
+
+            BO.Customer cs = new BO.Customer()
+            {
+                ID = Convert.ToInt32(iDTextBlock.Text),
+                Name = Convert.ToString(nameTextBox.Text),
+                Location = new Location()
+                {
+                    Latitude = Convert.ToDouble(latitudeTextBlock.Text),
+                    Longitude = Convert.ToDouble(longitudeTextBlock.Text)
+                },
+                Phone = Convert.ToString(phoneTextBox.Text),
+            };
+            return cs;
+        }
     }
 }

@@ -68,7 +68,7 @@
         <Label Margin="0,-21,0,382" RenderTransformOrigin="0.302,0.847">
             <Label x:Name="PersonDetails" Content="" Width="563" Height="46"/>
         </Label>
-        <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230"/>
-        <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230"/>
+        <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230" Click="PackagesFromCustomer_Click"/>
+        <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230" Click="PackagesToCustomer_Click"/>
     </Grid>
 </Window>

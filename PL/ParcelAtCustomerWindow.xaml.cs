@@ -31,11 +31,15 @@ namespace PL
                 listOfPersonalParcel.ItemsSource = bl.GetCustomer(id).PackagesToCustomer;
 
         }
-
-        private void listOfPersonalParcel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void listOfPersonalParcel_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            BO.ParcelToList parcelTo = (ParcelToList)listOfPersonalParcel.SelectedItem;
-            new parcelInTransferWindow(parcelTo.ID,bl).ShowDialog();
+            BO.ParcelAtCustomer parcelTo = (ParcelAtCustomer)listOfPersonalParcel.SelectedItem;
+            new parcelInTransferWindow(parcelTo.ID, bl).ShowDialog();
+        }
+
+        private void listOfPersonalParcel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

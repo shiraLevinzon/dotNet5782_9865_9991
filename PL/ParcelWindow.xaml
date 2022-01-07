@@ -106,7 +106,7 @@
             <Button x:Name="showResiver" Content="Show" HorizontalAlignment="Left" Margin="191,264,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showResiver_Click" Grid.ColumnSpan="2"/>
             <Button x:Name="showDrone" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="191,232,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showDrone_Click" Grid.ColumnSpan="2" />
         </Grid>
-        <materialDesign:PackIcon Kind="GiftOpen" Margin="0,101,0,0" Height="171" Width="202" HorizontalAlignment="Center" />
+        <materialDesign:PackIcon Kind="Package" Margin="0,101,0,0" Height="171" Width="202" HorizontalAlignment="Center" />
     </Grid>
 
 </Window>

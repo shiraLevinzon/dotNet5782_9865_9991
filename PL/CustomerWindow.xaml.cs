@@ -66,13 +66,13 @@ namespace PL
                             BO.Customer cs = new BO.Customer()
                             {
                                 ID = Convert.ToInt32(iDTextBox.Text),
-                                Name = Convert.ToString(nameTextBox.Text),
+                                Name = nameTextBox1.Text,
                                 Location = new Location()
                                 {
                                     Latitude = Convert.ToDouble(latitudeTextBox.Text),
                                     Longitude = Convert.ToDouble(longitudeTextBox.Text)
                                 },
-                                Phone = Convert.ToString(phoneTextBox.Text),
+                                Phone = phoneTextBox1.Text,
                             };
                             bl.AddCustomer(cs);
                             MessageBox.Show("add New Costumer sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -97,6 +97,18 @@ namespace PL
             catch (BO.DuplicateIdException ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void iDTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
     }

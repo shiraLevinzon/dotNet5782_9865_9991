@@ -21,17 +21,21 @@ namespace PL
     public partial class ParcelAtCustomerWindow : Window
     {
         IBL bl;
-        public ParcelAtCustomerWindow(BO.Customer custoer,IBL bll, Predicate<BO.ParcelToList> predicates = null)
+        public ParcelAtCustomerWindow(BO.Customer custoer,IBL bll,int i)
         {
             InitializeComponent();
             bl = bll;
-            listOfPersonalParcel.ItemsSource = bl.GetAllParcels(predicates);
+            if (i == 0)
+                listOfPersonalParcel.ItemsSource = bl.GetCustomer(custoer.ID).PackagesFromCustomer;
+            else
+                listOfPersonalParcel.ItemsSource = bl.GetCustomer(custoer.ID).PackagesToCustomer;
+
         }
 
         private void listOfPersonalParcel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.ParcelToList parcelTo = (ParcelToList)listOfPersonalParcel.SelectedItem;
-
+            new parcelInTransferWindow(parcelTo.ID,bl).ShowDialog();
         }
     }
 }

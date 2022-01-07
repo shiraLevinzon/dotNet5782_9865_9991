@@ -12,7 +12,7 @@
   Mode="PrimaryLight"
   Padding="16" Height="60"/>
         <ListView x:Name="listOfPersonalParcel"
-  ItemsSource="{Binding Items1}" Margin="0,60,0,0" HorizontalAlignment="Center" Width="583" MouseDoubleClick="listOfPersonalParcel_MouseDoubleClick">
+  ItemsSource="{Binding Items1}" Margin="0,60,0,0" HorizontalAlignment="Center" Width="583">
             <ListView.View>
                 <GridView>
                     <GridViewColumn
@@ -27,8 +27,7 @@
                     <GridViewColumn
         DisplayMemberBinding="{Binding priority}"
         Header="priority" />
-                    <GridViewColumn  DisplayMemberBinding="{Binding CustomerInParcel}"
-        Header="Customer receives">
+                    <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox

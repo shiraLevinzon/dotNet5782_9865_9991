@@ -66,13 +66,13 @@ namespace PL
                             BO.Customer cs = new BO.Customer()
                             {
                                 ID = Convert.ToInt32(iDTextBox.Text),
-                                Name = Convert.ToString(nameTextBox.Text),
+                                Name = nameTextBox1.Text,
                                 Location = new Location()
                                 {
                                     Latitude = Convert.ToDouble(latitudeTextBox.Text),
                                     Longitude = Convert.ToDouble(longitudeTextBox.Text)
                                 },
-                                Phone = Convert.ToString(phoneTextBox.Text),
+                                Phone = phoneTextBox1.Text,
                             };
                             bl.AddCustomer(cs);
                             MessageBox.Show("add New Costumer sucsess", "ADD OPTION", MessageBoxButton.OK, MessageBoxImage.Information);

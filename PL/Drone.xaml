@@ -14,16 +14,16 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
                     <ColumnDefinition Width="80.123"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto" MinHeight="25"/>
                     <RowDefinition Height="Auto" MinHeight="24"/>
                 </Grid.RowDefinitions>
-                <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Width="22"/>
-                <TextBox x:Name="iDTextBox" MaxLength="10" Grid.Column="2" HorizontalAlignment="Center" Margin="0,4,0,5" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"  KeyDown="iDTextBox_KeyDown"/>
-                <Label Content="Max Weight:" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="24" Width="74"/>
+                <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="35" Width="37" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
+                <TextBox x:Name="iDTextBox" MaxLength="10" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,9" Grid.Row="0" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"  KeyDown="iDTextBox_KeyDown"/>
+                <Label Content="Max Weight:" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="116" FontSize="16" FontWeight="Bold" FontStyle="Italic" Margin="-8,29,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                 <ComboBox x:Name="maxWeightComboBox" Grid.Column="2" HorizontalAlignment="Center" Height="25" SelectedItem="{Binding MaxWeight}" Grid.Row="1" VerticalAlignment="Center" Width="120">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -31,13 +31,13 @@
                         </ItemsPanelTemplate>
                     </ComboBox.ItemsPanel>
                 </ComboBox>
-                <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="24" Width="45"/>
-                <TextBox x:Name="modelTextBox1" Grid.Column="2" HorizontalAlignment="Center" Height="23" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Model:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,21,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Height="28" Width="78" FontSize="16" FontWeight="Bold" FontStyle="Italic" Grid.RowSpan="2"/>
+                <TextBox x:Name="modelTextBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="2" Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Margin="78,0,0,0" Grid.ColumnSpan="2"/>
             </Grid>
 
             <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click_1"/>
-            <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="155,217,0,0" VerticalAlignment="Top" Width="95"/>
-            <Label Content="station id:" HorizontalAlignment="Left" Margin="85,218,0,0" VerticalAlignment="Top" Width="77"/>
+            <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="340,205,0,0" VerticalAlignment="Top" Width="94"/>
+            <Label Content="station id:" HorizontalAlignment="Left" Margin="258,204,0,0" VerticalAlignment="Top" Width="88" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
         </Grid>
 
         <Grid x:Name="actMode" Margin="197,37,9,9" Grid.ColumnSpan="2" d:IsHidden="True">
@@ -118,5 +118,11 @@
             <StackPanel
     Orientation="Horizontal"/>
         </materialDesign:ColorZone>
+        <materialDesign:TimePicker
+  materialDesign:HintAssist.Hint="With Seconds"
+  Is24Hours="{Binding IsChecked, ElementName=Is24HourCheckbox}"
+  x:Name="WithSecondsTimePicker"
+  WithSeconds="True"
+  Width="100" Margin="248,364,142,0" VerticalAlignment="Top" />
     </Grid>
 </Window>

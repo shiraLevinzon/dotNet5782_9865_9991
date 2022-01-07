@@ -32,7 +32,10 @@ namespace BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName);
             }
-
+            catch(DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(ex.ID, ex.EntityName);
+            }
             return boBaseStation;
         }
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null)
@@ -55,13 +58,14 @@ namespace BL
         {
 
             //Add DO.BaseStation            
-           DO.BaseStation baseStationDO = new DO.BaseStation()
+            DO.BaseStation baseStationDO = new DO.BaseStation()
             {
                 ID = baseStation.ID,
                 StationName = baseStation.StationName,
                 FreeChargingSlots = baseStation.FreeChargingSlots,
                 Latitude = baseStation.BaseStationLocation.Latitude,
                 Longitude = baseStation.BaseStationLocation.Longitude,
+                Deleted = (DO.Deleted)1,
             };
             
             try

@@ -15,7 +15,7 @@ namespace DO
         public int FreeChargingSlots { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public bool Deleted { get; set; }
+        public Deleted Deleted { get=> Deleted; set => Deleted = (Deleted)0; }
     }
 }
 

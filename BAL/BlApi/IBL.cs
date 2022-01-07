@@ -28,7 +28,7 @@ namespace BlApi
         #endregion
         #region פונקציות לקוח של שיכבה 2
         public BO.Customer GetCustomer(int id);
-        public IEnumerable<BO.CustomerToList> GetAllCustomer();
+        public IEnumerable<BO.CustomerToList> GetAllCustomer(Predicate<BO.CustomerToList> predicate = null);
         public void AddCustomer(BO.Customer customer);
         public void UpdateCustomer(int id, string name, string phone);
         #endregion

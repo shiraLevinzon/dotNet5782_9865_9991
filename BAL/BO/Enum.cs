@@ -13,4 +13,6 @@ namespace BO
     //נוצר, שייך, נאסף, סיפק
     public enum DroneConditions { maintenance ,Available, delivery, /*charging*/}
     //תחזוקה, זמינה, משלוח, טעינה
+    public enum Deleted { Uninitialized, False, True }
+
 }

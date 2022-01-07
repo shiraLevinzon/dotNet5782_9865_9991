@@ -30,15 +30,15 @@ namespace Dal
         public Parcel GetParcel(int id)
         {
             Parcel p = DataSource.parcels.FirstOrDefault(par => par.ID == id);
-            if (!CheckParcel(id)&& p.Deleted==false)
+            if (!CheckParcel(id)&& p.Deleted== (Deleted)0)
                 throw new MissingIdException(id, "Parcel");
-            if (!CheckParcel(id) && p.Deleted == true)
+            if (!CheckParcel(id) && p.Deleted == (Deleted)2)
                 throw new EntityHasBeenDeleted(id, "The package no longer exists in the system");
             return p;
         }
         public bool CheckParcel(int id)
         {
-            return DataSource.parcels.Any(par => par.ID == id && par.Deleted==false);
+            return DataSource.parcels.Any(par => par.ID == id && par.Deleted== (Deleted)1);
         }
         /// <summary>
         /// print Parcel
@@ -50,16 +50,16 @@ namespace Dal
             if (predicate != null)
             {
                 return from p in DataSource.parcels
-                       where predicate(p) &&  p.Deleted == false
+                       where predicate(p) &&  p.Deleted == (Deleted)1
                        select p;
             }
             return from p in DataSource.parcels
-                   where p.Deleted == false
+                   where p.Deleted == (Deleted)1
                    select p;
         }
         public void UpdParcel(Parcel tmp)
         {
-            int count = DataSource.parcels.RemoveAll(par => tmp.ID == par.ID && par.Deleted == false);
+            int count = DataSource.parcels.RemoveAll(par => tmp.ID == par.ID && par.Deleted == (Deleted)1);
             if (count == 0)
                 throw new MissingIdException(tmp.ID, "Parcel");
             DataSource.parcels.Add(tmp);
@@ -68,9 +68,9 @@ namespace Dal
         {
             int index1 = DataSource.parcels.FindIndex(x => x.ID == pID);
             Parcel ps = DataSource.parcels[index1];
-            if (ps.Deleted == true)
+            if (ps.Deleted == (Deleted)2)
                 throw new EntityHasBeenDeleted(pID, "This Parcel has already been deleted");
-            ps.Deleted = true;
+            ps.Deleted = (Deleted)2;
             DataSource.parcels[index1] = ps;
         }
     }

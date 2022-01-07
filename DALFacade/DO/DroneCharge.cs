@@ -9,7 +9,7 @@ namespace DO
     {
         public int DroneID { get; set; }
         public int StationID { get; set; }
-        public bool Deleted { get; set; }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 
 }

@@ -10,7 +10,7 @@ namespace DO
         public int ID { get; set; }
         public string Model { get; set; }
         public WeightCategories MaxWeight { get; set; }
-        public bool Deleted { get; set; }
+        public Deleted Deleted { get => Deleted; set => Deleted = (Deleted)0; }
     }
 
 }

@@ -178,7 +178,9 @@ namespace PL
                 {
                     case 0:
                         TimeSpan t;
-                        bool tmp= TimeSpan.TryParse(WithSecondsTimePicker.Text,out t);
+                        string s= WithSecondsTimePicker.Text;
+                        int h=
+                        bool tmp= TimeSpan.TryParse(s,out t);
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();

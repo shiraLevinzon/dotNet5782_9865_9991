@@ -39,6 +39,7 @@ namespace Dal
             int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == false);
             int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
 
+
             Parcel p = DataSource.parcels[index1];
             Drone d = DataSource.drones[index2];
 

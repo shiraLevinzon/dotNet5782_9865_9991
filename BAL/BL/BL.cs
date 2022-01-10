@@ -165,10 +165,7 @@ namespace BL
 
             }
             #endregion
-            //foreach (var item in ezer)
-            //{
-            //    AssignPackageToDrone(item.ID);
-            //}
+            
             #region היית צריכה לעשות לזה אנד לכן זה עושה באאאאג
             foreach (var item in dronesToList)
             {
@@ -376,7 +373,7 @@ namespace BL
                 BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==false);
                 DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
-                    throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivere- Time Problem");
+                    throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivered- Time Problem");
                 DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);
                 double distance = DistanceTo(drone.location.Latitude, drone.location.Longitude, customer.Latitude, customer.Longitude);
                 int a = (int)parcel.Weight;

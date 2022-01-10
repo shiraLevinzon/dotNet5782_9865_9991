@@ -86,6 +86,7 @@
                     <ColumnDefinition Width="8" MinWidth="10"/>
                     <ColumnDefinition Width="Auto" MinWidth="1098.417"/>
                 </Grid.ColumnDefinitions>
+                
                 <Label x:Name="timeText" Content="put time in charge" FontStyle="Italic"  HorizontalAlignment="Center"  VerticalAlignment="Center" Width="113" Height="30"/>
                 <TextBox x:Name="spantime" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="22" Height="25"/>
                 <TextBox x:Name="spantimeminuts" Grid.Column="3" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="22" Height="25" RenderTransformOrigin="0.548,0.21"/>

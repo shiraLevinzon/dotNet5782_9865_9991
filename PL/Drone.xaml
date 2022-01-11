@@ -99,9 +99,7 @@
         </Grid>
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="29,394,0,0" VerticalAlignment="Top" Width="108" Click="CancelBottun_Click" Height="34"/>
         <materialDesign:PackIcon Kind="Quadcopter" Height="248" Width="137" Margin="26,55,0,0" />
-        <materialDesign:ColorZone
-  Mode="PrimaryLight"
-  Padding="16" Height="0" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4">
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Height="0" Margin="0,55,0,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4">
             <materialDesign:ColorZone.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -128,4 +126,5 @@
   x:Name="PresetTimePicker"
   Is24Hours="True" Margin="386,321,62,0" VerticalAlignment="Top" />
     </Grid>
+   </Grid>
 </Window>

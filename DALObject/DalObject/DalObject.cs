@@ -24,15 +24,7 @@ namespace Dal
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
         }
-        internal class Config
-        {
-            public static int IdCount = 1;
-            public static double available = 0.04;
-            public static double lightWeight = 0.09;
-            public static double mediumWeight = 0.15;
-            public static double heavyWeight = 0.22;
-            public static double DroneLoadingRate = 7.8;
-        }
+        
         #region Initialize
         public static void Initialize()
         {
@@ -117,9 +109,17 @@ namespace Dal
         }
         #endregion Initialize
     }
+    internal class Config
+    {
+        public static int IdCount = 1;
+        public static double available = 0.04;
+        public static double lightWeight = 0.09;
+        public static double mediumWeight = 0.15;
+        public static double heavyWeight = 0.22;
+        public static double DroneLoadingRate = 7.8;
+    }
 
-
-     partial class DalObject : DalApi.IDal
+    partial class DalObject : DalApi.IDal
      {
         //static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
         //public static IDal Instance { get => instance.Value; }
@@ -136,11 +136,11 @@ namespace Dal
             public double[] RequestPowerConsumptionByDrone()
             {
             double[] PowerConsumption = new double[5];
-            PowerConsumption[0] = DataSource.Config.available;
-            PowerConsumption[1] = DataSource.Config.lightWeight;
-            PowerConsumption[2] = DataSource.Config.mediumWeight;
-            PowerConsumption[3] = DataSource.Config.heavyWeight;
-            PowerConsumption[4] = DataSource.Config.DroneLoadingRate;
+            PowerConsumption[0] = Config.available;
+            PowerConsumption[1] = Config.lightWeight;
+            PowerConsumption[2] = Config.mediumWeight;
+            PowerConsumption[3] = Config.heavyWeight;
+            PowerConsumption[4] = Config.DroneLoadingRate;
             return PowerConsumption;
         }  
         public double Deg2rad(double deg)

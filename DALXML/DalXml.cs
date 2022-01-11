@@ -8,6 +8,8 @@ using DalApi;
 using DO;
 namespace DalXml
 {
+   
+
     sealed class DalXml:IDal
     {
         #region Singelton
@@ -16,12 +18,12 @@ namespace DalXml
         #region DS XML Files
 
         string DronesPath = @"DronesXml.xml"; //XMLSerializer
-
         string BaseStationsPath = @"BaseStationsXml.xml"; //XElement
         string CustonersPath = @"CustomersXml.xml"; //XMLSerializer
         string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
         string UsersPath = @"UsersXml.xml"; //XMLSerializer
         string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
+        string config = @"configXml.xml"; //XMLSerializer
 
 
         #endregion
@@ -30,27 +32,66 @@ namespace DalXml
         #region Drone
         public void UpdDrone(Drone tmp)
         {
-            throw new NotImplementedException();
+
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+            if (!CheckDrone(tmp.ID))
+                throw new MissingIdException(tmp.ID, "Drone");
+            ListDrones.Remove(tmp);
+            ListDrones.Add(tmp);
+
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
         }
         public void AddDrone(Drone tmp)
         {
-            throw new NotImplementedException();
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            if (CheckDrone(tmp.ID))
+                throw new DuplicateIdException(tmp.ID, "Drone");
+            ListDrones.Add(tmp);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+
         }
         public bool CheckDrone(int id)
         {
-            throw new NotImplementedException();
+            List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+            return ListDrone.Any(par => par.ID == id && par.Deleted == false);
+
         }
         public void DeleteDrone(int dID)
         {
-            throw new NotImplementedException();
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            int index1 = ListDrones.FindIndex(x => x.ID == dID);
+            Drone cs = ListDrones[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(dID, "This Drones has already been deleted");
+            cs.Deleted = true;
+            ListDrones[index1] = cs;
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
         }
         public IEnumerable<Drone> GetAllDrones(Predicate<Drone> predicate = null)
         {
-            throw new NotImplementedException();
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            if (predicate != null)
+            {
+                return from d in ListDrones
+                       where predicate(d) && d.Deleted == false
+                       select d;
+            }
+            return from d in ListDrones
+                   where d.Deleted == false
+                   select d;
         }
         public Drone GetDrone(int id)
         {
-            throw new NotImplementedException();
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            DO.Drone drone = ListDrones.Find(p => p.ID == id);
+            if (!CheckDrone(id))
+                throw new MissingIdException(id, "Drone");
+            else
+                return drone;
         }
 
         #endregion
@@ -108,7 +149,7 @@ namespace DalXml
                 throw new DO.EntityHasBeenDeleted(id, $"the Baes Station {id} is already been deleted");
             return bases;
         }
-        public void UpdBaseStation(BaseStation t    mp)
+        public void UpdBaseStation(BaseStation tmp)
         {
             XElement BaseStationRootElem = XMLTools.LoadListFromXMLElement(BaseStationsPath);
             XElement bases = (XElement)(from p in BaseStationRootElem.Elements()
@@ -157,58 +198,141 @@ namespace DalXml
             XMLTools.SaveListToXMLElement(BaseStationRootElem, BaseStationsPath);
         }
         #endregion
+
+
         #region Customer
         public void UpdCustomer(Customer tmp)
         {
-            throw new NotImplementedException();
+
+            List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+            if (!CheckCustomer(tmp.ID))
+                throw new MissingIdException(tmp.ID, "Customer");
+            ListCustomers.Remove(tmp);
+            ListCustomers.Add(tmp);
+
+            XMLTools.SaveListToXMLSerializer(ListCustomers, CustonersPath);
         }
         public void AddCustomer(Customer tmp)
         {
-            throw new NotImplementedException();
+            List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+
+            if (CheckCustomer(tmp.ID))
+                throw new DuplicateIdException(tmp.ID, "Customer");
+            ListCustomers.Add(tmp);
+            XMLTools.SaveListToXMLSerializer(ListCustomers, CustonersPath);
+
         }
         public bool CheckCustomer(int id)
         {
-            throw new NotImplementedException();
+            List<Customer> ListCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+            return ListCustomer.Any(par => par.ID == id && par.Deleted == false);
+
         }
-        public void DeleteCustomer(int csID)
+        public void DeleteCustomer(int dID)
         {
-            throw new NotImplementedException();
+            List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+
+            int index1 = ListCustomers.FindIndex(x => x.ID == dID);
+            Customer cs = ListCustomers[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(dID, "This Customer has already been deleted");
+            cs.Deleted = true;
+            ListCustomers[index1] = cs;
+            XMLTools.SaveListToXMLSerializer(ListCustomers, CustonersPath);
         }
         public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate = null)
         {
-            throw new NotImplementedException();
+            List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+
+            if (predicate != null)
+            {
+                return from d in ListCustomers
+                       where predicate(d) && d.Deleted == false
+                       select d;
+            }
+            return from d in ListCustomers
+                   where d.Deleted == false
+                   select d;
         }
         public Customer GetCostumer(int id)
         {
-            throw new NotImplementedException();
+            List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
+
+            DO.Customer customer = ListCustomers.Find(p => p.ID == id);
+            if (!CheckDrone(id))
+                throw new MissingIdException(id, "Customer");
+            else
+                return customer;
         }
 
         #endregion
         #region parcel
+        public void UpdParcel(Parcel tmp)
+        {
+
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            if (!CheckParcel(tmp.ID))
+                throw new MissingIdException(tmp.ID, "Parcel");
+            ListParcels.Remove(tmp);
+            ListParcels.Add(tmp);
+
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
+        }
         public void AddParcel(Parcel tmp)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            
+            if (CheckParcel(tmp.ID))
+                throw new DuplicateIdException(tmp.ID, "Parcel");
+            tmp.ID =Config.IdCount++;
+            tmp.Requested = DateTime.Now;
+            ListParcels.Add(tmp);
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
+
         }
         public bool CheckParcel(int id)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcel = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            return ListParcel.Any(par => par.ID == id && par.Deleted == false);
+
         }
-        public void DeleteParcel(int pID)
+        public void DeleteParcel(int dID)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            int index1 = ListParcels.FindIndex(x => x.ID == dID);
+            Parcel cs = ListParcels[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(dID, "This Parcel has already been deleted");
+            cs.Deleted = true;
+            ListParcels[index1] = cs;
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
         }
         public IEnumerable<Parcel> GetAllParcels(Predicate<Parcel> predicate = null)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            if (predicate != null)
+            {
+                return from d in ListParcels
+                       where predicate(d) && d.Deleted == false
+                       select d;
+            }
+            return from d in ListParcels
+                   where d.Deleted == false
+                   select d;
         }
         public Parcel GetParcel(int id)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+
+            DO.Parcel parcel = ListParcels.Find(p => p.ID == id);
+            if (!CheckDrone(id))
+                throw new MissingIdException(id, "Parcel");
+            else
+                return parcel;
         }
-        public void UpdParcel(Parcel tmp)
-        {
-            throw new NotImplementedException();
-        }
+
         #endregion
         #region DroneCharging
         public bool CheckDroneCharge(int id)
@@ -233,51 +357,209 @@ namespace DalXml
         }
         #endregion
         #region User
+        public void UpdUser(User tmp)
+        {
+
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+            if (!CheckUser(tmp.Id))
+                throw new MissingIdException(tmp.Id, "User");
+            ListUsers.Remove(tmp);
+            ListUsers.Add(tmp);
+
+            XMLTools.SaveListToXMLSerializer(ListUsers, UsersPath);
+        }
         public void AddUser(User tmp)
         {
-            throw new NotImplementedException();
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+
+            if (CheckUser(tmp.Id))
+                throw new DuplicateIdException(tmp.Id, "User");
+            ListUsers.Add(tmp);
+            XMLTools.SaveListToXMLSerializer(ListUsers, UsersPath);
+
         }
         public bool CheckUser(int id)
         {
-            throw new NotImplementedException();
+            List<User> ListUser = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+            return ListUser.Any(par => par.Id == id && par.Deleted == false);
+
         }
-        public void DeleteUser(int uID)
+        public void DeleteUser(int dID)
         {
-            throw new NotImplementedException();
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+
+            int index1 = ListUsers.FindIndex(x => x.Id == dID);
+            User cs = ListUsers[index1];
+            if (cs.Deleted == true)
+                throw new EntityHasBeenDeleted(dID, "This User has already been deleted");
+            cs.Deleted = true;
+            ListUsers[index1] = cs;
+            XMLTools.SaveListToXMLSerializer(ListUsers, UsersPath);
         }
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null)
         {
-            throw new NotImplementedException();
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+
+            if (predicate != null)
+            {
+                return from d in ListUsers
+                       where predicate(d) && d.Deleted == false
+                       select d;
+            }
+            return from d in ListUsers
+                   where d.Deleted == false
+                   select d;
         }
         public User GetUser(int id)
         {
-            throw new NotImplementedException();
-        }
-        public void UpdUser(User tmp)
-        {
-            throw new NotImplementedException();
+            List<User> ListUsers = XMLTools.LoadListFromXMLSerializer<User>(UsersPath);
+
+            DO.User user = ListUsers.Find(p => p.Id == id);
+            if (!CheckUser(id))
+                throw new MissingIdException(id, "User");
+            else
+                return user;
         }
         #endregion
         #region UPdateFunction
+        /// <summary>
+        /// Assign A Package To A Drone
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
         public void AssignPackageToDrone(int pID, int dID)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            int index1 = ListParcels.FindIndex(x => x.ID == pID && x.Deleted == false);
+            int index2 = ListDrones.FindIndex(x => x.ID == dID && x.Deleted == false);
+
+            Parcel p = ListParcels[index1];
+            Drone d = ListDrones[index2];
+
+            p.DroneId = dID;
+            p.Scheduled = DateTime.Now;
+
+            ListParcels[index1] = p;
+            ListDrones[index2] = d;
+
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+
+
         }
-        public void DeliveryParcelToCustomer(int pID, int dID)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Parcel Collection By A Drone
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
         public void ParcelCollectionByDrone(int pID, int dID)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            int index1 = ListParcels.FindIndex(x => x.ID == pID && x.Deleted == false);
+            int index2 = ListDrones.FindIndex(x => x.ID == dID && x.Deleted == false);
+
+
+            Parcel p = ListParcels[index1];
+            Drone d = ListDrones[index2];
+
+            p.PickedUp = DateTime.Now;
+            d.MaxWeight = p.Weight;
+
+            ListParcels[index1] = p;
+            ListDrones[index2] = d;
+
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+
         }
-        public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
+        /// <summary>
+        /// Delivery Parcel To Customer
+        /// </summary>
+        /// <param name="pID"></param>
+        /// <param name="dID"></param>
+        public void DeliveryParcelToCustomer(int pID, int dID)
         {
-            throw new NotImplementedException();
+            List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+
+            int index1 = ListParcels.FindIndex(x => x.ID == pID && x.Deleted == false);
+            int index2 = ListDrones.FindIndex(x => x.ID == dID && x.Deleted == false);
+
+            Parcel p = ListParcels[index1];
+            Drone d = ListDrones[index2];
+
+            p.Delivered = DateTime.Now;
+
+            ListParcels[index1] = p;
+            ListDrones[index2] = d;
+
+            XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+
         }
+        /// <summary>
+        /// Sending Drone To BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
         public void SendingDroneToBaseStation(int bsID, int dID)
         {
-            throw new NotImplementedException();
+            List<BaseStation> ListBaseStations = XMLTools.LoadListFromXMLSerializer<BaseStation>(BaseStationsPath);
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+            List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            int index1 = ListBaseStations.FindIndex(x => x.ID == bsID && x.Deleted == false);
+            int index2 = ListDrones.FindIndex(x => x.ID == dID && x.Deleted == false);
+
+            BaseStation bs = ListBaseStations[index1];
+            Drone d = ListDrones[index2];
+            bs.FreeChargingSlots--;
+
+            ListBaseStations[index1] = bs;
+            ListDrones[index2] = d;
+
+            DroneCharge dc = new DroneCharge();
+            dc.DroneID = dID;
+            dc.StationID = bsID;
+            ListDroneCharges.Add(dc);
+
+            XMLTools.SaveListToXMLSerializer(ListBaseStations, BaseStationsPath);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+            XMLTools.SaveListToXMLSerializer(ListDroneCharges, DronesInChargePath);
+
+        }
+        /// <summary>
+        /// Release Drone From Charging At BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
+        public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
+        {
+            List<BaseStation> ListBaseStations = XMLTools.LoadListFromXMLSerializer<BaseStation>(BaseStationsPath);
+            List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
+            List<DroneCharge> ListDroneCharges = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            int index1 = ListBaseStations.FindIndex(x => x.ID == bsID && x.Deleted == false);
+            int index2 = ListDrones.FindIndex(x => x.ID == dID && x.Deleted == false);
+            int index3 = ListDroneCharges.FindIndex(x => x.DroneID == dID && x.Deleted == false);
+
+            BaseStation bs = ListBaseStations[index1];
+            Drone d = ListDrones[index2];
+            bs.FreeChargingSlots++;
+
+            ListBaseStations[index1] = bs;
+            ListDrones[index2] = d;
+            DeleteDroneInCharge(dID);
+            //DataSource.droneCharges.RemoveAt(index3);
+
+            XMLTools.SaveListToXMLSerializer(ListBaseStations, BaseStationsPath);
+            XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
+            XMLTools.SaveListToXMLSerializer(ListDroneCharges, DronesInChargePath);
+
         }
         #endregion
         #region Help Functions

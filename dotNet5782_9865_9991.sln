@@ -30,7 +30,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BAL\BL.csproj", "{6C6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{E8533B31-7191-4300-A113-23C0E9EAB4E1}"
 	ProjectSection(SolutionItems) = preProject
+		BaseStationsXml.xml = BaseStationsXml.xml
+		CustomersXml.xml = CustomersXml.xml
 		dal-config.xml = dal-config.xml
+		DronesInChargeXml.xml = DronesInChargeXml.xml
+		DronesXml.xml = DronesXml.xml
+		ParcelsXml.xml = ParcelsXml.xml
+		UsersXml.xml = UsersXml.xml
 	EndProjectSection
 EndProject
 Global

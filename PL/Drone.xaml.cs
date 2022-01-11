@@ -40,12 +40,12 @@ namespace PL
             if(d.Conditions==(BO.DroneConditions)0)
             {
                 timeLabel.Visibility = Visibility.Visible;
-                WithSecondsTimePicker.Visibility = Visibility.Visible;
+                PresetTimePicker.Visibility = Visibility.Visible;
             }
             if(d.Conditions!=(BO.DroneConditions)0)
             {
                 timeLabel.Visibility = Visibility.Collapsed;
-                WithSecondsTimePicker.Visibility = Visibility.Collapsed;
+                PresetTimePicker.Visibility = Visibility.Collapsed;
             }
         }
         public Drone(BlApi.IBL blobject)
@@ -56,7 +56,7 @@ namespace PL
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
             timeLabel.Visibility = Visibility.Collapsed;
-            WithSecondsTimePicker.Visibility = Visibility.Collapsed;
+            PresetTimePicker.Visibility = Visibility.Collapsed;
         }
         public void Refresh()
         {
@@ -66,6 +66,7 @@ namespace PL
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
                 Timegrid.Visibility = Visibility.Hidden;
+                
 
             }
             if (temp == 0)
@@ -73,6 +74,8 @@ namespace PL
                 Bottun1.Content = "relese drone from charge ";
                 Timegrid.Visibility = Visibility.Visible;
                 Bottun2.Visibility = Visibility.Hidden;
+                timeLabel.Visibility = Visibility.Visible;
+                PresetTimePicker.Visibility = Visibility.Visible;
 
             }
             if (temp == 2)
@@ -81,6 +84,8 @@ namespace PL
                 Bottun2.Content = "Package delivery";
                 Bottun2.Visibility = Visibility.Visible;
                 Timegrid.Visibility = Visibility.Hidden;
+                timeLabel.Visibility = Visibility.Collapsed;
+                PresetTimePicker.Visibility = Visibility.Collapsed;
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -178,7 +183,7 @@ namespace PL
                 {
                     case 0:
                         TimeSpan t;
-                        bool tmp= TimeSpan.TryParse(WithSecondsTimePicker.Text,out t);
+                        bool tmp= TimeSpan.TryParse(PresetTimePicker.Text,out t);
                         bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();

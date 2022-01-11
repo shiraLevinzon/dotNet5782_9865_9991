@@ -37,7 +37,7 @@ namespace Dal
             int index1 = DataSource.droneCharges.FindIndex(x => x.DroneID == dgID && x.Deleted== false);
             DroneCharge ps = DataSource.droneCharges[index1];
             if (ps.Deleted == true)
-                throw new EntityHasBeenDeleted(dgID, "This Drone has already been deleted");
+                throw new EntityHasBeenDeleted(dgID, "This Drone has already been remuved");
             ps.Deleted = true;
             DataSource.droneCharges[index1] = ps;
         }

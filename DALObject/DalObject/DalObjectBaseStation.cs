@@ -13,7 +13,7 @@ namespace Dal
         {
 
             if (!CheckBaseStation(id))
-                throw new MissingIdException(id, "BaseStation");
+                throw new MissingIdException(id, "Base Station does not exist in the system");
             BaseStation b = DataSource.baseStations.FirstOrDefault(par => par.ID == id);
             return b;
         }
@@ -87,7 +87,8 @@ namespace Dal
             bs.FreeChargingSlots++;
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
-             DataSource.droneCharges.RemoveAt(index3);
+            DeleteDroneInCharge(dID);
+            //DataSource.droneCharges.RemoveAt(index3);
         }
         public void DeleteBaseStatin(int bsID)
         {

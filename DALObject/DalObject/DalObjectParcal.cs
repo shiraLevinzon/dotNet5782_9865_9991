@@ -18,7 +18,7 @@ namespace Dal
             if (CheckParcel(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "Parcel");
 
-            tmp.ID = Config.IdCount++;
+            tmp.ID =DataSource.Config.IdCount++;
             tmp.Requested = DateTime.Now;
             DataSource.parcels.Add(tmp);
         }

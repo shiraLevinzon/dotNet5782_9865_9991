@@ -17,7 +17,13 @@ namespace Dal
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
         internal static List<User> users = new List<User>();
 
-
+        //static string DronesPath = @"DronesXml.xml"; //XMLSerializer
+        //static string BaseStationsPath = @"BaseStationsXml.xml"; //XElement
+        //static string CustonersPath = @"CustomersXml.xml"; //XMLSerializer
+        //static string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
+        //static string UsersPath = @"UsersXml.xml"; //XMLSerializer
+        //static string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
+        //static string configPath = @"configXml.xml"; //XMLSerializer
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -32,6 +38,13 @@ namespace Dal
             InitializeCustomer();
             InitializeDrone();
             InitializeParcel();
+            //XMLTools.SaveListToXMLSerializer(DataSource.drones, DronesPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.baseStations, BaseStationsPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.customers, CustonersPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.parcels, ParcelsPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.users, UsersPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.droneCharges, DronesInChargePath);
+            //XMLTools.SaveListToXMLSerializer(DalObject.RequestPowerConsumptionByDrone().ToList(), configPath);
         }
 
         static void InitializeDrone()
@@ -130,10 +143,13 @@ namespace Dal
 
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
-        public DalObject() { DataSource.Initialize(); }
-       
-            
-            public double[] RequestPowerConsumptionByDrone()
+        public DalObject() {
+            DataSource.Initialize();
+
+        }
+
+
+        public double[] RequestPowerConsumptionByDrone()
             {
             double[] PowerConsumption = new double[5];
             PowerConsumption[0] = Config.available;
@@ -143,10 +159,7 @@ namespace Dal
             PowerConsumption[4] = Config.DroneLoadingRate;
             return PowerConsumption;
         }  
-        public double Deg2rad(double deg)
-        {
-                return deg * (Math.PI / 180);
-        }
+        
         public IEnumerable<DroneCharge> GetAllDroneCharge()
         {
             return DataSource.droneCharges.Take(DataSource.droneCharges.Count);

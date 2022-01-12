@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 using DO;
-namespace DalXml
+namespace Dal
 {
    
 
@@ -23,12 +23,19 @@ namespace DalXml
         string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
         string UsersPath = @"UsersXml.xml"; //XMLSerializer
         string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
-        string config = @"configXml.xml"; //XMLSerializer
+        string configPath = @"configXml.xml"; //XMLSerializer
 
 
         #endregion
         DalXml() { }
         #endregion  
+
+        public double[] RequestPowerConsumptionByDrone()
+        {
+            return XMLTools.LoadListFromXMLElement(configPath).Element("BatteryUsages").Elements()
+                .Select(e => Convert.ToDouble(e.Value)).ToArray();
+        }
+
         #region Drone
         public void UpdDrone(Drone tmp)
         {
@@ -284,7 +291,7 @@ namespace DalXml
             
             if (CheckParcel(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "Parcel");
-            tmp.ID =Config.IdCount++;
+            tmp.ID = int.Parse(XMLTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Value);
             tmp.Requested = DateTime.Now;
             ListParcels.Add(tmp);
             XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);
@@ -567,10 +574,7 @@ namespace DalXml
         {
             throw new NotImplementedException();
         }
-        public double[] RequestPowerConsumptionByDrone()
-        {
-            throw new NotImplementedException();
-        }
+       
         #endregion
     }
 }

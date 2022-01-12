@@ -70,7 +70,6 @@ namespace DalApi
         public void DeleteDroneInCharge(int dgID);
         #endregion
         public double[] RequestPowerConsumptionByDrone();
-        public double Deg2rad(double deg);
         public IEnumerable<DroneCharge> GetAllDroneCharge();
 
     }

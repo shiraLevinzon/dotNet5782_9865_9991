@@ -130,7 +130,10 @@ namespace Dal
 
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
-        public DalObject() { DataSource.Initialize(); }
+        public DalObject() 
+        {
+            DataSource.Initialize();
+        }
        
             
             public double[] RequestPowerConsumptionByDrone()

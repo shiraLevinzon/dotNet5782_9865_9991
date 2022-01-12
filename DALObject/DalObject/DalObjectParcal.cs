@@ -8,7 +8,7 @@ using DalApi;
 namespace Dal
 {
      partial class DalObject : DalApi.IDal
-    {
+     {
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
@@ -18,7 +18,7 @@ namespace Dal
             if (CheckParcel(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "Parcel");
 
-            tmp.ID = DataSource.Config.IdCount++;
+            tmp.ID = Config.IdCount++;
             tmp.Requested = DateTime.Now;
             DataSource.parcels.Add(tmp);
         }

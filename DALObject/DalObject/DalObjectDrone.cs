@@ -61,7 +61,7 @@ namespace Dal
         }
         public void DeleteDrone(int dID)
         {
-            int index1 = DataSource.customers.FindIndex(x => x.ID == dID);
+            int index1 = DataSource.drones.FindIndex(x => x.ID == dID);
             Drone cs = DataSource.drones[index1];
             if (cs.Deleted == true)
                 throw new EntityHasBeenDeleted(dID, "This Drones has already been deleted");

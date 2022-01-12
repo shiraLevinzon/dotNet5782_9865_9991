@@ -108,7 +108,7 @@ namespace DalXml
                 throw new DO.EntityHasBeenDeleted(id, $"the Baes Station {id} is already been deleted");
             return bases;
         }
-        public void UpdBaseStation(BaseStation t    mp)
+        public void UpdBaseStation(BaseStation tmp)
         {
             XElement BaseStationRootElem = XMLTools.LoadListFromXMLElement(BaseStationsPath);
             XElement bases = (XElement)(from p in BaseStationRootElem.Elements()

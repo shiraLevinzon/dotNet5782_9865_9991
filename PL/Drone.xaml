@@ -8,9 +8,8 @@
         mc:Ignorable="d"
         Title="Drone" Height="600" Width="600">
 
-    <Grid Margin="0,10,10,0">
-        <Grid x:Name="addMode" Margin="168,0,97,0" d:IsHidden="True">
-    <Grid Margin="-10,10,10,82">
+    <Grid>
+
         <Grid x:Name="addMode" Margin="169,0,96,54" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
@@ -40,12 +39,12 @@
             <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="47,297,0,0" VerticalAlignment="Top" Width="66" Click="AddBottun_Click_1"/>
             <ComboBox x:Name="StationIdComboBox" HorizontalAlignment="Left" Margin="151,205,0,0" VerticalAlignment="Top" Width="95"/>
             <Label Content="station id:" HorizontalAlignment="Left" Margin="58,201,0,0" VerticalAlignment="Top" Width="88" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
-            <Button x:Name="AddBottun" Content="Add" HorizontalAlignment="Left" Margin="-11,392,0,0" VerticalAlignment="Top" Width="84" Click="AddBottun_Click_1" Height="35"/>
-            <ComboBox x:Name="StationIdComboBox" Margin="162,213,78,0" VerticalAlignment="Top"/>
+            <Button x:Name="AddBottun1" Content="Add" HorizontalAlignment="Left" Margin="-11,392,0,0" VerticalAlignment="Top" Width="84" Click="AddBottun_Click_1" Height="35"/>
+            <ComboBox x:Name="StationIdComboBox1" Margin="162,213,78,0" VerticalAlignment="Top"/>
             <Label Content="station id:" HorizontalAlignment="Left" Margin="65,207,0,0" VerticalAlignment="Top" Width="88" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="197,37,9,9" Grid.ColumnSpan="2">
+
         <Grid x:Name="actMode" Margin="197,37,9,-96">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="102,77,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
@@ -108,23 +107,16 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </materialDesign:ColorZone.RenderTransform>
-            <StackPanel
-    Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal"/>
         </materialDesign:ColorZone>
-        <materialDesign:ColorZone
-  Mode="PrimaryLight"
-  Padding="16" Grid.ColumnSpan="4" Margin="0,-10,-11,0" Height="42">
-            <StackPanel
-    Orientation="Horizontal"/>
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Margin="-11,488,0,54" Height="42">
+            <StackPanel Orientation="Horizontal"/>
         </materialDesign:ColorZone>
-        <materialDesign:TimePicker Visibility="Collapsed"
-  materialDesign:HintAssist.Hint="With Seconds"
-  Is24Hours="{Binding IsChecked, ElementName=Is24HourCheckbox}"
-  x:Name="WithSecondsTimePicker"
-  WithSeconds="True" Margin="420,330,30,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <materialDesign:TimePicker
-  x:Name="PresetTimePicker"
-  Is24Hours="True" Margin="386,321,62,0" VerticalAlignment="Top" />
+        <materialDesign:TimePicker Visibility="Collapsed" materialDesign:HintAssist.Hint="With Seconds"
+                                         Is24Hours="{Binding IsChecked, ElementName=Is24HourCheckbox}"
+                                            x:Name="WithSecondsTimePicker"
+                                    WithSeconds="True" Margin="420,330,30,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+        <materialDesign:TimePicker x:Name="PresetTimePicker" Is24Hours="True" Margin="386,321,62,0" VerticalAlignment="Top" />
+
     </Grid>
-   </Grid>
 </Window>

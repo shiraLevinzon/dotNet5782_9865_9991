@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 using DO;
-namespace Dal
+namespace DalXml
 {
    
 
-    sealed class DalXml:IDal
+    public class DalXml:IDal
     {
         #region Singelton
         static readonly IDal intance = new DalXml();
@@ -27,7 +27,7 @@ namespace Dal
 
 
         #endregion
-        DalXml() { }
+        static DalXml() {  }
         #endregion  
 
         public double[] RequestPowerConsumptionByDrone()

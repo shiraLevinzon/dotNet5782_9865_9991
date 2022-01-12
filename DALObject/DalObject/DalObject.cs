@@ -17,12 +17,12 @@ namespace Dal
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
         internal static List<User> users = new List<User>();
 
-        //static string DronesPath = @"DronesXml.xml"; //XMLSerializer
-        //static string BaseStationsPath = @"BaseStationsXml.xml"; //XElement
-        //static string CustonersPath = @"CustomersXml.xml"; //XMLSerializer
-        //static string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
-        //static string UsersPath = @"UsersXml.xml"; //XMLSerializer
-        //static string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
+        static string DronesPath = @"DronesXml.xml"; //XMLSerializer
+        static string BaseStationsPath = @"BaseStationsXml.xml"; //XElement
+        static string CustonersPath = @"CustomersXml.xml"; //XMLSerializer
+        static string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
+        static string UsersPath = @"UsersXml.xml"; //XMLSerializer
+        static string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
         //static string configPath = @"configXml.xml"; //XMLSerializer
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
@@ -38,12 +38,7 @@ namespace Dal
             InitializeCustomer();
             InitializeDrone();
             InitializeParcel();
-            //XMLTools.SaveListToXMLSerializer(DataSource.drones, DronesPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.baseStations, BaseStationsPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.customers, CustonersPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.parcels, ParcelsPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.users, UsersPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.droneCharges, DronesInChargePath);
+           
             //XMLTools.SaveListToXMLSerializer(DalObject.RequestPowerConsumptionByDrone().ToList(), configPath);
         }
 
@@ -119,18 +114,25 @@ namespace Dal
                     // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;
             }
+            XMLTools.SaveListToXMLSerializer(DataSource.drones, DronesPath);
+            XMLTools.SaveListToXMLSerializer(DataSource.baseStations, BaseStationsPath);
+            XMLTools.SaveListToXMLSerializer(DataSource.customers, CustonersPath);
+            XMLTools.SaveListToXMLSerializer(DataSource.parcels, ParcelsPath);
+            XMLTools.SaveListToXMLSerializer(DataSource.users, UsersPath);
+            XMLTools.SaveListToXMLSerializer(DataSource.droneCharges, DronesInChargePath);
         }
         #endregion Initialize
+        internal class Config
+        {
+            public static int IdCount = 1;
+            public static double available = 0.04;
+            public static double lightWeight = 0.09;
+            public static double mediumWeight = 0.15;
+            public static double heavyWeight = 0.22;
+            public static double DroneLoadingRate = 7.8;
+        }
     }
-    internal class Config
-    {
-        public static int IdCount = 1;
-        public static double available = 0.04;
-        public static double lightWeight = 0.09;
-        public static double mediumWeight = 0.15;
-        public static double heavyWeight = 0.22;
-        public static double DroneLoadingRate = 7.8;
-    }
+    
 
     partial class DalObject : DalApi.IDal
      {
@@ -152,11 +154,11 @@ namespace Dal
         public double[] RequestPowerConsumptionByDrone()
             {
             double[] PowerConsumption = new double[5];
-            PowerConsumption[0] = Config.available;
-            PowerConsumption[1] = Config.lightWeight;
-            PowerConsumption[2] = Config.mediumWeight;
-            PowerConsumption[3] = Config.heavyWeight;
-            PowerConsumption[4] = Config.DroneLoadingRate;
+            PowerConsumption[0] = DataSource.Config.available;
+            PowerConsumption[1] = DataSource.Config.lightWeight;
+            PowerConsumption[2] = DataSource.Config.mediumWeight;
+            PowerConsumption[3] = DataSource.Config.heavyWeight;
+            PowerConsumption[4] = DataSource.Config.DroneLoadingRate;
             return PowerConsumption;
         }  
         

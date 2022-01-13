@@ -18,10 +18,7 @@ namespace BL
         //  // The public Instance property to use 
         ////   public static IBL Instance { get { return instance; } }
      
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
-        internal IDal dalLayer = DalFactory.GetDal();
-
+ 
         internal  Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -37,6 +34,12 @@ namespace BL
         public double droneLoadingRate;
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
+
+        internal IDal dalLayer = DalFactory.GetDal();
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+        
+
         #region בנאי 
         internal BL() 
         {

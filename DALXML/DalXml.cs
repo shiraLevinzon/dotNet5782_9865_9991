@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using DalApi;
 using DO;
-namespace DalXml
+namespace Dal
 {
    
 
     public class DalXml:IDal
     {
         #region Singelton
-        static readonly IDal intance = new DalXml();
-        public static IDal Intance { get => intance; }
+        static readonly IDal instance = new DalXml();
+        public static IDal Instance { get => instance; }
         #region DS XML Files
 
         string DronesPath = @"DronesXml.xml"; //XMLSerializer

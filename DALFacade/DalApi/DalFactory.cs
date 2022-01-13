@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
-
+using DalApi;
+using DO;
 namespace DalApi
 {
     public class DalFactory

@@ -97,11 +97,11 @@
     <TargetID>876853018</TargetID>
     <Weight>normal</Weight>
     <priority>hight</priority>
-    <DroneId>5</DroneId>
+    <DroneId>3</DroneId>
     <Requested>2022-01-12T11:50:33.0008199+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
+    <Scheduled>2022-01-13T16:28:15.8936996+02:00</Scheduled>
+    <PickedUp>2022-01-13T16:28:19.7123259+02:00</PickedUp>
+    <Delivered>2022-01-13T16:28:30.7133479+02:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
@@ -125,8 +125,8 @@
     <priority>hight</priority>
     <DroneId>5</DroneId>
     <Requested>2022-01-12T11:50:33.0008217+02:00</Requested>
-    <Scheduled>2022-01-13T14:53:01.0637678+02:00</Scheduled>
-    <PickedUp>2022-01-13T14:53:06.6439019+02:00</PickedUp>
+    <Scheduled>2022-01-13T16:26:26.3910826+02:00</Scheduled>
+    <PickedUp>2022-01-13T16:26:31.2104211+02:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>

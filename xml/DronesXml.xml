@@ -15,7 +15,7 @@
   <Drone>
     <ID>3</ID>
     <Model>p1</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>

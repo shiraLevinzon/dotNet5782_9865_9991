@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <ArrayOfDouble xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<BatteryUsages>
-		<FreeBatteryUsing>0.1</FreeBatteryUsing>
-		<LightBatteryUsing>0.2</LightBatteryUsing>
-		<MediumBatteryUsing>0.3</MediumBatteryUsing>
-		<HeavyBatteryUsing>0.4</HeavyBatteryUsing>
+		<FreeBatteryUsing>0.01</FreeBatteryUsing>
+		<LightBatteryUsing>0.02</LightBatteryUsing>
+		<MediumBatteryUsing>0.03</MediumBatteryUsing>
+		<HeavyBatteryUsing>0.04</HeavyBatteryUsing>
 		<ChargingRate>0.4</ChargingRate>
 	</BatteryUsages>
 	<RowNumbers>

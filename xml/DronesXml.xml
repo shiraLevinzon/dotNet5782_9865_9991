@@ -30,4 +30,10 @@
     <MaxWeight>heavy</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
+  <Drone>
+    <ID>2133213</ID>
+    <Model>דשגדכ</Model>
+    <MaxWeight>light</MaxWeight>
+    <Deleted>false</Deleted>
+  </Drone>
 </ArrayOfDrone>

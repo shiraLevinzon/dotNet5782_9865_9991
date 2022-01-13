@@ -266,7 +266,7 @@ namespace Dal
             List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
 
             DO.Customer customer = ListCustomers.Find(p => p.ID == id);
-            if (!CheckDrone(id))
+            if (!CheckCustomer(id))
                 throw new MissingIdException(id, "Customer");
             else
                 return customer;

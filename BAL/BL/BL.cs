@@ -288,7 +288,7 @@ namespace BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
-                DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
+                DO.Parcel parcel = dalLayer.GetAllParcels(par => par.Scheduled == DateTime.MinValue).FirstOrDefault();
                 foreach (DO.Parcel item in dalLayer.GetAllParcels(par=> par.Scheduled==DateTime.MinValue))
                 {
                     if (item.priority > parcel.priority)

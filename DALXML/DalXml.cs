@@ -334,7 +334,7 @@ namespace Dal
             List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
 
             DO.Parcel parcel = ListParcels.Find(p => p.ID == id);
-            if (!CheckDrone(id))
+            if (!CheckParcel(id))
                 throw new MissingIdException(id, "Parcel");
             else
                 return parcel;

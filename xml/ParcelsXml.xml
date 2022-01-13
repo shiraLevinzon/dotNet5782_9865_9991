@@ -123,10 +123,10 @@
     <TargetID>684351256</TargetID>
     <Weight>normal</Weight>
     <priority>hight</priority>
-    <DroneId>2</DroneId>
+    <DroneId>5</DroneId>
     <Requested>2022-01-12T11:50:33.0008217+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
+    <Scheduled>2022-01-13T14:53:01.0637678+02:00</Scheduled>
+    <PickedUp>2022-01-13T14:53:06.6439019+02:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>

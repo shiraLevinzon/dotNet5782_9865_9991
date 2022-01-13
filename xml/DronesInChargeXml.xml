@@ -1,18 +1,2 @@
 <?xml version="1.0"?>
-<ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DroneCharge>
-    <DroneID>1</DroneID>
-    <StationID>8674</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneID>2</DroneID>
-    <StationID>8674</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneID>3</DroneID>
-    <StationID>1134</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-</ArrayOfDroneCharge>
+<ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

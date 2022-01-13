@@ -289,7 +289,7 @@ namespace BL
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
                 DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
-                foreach (DO.Parcel item in dalLayer.GetAllParcels())
+                foreach (DO.Parcel item in dalLayer.GetAllParcels(par=> par.Scheduled==DateTime.MinValue))
                 {
                     if (item.priority > parcel.priority)
                         parcel = item;
@@ -371,7 +371,7 @@ namespace BL
             try
             {
                 BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==false);
-                DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
+                DO.Parcel parcel = dalLayer.GetAllParcels(x => x.DroneId == id).FirstOrDefault();
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivered- Time Problem");
                 DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);

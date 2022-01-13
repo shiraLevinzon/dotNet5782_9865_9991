@@ -530,6 +530,7 @@ namespace Dal
             Drone d = ListDrones[index2];
 
             p.Delivered = DateTime.Now;
+            p.DroneId = 0;
 
             ListParcels[index1] = p;
             ListDrones[index2] = d;

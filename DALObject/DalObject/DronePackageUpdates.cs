@@ -64,6 +64,8 @@ namespace Dal
             Drone d = DataSource.drones[index2];
 
             p.Delivered = DateTime.Now;
+            p.DroneId = 0;
+
 
             DataSource.parcels[index1] = p;
             DataSource.drones[index2] = d;

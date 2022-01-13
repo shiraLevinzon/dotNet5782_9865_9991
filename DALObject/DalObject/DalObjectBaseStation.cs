@@ -87,8 +87,8 @@ namespace Dal
             bs.FreeChargingSlots++;
             DataSource.baseStations[index1] = bs;
             DataSource.drones[index2] = d;
-            DeleteDroneInCharge(dID);
-            //DataSource.droneCharges.RemoveAt(index3);
+            //DeleteDroneInCharge(dID);
+            DataSource.droneCharges.RemoveAt(index3);
         }
         public void DeleteBaseStatin(int bsID)
         {

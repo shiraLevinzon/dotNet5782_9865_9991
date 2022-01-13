@@ -344,23 +344,53 @@ namespace Dal
         #region DroneCharging
         public bool CheckDroneCharge(int id)
         {
-            throw new NotImplementedException();
+            List<DroneCharge> ListDroneCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+            return ListDroneCharge.Any(par => par.DroneID == id && par.Deleted == false);
         }
         public void DeleteDroneInCharge(int dgID)
         {
-            throw new NotImplementedException();
+            List<DroneCharge> ListDroneCharge = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            int index1 = ListDroneCharge.FindIndex(x => x.DroneID == dgID && x.Deleted == false);
+            DroneCharge ps = ListDroneCharge[index1];
+            if (ps.Deleted == true)
+                throw new EntityHasBeenDeleted(dgID, "This Drone has already been remuved");
+            ps.Deleted = true;
+            ListDroneCharge[index1] = ps;
+
+            XMLTools.SaveListToXMLSerializer(ListDroneCharge, DronesInChargePath);
+
         }
         public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate = null)
         {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<DroneCharge> GetAllDroneCharge()
-        {
-            throw new NotImplementedException();
+            List<DroneCharge> ListDrones = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            if (predicate != null)
+            {
+                return from b in ListDrones
+                       where predicate(b) && b.Deleted == false
+                       select b;
+            }
+            return from b in ListDrones
+                   where b.Deleted == false
+                   select b;
         }
         public DroneCharge GetDroneInCharging(int id)
         {
-            throw new NotImplementedException();
+            List<DroneCharge> ListDrones = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            if (!CheckDroneCharge(id))
+                throw new MissingIdException(id, "DroneCharge");
+            DroneCharge d = ListDrones.FirstOrDefault(par => par.DroneID == id);
+            return d;
+        }
+        public IEnumerable<DroneCharge> GetAllDroneCharge()
+        {
+            List<DroneCharge> ListDrones = XMLTools.LoadListFromXMLSerializer<DroneCharge>(DronesInChargePath);
+
+            return from d in ListDrones
+                          where d.Deleted == false
+                          select d;
         }
         #endregion
         #region User
@@ -560,8 +590,8 @@ namespace Dal
 
             ListBaseStations[index1] = bs;
             ListDrones[index2] = d;
-            DeleteDroneInCharge(dID);
-            //DataSource.droneCharges.RemoveAt(index3);
+            //DeleteDroneInCharge(dID);
+            ListDroneCharges.RemoveAt(index3);
 
             XMLTools.SaveListToXMLSerializer(ListBaseStations, BaseStationsPath);
             XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);

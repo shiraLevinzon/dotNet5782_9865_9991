@@ -18,23 +18,23 @@ namespace Dal
         }
         public bool CheckDroneCharge(int id)
         {
-            return DataSource.droneCharges.Any(par => par.DroneID == id && par.Deleted== false);
+            return DataSource.droneCharges.Any(par => par.DroneID == id && par.Deleted == false);
         }
         public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate = null)
         {
             if (predicate != null)
             {
                 return from b in DataSource.droneCharges
-                       where predicate(b) && b.Deleted== false
+                       where predicate(b) && b.Deleted == false
                        select b;
             }
             return from b in DataSource.droneCharges
-                   where b.Deleted== false
+                   where b.Deleted == false
                    select b;
         }
         public void DeleteDroneInCharge(int dgID)
         {
-            int index1 = DataSource.droneCharges.FindIndex(x => x.DroneID == dgID && x.Deleted== false);
+            int index1 = DataSource.droneCharges.FindIndex(x => x.DroneID == dgID && x.Deleted == false);
             DroneCharge ps = DataSource.droneCharges[index1];
             if (ps.Deleted == true)
                 throw new EntityHasBeenDeleted(dgID, "This Drone has already been remuved");

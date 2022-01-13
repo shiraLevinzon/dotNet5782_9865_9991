@@ -25,7 +25,8 @@ namespace PL
         {
             InitializeComponent();
             bl = bll;
-            listOfDroneInCharge.ItemsSource =bl.GetAllDroneInCharge(bs.ID);
+            listOfDroneInCharge.ItemsSource = bl.GetAllDroneInCharge(bs.ID);
+            //listOfDroneInCharge.ItemsSource = bs.DronesInCharge;
         }
         private void listOfDroneInCharge_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {

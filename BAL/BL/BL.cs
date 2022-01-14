@@ -71,7 +71,7 @@ namespace BL
                 dtl.MaxWeight = (WeightCategories)item.MaxWeight;
                 dtl.Model = item.Model;
                 dtl.BatteryStatus = random.Next(0, 101);
-                dtl.Conditions = (DroneConditions)random.Next(0, 2);
+                //dtl.Conditions = (DroneConditions)random.Next(0, 2);
                 dtl.PackagNumberOnTransferred = 0;
                 dtl.location = new Location();
                 dtl.location.Latitude = TMPcustomer[r1.Next(0, 9)].Latitude;
@@ -97,8 +97,9 @@ namespace BL
                 baseStationsBL.Add(bases);
             }
             #endregion
-            #region מילוי רשימת חבילה מסוג דאל
-            List<DroneToList> ezer = new List<DroneToList>();
+           
+                #region מילוי רשימת חבילה מסוג דאל
+                List<DroneToList> ezer = new List<DroneToList>();
             List<DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
             foreach (var item in TMPparcel)
             {
@@ -170,14 +171,24 @@ namespace BL
                 {
                     item.Conditions = (BO.DroneConditions)random.Next(0, 2);
                 }
-                if (item.Conditions == (BO.DroneConditions)0)
+
+                if (dalLayer.GetAllDroneCharge().Any(dro => dro.DroneID == item.ID))
                 {
+                    item.Conditions = (BO.DroneConditions)0;
+                    item.location = GetBaseStation(dalLayer.GetDroneInCharging(item.ID).StationID).BaseStationLocation;
+                    item.BatteryStatus = (random.Next(0, 21));
+                }
+                else if ((item.Conditions == (BO.DroneConditions)0))
+                {
+                    item.Conditions = (BO.DroneConditions)1;
                     int ran = random.Next(0, baseStationsBL.Count());
                     item.location = baseStationsBL[ran].BaseStationLocation;
                     dalLayer.SendingDroneToBaseStation(baseStationsBL[ran].ID, item.ID);
                     item.BatteryStatus = (random.Next(0, 21));
+                    //DroneToCharging(item.ID);
                 }
-                else
+
+
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
                     //int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);

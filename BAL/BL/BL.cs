@@ -51,9 +51,8 @@ namespace BL
             heavyC = arr[3];
             droneLoadingRate = arr[4];
             #region מילוי רשימת הלקוחות מסוג דאל 
-            List<DO.Customer> TMPcustomer = new List<DO.Customer>();
-            TMPcustomer = dalLayer.GetAllCustomers().ToList();
-            foreach (var item in TMPcustomer)
+            List<DO.Customer> TMPcustomer= dalLayer.GetAllCustomers().ToList();
+            /*foreach (var item in TMPcustomer)
             {
                 BO.Customer cust = new Customer();
                 cust.ID = item.ID;
@@ -64,12 +63,11 @@ namespace BL
                 cust.Location.Longitude = item.Longitude;
                 cust.Deleted = item.Deleted;
                 customersBL.Add(cust);
-            }
+            }*/
             #endregion
             #region מילוי רשימת רחפנים מסוג דאל
-            List<DO.Drone> TMPdrone = new List<DO.Drone>();
-            TMPdrone = dalLayer.GetAllDrones().ToList();
-            foreach (var item in TMPdrone)
+            List<DO.Drone> TMPdrone = dalLayer.GetAllDrones().ToList();
+           /* foreach (var item in TMPdrone)
             {
                 DroneToList dtl = new DroneToList();
                 dtl.ID = item.ID; 
@@ -84,13 +82,12 @@ namespace BL
                 dtl.Deleted =item.Deleted;
                 dronesToList.Add(dtl);
                 
-            }
+            }*/
             #endregion
    
             #region מילוי רשימת תחנות בסיס מסוג דאל
-            List<DO.BaseStation> TMPbaseStation = new List<DO.BaseStation>();
-            TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
-            foreach (var item in TMPbaseStation)
+            List<DO.BaseStation> TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
+           /* foreach (var item in TMPbaseStation)
             {
                 BO.BaseStation bases = new BaseStation()
                 {
@@ -101,7 +98,7 @@ namespace BL
                     Deleted = item.Deleted,
                 };
                 baseStationsBL.Add(bases);
-            }
+            }*/
             #endregion
             #region מילוי רשימת חבילה מסוג דאל
             List<DroneToList> ezer = new List<DroneToList>();

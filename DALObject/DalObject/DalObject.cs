@@ -80,7 +80,7 @@ namespace Dal
                 {
                     ID = r1.Next(1000, 10000),
                     StationName = $"Station {i}",
-                    FreeChargingSlots = r1.Next(1, 6),
+                    FreeChargingSlots = r1.Next(5, 7),
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
                     Deleted = false

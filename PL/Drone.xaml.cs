@@ -39,13 +39,13 @@ namespace PL
             }
             if(d.Conditions==(BO.DroneConditions)0)
             {
-                timeLabel.Visibility = Visibility.Visible;
-                PresetTimePicker.Visibility = Visibility.Visible;
+                timepicker1.Visibility = Visibility.Visible;
+                WithSecondsTimePicker1.Visibility = Visibility.Visible;
             }
             if(d.Conditions!=(BO.DroneConditions)0)
             {
-                timeLabel.Visibility = Visibility.Collapsed;
-                PresetTimePicker.Visibility = Visibility.Collapsed;
+                timepicker1.Visibility = Visibility.Collapsed;
+                WithSecondsTimePicker1.Visibility = Visibility.Collapsed;
             }
         }
         public Drone(BlApi.IBL blobject)
@@ -55,8 +55,8 @@ namespace PL
             actMode.Visibility = Visibility.Hidden;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
-            timeLabel.Visibility = Visibility.Collapsed;
-            PresetTimePicker.Visibility = Visibility.Collapsed;
+            timepicker1.Visibility = Visibility.Collapsed;
+            WithSecondsTimePicker1.Visibility = Visibility.Collapsed;
         }
         public void Refresh()
         {
@@ -72,8 +72,8 @@ namespace PL
                 Bottun1.Content = "relese drone from charge ";
                 Timegrid.Visibility = Visibility.Visible;
                 Bottun2.Visibility = Visibility.Hidden;
-                timeLabel.Visibility = Visibility.Visible;
-                PresetTimePicker.Visibility = Visibility.Visible;
+                timepicker1.Visibility = Visibility.Visible;
+                WithSecondsTimePicker1.Visibility = Visibility.Visible;
 
             }
             if (temp == 2)
@@ -82,8 +82,8 @@ namespace PL
                 Bottun2.Content = "Package delivery";
                 Bottun2.Visibility = Visibility.Visible;
                 Timegrid.Visibility = Visibility.Hidden;
-                timeLabel.Visibility = Visibility.Collapsed;
-                PresetTimePicker.Visibility = Visibility.Collapsed;
+                timepicker1.Visibility = Visibility.Collapsed;
+                WithSecondsTimePicker1.Visibility = Visibility.Collapsed;
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -181,8 +181,9 @@ namespace PL
                 {
                     case 0:
                         TimeSpan t;
-                        bool tmp= TimeSpan.TryParse(PresetTimePicker.Text,out t);
-                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
+                        bool tmp= TimeSpan.TryParse(WithSecondsTimePicker1.Text,out t);
+                        TimeSpan s=new TimeSpan(t.Minutes,t.Seconds,0);
+                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), s);
                         temp = 1;
                         Refresh();
                         MessageBox.Show("relese drone from charge sucess");
@@ -291,5 +292,6 @@ namespace PL
                 e.Handled = true;
             }
         }
+
     }
 }

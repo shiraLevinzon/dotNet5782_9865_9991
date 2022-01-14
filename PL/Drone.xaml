@@ -10,7 +10,7 @@
 
     <Grid>
 
-        <Grid x:Name="addMode" Margin="169,0,96,54">
+        <Grid x:Name="addMode" Margin="169,0,96,54" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0"/>
@@ -42,7 +42,7 @@
         </Grid>
 
 
-        <Grid x:Name="actMode" Margin="197,37,9,-96" d:IsHidden="True">
+        <Grid x:Name="actMode" Margin="197,37,9,-96">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="102,77,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="174.137"/>

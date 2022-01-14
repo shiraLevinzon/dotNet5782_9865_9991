@@ -33,7 +33,7 @@ namespace PL
             StationIdComboBox.Visibility = Visibility.Hidden;
             temp = Convert.ToInt32(d.Conditions);
             Refresh();
-            if (Convert.ToInt32(packagNumberOnTransferred.Content) != 0)
+            if (Convert.ToString(packagNumberOnTransferred.Content) != "0")
             {
                 showParcel.IsEnabled = true;
             }
@@ -66,8 +66,6 @@ namespace PL
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
                 Timegrid.Visibility = Visibility.Hidden;
-                
-
             }
             if (temp == 0)
             {

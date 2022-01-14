@@ -15,7 +15,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        Title="MainWindow" Height="640" Width="700">
+        Title="MainWindow" Height="640" Width="700" Closing="Window_Closing">
     <Grid RenderTransformOrigin="0.498,0.504">
         <Grid>
             <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="0,0,-10,0">

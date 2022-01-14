@@ -95,7 +95,7 @@ namespace BL
                 drone.CopyPropertiesTo(droneToListTMP);
 
                 droneToListTMP.BatteryStatus = (random.Next(20, 40));
-                droneToListTMP.Conditions = (BO.DroneConditions)0;
+                droneToListTMP.Conditions = (BO.DroneConditions)1;
                 droneToListTMP.Deleted= false;
                 droneToListTMP.location = new BO.Location();
                 droneToListTMP.location.Latitude = GetBaseStation(id).BaseStationLocation.Latitude;
@@ -103,7 +103,8 @@ namespace BL
 
                 dronesToList.Add(droneToListTMP);
                 dalLayer.AddDrone(DroneDO);
-                dalLayer.SendingDroneToBaseStation(id, drone.ID);
+                //dalLayer.SendingDroneToBaseStation(id, drone.ID);
+                DroneToCharging(drone.ID);
             }
             catch(DO.MissingIdException ex)
             {

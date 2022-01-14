@@ -16,14 +16,6 @@ namespace Dal
         internal static List<Parcel> parcels = new List<Parcel>();
         internal static List<DroneCharge> droneCharges = new List<DroneCharge>();
         internal static List<User> users = new List<User>();
-
-        //static string DronesPath = @"DronesXml.xml"; //XMLSerializer
-        //static string BaseStationsPath = @"BaseStationsXml.xml"; //XElement
-        //static string CustonersPath = @"CustomersXml.xml"; //XMLSerializer
-        //static string ParcelsPath = @"ParcelsXml.xml"; //XMLSerializer
-        //static string UsersPath = @"UsersXml.xml"; //XMLSerializer
-        //static string DronesInChargePath = @"DronesInChargeXml.xml"; //XMLSerializer
-        //static string configPath = @"configXml.xml"; //XMLSerializer
         internal static Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -106,10 +98,6 @@ namespace Dal
                     DroneId = 0,
                     Requested = DateTime.Now,
                     Deleted = false
-
-
-
-
                     // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;
             }
@@ -133,16 +121,6 @@ namespace Dal
             public static double heavyWeight = 0.04;
             public static double DroneLoadingRate = 7.8;
         }
-        //public static double[] RequestPowerConsumptionByDrone()
-        //{
-        //    double[] PowerConsumption = new double[5];
-        //    PowerConsumption[0] = DataSource.Config.available;
-        //    PowerConsumption[1] = DataSource.Config.lightWeight;
-        //    PowerConsumption[2] = DataSource.Config.mediumWeight;
-        //    PowerConsumption[3] = DataSource.Config.heavyWeight;
-        //    PowerConsumption[4] = DataSource.Config.DroneLoadingRate;
-        //    return PowerConsumption;
-        //}
     }
     
 
@@ -157,12 +135,7 @@ namespace Dal
 
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
-        public DalObject() {
-            DataSource.Initialize();
-
-        }
-
-
+        public DalObject() { DataSource.Initialize(); }
         public double[] RequestPowerConsumptionByDrone()
             {
             double[] PowerConsumption = new double[5];

@@ -64,27 +64,27 @@ namespace BL
             #endregion
             #region מילוי רשימת רחפנים מסוג דאל
             List<DO.Drone> TMPdrone = dalLayer.GetAllDrones().ToList();
-           foreach (var item in TMPdrone)
+            foreach (var item in TMPdrone)
             {
                 DroneToList dtl = new DroneToList();
-                dtl.ID = item.ID; 
+                dtl.ID = item.ID;
                 dtl.MaxWeight = (WeightCategories)item.MaxWeight;
                 dtl.Model = item.Model;
                 dtl.BatteryStatus = random.Next(0, 101);
-                dtl.Conditions = (DroneConditions)random.Next(0,2);
+                dtl.Conditions = (DroneConditions)random.Next(0, 2);
                 dtl.PackagNumberOnTransferred = 0;
                 dtl.location = new Location();
-                dtl.location.Latitude = TMPcustomer[r1.Next(0,9)].Latitude;
-                dtl.location.Longitude = TMPcustomer[r1.Next(0,9)].Longitude;
-                dtl.Deleted =item.Deleted;
+                dtl.location.Latitude = TMPcustomer[r1.Next(0, 9)].Latitude;
+                dtl.location.Longitude = TMPcustomer[r1.Next(0, 9)].Longitude;
+                dtl.Deleted = item.Deleted;
                 dronesToList.Add(dtl);
-                
+
             }
             #endregion
-   
+
             #region מילוי רשימת תחנות בסיס מסוג דאל
             List<DO.BaseStation> TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
-           foreach (var item in TMPbaseStation)
+            foreach (var item in TMPbaseStation)
             {
                 BO.BaseStation bases = new BaseStation()
                 {

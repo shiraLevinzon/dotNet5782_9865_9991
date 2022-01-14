@@ -26,7 +26,7 @@
         <materialDesign:ColorZone
   Mode="PrimaryLight" materialDesign:ColorZoneAssist.Foreground="White" Padding="25
             " Margin="-26,0,0,0" Height="50" Background="{StaticResource BaseStationColor}"/>
-        <Grid x:Name="actMode" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="252" Grid.Row="1" Margin="196,73,0,0">
+        <Grid x:Name="actMode" HorizontalAlignment="Left" VerticalAlignment="Top" Height="146" Width="252" Grid.Row="1" Margin="196,73,0,0" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -39,7 +39,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Free Charging Slots:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="freeChargingSlotsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding FreeChargingSlots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="freeChargingSlotsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding FreeChargingSlots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="freeChargingSlotsTextBox_KeyDown"/>
             <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
             <Label Content="Station Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
@@ -49,7 +49,7 @@
             <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding BaseStationLocation.Longitude}" VerticalAlignment="Center"/>
         </Grid>
-        <Grid x:Name="addMode" HorizontalAlignment="Left" Margin="138,58,0,0" VerticalAlignment="Top" Height="120" Width="296" Grid.Row="1" d:IsHidden="True">
+        <Grid x:Name="addMode" HorizontalAlignment="Left" Margin="138,58,0,0" VerticalAlignment="Top" Height="120" Width="296" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="133.8"/>
                 <ColumnDefinition Width="20.2"/>
@@ -67,7 +67,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Free Charging Slots:" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Height="23" Width="154" FontWeight="Bold" FontSize="16" Background="{StaticResource BaseStationColor}" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="freeChargingSlotsTextBox1" Grid.Column="3" HorizontalAlignment="Center" Height="23" Grid.Row="1" Text="{Binding FreeChargingSlots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136" Background="White"/>
+            <TextBox x:Name="freeChargingSlotsTextBox1" Grid.Column="3" HorizontalAlignment="Center" Height="23" Grid.Row="1" Text="{Binding FreeChargingSlots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="136" Background="White" KeyDown="freeChargingSlotsTextBox1_KeyDown"/>
             <Label Content="ID:" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="154" FontWeight="Bold" FontSize="16" Background="{StaticResource BaseStationColor}" Grid.ColumnSpan="2"/>
             <TextBox x:Name="iDTextBox" Grid.Column="3" HorizontalAlignment="Center" Height="23" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="134" Background="White" SelectionTextBrush="#FFF1F0F0" KeyDown="iDTextBox_KeyDown"/>
             <Label Content="Station Name:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="23" Width="154" FontWeight="Bold" FontSize="16" Background="{StaticResource BaseStationColor}" Grid.ColumnSpan="2"/>

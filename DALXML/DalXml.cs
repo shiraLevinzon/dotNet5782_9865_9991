@@ -334,7 +334,7 @@ namespace Dal
             List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
 
             DO.Parcel parcel = ListParcels.Find(p => p.ID == id);
-            if (!CheckDrone(id))
+            if (!CheckParcel(id))
                 throw new MissingIdException(id, "Parcel");
             else
                 return parcel;
@@ -530,6 +530,7 @@ namespace Dal
             Drone d = ListDrones[index2];
 
             p.Delivered = DateTime.Now;
+            p.DroneId = 0;
 
             ListParcels[index1] = p;
             ListDrones[index2] = d;

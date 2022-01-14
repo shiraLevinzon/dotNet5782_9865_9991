@@ -18,7 +18,10 @@ namespace BL
         //  // The public Instance property to use 
         ////   public static IBL Instance { get { return instance; } }
      
- 
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+        internal IDal dalLayer = DalFactory.GetDal();
+
         internal  Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -34,12 +37,6 @@ namespace BL
         public double droneLoadingRate;
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
-
-        internal IDal dalLayer = DalFactory.GetDal();
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
-        
-
         #region בנאי 
         internal BL() 
         {
@@ -73,7 +70,7 @@ namespace BL
                 dtl.ID = item.ID; 
                 dtl.MaxWeight = (WeightCategories)item.MaxWeight;
                 dtl.Model = item.Model;
-                dtl.BatteryStatus = 0;
+                dtl.BatteryStatus = random.Next(0, 101);
                 dtl.Conditions = (DroneConditions)random.Next(0,2);
                 dtl.PackagNumberOnTransferred = 0;
                 dtl.location = new Location();
@@ -109,50 +106,50 @@ namespace BL
                 d.Conditions = (BO.DroneConditions)2;
                 d.PackagNumberOnTransferred = item.ID;
 
-                    if (item.Requested != DateTime.MinValue)
+                if (item.Requested != DateTime.MinValue)
+                {
+
+                    if (item.PickedUp == DateTime.MinValue)
                     {
-                       
-                            if (item.PickedUp == DateTime.MinValue)
-                            {
 
-                               BO.BaseStation basestationHalper = new BO.BaseStation();
-                                double mini = double.MaxValue;
-                                foreach (var item2 in baseStationsBL)
-                                {
-                                double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude);
-                                if (dis < mini)
-                                    {
-                                        mini = dis;
-                                        basestationHalper = item2;
-                                    }
-                                }
-                                d.location.Latitude = basestationHalper.BaseStationLocation.Latitude;
-                                d.location.Longitude = basestationHalper.BaseStationLocation.Longitude;
-                            }
-                            else
-                            {
-                                d.location.Latitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Latitude;
-                                d.location.Longitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Longitude;
-
-                            }
-                        
-                        //עדכון מצב בטריה
-                        BO.BaseStation stationHalper = new BO.BaseStation();
-                        double min = double.MaxValue;
+                        BO.BaseStation basestationHalper = new BO.BaseStation();
+                        double mini = double.MaxValue;
                         foreach (var item2 in baseStationsBL)
                         {
-
-                            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Latitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Longitude);
-                            if (dis < min)
+                            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude);
+                            if (dis < mini)
                             {
-                                min = dis;
-                                stationHalper = item2;
+                                mini = dis;
+                                basestationHalper = item2;
                             }
                         }
+                        d.location.Latitude = basestationHalper.BaseStationLocation.Latitude;
+                        d.location.Longitude = basestationHalper.BaseStationLocation.Longitude;
+                    }
+                    else
+                    {
+                        d.location.Latitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Latitude;
+                        d.location.Longitude = customersBL.Find(cu => cu.ID == item.SenderID).Location.Longitude;
 
-                        double distans = DistanceTo(d.location.Latitude, d.location.Longitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude);
-                        distans += min + DistanceTo(customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Latitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Longitude);
-                        int i = (int)(DO.WeightCategories)item.Weight;
+                    }
+
+                    //עדכון מצב בטריה
+                    BO.BaseStation stationHalper = new BO.BaseStation();
+                    double min = double.MaxValue;
+                    foreach (var item2 in baseStationsBL)
+                    {
+
+                        double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Latitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Longitude);
+                        if (dis < min)
+                        {
+                            min = dis;
+                            stationHalper = item2;
+                        }
+                    }
+
+                    double distans = DistanceTo(d.location.Latitude, d.location.Longitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude);
+                    distans += min + DistanceTo(customersBL.Find(cus => item.SenderID == cus.ID).Location.Latitude, customersBL.Find(cus => item.SenderID == cus.ID).Location.Longitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Latitude, customersBL.Find(cus => item.TargetID == cus.ID).Location.Longitude);
+                    int i = (int)(DO.WeightCategories)item.Weight;
                     if (distans * arr[i + 1] > 100)
                     {
                         d.BatteryStatus = 100;
@@ -161,11 +158,11 @@ namespace BL
                         d.BatteryStatus = random.Next((int)distans * (int)arr[i + 1], 100);
 
 
-                    }
+                }
 
             }
             #endregion
-            
+
             #region היית צריכה לעשות לזה אנד לכן זה עושה באאאאג
             foreach (var item in dronesToList)
             {
@@ -183,8 +180,8 @@ namespace BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                  //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                  //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                    //int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                    //item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;
@@ -288,8 +285,8 @@ namespace BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
-                DO.Parcel parcel = dalLayer.GetAllParcels().ToList()[0];
-                foreach (DO.Parcel item in dalLayer.GetAllParcels())
+                DO.Parcel parcel = dalLayer.GetAllParcels(par => par.Scheduled == DateTime.MinValue).FirstOrDefault();
+                foreach (DO.Parcel item in dalLayer.GetAllParcels(par=> par.Scheduled==DateTime.MinValue))
                 {
                     if (item.priority > parcel.priority)
                         parcel = item;
@@ -371,7 +368,7 @@ namespace BL
             try
             {
                 BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==false);
-                DO.Parcel parcel = dalLayer.GetAllParcels().ToList().Find(x => x.DroneId == id);
+                DO.Parcel parcel = dalLayer.GetAllParcels(x => x.DroneId == id).FirstOrDefault();
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivered- Time Problem");
                 DO.Customer customer = dalLayer.GetAllCustomers().ToList().Find(x => x.ID == parcel.TargetID);

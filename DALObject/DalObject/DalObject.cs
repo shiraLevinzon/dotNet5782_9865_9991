@@ -72,7 +72,7 @@ namespace Dal
                 {
                     ID = r1.Next(1000, 10000),
                     StationName = $"Station {i}",
-                    FreeChargingSlots = r1.Next(1, 6),
+                    FreeChargingSlots = r1.Next(5, 7),
                     Latitude = GetRandomNumber(33.7, 36.3),
                     Longitude = GetRandomNumber(29.3, 33.5),
                     Deleted = false
@@ -87,7 +87,7 @@ namespace Dal
             {
                 int temp1 = r1.Next(0, 10);
                 int temp2 = r1.Next(0, 10);
-                int temp3 = r1.Next(0,6);
+                
                 parcels.Add(new Parcel()
                 {
                     ID = Config.IdCount++,
@@ -95,7 +95,7 @@ namespace Dal
                     TargetID = customers[temp2].ID,
                     Weight = (WeightCategories)r1.Next(0, 3),
                     priority = (Priorities)r1.Next(0, 3),
-                    DroneId = temp3,
+                    DroneId = 0,
                     Requested = DateTime.Now,
                     Deleted = false
                     // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
@@ -115,10 +115,10 @@ namespace Dal
         internal class Config
         {
             public static int IdCount = 1;
-            public static double available = 0.04;
-            public static double lightWeight = 0.09;
-            public static double mediumWeight = 0.15;
-            public static double heavyWeight = 0.22;
+            public static double available = 0.01;
+            public static double lightWeight = 0.02;
+            public static double mediumWeight = 0.03;
+            public static double heavyWeight = 0.04;
             public static double DroneLoadingRate = 7.8;
         }
     }

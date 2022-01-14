@@ -3,7 +3,7 @@
   <Drone>
     <ID>1</ID>
     <Model>p1</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
@@ -15,13 +15,13 @@
   <Drone>
     <ID>3</ID>
     <Model>p1</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
     <ID>4</ID>
     <Model>p1</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
@@ -33,7 +33,7 @@
   <Drone>
     <ID>2133213</ID>
     <Model>דשגדכ</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
 </ArrayOfDrone>

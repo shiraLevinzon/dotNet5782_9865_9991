@@ -163,36 +163,24 @@ namespace BL
 
             }
             #endregion
-
-            #region היית צריכה לעשות לזה אנד לכן זה עושה באאאאג
             foreach (var item in dronesToList)
             {
                 if (item.Conditions != (BO.DroneConditions)2)
                 {
                     item.Conditions = (BO.DroneConditions)random.Next(0, 2);
                 }
-
-                if (dalLayer.GetAllDroneCharge().Any(dro => dro.DroneID == item.ID))
+                if (item.Conditions == (BO.DroneConditions)0)
                 {
-                    item.Conditions = (BO.DroneConditions)0;
-                    item.location = GetBaseStation(dalLayer.GetDroneInCharging(item.ID).StationID).BaseStationLocation;
-                    item.BatteryStatus = (random.Next(0, 21));
-                }
-                else if ((item.Conditions == (BO.DroneConditions)0))
-                {
-                    item.Conditions = (BO.DroneConditions)1;
                     int ran = random.Next(0, baseStationsBL.Count());
                     item.location = baseStationsBL[ran].BaseStationLocation;
                     dalLayer.SendingDroneToBaseStation(baseStationsBL[ran].ID, item.ID);
                     item.BatteryStatus = (random.Next(0, 21));
-                    //DroneToCharging(item.ID);
                 }
-
-
+                else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                    //int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                    //item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+                    //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+                    //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;
@@ -208,9 +196,53 @@ namespace BL
                     item.BatteryStatus = random.Next((int)(mini * free), 100);
                 }
             }
-            #endregion
+            //#region 
+            //foreach (var item in dronesToList)
+            //{
+            //    if (item.Conditions != (BO.DroneConditions)2)
+            //    {
+            //        item.Conditions = (BO.DroneConditions)random.Next(0, 2);
+            //    }
+
+            //    if (dalLayer.GetAllDroneCharge().Any(dro => dro.DroneID == item.ID))
+            //    {
+            //        item.Conditions = (BO.DroneConditions)0;
+            //        item.location = GetBaseStation(dalLayer.GetDroneInCharging(item.ID).StationID).BaseStationLocation;
+            //        item.BatteryStatus = (random.Next(0, 21));
+            //    }
+            //    else if ((item.Conditions == (BO.DroneConditions)0))
+            //    {
+            //        item.Conditions = (BO.DroneConditions)1;
+            //        int ran = random.Next(0, baseStationsBL.Count());
+            //        item.location = baseStationsBL[ran].BaseStationLocation;
+            //        dalLayer.SendingDroneToBaseStation(baseStationsBL[ran].ID, item.ID);
+            //        item.BatteryStatus = (random.Next(0, 21));
+            //        //DroneToCharging(item.ID);
+            //    }
+
+
+            //    if (item.Conditions == (BO.DroneConditions)1)
+            //    {
+            //        //int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
+            //        //item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
+            //        //עדכון מצב בטריה
+            //        BO.BaseStation basestationHalper = new BO.BaseStation();
+            //        double mini = double.MaxValue;
+            //        foreach (var item2 in baseStationsBL)
+            //        {
+            //            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, item.location.Latitude, item.location.Longitude);
+            //            if (dis < mini)
+            //            {
+            //                mini = dis;
+            //                basestationHalper = item2;
+            //            }
+            //        }
+            //        item.BatteryStatus = random.Next((int)(mini * free), 100);
+            //    }
+            //}
+            //#endregion
         }
-        #endregion
+#endregion
         #region פונקציית שליחת רחפן לטעינה יש צורך בבדיקה!!
         public void DroneToCharging(int id)
         {

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Drone" Height="600" Width="600">
 
-    <Grid>
+    <Grid x:Name="timepicker">
 
         <Grid x:Name="addMode" Margin="169,0,96,54" d:IsHidden="True">
             <Grid x:Name="ADDgrid" HorizontalAlignment="Left" Margin="85,116,0,0" VerticalAlignment="Top" Width="161" Height="112">
@@ -91,7 +91,7 @@
 
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="10,195,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showParcel_Click" />
-            <Label x:Name="timeLabel" Content="Time Drone is in cgarge:" HorizontalAlignment="Left" Margin="43,284,0,0" VerticalAlignment="Top" Width="154"/>
+            <Button x:Name="timepicker1" Content="Time Drone is in charge:" HorizontalAlignment="Left" Margin="-39,290,0,0" VerticalAlignment="Top"/>
         </Grid>
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="29,394,0,0" VerticalAlignment="Top" Width="108" Click="CancelBottun_Click" Height="34"/>
         <materialDesign:PackIcon Kind="Quadcopter" Height="248" Width="137" Margin="26,55,0,0" />
@@ -106,14 +106,13 @@
             </materialDesign:ColorZone.RenderTransform>
             <StackPanel Orientation="Horizontal"/>
         </materialDesign:ColorZone>
-        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Margin="-11,488,0,54" Height="42">
-            <StackPanel Orientation="Horizontal"/>
-        </materialDesign:ColorZone>
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Margin="0,2,0,0" Height="42"/>
         <materialDesign:TimePicker Visibility="Collapsed" materialDesign:HintAssist.Hint="With Seconds"
                                          Is24Hours="{Binding IsChecked, ElementName=Is24HourCheckbox}"
                                             x:Name="WithSecondsTimePicker"
                                     WithSeconds="True" Margin="420,330,30,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <materialDesign:TimePicker x:Name="PresetTimePicker" Is24Hours="True" Margin="386,321,62,0" VerticalAlignment="Top" />
-
+        <materialDesign:TimePicker
+  x:Name="WithSecondsTimePicker1"
+  Is24Hours="True" Margin="370,329,88,0" VerticalAlignment="Top" Height="30" />
     </Grid>
 </Window>

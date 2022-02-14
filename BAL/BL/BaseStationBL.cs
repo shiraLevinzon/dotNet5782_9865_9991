@@ -60,7 +60,6 @@ namespace BL
             return baseStationToLists.Where(p => predicate(p));
 
         }
- 
         public void AddBaseStation(BO.BaseStation baseStation)
         {
 
@@ -111,6 +110,20 @@ namespace BL
                 throw new BO.DuplicateIdException(BaseStationDO.ID, "BaseStation", "BaseStation ID is illegal", ex);
             }
 
+        }
+        public void DeleteBaseStation(int id)
+        {
+            try
+            {
+                BO.BaseStation bs = GetBaseStation(id);
+                if (bs.DronesInCharge.Count() != 0)
+                    throw new BO.ChargingStationsMaintained(bs.ID, "BaseStation", "Charging stations at the base station contain Drone in charge");
+                dalLayer.DeleteBaseStatin(id);
+            }
+            catch(DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(id, "BaseStation", "This base station has already been deleted", ex);
+            }
         }
     }
 }

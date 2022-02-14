@@ -131,6 +131,22 @@ namespace BL
                 num = 0;
             return num;
         }
-
+        public void DeleteParcel(int id)
+        {
+            try
+            {
+                BO.Parcel p = GetParcel(id);
+                if (p.PickedUp != DateTime.MinValue && p.Delivered==DateTime.MinValue)
+                {
+                    BO.Drone dro = GetDrone(p.DroneInParcel.ID);
+                    dro.Conditions = (DroneConditions)1;
+                }
+                dalLayer.DeleteParcel(id);
+            }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(id, "Parcel", "This Parcel has already been deleted", ex);
+            }
+        }
     }
 }

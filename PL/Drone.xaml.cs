@@ -27,6 +27,7 @@ namespace PL
             InitializeComponent();
             bl = blobject;
             addMode.Visibility = Visibility.Hidden;
+            actMode.Visibility = Visibility.Visible;
             UPDATEgrid.DataContext = d;
             modelTextBox.IsEnabled = true;
             updateBottun.IsEnabled = false;
@@ -53,6 +54,7 @@ namespace PL
             InitializeComponent();         
             bl = blobject;
             actMode.Visibility = Visibility.Hidden;
+            addMode.Visibility = Visibility.Visible;
             maxWeightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             StationIdComboBox.ItemsSource = blobject.GetAllBaseStation().Select(b=> b.ID);
             timepicker1.Visibility = Visibility.Collapsed;
@@ -65,7 +67,9 @@ namespace PL
                 Bottun2.Visibility = Visibility.Visible;
                 Bottun1.Content = "sent drone to charge";
                 Bottun2.Content = "assing drone to parcel";
-                Timegrid.Visibility = Visibility.Hidden;
+                deleteDrone.Visibility = Visibility.Visible;
+                deleteDrone.Content = "Delete Drone";
+                Timegrid.Visibility = Visibility.Visible;
             }
             if (temp == 0)
             {
@@ -74,6 +78,7 @@ namespace PL
                 Bottun2.Visibility = Visibility.Hidden;
                 timepicker1.Visibility = Visibility.Visible;
                 WithSecondsTimePicker1.Visibility = Visibility.Visible;
+                deleteDrone.Visibility = Visibility.Collapsed;
 
             }
             if (temp == 2)
@@ -84,6 +89,7 @@ namespace PL
                 Timegrid.Visibility = Visibility.Hidden;
                 timepicker1.Visibility = Visibility.Collapsed;
                 WithSecondsTimePicker1.Visibility = Visibility.Collapsed;
+                deleteDrone.Visibility = Visibility.Collapsed;
             }
         }
         private void AddBottun_Click_1(object sender, RoutedEventArgs e)
@@ -143,7 +149,6 @@ namespace PL
         {
             updateBottun.IsEnabled = true;
         }
-
         private void updateBottun_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -168,6 +173,10 @@ namespace PL
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (BO.PackageTimesException ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(BO.EntityHasBeenDeleted ex)
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -223,12 +232,13 @@ namespace PL
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-         
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
             //dronesListWindow.FilterByCombiBox();
         }
-
-
         private void Bottun2_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -271,11 +281,12 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             UPDATEgrid.DataContext = bl.GetAllDrones(d => d.ID == Convert.ToInt32(iDLabel.Content));
         }
-
-     
-
         private void showParcel_Click(object sender, RoutedEventArgs e)
         {
             new parcelInTransferWindow(Convert.ToInt32(iDLabel.Content),bl).ShowDialog();
@@ -292,6 +303,17 @@ namespace PL
                 e.Handled = true;
             }
         }
-
+        private void deleteDrone_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DeleteDrone(Convert.ToInt32(iDLabel.Content));
+                MessageBox.Show("delete Drone succeeded");
+            }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

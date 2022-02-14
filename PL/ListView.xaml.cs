@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL
 {
-    public enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five,};
+    public  enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five, Six,Seven,Eight,Nine,Ten};
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
@@ -59,7 +59,6 @@ namespace PL
         {
             StatusSelector.SelectedItem = null;
         }
-
         private void Clear2_Click(object sender, RoutedEventArgs e)
         {
             WeightSelector.SelectedItem = null;
@@ -130,7 +129,6 @@ namespace PL
         {
             FilterByCombiBoxOfParcel();
         }
-
         private void DATEcombobox_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterByCombiBoxOfParcel();
@@ -244,7 +242,6 @@ namespace PL
                 }
             }
             listOfParcel.ItemsSource = parcels;
-
         }
         private void listOfCostumer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

@@ -35,7 +35,17 @@ namespace Dal
             return XMLTools.LoadListFromXMLElement(configPath).Element("BatteryUsages").Elements()
                 .Select(e => Convert.ToDouble(e.Value)).ToArray();
         }
-
+        public int GetParcelId()
+        {
+            return XMLTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Elements()
+                .Select(X => Convert.ToInt32(X.Value)).FirstOrDefault();
+        }
+        public void SetParcelId(int id)
+        {
+            XElement pIdR = XMLTools.LoadListFromXMLElement(configPath);
+            pIdR.Element("RowNumbers").Element("NewParcelId").Value = id.ToString();
+            XMLTools.SaveListToXMLElement(pIdR, configPath);
+        }
         #region Drone
         public void UpdDrone(Drone tmp)
         {
@@ -291,7 +301,8 @@ namespace Dal
             
             if (CheckParcel(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "Parcel");
-            tmp.ID = int.Parse(XMLTools.LoadListFromXMLElement(configPath).Element("RowNumbers").Value);
+            tmp.ID = GetParcelId();
+            SetParcelId(tmp.ID + 1);
             tmp.Requested = DateTime.Now;
             ListParcels.Add(tmp);
             XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);

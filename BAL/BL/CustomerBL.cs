@@ -126,5 +126,35 @@ namespace BL
             }
 
         }
+        public void DeleteCustomer(int id)
+        {
+            try
+            {
+                BO.Customer custumer = GetCustomer(id);
+                if (custumer.PackagesFromCustomer.Count()!= 0)
+                {
+                    foreach(var p in custumer.PackagesFromCustomer)
+                    {
+                        BO.Customer cus = GetCustomer(GetParcel(p.ID).Receiver.ID);
+                        cus.PackagesToCustomer.ToList().RemoveAll(ps => ps.ID == p.ID);
+                        DeleteParcel(p.ID);
+                    }
+                }
+                if (custumer.PackagesToCustomer.Count() != 0)
+                {
+                    foreach (var p in custumer.PackagesToCustomer)
+                    {
+                        BO.Customer cus = GetCustomer(GetParcel(p.ID).Sender.ID);
+                        cus.PackagesFromCustomer.ToList().RemoveAll(ps => ps.ID == p.ID);
+                        DeleteParcel(p.ID);
+                    }
+                }
+                dalLayer.DeleteCustomer(id);
+            }
+            catch (DO.EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(id, "Customer", "This Customer has already been deleted", ex);
+            }
+        }
     }
 }

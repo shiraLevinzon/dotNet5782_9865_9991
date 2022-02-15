@@ -84,5 +84,6 @@
         <materialDesign:PackIcon Kind="EvStation" Margin="12,37,0,0" Width="126" Height="165" Grid.Row="1" />
         <Label x:Name="title" Content="Enter the station details:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="237" FontWeight="Bold" FontSize="20"/>
         <Button x:Name="droneInChargeList" Content="view all Drone in Charge" HorizontalAlignment="Left" Margin="7,253,0,0" Grid.Row="1" VerticalAlignment="Top" Width="196" Background="{StaticResource BaseStationColor}" Click="droneInChargeList_Click"/>
+        <Button x:Name="deleteButton" Content="Button" HorizontalAlignment="Left" Margin="343,218,0,0" Grid.Row="1" VerticalAlignment="Top" Width="125" Background="{StaticResource BaseStationColor}" Height="29" Click="deleteButton_Click"/>
     </Grid>
 </Window>

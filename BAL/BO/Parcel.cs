@@ -20,6 +20,5 @@ namespace BO
         public DateTime PickedUp { get; set; }
         public DateTime Delivered { get; set; }
         public bool Deleted { get; set; }
-
     }
 }

@@ -139,6 +139,20 @@ namespace BL
                 throw new BO.MissingIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
         }
+        public void DeleteDrone(int id)
+        {
+            try
+            {
+                if (GetDrone(id).Conditions == (DroneConditions)2)
+                    throw new BO.ImproperMaintenanceCondition(id, "Drone", "Drone in delivery - can not be deleted");
+               // dronesToList.RemoveAll(x => x.ID == id);
+                dalLayer.DeleteDrone(id);
+            }
+            catch (EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(id, "Drone", "This Drone has already been deleted", ex);
+            }
+        }
     }
 }
 

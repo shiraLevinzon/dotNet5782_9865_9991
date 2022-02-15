@@ -19,12 +19,15 @@ namespace BlApi
         public BO.BaseStation GetBaseStation(int id);
         public void AddBaseStation(BO.BaseStation baseStation);
         public void UpdateBaseStation(int id, string name, int sum);
+        public void DeleteBaseStation(int id);
+
         #endregion
         #region פונקציות רחפן של שיכבה 2
         public BO.Drone GetDrone(int id);
         public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate = null);
         public void AddDrone(BO.Drone drone, int id);
         public void UpdateDrone(int id, string name);
+        public void DeleteDrone(int id);
         #endregion
         #region פונקציות לקוח של שיכבה 2
         public BO.Customer GetCustomer(int id);

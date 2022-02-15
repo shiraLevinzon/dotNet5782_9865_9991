@@ -30,8 +30,8 @@ namespace PL
             buttonBaseStation.Content = "ADD";
             droneInChargeList.Visibility = Visibility.Collapsed;
             title.Content = "ADD Base Station Details";
-            
-           temp = 0;
+            deleteButton.Visibility = Visibility.Collapsed;
+            temp = 0;
         }
         public BaseStationwindow(BaseStationToList bs, BlApi.IBL blobject)
         {
@@ -40,7 +40,9 @@ namespace PL
             actMode.DataContext = bl.GetBaseStation(bs.ID);
             addMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "Update";
-            string temp1 = "Station Details " + bs.ID;
+            deleteButton.Visibility = Visibility.Visible;
+            deleteButton.Content = "Delete Base Station";
+            string temp1 = "Station Details: " + bs.ID;
             droneInChargeList.Visibility = Visibility.Visible;
             title.Content = temp1;
             temp = 1;
@@ -142,7 +144,6 @@ namespace PL
                 e.Handled = true;
             }
         }
-
         private void freeChargingSlotsTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
@@ -152,6 +153,23 @@ namespace PL
             else
             {
                 e.Handled = true;
+            }
+        }
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DeleteBaseStation(Convert.ToInt32(iDTextBlock.Text));
+                MessageBox.Show($"delete Base Station succeeded");
+
+            }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.ChargingStationsMaintained ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

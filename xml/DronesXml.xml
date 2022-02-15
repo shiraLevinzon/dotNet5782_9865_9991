@@ -69,7 +69,7 @@
   <Drone>
     <ID>32424324</ID>
     <Model>dfg</Model>
-    <MaxWeight>light</MaxWeight>
+    <MaxWeight>heavy</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
 </ArrayOfDrone>

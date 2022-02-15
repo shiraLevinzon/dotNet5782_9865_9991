@@ -80,4 +80,20 @@
     <Latitude>35.04724690054881</Latitude>
     <Deleted>false</Deleted>
   </Customer>
+  <Customer>
+    <ID>212829865</ID>
+    <Name>shira</Name>
+    <Phone>0525369552</Phone>
+    <Longitude>32</Longitude>
+    <Latitude>32</Latitude>
+    <Deleted>false</Deleted>
+  </Customer>
+  <Customer>
+    <ID>1111</ID>
+    <Name>yakov</Name>
+    <Phone>0583294559</Phone>
+    <Longitude>32</Longitude>
+    <Latitude>33</Latitude>
+    <Deleted>false</Deleted>
+  </Customer>
 </ArrayOfCustomer>

@@ -7,20 +7,21 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CostumerWindow" Height="450" Width="800">
-    <Grid RenderTransformOrigin="-0.193,0.628">
-        <materialDesign:PackIcon Kind="CardAccountDetails" Height="280" Width="357" Margin="43,56,0,0" />
+    <Grid>
+        <materialDesign:PackIcon Kind="CardAccountDetails" Height="280" Width="357" Margin="43,56,0,0"/>
+        <Button x:Name="AddP" Content="Add Parcel"  HorizontalAlignment="Left" Margin="367,360,0,0" VerticalAlignment="Top" Width="105" Visibility="Hidden" Click="AddP_Click"/>
 
-        <Grid x:Name="actMode"  HorizontalAlignment="Left" Margin="458,0,0,0" VerticalAlignment="Center" Height="216" Width="262" d:IsHidden="True">
+        <Grid x:Name="actMode"  HorizontalAlignment="Left" Margin="458,0,0,0" VerticalAlignment="Center" Height="216" Width="262">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
             <TextBlock x:Name="iDTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" Text="{Binding ID}" VerticalAlignment="Center"/>
@@ -28,12 +29,12 @@
             <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
             <TextBox x:Name="phoneTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" FontWeight="Bold"/>
             <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBlock x:Name="latitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding Location.Latitude}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="latitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding Location.Latitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
             <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
-            <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Location.Longitude}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Location.Longitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
             <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="6,0,0,0" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" FontWeight="Bold"/>
         </Grid>
-        <Grid x:Name="addMode"  HorizontalAlignment="Left" Margin="520,128,0,0" VerticalAlignment="Top">
+        <Grid x:Name="addMode"  HorizontalAlignment="Left" Margin="520,128,0,0" VerticalAlignment="Top" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -57,17 +58,13 @@
             <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
 
-        <materialDesign:ColorZone
-  Mode="PrimaryLight"
-  Padding="16" Height="52">
-            <StackPanel
-    Orientation="Horizontal"/>
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Height="52">
+            <StackPanel Orientation="Horizontal"/>
         </materialDesign:ColorZone>
-        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="625,360,0,0" VerticalAlignment="Top" Width="105" Click="Cancel_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="634,361,0,0" VerticalAlignment="Top" Width="105" Click="Cancel_Click"/>
         <Button x:Name="AddOrUpdate" Content="" HorizontalAlignment="Left" Margin="499,360,0,0" VerticalAlignment="Top" Width="105" Click="AddOrUpdate_Click"/>
-        <Label Margin="0,-21,0,382" RenderTransformOrigin="0.302,0.847">
-            <Label x:Name="PersonDetails" Content="" Width="563" Height="46"/>
-        </Label>
+        <TextBlock x:Name="PersonDetails"  Width="563" Margin="0,0,237,383" FontSize="25" FontWeight="Bold" FontStyle="Italic"/>
+
         <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230" Click="PackagesFromCustomer_Click"/>
         <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230" Click="PackagesToCustomer_Click"/>
     </Grid>

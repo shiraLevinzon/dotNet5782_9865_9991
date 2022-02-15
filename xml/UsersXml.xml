@@ -1,2 +1,31 @@
 <?xml version="1.0"?>
-<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Id>212829865</Id>
+    <Name>shira levinzon</Name>
+    <Password>1111</Password>
+    <Phone>0525369552</Phone>
+    <Deleted>false</Deleted>
+  </User>
+  <User>
+    <Id>2128</Id>
+    <Name>shira levinzon</Name>
+    <Password>1111</Password>
+    <Phone>0525369552</Phone>
+    <Deleted>false</Deleted>
+  </User>
+  <User>
+    <Id>335322739</Id>
+    <Name>gorge</Name>
+    <Password>5678</Password>
+    <Phone>1298309237</Phone>
+    <Deleted>false</Deleted>
+  </User>
+  <User>
+    <Id>1111</Id>
+    <Name>yakov</Name>
+    <Password>1111</Password>
+    <Phone>1298309237</Phone>
+    <Deleted>false</Deleted>
+  </User>
+</ArrayOfUser>

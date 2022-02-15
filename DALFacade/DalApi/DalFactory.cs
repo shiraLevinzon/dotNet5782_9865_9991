@@ -4,7 +4,7 @@ using DalApi;
 using DO;
 namespace DalApi
 {
-    public class DalFactory
+    public static class DalFactory
     {
         public static IDal GetDal()
         {

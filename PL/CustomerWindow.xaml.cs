@@ -35,6 +35,23 @@ namespace PL
             PackagesFromCustomer.Content = "view all parcel from costumer";
             PackagesToCustomer.Visibility = Visibility.Visible;
             PackagesToCustomer.Content = "view all parcel to costumer";
+            PersonDetails.Text = " " + customer.Name + "  " + customer.ID;
+            temp = 1;
+        }
+        public CostumerWindow(BO.Customer customer, IBL bll,bool flag)
+        {
+            InitializeComponent();
+            bl = bll;
+            id = customer.ID;
+            addMode.Visibility = Visibility.Collapsed;
+            actMode.DataContext = customer;
+            AddOrUpdate.Content = "Update";
+            AddP.Visibility = Visibility.Visible;
+            PackagesFromCustomer.Visibility = Visibility.Visible;
+            PackagesFromCustomer.Content = "view all parcel from costumer";
+            PackagesToCustomer.Visibility = Visibility.Visible;
+            PackagesToCustomer.Content = "view all parcel to costumer";
+            PersonDetails.Text = " " + customer.Name + "  " + customer.ID;
             temp = 1;
         }
         public CostumerWindow( IBL bll)
@@ -143,6 +160,11 @@ namespace PL
             {
                 e.Handled = true;
             }
+        }
+
+        private void AddP_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelWindow(bl,id).ShowDialog();
         }
     }
 }

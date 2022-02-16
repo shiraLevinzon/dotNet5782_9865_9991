@@ -28,4 +28,11 @@
     <Phone>1298309237</Phone>
     <Deleted>false</Deleted>
   </User>
+  <User>
+    <Id>33574773</Id>
+    <Name>מיכל </Name>
+    <Password>1111</Password>
+    <Phone>0528608110</Phone>
+    <Deleted>false</Deleted>
+  </User>
 </ArrayOfUser>

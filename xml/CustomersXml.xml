@@ -96,4 +96,12 @@
     <Latitude>33</Latitude>
     <Deleted>false</Deleted>
   </Customer>
+  <Customer>
+    <ID>33574773</ID>
+    <Name>מיכל לוינזון</Name>
+    <Phone>0528608110</Phone>
+    <Longitude>33</Longitude>
+    <Latitude>32</Latitude>
+    <Deleted>false</Deleted>
+  </Customer>
 </ArrayOfCustomer>

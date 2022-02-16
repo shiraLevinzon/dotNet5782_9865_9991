@@ -90,6 +90,7 @@
                                     <GridViewColumn DisplayMemberBinding="{Binding Conditions}" Header="סטטוס" />
                                     <GridViewColumn DisplayMemberBinding="{Binding location ,StringFormat=\{0:#0.00\}}" Header="  מיקום קו רוחב       מיקום קו אורך"  />
                                     <GridViewColumn DisplayMemberBinding="{Binding PackagNumberOnTransferred}" Header="חבילה משויכת"   />
+
                                 </GridView>
                             </ListView.View>
                         </ListView>

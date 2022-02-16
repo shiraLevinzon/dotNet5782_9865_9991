@@ -39,13 +39,13 @@
             <Label Content="Weight:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBlock x:Name="weightTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Weight}" VerticalAlignment="Center"/>
             <Label Content="Collection Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <TextBlock x:Name="latitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Collection.Latitude}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="latitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="5" Text="{Binding Collection.Latitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
             <Label Content="Collection Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" Text="{Binding Collection.Longitude}" VerticalAlignment="Center"/>
-            <Label Content="Destination Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
-            <TextBlock x:Name="latitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="7" Text="{Binding PackageDestination.Latitude}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="longitudeTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="6" Text="{Binding Collection.Longitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
+            <Label Content="Destination Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <TextBlock x:Name="latitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="7" Text="{Binding PackageDestination.Latitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
             <Label Content="Destination Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
-            <TextBlock x:Name="longitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="8" Text="{Binding PackageDestination.Longitude}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="longitudeTextBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="8" Text="{Binding PackageDestination.Longitude,StringFormat=\{0:#0.00\}}" VerticalAlignment="Center"/>
             <Label Content="Receiver Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
             <TextBlock x:Name="customerNameTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="9" Text="{Binding Receives.CustomerName}" VerticalAlignment="Center"/>
             <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>

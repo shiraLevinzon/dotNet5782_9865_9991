@@ -21,13 +21,13 @@
             <ColumnDefinition Width="111*"/>
             <ColumnDefinition Width="139*"/>
         </Grid.ColumnDefinitions>
-        <materialDesign:ColorZone
-  Mode="PrimaryLight"
-  Padding="16" Grid.ColumnSpan="2" Height="42">
-            <StackPanel Orientation="Horizontal"/>
-        </materialDesign:ColorZone>
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Grid.ColumnSpan="2" Height="42"/>
+
+        <TextBlock x:Name="senNAME" Margin="0,0,261,0" Text="" VerticalAlignment="Top" Height="42" FontWeight="Bold" FontStyle="Italic" FontSize="25" Grid.ColumnSpan="2"/>
+
+
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="115,415,0,0" VerticalAlignment="Top" Width="148"  Height="43" Click="CancelBottun_Click" Grid.ColumnSpan="2"/>
-        <Grid x:Name="addMode" Grid.ColumnSpan="2" Margin="-16,10,16,-10" d:IsHidden="True">
+        <Grid x:Name="addMode" Grid.ColumnSpan="2" Margin="-16,10,16,-10">
             <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="285,112,0,0" VerticalAlignment="Top" Width="200" SourceUpdated="grid2_SourceUpdated" DataContextChanged="grid2_DataContextChanged">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -45,14 +45,14 @@
                 <ComboBox x:Name="weightComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="3" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Receiver ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
                 <ComboBox x:Name="ReceiverIDComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120"/>
-                <Label Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
+                <Label Name="SenderLabel" Content="Sender ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" FontStyle="Italic"/>
                 <ComboBox x:Name="SenderIDComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="120"/>
             </Grid>
             <materialDesign:PackIcon Name="error" Visibility="Hidden" Kind="AlertCircleOutline" Height="65" Width="33" Margin="47,112,0,0" />
             <Button x:Name="AddBottun"  Content="Add" HorizontalAlignment="Left" Margin="311,407,0,0" VerticalAlignment="Top" Width="146" Click="AddBottun_Click" Height="41"/>
         </Grid>
 
-        <Grid x:Name="actMode" Margin="10,42,0,0" RenderTransformOrigin="0.438,0.572" Grid.ColumnSpan="2">
+        <Grid x:Name="actMode" Margin="10,42,0,0" RenderTransformOrigin="0.438,0.572" Grid.ColumnSpan="2" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="67*"/>
                 <ColumnDefinition Width="104*"/>

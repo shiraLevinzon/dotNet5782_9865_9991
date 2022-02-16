@@ -17,10 +17,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn
-        DisplayMemberBinding="{Binding ID}"
-        Header="Drone ID" />
-                    <GridViewColumn
-        DisplayMemberBinding="{Binding BatteryStatus}"
+        DisplayMemberBinding="{Binding ID}"  Header="Drone ID" />
+                    <GridViewColumn  DisplayMemberBinding="{Binding BatteryStatus,StringFormat=\{0:#0.0\}%}"
         Header="Battery left" />
 
                 </GridView>

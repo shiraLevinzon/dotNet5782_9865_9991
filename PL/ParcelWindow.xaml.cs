@@ -48,6 +48,20 @@ namespace PL
             SenderIDComboBox.ItemsSource = bl.GetAllCustomer().Select(cu => cu.ID);
 
         }
+        public ParcelWindow(BlApi.IBL blobject,int id)
+        {
+            InitializeComponent();
+            bl = blobject;
+            actMode.Visibility = Visibility.Hidden;
+            priorityComboBox.ItemsSource = Enum.GetValues(typeof(Priorities));
+            weightComboBox.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            ReceiverIDComboBox.ItemsSource = bl.GetAllCustomer().Select(cu => cu.ID);
+            SenderIDComboBox.ItemsSource = bl.GetAllCustomer().Select(cu => cu.ID);
+            SenderIDComboBox.Visibility = Visibility.Hidden;
+            SenderLabel.Visibility = Visibility.Hidden;
+            senNAME.Text = "The Sender: " + id;
+            SenderIDComboBox.SelectedItem = bl.GetCustomer(id).ID;
+        }
 
         private void AddBottun_Click(object sender, RoutedEventArgs e)
         {

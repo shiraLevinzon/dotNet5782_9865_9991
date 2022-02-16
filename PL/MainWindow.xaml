@@ -65,7 +65,7 @@
                     </Grid>
 
 
-                    
+
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
@@ -75,26 +75,25 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid>
-                        <Button x:Name="nerUser" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="הירשם" Margin="60,312,354,0"  FontSize="30" VerticalAlignment="Top"  Height="49" Click="nerUser_Click" />
-                        <Grid x:Name="newUser" HorizontalAlignment="Left" Margin="63,195,0,0" VerticalAlignment="Top" Height="101" Width="221">
+                        <Button x:Name="nerUser" Style="{StaticResource MaterialDesignRaisedButton}"  materialDesign:ButtonProgressAssist.Value="-1" materialDesign:ButtonProgressAssist.IsIndicatorVisible="True" materialDesign:ButtonProgressAssist.IsIndeterminate="True" Content="הירשם" Margin="148,441,190,0"  FontSize="30" VerticalAlignment="Top"  Height="79" Click="nerUser_Click" RenderTransformOrigin="1.122,2.201" />
+                        <Grid x:Name="newUser" HorizontalAlignment="Left" Margin="148,129,0,0" VerticalAlignment="Top" Height="285" Width="297">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="126"/>
-                                <ColumnDefinition Width="0"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Height="23" Width="21"/>
+                            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Center" Height="51" Width="135" FontSize="30"/>
                             <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="23" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="23" Width="43"/>
+                            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="52" Width="135" FontSize="30"/>
                             <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="1" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="Password:" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="23" Width="64"/>
+                            <Label Content="Password:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Height="51" Width="138" FontSize="30"/>
                             <TextBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="2" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="23" Width="45"/>
+                            <Label Content="Phone:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="3" VerticalAlignment="Center" Height="71" Width="135" FontSize="30"/>
                             <TextBox x:Name="phoneTextBox" Grid.Column="1" HorizontalAlignment="Center" Height="23" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                         </Grid>
                     </Grid>
@@ -103,20 +102,7 @@
                 </TabItem>
 
             </TabControl>
-            <Image HorizontalAlignment="Left" Height="80" Margin="561,10,0,0" VerticalAlignment="Top" Width="114" Source="/רחפן תמונה.jpg" RenderTransformOrigin="1.232,0.001">
-                <Image.OpacityMask>
-                    <ImageBrush TileMode="Tile" ImageSource="/רחפן תמונה.jpg">
-                        <ImageBrush.RelativeTransform>
-                            <TransformGroup>
-                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                <TranslateTransform X="100" Y="1004"/>
-                            </TransformGroup>
-                        </ImageBrush.RelativeTransform>
-                    </ImageBrush>
-                </Image.OpacityMask>
-            </Image>
+
         </Grid>
 
     </Grid>

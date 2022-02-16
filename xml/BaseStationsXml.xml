@@ -3,7 +3,7 @@
   <BaseStation>
     <ID>1134</ID>
     <StationName>Station 0</StationName>
-    <FreeChargingSlots>-5</FreeChargingSlots>
+    <FreeChargingSlots>19</FreeChargingSlots>
     <Longitude>30.872545339713128</Longitude>
     <Latitude>34.89640097375791</Latitude>
     <Deleted>false</Deleted>
@@ -11,7 +11,7 @@
   <BaseStation>
     <ID>8674</ID>
     <StationName>Station 1</StationName>
-    <FreeChargingSlots>-6</FreeChargingSlots>
+    <FreeChargingSlots>19</FreeChargingSlots>
     <Longitude>31.622495702711166</Longitude>
     <Latitude>35.62579528397219</Latitude>
     <Deleted>false</Deleted>

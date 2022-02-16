@@ -11,12 +11,17 @@ namespace BL
 {
     partial class BL : BlApi.IBL
     {
-       // static readonly Lazy<IBL> instance = new Lazy<IBL>(() => new BL());
-       // public static IBL Instance { get => instance.Value; }
-         // static readonly IBL instance = new BL();
+       //  static readonly Lazy< IBL> instance = new Lazy<IBL>(() => new BL());
+        //  public static IBL Instance { get => instance.Value; }
+        // //  static readonly IBL instance = new BL();
 
-       //  The public Instance property to use 
-         // public static IBL Instance { get { return instance; } }
+        //  // The public Instance property to use 
+        ////   public static IBL Instance { get { return instance; } }
+
+         static readonly IBL instance = new BL();
+          public static IBL Instance { get => instance; }
+        internal IDal dalLayer = DalFactory.GetDal();
+
         internal  Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -332,7 +337,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.Find(x => x.ID == id);
+                BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone Conditions stuck");
                 DO.Parcel parcel = dalLayer.GetAllParcels(par => par.Scheduled == DateTime.MinValue).FirstOrDefault();
@@ -388,7 +393,7 @@ namespace BL
             try
             {
                 
-                BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id );
+                BO.DroneToList droneTOlist = dronesToList.Find(x => x.ID == id && x.Deleted==false);
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");

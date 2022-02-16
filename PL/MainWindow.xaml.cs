@@ -49,9 +49,12 @@ namespace PL
         {
             try
             {
-                if (passwordCustomer.Password == blObject.GetUser(Convert.ToInt32(idTEXTBOX.Text)).Password)
+                bool flag = true;
+                BO.User u= blObject.GetUser(Convert.ToInt32(idTEXTBOX.Text));
+                if (passwordCustomer.Password == u.Password)
                 {
-                    new UserInterfaceWindow(blObject).ShowDialog();
+                    BO.Customer c = blObject.GetCustomer(u.Id);
+                    new CostumerWindow(c,blObject,flag).ShowDialog();
                 }
                 else
                 {
@@ -81,6 +84,7 @@ namespace PL
 
                 blObject.AddUser(user);
                 MessageBox.Show("add user sucsess");
+                nerUser.DataContext = null;
                
             }
             catch (BO.DuplicateIdException ex)

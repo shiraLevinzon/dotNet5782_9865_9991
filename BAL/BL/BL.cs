@@ -103,7 +103,7 @@ namespace BL
             List<DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
             foreach (var item in TMPparcel)
             {
-                DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
+                DroneToList d = dronesToList.FirstOrDefault(dro => dro.ID == item.DroneId);
                 d.Conditions = (BO.DroneConditions)2;
                 d.PackagNumberOnTransferred = item.ID;
 

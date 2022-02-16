@@ -70,5 +70,6 @@
         </Label>
         <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230" Click="PackagesFromCustomer_Click"/>
         <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230" Click="PackagesToCustomer_Click"/>
+        <Button x:Name="DeleteCustumer" Content="" HorizontalAlignment="Left" Margin="331,360,0,0" VerticalAlignment="Top" Width="142" Click="DeleteCustumer_Click"/>
     </Grid>
 </Window>

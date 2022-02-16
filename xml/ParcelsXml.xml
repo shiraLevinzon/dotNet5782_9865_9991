@@ -130,43 +130,4 @@
     <Delivered>2022-01-13T20:46:28.8671571+02:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>
-  <Parcel>
-    <ID>100000</ID>
-    <SenderID>598505554</SenderID>
-    <TargetID>180587831</TargetID>
-    <Weight>light</Weight>
-    <priority>low</priority>
-    <DroneId>0</DroneId>
-    <Requested>2022-01-14T12:16:33.3991226+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>false</Deleted>
-  </Parcel>
-  <Parcel>
-    <ID>100000</ID>
-    <SenderID>684351256</SenderID>
-    <TargetID>180587831</TargetID>
-    <Weight>light</Weight>
-    <priority>low</priority>
-    <DroneId>0</DroneId>
-    <Requested>2022-01-14T15:41:21.3295701+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>false</Deleted>
-  </Parcel>
-  <Parcel>
-    <ID>100001</ID>
-    <SenderID>598505554</SenderID>
-    <TargetID>684351256</TargetID>
-    <Weight>normal</Weight>
-    <priority>normal</priority>
-    <DroneId>0</DroneId>
-    <Requested>2022-01-14T15:41:33.5166506+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>false</Deleted>
-  </Parcel>
 </ArrayOfParcel>

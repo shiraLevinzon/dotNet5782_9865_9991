@@ -35,6 +35,8 @@ namespace PL
             PackagesFromCustomer.Content = "view all parcel from costumer";
             PackagesToCustomer.Visibility = Visibility.Visible;
             PackagesToCustomer.Content = "view all parcel to costumer";
+            DeleteCustumer.Visibility = Visibility.Visible;
+            DeleteCustumer.Content = "Delete Customer";
             temp = 1;
         }
         public CostumerWindow( IBL bll)
@@ -45,6 +47,7 @@ namespace PL
             AddOrUpdate.Content = "ADD";
             PackagesFromCustomer.Visibility = Visibility.Collapsed;
             PackagesToCustomer.Visibility = Visibility.Collapsed;
+            DeleteCustumer.Visibility = Visibility.Collapsed;
             temp = 0;
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -142,6 +145,19 @@ namespace PL
             else
             {
                 e.Handled = true;
+            }
+        }
+        private void DeleteCustumer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DeleteCustomer(Convert.ToInt32(iDTextBlock.Text));
+                MessageBox.Show($"delete Customer succeeded");
+                this.Close();
+            }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

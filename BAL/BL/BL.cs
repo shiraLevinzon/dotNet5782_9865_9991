@@ -11,17 +11,12 @@ namespace BL
 {
     partial class BL : BlApi.IBL
     {
-        static readonly Lazy<IBL> instance = new Lazy<IBL>(() => new BL());
-        public static IBL Instance { get => instance.Value; }
-        //  static readonly IBL instance = new BL();
+       // static readonly Lazy<IBL> instance = new Lazy<IBL>(() => new BL());
+       // public static IBL Instance { get => instance.Value; }
+         // static readonly IBL instance = new BL();
 
-        // The public Instance property to use 
-        //   public static IBL Instance { get { return instance; } }
-
-        //  static readonly IBL instance = new BL();
-        //  public static IBL Instance { get => instance; }
-        internal IDal dalLayer = DalFactory.GetDal();
-
+       //  The public Instance property to use 
+         // public static IBL Instance { get { return instance; } }
         internal  Random r1 = new Random();
         internal static double GetRandomNumber(double minimum, double maximum)
         {
@@ -37,6 +32,9 @@ namespace BL
         public double droneLoadingRate;
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+        internal IDal dalLayer = DalFactory.GetDal();
         #region בנאי 
         internal BL() 
         {
@@ -81,7 +79,16 @@ namespace BL
 
             }
             #endregion
-
+            #region מילוי משתמשים 
+            List<BO.User> users = new List<BO.User>();
+            List<DO.User> TMPusers = dalLayer.GetAllUser().ToList();
+            foreach(var item in TMPusers)
+            {
+                BO.User us = new User();
+                item.CopyPropertiesTo(us);
+                users.Add(us);
+            }
+            #endregion
             #region מילוי רשימת תחנות בסיס מסוג דאל
             List<DO.BaseStation> TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
             foreach (var item in TMPbaseStation)
@@ -103,7 +110,7 @@ namespace BL
             List<DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
             foreach (var item in TMPparcel)
             {
-                DroneToList d = dronesToList.Find(dro => dro.ID == item.DroneId);
+                DroneToList d = dronesToList.FirstOrDefault(dro => dro.ID == item.DroneId);
                 d.Conditions = (BO.DroneConditions)2;
                 d.PackagNumberOnTransferred = item.ID;
 

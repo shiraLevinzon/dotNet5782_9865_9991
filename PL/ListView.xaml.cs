@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL
 {
-    public  enum  TheNumberOfFreeeSlot {zero,one,two,three,four,five, Six,Seven,Eight,Nine,Ten};
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
@@ -30,9 +29,8 @@ namespace PL
             listOfDrones.ItemsSource = bl.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-
+            freeChargSlot.ItemsSource=
             listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
-            FreeSlot.ItemsSource = Enum.GetValues(typeof(TheNumberOfFreeeSlot));
             listOfCostumer.ItemsSource = bl.GetAllCustomer();
 
             listOfParcel.ItemsSource = bl.GetAllParcels();
@@ -83,10 +81,10 @@ namespace PL
 
         public void FilterByCombiBoxOfBaseStation()
         {
-            if (FreeSlot.SelectedItem == null)
+            if (freeChargSlot.SelectedItem == null)
                 listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
             else
-                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases => bases.FreeChargingSlots == (int)(TheNumberOfFreeeSlot)FreeSlot.SelectedIndex);
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases => bases.FreeChargingSlots == (int)freeChargSlot.SelectedIndex);
         }
         private void listOfbaseStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -95,9 +93,9 @@ namespace PL
         }
         private void Clear3_Click(object sender, RoutedEventArgs e)
         {
-            FreeSlot.SelectedItem = null;
+            freeChargSlot.SelectedItem = null;
         }
-        private void FreeSlot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void freeChargSlot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterByCombiBoxOfBaseStation();
         }

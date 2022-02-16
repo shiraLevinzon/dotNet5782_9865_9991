@@ -136,11 +136,15 @@ namespace BL
             try
             {
                 BO.Parcel p = GetParcel(id);
-                if (p.PickedUp != DateTime.MinValue && p.Delivered==DateTime.MinValue)
+               if( dronesToList.Any(x => x.PackagNumberOnTransferred == p.ID))
                 {
-                    BO.Drone dro = GetDrone(p.DroneInParcel.ID);
+                    BO.DroneToList dro = dronesToList.Find(x => x.PackagNumberOnTransferred == p.ID);
                     dro.Conditions = (DroneConditions)1;
                 }
+                BO.Customer cust = GetCustomer(p.Sender.ID);
+                cust.PackagesFromCustomer.ToList().RemoveAll(x => x.ID == p.ID);
+                cust = GetCustomer(p.Receiver.ID);
+                cust.PackagesToCustomer.ToList().RemoveAll(x => x.ID == p.ID);
                 dalLayer.DeleteParcel(id);
             }
             catch (DO.EntityHasBeenDeleted ex)

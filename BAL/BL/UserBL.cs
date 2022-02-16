@@ -86,5 +86,17 @@ namespace BL
                 return UserLists;
             return UserLists.Where(p => predicate(p));
         }
+        public void DeleteUser(int id)
+        {
+            try
+            {
+                DeleteCustomer(id);
+                dalLayer.DeleteUser(id);
+            }
+            catch(EntityHasBeenDeleted ex)
+            {
+                throw new BO.EntityHasBeenDeleted(id,"users" ,"this user has been deleted already",ex);
+            }
+        }
     }
 }

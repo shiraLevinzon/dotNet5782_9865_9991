@@ -47,12 +47,13 @@
 
                         <Grid Grid.Row="0" Margin="0,0,0,10" HorizontalAlignment="Left" Width="1000" Grid.ColumnSpan="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="11*"/>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="37*"/>
+                                <ColumnDefinition Width="37*"/>
 
                             </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,10,0,-1"  Grid.Column="0">
+                            <StackPanel Margin="0,10,0,-1"  Grid.Column="0" Grid.ColumnSpan="2">
                                 <Grid  >
                                     <Grid.ColumnDefinitions>
 
@@ -62,7 +63,7 @@
                                 </Grid>
                                 <ComboBox x:Name="StatusSelector"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון סטטוס רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="StatusSelector_SelectionChanged" />
                             </StackPanel>
-                            <StackPanel  Margin="333,4,333,4" Grid.ColumnSpan="3">
+                            <StackPanel  Margin="234,4,333,4" Grid.ColumnSpan="3" Grid.Column="1">
                                 <Grid Height="37" Width="276">
                                     <Grid.ColumnDefinitions>
 
@@ -72,7 +73,7 @@
                                 </Grid>
                                 <ComboBox x:Name="WeightSelector" Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox1}" materialDesign:HintAssist.Hint="סינון משקל רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="WeightSelector_SelectionChanged" />
                             </StackPanel>
-                            <Button Content="קיבוץ לפי מצב רחפן" Grid.Column="2" HorizontalAlignment="Left" Margin="55,50,0,0" VerticalAlignment="Top" Height="33" Click="Button_Click" Width="217"/>
+                            <Button Content="קיבוץ לפי מצב רחפן" Grid.Column="3" HorizontalAlignment="Left" Margin="55,50,0,0" VerticalAlignment="Top" Height="33" Click="Button_Click" Width="217"/>
                         </Grid>
 
                         <ListView x:Name="listOfDrones" ItemsSource="{Binding Items1}" Margin="0,10,0,17" MouseDoubleClick="listOfDrones_MouseDoubleClick" SelectionChanged="listOfDrones_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1" >
@@ -115,23 +116,22 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="9*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,319" Grid.RowSpan="3">
+                        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,-3,319" Grid.RowSpan="3" RenderTransformOrigin="0.373,0.604" HorizontalAlignment="Right" Width="1093">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="550*"/>
+                                <ColumnDefinition Width="543*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Margin="0,0,0,4"  Grid.Column="0">
-                                <Grid Height="53" Width="276">
-                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBox2"  IsChecked="True" Margin="0,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
-                                    <Button x:Name="Clear3" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" Click="Clear3_Click" Margin="211,10,0,11"  />
+                            <Button x:Name="groupStation" Content="קיבוץ לפי מספר עמדות טעינה פנויות" HorizontalAlignment="Left" Margin="128,0,0,0" VerticalAlignment="Center" Height="56" Click="groupStation_Click" Width="260" Grid.Column="1" />
+                            <StackPanel Margin="72,38,144,38"  Grid.Column="0">
+                                <Grid  >
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBoxForBaseStation"  IsChecked="True" Margin="41,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <Button x:Name="Clear3" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear1_Click"  />
                                 </Grid>
-                                <ComboBox x:Name="FreeSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox2}" materialDesign:HintAssist.Hint="סינון עפ כמות עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="284" Height="53" SelectionChanged="FreeSlot_SelectionChanged" />
+                                <ComboBox x:Name="freeChargSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון סטטוס רחפן" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="StatusSelector_SelectionChanged" />
                             </StackPanel>
-                            <Button x:Name="groupStation" Content="קיבוץ לפי מספר עמדות טעינה פנויות" Grid.Column="1" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="56" Click="groupStation_Click" Width="261" />
-
                         </Grid>
 
-                        <ListView x:Name="listOfBaseStation" ItemsSource="{Binding Items1}" Margin="3,91,0,5" Grid.Row="1" MouseDoubleClick="listOfbaseStation_MouseDoubleClick" SelectionChanged="listOfBaseStation_SelectionChanged" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="1097" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+                        <ListView x:Name="listOfBaseStation" ItemsSource="{Binding Items1}" Margin="-1,80,0,-86" Grid.Row="1" MouseDoubleClick="listOfbaseStation_MouseDoubleClick" SelectionChanged="listOfBaseStation_SelectionChanged" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="1099" Grid.ColumnSpan="2" Grid.RowSpan="2" >
                             <ListView.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -168,14 +168,14 @@
                     </TabItem.Header>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            
+
                             <RowDefinition Height="13*"/>
                             <RowDefinition Height="219*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <ListView x:Name="listOfCostumer" ItemsSource="{Binding Items1}" Margin="0,24,0,0" MouseDoubleClick="listOfCostumer_MouseDoubleClick" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3" RenderTransformOrigin="0.539,0.535" >
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="{x:Type ListViewItem}">

@@ -101,7 +101,7 @@
                 <TextBlock x:Name="iDTextBlock3" Grid.Column="2" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="10" Text="{Binding Sender.ID}" VerticalAlignment="Center" Height="16" Width="118" Grid.ColumnSpan="2"/>
             </Grid>
 
-            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Left" Margin="148,372,0,0" VerticalAlignment="Top" Height="44" Width="146" Grid.Column="1" />
+            <Button x:Name="DeleteBottun" Content="Delete" HorizontalAlignment="Left" Margin="148,372,0,0" VerticalAlignment="Top" Height="44" Width="146" Grid.Column="1" Click="DeleteBottun_Click" />
             <Button x:Name="showSender" Content="Show" HorizontalAlignment="Left" Margin="191,297,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showSender_Click" Grid.ColumnSpan="2"/>
             <Button x:Name="showResiver" Content="Show" HorizontalAlignment="Left" Margin="191,264,0,0" VerticalAlignment="Top" Height="25" Width="70"  Click="showResiver_Click" Grid.ColumnSpan="2"/>
             <Button x:Name="showDrone" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="191,232,0,0" VerticalAlignment="Top" Height="25" Width="70" Click="showDrone_Click" Grid.ColumnSpan="2" />

@@ -141,5 +141,20 @@ namespace PL
                 AddBottun.IsEnabled = true;
             }
         }
+
+        private void DeleteBottun_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DeleteParcel(Convert.ToInt32(iDTextBlock.Text));
+                MessageBox.Show($"delete Parcel succeeded");
+                this.Close();
+
+            }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

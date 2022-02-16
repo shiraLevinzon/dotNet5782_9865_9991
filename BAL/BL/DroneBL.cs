@@ -64,11 +64,11 @@ namespace BL
             }
             catch (DO.MissingIdException ex)
             {
-                throw new BO.MissingIdException(ex.ID, ex.EntityName);
+                throw new BO.MissingIdException(ex.ID,"Drone", ex.EntityName);
             }
             catch(BO.ImproperMaintenanceCondition ex)
             {
-                throw new BO.ImproperMaintenanceCondition(ex.ID, ex.EntityName);
+                throw new BO.ImproperMaintenanceCondition(ex.ID,"Drone", ex.EntityName);
             }
             return boDrone;
         }
@@ -145,7 +145,7 @@ namespace BL
             {
                 if (GetDrone(id).Conditions == (DroneConditions)2)
                     throw new BO.ImproperMaintenanceCondition(id, "Drone", "Drone in delivery - can not be deleted");
-               // dronesToList.RemoveAll(x => x.ID == id);
+                dronesToList.RemoveAll(x => x.ID == id);
                 dalLayer.DeleteDrone(id);
             }
             catch (EntityHasBeenDeleted ex)

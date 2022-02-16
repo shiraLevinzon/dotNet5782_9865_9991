@@ -131,24 +131,45 @@ namespace BL
             try
             {
                 BO.Customer custumer = GetCustomer(id);
-                if (custumer.PackagesFromCustomer.Count()!= 0)
+                List<ParcelAtCustomer> TMPlist=new List<ParcelAtCustomer>();
+                foreach(var item in custumer.PackagesFromCustomer)
                 {
-                    foreach(var p in custumer.PackagesFromCustomer)
+                    BO.ParcelAtCustomer p = new ParcelAtCustomer
                     {
-                        BO.Customer cus = GetCustomer(GetParcel(p.ID).Receiver.ID);
-                        cus.PackagesToCustomer.ToList().RemoveAll(ps => ps.ID == p.ID);
-                        DeleteParcel(p.ID);
-                    }
+                        priority = item.priority,
+                        ID = item.ID,
+                        Situation = item.Situation,
+                        Weight = item.Weight,
+                        CustomerInParcel = new CustomerInParcel()
+                        {
+                            CustomerName = item.CustomerInParcel.CustomerName,
+                            ID = item.CustomerInParcel.ID
+                        }
+                    };
+                    TMPlist.Add(p);
                 }
-                if (custumer.PackagesToCustomer.Count() != 0)
+                foreach (var item in TMPlist)
+                    DeleteParcel(item.ID);
+                TMPlist = new List<ParcelAtCustomer>();
+                foreach (var item in custumer.PackagesToCustomer)
                 {
-                    foreach (var p in custumer.PackagesToCustomer)
+                    BO.ParcelAtCustomer p = new ParcelAtCustomer
                     {
-                        BO.Customer cus = GetCustomer(GetParcel(p.ID).Sender.ID);
-                        cus.PackagesFromCustomer.ToList().RemoveAll(ps => ps.ID == p.ID);
-                        DeleteParcel(p.ID);
-                    }
+                        priority = item.priority,
+                        ID = item.ID,
+                        Situation = item.Situation,
+                        Weight = item.Weight,
+                        CustomerInParcel = new CustomerInParcel()
+                        {
+                            CustomerName = item.CustomerInParcel.CustomerName,
+                            ID = item.CustomerInParcel.ID
+                        }
+                    };
+                    TMPlist.Add(p);
                 }
+  
+                foreach (var item in TMPlist)
+                    DeleteParcel(item.ID);
                 dalLayer.DeleteCustomer(id);
             }
             catch (DO.EntityHasBeenDeleted ex)

@@ -32,5 +32,6 @@
             <TextBlock x:Name="iDTextBlock4" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding ID}" VerticalAlignment="Center"/>
             <materialDesign:PackIcon Kind="AccountCheck" Margin="-54,2,62,1" Height="25" Width="41" materialDesign:ColorZoneAssist.Background="Aqua" />
         </Grid>
+        <materialDesign:ColorZone Mode="PrimaryLight" Padding="16" Margin="0,1,0,0" Height="42"/>
     </Grid>
 </Window>

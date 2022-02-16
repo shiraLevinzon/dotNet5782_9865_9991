@@ -41,7 +41,7 @@ namespace PL
             addMode.Visibility = Visibility.Collapsed;
             buttonBaseStation.Content = "Update";
             deleteButton.Visibility = Visibility.Visible;
-            deleteButton.Content = "Delete Base Station";
+            deleteButton.Content = "Delete";
             string temp1 = "Station Details: " + bs.ID;
             droneInChargeList.Visibility = Visibility.Visible;
             title.Content = temp1;
@@ -161,7 +161,7 @@ namespace PL
             {
                 bl.DeleteBaseStation(Convert.ToInt32(iDTextBlock.Text));
                 MessageBox.Show($"delete Base Station succeeded");
-
+                this.Close();
             }
             catch (BO.EntityHasBeenDeleted ex)
             {

@@ -309,6 +309,7 @@ namespace PL
             {
                 bl.DeleteDrone(Convert.ToInt32(iDLabel.Content));
                 MessageBox.Show("delete Drone succeeded");
+                this.Close();
             }
             catch (BO.EntityHasBeenDeleted ex)
             {

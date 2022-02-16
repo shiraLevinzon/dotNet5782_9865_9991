@@ -62,6 +62,7 @@ namespace PL
             AddOrUpdate.Content = "ADD";
             PackagesFromCustomer.Visibility = Visibility.Collapsed;
             PackagesToCustomer.Visibility = Visibility.Collapsed;
+            DeleteCustumer.Visibility = Visibility.Collapsed;
             temp = 0;
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -165,6 +166,19 @@ namespace PL
         private void AddP_Click(object sender, RoutedEventArgs e)
         {
             new ParcelWindow(bl,id).ShowDialog();
+        }
+        private void DeleteCustumer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.DeleteCustomer(Convert.ToInt32(iDTextBlock.Text));
+                MessageBox.Show($"delete Customer succeeded");
+                this.Close();
+            }
+            catch (BO.EntityHasBeenDeleted ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

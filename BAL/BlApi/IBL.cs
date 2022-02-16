@@ -34,12 +34,14 @@ namespace BlApi
         public IEnumerable<BO.CustomerToList> GetAllCustomer(Predicate<BO.CustomerToList> predicate = null);
         public void AddCustomer(BO.Customer customer);
         public void UpdateCustomer(int id, string name, string phone);
+        public void DeleteCustomer(int id);
         #endregion
         #region פונקציות חבילה של שיכבה 2
         public BO.Parcel GetParcel(int id);
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null, DateTime? date = null);
         public void AddParcel(BO.Parcel parcel);
         public int func(DO.Parcel p);
+        public void DeleteParcel(int id);
 
         //public void UpdateParcel(BO.Parcel Parcel);
         #endregion

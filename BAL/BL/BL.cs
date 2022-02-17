@@ -37,9 +37,6 @@ namespace BL
         public double droneLoadingRate;
         List<Customer> customersBL = new List<Customer>();
         List<BaseStation> baseStationsBL = new List<BaseStation>();
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
-        internal IDal dalLayer = DalFactory.GetDal();
         #region בנאי 
         internal BL() 
         {

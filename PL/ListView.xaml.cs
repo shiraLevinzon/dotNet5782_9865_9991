@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL
 {
+    public enum numbers { zero,one ,two, Three ,four ,five , seven ,eight ,nine, ten }
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>

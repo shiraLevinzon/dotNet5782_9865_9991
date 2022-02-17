@@ -32,7 +32,7 @@
   </Drone>
   <Drone>
     <ID>2133213</ID>
-    <Model>γωβγλ</Model>
+    <Model>Χ“Χ©Χ’Χ“Χ›</Model>
     <MaxWeight>normal</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
@@ -63,18 +63,6 @@
   <Drone>
     <ID>32423424</ID>
     <Model>dffdg</Model>
-    <MaxWeight>light</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>32424324</ID>
-    <Model>dfg</Model>
-    <MaxWeight>heavy</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>1</ID>
-    <Model>p1</Model>
     <MaxWeight>light</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>

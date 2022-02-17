@@ -141,7 +141,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>false</Deleted>
+    <Deleted>true</Deleted>
   </Parcel>
   <Parcel>
     <ID>100000</ID>

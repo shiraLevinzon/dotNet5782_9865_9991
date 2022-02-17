@@ -75,7 +75,7 @@ namespace PL
         private void listOfDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList d = (DroneToList)listOfDrones.SelectedItem;
-            new Drone(d, bl).ShowDialog();
+            new Drone(d, bl,this).ShowDialog();
         }
         #endregion
         #region BaseStation
@@ -143,7 +143,7 @@ namespace PL
             switch (TCview.SelectedIndex)
             {
                 case 0:
-                    new Drone(bl).ShowDialog();
+                    new Drone(bl,this).ShowDialog();
                     break;
                 case 1:
                    new BaseStationwindow(bl).ShowDialog();

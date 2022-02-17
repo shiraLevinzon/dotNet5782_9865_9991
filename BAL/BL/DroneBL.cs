@@ -12,6 +12,8 @@ namespace BL
 {
      partial class BL : BlApi.IBL
      {
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.Drone GetDrone(int id)
         {
             BO.Drone boDrone = new BO.Drone();
@@ -72,6 +74,8 @@ namespace BL
             }
             return boDrone;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.DroneToList> GetAllDrones(Predicate<BO.DroneToList> predicate=null)
         {
             if(predicate!=null)
@@ -80,7 +84,8 @@ namespace BL
             }
             return dronesToList.FindAll(dro => dro.Deleted == false);
         }
-       
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDrone(BO.Drone drone, int id)
         {
             DO.Drone DroneDO = new DO.Drone();
@@ -116,6 +121,8 @@ namespace BL
                 throw new BO.DuplicateIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             } 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDrone(int id, string model)
         {
             DO.Drone DroneDO = new DO.Drone();
@@ -139,6 +146,8 @@ namespace BL
                 throw new BO.MissingIdException(DroneDO.ID, "Drone", "Drone ID is illegal", ex);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteDrone(int id)
         {
             try
@@ -153,6 +162,8 @@ namespace BL
                 throw new BO.EntityHasBeenDeleted(id, "Drone", "This Drone has already been deleted", ex);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void simula(int droneId , Action reportProgress,Func<bool> IsTimeRun)
         {
             new Simulator(this, droneId, reportProgress, IsTimeRun);

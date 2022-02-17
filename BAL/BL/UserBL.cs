@@ -9,7 +9,7 @@ namespace BL
 {
     partial class BL : BlApi.IBL
     {
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public User GetUser(int id)
         {
             User user = new User();
@@ -31,7 +31,7 @@ namespace BL
             }
             return user;
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdUser(User tmp)
         {
             DO.User user = new DO.User();
@@ -57,6 +57,7 @@ namespace BL
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(User tmp)
         {
             DO.User user = new DO.User();
@@ -79,6 +80,7 @@ namespace BL
                 throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null)
         {
             IEnumerable<BO.User> UserLists = from UserDO in dalLayer.GetAllUser()
@@ -87,6 +89,7 @@ namespace BL
                 return UserLists;
             return UserLists.Where(p => predicate(p));
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteUser(int id)
         {
             try

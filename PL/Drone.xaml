@@ -88,6 +88,9 @@
             <Button x:Name="Bottun1" Content="Button" HorizontalAlignment="Left" Margin="20,386,0,0" VerticalAlignment="Top" Width="172" Click="Bottun1_Click"/>
             <Button x:Name="Bottun2" Content="Button" HorizontalAlignment="Left" Margin="202,386,0,0" VerticalAlignment="Top" Height="32" Width="155" Click="Bottun2_Click"/>
             <Button x:Name="updateBottun" Content="update" HorizontalAlignment="Left" Margin="-168,316,0,0" VerticalAlignment="Top" Height="32" Width="138" Click="updateBottun_Click" RenderTransformOrigin="-0.033,-1.552"/>
+            <Button x:Name="simu" Content="Simulator" HorizontalAlignment="Left" Margin="20,436,0,79" Click="simu_Click"/>
+            <Button x:Name="cancelSimu" Content="Cancel Simu" HorizontalAlignment="Center" Margin="0,436,0,79" Click="cancelSimu_Click"  />
+
             <Grid x:Name="Timegrid" HorizontalAlignment="Left" Margin="102,423,0,0" VerticalAlignment="Top" Height="26" Width="225">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
@@ -101,8 +104,6 @@
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="0,211,0,0" VerticalAlignment="Top" Height="29" Width="74" Click="showParcel_Click" />
             <Button x:Name="timepicker1" Content="Time Drone is in charge:" HorizontalAlignment="Left" Margin="9,322,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="simu" Content="Simu" HorizontalAlignment="Left" Margin="122,505,0,10" Click="simu_Click"/>
-            <Button x:Name="cancelSimu" Content="cancelSimu" HorizontalAlignment="Left" Margin="228,499,0,16" Click="cancelSimu_Click"  />
 
         </Grid>
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="28,394,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="34"/>

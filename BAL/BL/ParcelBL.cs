@@ -11,6 +11,8 @@ namespace BL
 {
      partial class BL : BlApi.IBL
      {
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.Parcel GetParcel(int id)
         {
             BO.Parcel boParcel = new BO.Parcel();
@@ -44,6 +46,8 @@ namespace BL
             }
             return boParcel; 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.ParcelToList> GetAllParcels(Predicate<BO.ParcelToList> predicate = null,DateTime? date=null)
         {
             IEnumerable<DO.Parcel> parcels;
@@ -72,7 +76,7 @@ namespace BL
 
             
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(BO.Parcel parcel)
         {
             //Add DO.Parcel            
@@ -119,6 +123,7 @@ namespace BL
         //    }
 
         //}
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int func(DO.Parcel p)
         {
             int num = 0;
@@ -132,6 +137,7 @@ namespace BL
                 num = 0;
             return num;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int id)
         {
             try

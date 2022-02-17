@@ -14,7 +14,9 @@ namespace BL
 {
     static class DeepCopyUtilities
     {
-            public static void CopyPropertiesTo<T, S>(this S from, T to)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public static void CopyPropertiesTo<T, S>(this S from, T to)
             {
                 foreach (PropertyInfo propTo in to.GetType().GetProperties())
                 {
@@ -26,7 +28,9 @@ namespace BL
                         propTo.SetValue(to, value);
                 }
             }
-            public static object CopyPropertiesToNew<S>(this S from, Type type)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public static object CopyPropertiesToNew<S>(this S from, Type type)
             {
                 object to = Activator.CreateInstance(type); // new object of Type
                 from.CopyPropertiesTo(to);

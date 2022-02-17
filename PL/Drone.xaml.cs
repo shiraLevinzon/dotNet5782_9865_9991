@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
+
 namespace PL
 {
     /// <summary>
@@ -22,12 +23,13 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        
+        ListView listViewWin;
          IBL  bl;
         int temp;
-        public Drone(DroneToList d, BlApi.IBL blobject)
+        public Drone(DroneToList d, BlApi.IBL blobject,ListView l=null)
         {
             InitializeComponent();
+            listViewWin = l;
             bl = blobject;
             addMode.Visibility = Visibility.Hidden;
             actMode.Visibility = Visibility.Visible;
@@ -52,8 +54,9 @@ namespace PL
                 WithSecondsTimePicker1.Visibility = Visibility.Collapsed;
             }
         }
-        public Drone(BlApi.IBL blobject)
+        public Drone(BlApi.IBL blobject, ListView l=null)
         {
+            listViewWin = l;
             InitializeComponent();         
             bl = blobject;
             actMode.Visibility = Visibility.Hidden;
@@ -334,6 +337,11 @@ namespace PL
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //שינויים בסוף התהליכון
+            Bottun1.Visibility = Visibility.Visible;
+            Bottun2.Visibility = Visibility.Visible;
+            updateBottun.Visibility = Visibility.Visible;
+            deleteDrone.Visibility = Visibility.Visible;
+            CancelBottun.Visibility = Visibility.Visible;
 
         }
 
@@ -343,12 +351,44 @@ namespace PL
             BO.Drone myDrone = bl.GetDrone(Convert.ToInt32(iDLabel.Content));
             DataContext = myDrone;
 
+            listViewWin.FilterByCombiBoxOfDrone();
+            listViewWin.FilterByCombiBoxOfBaseStation();
+            listViewWin.FilterByCombiBoxOfParcel();
+            listViewWin.listOfCostumer.ItemsSource = bl.GetAllCustomer();
+
+
+            switch (myDrone.Conditions)
+            {
+                case DroneConditions.Available:
+                    if (showParcel.IsEnabled==true) //the drone is free cuse he just done (we know that becuse the grid is opend) it is affter deliverd.
+                    {
+                        //display changes for thois stage
+                        showParcel.IsEnabled =false;
+                    }
+                    else //the drone is in a free state that has come out of charge and not like before (not affter deliver).
+                    {
+                        //Update the list observer of BaseStations.
+                        
+                    }
+                    break;
+                case DroneConditions.maintenance:
+                    break;
+
+                case DroneConditions.delivery:
+                    showParcel.IsEnabled = true;
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
 
             //////to update conect the binding to set the value of my drone to the proprtis.
             ////            MyDrone = bl.GetDrone(MyDrone.Id);
             ////            DataContext = MyDrone;
 
-            //ListView.FilterByCombiBoxOfDrone();
 
             ////            // to find the index when the fanc need to find in the observer collaction and update.
             ////            int indexOfParcelInTheObservable;
@@ -356,19 +396,7 @@ namespace PL
             ////            int indexOfReceiverCustomerInTheObservable;
 
             ////switch betwen drone status and according to that update the display.
-            //switch (myDrone.Conditions)
-            //{
-            //    case DroneConditions.Available:
 
-            //        break;
-            //    case DroneConditions.maintenance:
-            //        break;
-                
-            //    case DroneConditions.delivery:
-            //        break;
-            //    default:
-            //        break;
-            //}
             //switch (myDrone.Statuses)
             //{
             //    case DroneStatuses.free:
@@ -455,6 +483,12 @@ namespace PL
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             bl.simula(Convert.ToInt32(iDLabel.Content), reportPro, IsTimeRun);
+            Bottun1.Visibility = Visibility.Hidden;
+            Bottun2.Visibility = Visibility.Hidden;
+            updateBottun.Visibility = Visibility.Hidden;
+            deleteDrone.Visibility = Visibility.Hidden;
+            CancelBottun.Visibility = Visibility.Hidden;
+
         }
         public void reportPro()
         {

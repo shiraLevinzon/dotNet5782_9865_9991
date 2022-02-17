@@ -32,6 +32,7 @@ namespace BL
                 throw new BO.EntityHasBeenDeleted(ex.ID, ex.EntityName);
             }
         }*/
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.DroneInCharging> GetAllDroneInCharge(int id, Predicate<BO.DroneInCharging> predicate = null)
         {
             BO.BaseStation bs = GetBaseStation(id);

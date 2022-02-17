@@ -249,8 +249,9 @@ namespace BL
             //}
             //#endregion
         }
-#endregion
+        #endregion
         #region פונקציית שליחת רחפן לטעינה יש צורך בבדיקה!!
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToCharging(int id)
         {
             try
@@ -286,6 +287,8 @@ namespace BL
         }
         #endregion
         #region פונקציית שחרור רחפן מעמדת טעינה
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void ReleaseDroneFromCharging(int id, TimeSpan time)
         {
             try
@@ -321,6 +324,8 @@ namespace BL
         #endregion
         #region פונקציית שיוך חבילה לרחפן
         //עובדת!!
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AssignPackageToDrone(int id)
         {
             try
@@ -375,6 +380,8 @@ namespace BL
         }
         #endregion
         #region איסוף חבילה עי רחפן
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void CollectParcelByDrone(int id)//לסדר פונקציה כדי שרשימת הרחפנים תתעדכן
         {
             
@@ -406,6 +413,8 @@ namespace BL
         }
         #endregion
         #region אספקת חבילה ע"י רחפן
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeliveryOfPackageByDrone(int id)
         {
             try
@@ -444,6 +453,8 @@ namespace BL
         }
         #endregion
         #region פונקציית עזר לחישוב מרחק
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public double DistanceTo(double lat1, double lon1, double lat2, double lon2)
         {
             double rlat1 = Math.PI * lat1 / 180;
@@ -460,6 +471,8 @@ namespace BL
         }
         #endregion
         #region פונקציית עזר למציאת תחנת בסיס קרובה
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public int helpbasestation(BO.DroneToList drone, IEnumerable<BO.BaseStation> baseStationsBL)
         {
             double distance = DistanceTo(baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);

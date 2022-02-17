@@ -19,7 +19,7 @@
   <BaseStation>
     <ID>90</ID>
     <StationName>esfw</StationName>
-    <FreeChargingSlots>0</FreeChargingSlots>
+    <FreeChargingSlots>5</FreeChargingSlots>
     <Longitude>33</Longitude>
     <Latitude>32</Latitude>
     <Deleted>false</Deleted>

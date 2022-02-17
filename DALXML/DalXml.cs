@@ -223,7 +223,8 @@ namespace Dal
                 throw new DO.MissingIdException(bsID,$"there is no base station with such ID: {bsID}");
             if (bases.Element("Deleted").Value == true.ToString())
                 throw new DO.EntityHasBeenDeleted(bsID, "the base station is already been deleted");
-            bases.Element("Deleted").Value = true.ToString();
+            bases.Element("Deleted").Value = true.ToString().ToLower();
+            XMLTools.SaveListToXMLElement(BaseStationRootElem, BaseStationsPath);
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     partial class DalObject : DalApi.IDal
@@ -14,6 +15,9 @@ namespace Dal
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignPackageToDrone(int pID, int dID)
         {
             int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted== false);
@@ -33,6 +37,9 @@ namespace Dal
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ParcelCollectionByDrone(int pID, int dID)
         {
 
@@ -55,6 +62,9 @@ namespace Dal
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeliveryParcelToCustomer(int pID, int dID)
         {
             int index1 = DataSource.parcels.FindIndex(x => x.ID == pID && x.Deleted == false);

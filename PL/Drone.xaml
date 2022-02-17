@@ -101,6 +101,9 @@
             </Grid>
             <Button x:Name="showParcel" IsEnabled="False" Content="Show" HorizontalAlignment="Left" Margin="0,211,0,0" VerticalAlignment="Top" Height="29" Width="74" Click="showParcel_Click" />
             <Button x:Name="timepicker1" Content="Time Drone is in charge:" HorizontalAlignment="Left" Margin="9,322,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="simu" Content="Simu" HorizontalAlignment="Left" Margin="122,505,0,10" Click="simu_Click"/>
+            <Button x:Name="cancelSimu" Content="cancelSimu" HorizontalAlignment="Left" Margin="228,499,0,16" Click="cancelSimu_Click"  />
+
         </Grid>
         <Button x:Name="CancelBottun" Content="Cancel" HorizontalAlignment="Left" Margin="28,394,0,0" VerticalAlignment="Top" Width="140" Click="CancelBottun_Click" Height="34"/>
         <materialDesign:PackIcon Kind="Quadcopter" Height="248" Width="137" Margin="26,55,0,0" />

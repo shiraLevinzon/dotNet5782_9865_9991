@@ -8,6 +8,8 @@ namespace BlApi
 {
    public interface IBL
    {
+        public void simula(int droneId, Action reportProgress, Func<bool> IsTimeRun);
+        public int helpbasestation(BO.DroneToList drone, IEnumerable<BO.BaseStation> baseStationsBL);
         #region פונקציות משתמשים של שיכבה 2
         public User GetUser(int id);
         public void UpdUser(User tmp);
@@ -15,6 +17,7 @@ namespace BlApi
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null);
         #endregion
         #region פונקציות תחנת בסיס של שיכבה 2
+        public IEnumerable<BO.BaseStation> GetBaseStations();
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null);
         public BO.BaseStation GetBaseStation(int id);
         public void AddBaseStation(BO.BaseStation baseStation);

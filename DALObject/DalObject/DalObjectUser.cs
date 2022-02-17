@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
-
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     partial class DalObject : DalApi.IDal
     {
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public User GetUser(int id)
         {
             if (!CheckUser(id)) 
@@ -17,10 +20,16 @@ namespace Dal
             User d = DataSource.users.Find(par => par.Id == id);
             return d;
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public bool CheckUser(int id)
         {
             return DataSource.users.Any(par => par.Id == id && par.Deleted== false);
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdUser(User tmp)
         {
             int count = DataSource.users.RemoveAll(par => tmp.Id == par.Id && par.Deleted == false);
@@ -32,12 +41,18 @@ namespace Dal
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddUser(User tmp)
         {
             if (CheckUser(tmp.Id))
                 throw new DuplicateIdException(tmp.Id, "User");
             DataSource.users.Add(tmp);
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<User> GetAllUser(Predicate<User> predicate = null)
         {
             if (predicate != null)
@@ -50,6 +65,9 @@ namespace Dal
                    where b.Deleted == false
                    select b;
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteUser(int uID)
         {
             int index1 = DataSource.users.FindIndex(x => x.Id == uID);

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
-
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
      partial class BL : BlApi.IBL
-    {
+     {
         public BO.Drone GetDrone(int id)
         {
             BO.Drone boDrone = new BO.Drone();
@@ -153,6 +153,10 @@ namespace BL
                 throw new BO.EntityHasBeenDeleted(id, "Drone", "This Drone has already been deleted", ex);
             }
         }
-    }
+        public void simula(int droneId , Action reportProgress,Func<bool> IsTimeRun)
+        {
+            new Simulator(this, droneId, reportProgress, IsTimeRun);
+        }
+     }
 }
 

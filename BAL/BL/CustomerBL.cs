@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace BL
 {
      partial class BL : BlApi.IBL
     {
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.Customer GetCustomer(int id)
         {
             BO.Customer boCustomer = new BO.Customer();
@@ -61,6 +65,9 @@ namespace BL
             }
             return boCustomer;
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.CustomerToList> GetAllCustomer(Predicate<BO.CustomerToList> predicate = null)
         {
             //אסור להשתשמש בגט פרסל
@@ -80,6 +87,9 @@ namespace BL
                 return CustomerToLists;
             return CustomerToLists.Where(p => predicate(p));
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(BO.Customer customer)
         {
 
@@ -102,6 +112,9 @@ namespace BL
                 throw new BO.DuplicateIdException(customerDO.ID, "Customer", "Customer ID is illegal", ex);
             }
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int id,string name,string phone)
         {
 
@@ -126,6 +139,9 @@ namespace BL
             }
 
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int id)
         {
             try
@@ -177,5 +193,5 @@ namespace BL
                 throw new BO.EntityHasBeenDeleted(id, "Customer", "This Customer has already been deleted", ex);
             }
         }
-    }
+     }
 }

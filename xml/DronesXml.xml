@@ -3,7 +3,7 @@
   <Drone>
     <ID>1</ID>
     <Model>p1</Model>
-    <MaxWeight>heavy</MaxWeight>
+    <MaxWeight>light</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
@@ -31,38 +31,14 @@
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
-    <ID>2133213</ID>
-    <Model>דשגדכ</Model>
-    <MaxWeight>normal</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>21423423</ID>
-    <Model>ersw</Model>
+    <ID>12</ID>
+    <Model>wekf</Model>
     <MaxWeight>light</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>
   <Drone>
-    <ID>3423435</ID>
-    <Model>xfdgfsg</Model>
-    <MaxWeight>light</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>4423424</ID>
-    <Model>efref</Model>
-    <MaxWeight>light</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>23432423</ID>
-    <Model>fsdfsf</Model>
-    <MaxWeight>normal</MaxWeight>
-    <Deleted>false</Deleted>
-  </Drone>
-  <Drone>
-    <ID>32423424</ID>
-    <Model>dffdg</Model>
+    <ID>32</ID>
+    <Model>dew</Model>
     <MaxWeight>light</MaxWeight>
     <Deleted>false</Deleted>
   </Drone>

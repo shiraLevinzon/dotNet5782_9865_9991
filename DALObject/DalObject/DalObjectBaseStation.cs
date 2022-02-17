@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace Dal
 {
      partial class DalObject : DalApi.IDal
-    {
+     {
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BaseStation GetBaseStation(int id)
         {
 
@@ -18,10 +22,15 @@ namespace Dal
             return b;
         }
 
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public bool CheckBaseStation(int id)
         {
             return DataSource.baseStations.Any(par => par.ID == id && par.Deleted == false);
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdBaseStation(BaseStation tmp)
         {
             int count = DataSource.baseStations.RemoveAll(par => tmp.ID == par.ID && par.Deleted== false);
@@ -34,12 +43,18 @@ namespace Dal
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
+        /// 
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(BaseStation tmp)
         {
             if (CheckBaseStation(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "BaseStation");
             DataSource.baseStations.Add(tmp);
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BaseStation> GetAllBaseStations(Predicate<BaseStation> predicate=null)
         {
             if (predicate != null)
@@ -57,6 +72,9 @@ namespace Dal
         /// </summary>
         /// <param name="bsID"></param>
         /// <param name="dID"></param>
+        /// 
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendingDroneToBaseStation(int bsID, int dID)
         {
             int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted== false);
@@ -77,6 +95,9 @@ namespace Dal
         /// </summary>
         /// <param name="bsID"></param>
         /// <param name="dID"></param>
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
         {
             int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted== false);
@@ -90,6 +111,9 @@ namespace Dal
             //DeleteDroneInCharge(dID);
             DataSource.droneCharges.RemoveAt(index3);
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteBaseStatin(int bsID)
         {
             int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID);

@@ -9,7 +9,7 @@
         Title="CostumerWindow" Height="450" Width="800">
     <Grid>
         <materialDesign:PackIcon Kind="CardAccountDetails" Height="280" Width="357" Margin="43,56,0,0"/>
-        <Button x:Name="AddP" Content="Add Parcel"  HorizontalAlignment="Left" Margin="367,360,0,0" VerticalAlignment="Top" Width="105" Visibility="Hidden" Click="AddP_Click"/>
+        <Button x:Name="AddP" Content="Add Parcel" Visibility="Hidden"  HorizontalAlignment="Left" Margin="353,361,0,0" VerticalAlignment="Top" Width="105" Click="AddP_Click"/>
 
         <Grid x:Name="actMode"  HorizontalAlignment="Left" Margin="458,0,0,0" VerticalAlignment="Center" Height="216" Width="262">
             <Grid.ColumnDefinitions>
@@ -67,6 +67,6 @@
 
         <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230" Click="PackagesFromCustomer_Click"/>
         <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230" Click="PackagesToCustomer_Click"/>
-        <Button x:Name="DeleteCustumer" Content="" HorizontalAlignment="Left" Margin="331,360,0,0" VerticalAlignment="Top" Width="142" Click="DeleteCustumer_Click"/>
+        <Button x:Name="DeleteCustumer" Content="" HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Width="142" Click="DeleteCustumer_Click"/>
     </Grid>
 </Window>

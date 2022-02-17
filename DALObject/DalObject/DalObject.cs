@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
-
+using System.Runtime.CompilerServices;
 namespace Dal
 {
     public class DataSource
@@ -136,6 +136,9 @@ namespace Dal
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
         public DalObject() { DataSource.Initialize(); }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] RequestPowerConsumptionByDrone()
             {
             double[] PowerConsumption = new double[5];
@@ -147,6 +150,8 @@ namespace Dal
             return PowerConsumption;
         }
 
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetAllDroneCharge()
         {
             return DataSource.droneCharges.Take(DataSource.droneCharges.Count);

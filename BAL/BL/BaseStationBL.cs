@@ -6,10 +6,29 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace BL
 {
     partial class BL: BlApi.IBL
     {
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<BO.BaseStation> GetBaseStations()
+        {
+          return  (from item in dalLayer.GetAllBaseStations()
+                                                      select new BaseStation()
+                                                      {
+                                                          ID = item.ID,
+                                                          StationName = item.StationName,
+                                                          FreeChargingSlots = item.FreeChargingSlots,
+                                                          BaseStationLocation = new Location() { Longitude = item.Longitude, Latitude = item.Latitude },
+                                                          DronesInCharge = new List<DroneInCharging>()
+                                                      });
+        }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public BO.BaseStation GetBaseStation(int id)
         {
             BO.BaseStation boBaseStation = new BO.BaseStation();
@@ -45,6 +64,9 @@ namespace BL
             }
             return boBaseStation;
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.BaseStationToList> GetAllBaseStation(Predicate<BO.BaseStationToList> predicate = null)
         {
             IEnumerable<BO.BaseStationToList> baseStationToLists= from BaseStationDO in dalLayer.GetAllBaseStations()
@@ -60,6 +82,9 @@ namespace BL
             return baseStationToLists.Where(p => predicate(p));
 
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(BO.BaseStation baseStation)
         {
 
@@ -88,6 +113,9 @@ namespace BL
                 throw new BO.DuplicateIdException(baseStationDO.ID,"BaseStation", "BaseStation ID is illegal", ex);
             }
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateBaseStation(int id, string name, int sum)
         {
             //Update DO.BaseStation            
@@ -111,6 +139,9 @@ namespace BL
             }
 
         }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteBaseStation(int id)
         {
             try

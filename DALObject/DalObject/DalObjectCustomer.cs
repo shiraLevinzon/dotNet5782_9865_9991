@@ -5,10 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace Dal
 {
-     partial class DalObject: DalApi.IDal
+
+
+    
+    partial class DalObject: DalApi.IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCostumer(int id)
         {
             if (!CheckCustomer(id))
@@ -16,10 +21,12 @@ namespace Dal
             Customer d = DataSource.customers.FirstOrDefault(par => par.ID == id);
             return d;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public bool CheckCustomer(int id)
         {
             return DataSource.customers.Any(par => par.ID == id && par.Deleted== false);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdCustomer(Customer tmp)
         {
             int count = DataSource.customers.RemoveAll(par => tmp.ID == par.ID && par.Deleted== false);
@@ -33,6 +40,8 @@ namespace Dal
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
+        
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer tmp)
         {
             if (CheckCustomer(tmp.ID))
@@ -40,6 +49,7 @@ namespace Dal
 
             DataSource.customers.Add(tmp);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetAllCustomers(Predicate<Customer> predicate=null)
         {
             if(predicate!=null)
@@ -52,6 +62,7 @@ namespace Dal
                    where c.Deleted== false
                    select c;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int csID)
         {
             int index1 = DataSource.customers.FindIndex(x => x.ID == csID);

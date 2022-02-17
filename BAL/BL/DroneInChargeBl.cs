@@ -7,6 +7,7 @@ using BO;
 using BlApi;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 namespace BL
 {
     partial class BL : BlApi.IBL

@@ -44,6 +44,7 @@ namespace PL
             bl = bll;
             id = customer.ID;
             addMode.Visibility = Visibility.Collapsed;
+            DeleteCustumer.Visibility = Visibility.Collapsed;
             actMode.DataContext = customer;
             AddOrUpdate.Content = "Update";
             AddP.Visibility = Visibility.Visible;
@@ -102,7 +103,6 @@ namespace PL
                     case 1:
                         bl.UpdateCustomer(Convert.ToInt32(iDTextBlock.Text), nameTextBox.Text, Convert.ToString(phoneTextBox.Text));
                         MessageBox.Show("update Costumer sucsess", "UPDATE OPTION", MessageBoxButton.OK, MessageBoxImage.Information);
-                        this.Close();
                         break;
                 }
             }

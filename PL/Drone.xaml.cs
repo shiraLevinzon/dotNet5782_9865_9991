@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+
 namespace PL
 {
     /// <summary>
@@ -20,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
+        
          IBL  bl;
         int temp;
         public Drone(DroneToList d, BlApi.IBL blobject)
@@ -315,6 +318,163 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        #region simulator
+        internal BackgroundWorker worker;
+        private void simulator()
+        {
+            worker = new BackgroundWorker() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //שינויים בסוף התהליכון
+
+        }
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //שינויים בתצוגה
+            BO.Drone myDrone = bl.GetDrone(Convert.ToInt32(iDLabel.Content));
+            DataContext = myDrone;
+
+
+            //////to update conect the binding to set the value of my drone to the proprtis.
+            ////            MyDrone = bl.GetDrone(MyDrone.Id);
+            ////            DataContext = MyDrone;
+
+            //ListView.FilterByCombiBoxOfDrone();
+
+            ////            // to find the index when the fanc need to find in the observer collaction and update.
+            ////            int indexOfParcelInTheObservable;
+            ////            int indexOfSenderCustomerInTheObservable;
+            ////            int indexOfReceiverCustomerInTheObservable;
+
+            ////switch betwen drone status and according to that update the display.
+            //switch (myDrone.Conditions)
+            //{
+            //    case DroneConditions.Available:
+
+            //        break;
+            //    case DroneConditions.maintenance:
+            //        break;
+                
+            //    case DroneConditions.delivery:
+            //        break;
+            //    default:
+            //        break;
+            //}
+            //switch (myDrone.Statuses)
+            //{
+            //    case DroneStatuses.free:
+            //        if (GRIDparcelInDelivery.Visibility == Visibility.Visible) //the drone is free cuse he just done (we know that becuse the grid is opend) it is affter deliverd.
+            //        {
+            //            //update the parcels list
+            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == IdOfDeliveryInMyDrone));
+            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == IdOfDeliveryInMyDrone);
+
+            //            //update spasice customer in the Customer list (sender)
+            //            indexOfSenderCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == IdOfSenderCustomerInMyDrone));
+            //            listWindow.CustomerToLists[indexOfSenderCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == IdOfSenderCustomerInMyDrone);
+
+            //            //update the reciver
+            //            indexOfReceiverCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == IdOfReceiverCustomerInMyDrone));
+            //            listWindow.CustomerToLists[indexOfReceiverCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == IdOfReceiverCustomerInMyDrone);
+
+            //            //display changes for thois stage
+            //            GRIDparcelInDelivery.Visibility = Visibility.Hidden;
+            //            TBnotAssigned.Visibility = Visibility.Visible;
+            //        }
+            //        else //the drone is in a free state that has come out of charge and not like before (not affter deliver).
+            //        {
+            //            //Update the list observer of BaseStations.
+            //            listWindow.BaseStationToLists.Clear();
+            //            List<BO.BaseStationsToList> baseStations1 = AccessIbl.GetBaseStationList().ToList();
+            //            foreach (var item in baseStations1)
+            //            {
+            //                listWindow.BaseStationToLists.Add(item);
+            //            }
+            //        }
+
+            //        break;
+
+            //    case DroneStatuses.inMaintenance:
+            //        //Update the list observer of BaseStations.
+            //        listWindow.BaseStationToLists.Clear();
+            //        List<BO.BaseStationsToList> baseStations = AccessIbl.GetBaseStationList().ToList();
+            //        foreach (var item in baseStations)
+            //        {
+            //            listWindow.BaseStationToLists.Add(item);
+            //        }
+            //        break;
+
+            //    case DroneStatuses.busy:
+            //        IdOfDeliveryInMyDrone = MyDrone.Delivery.Id;
+            //        IdOfSenderCustomerInMyDrone = MyDrone.Delivery.Sender.Id;
+            //        IdOfReceiverCustomerInMyDrone = MyDrone.Delivery.Receiver.Id;
+
+            //        if (AccessIbl.GetParcel(MyDrone.Delivery.Id).PickedUp == null)
+            //        {
+            //            IdOfDeliveryInMyDrone = MyDrone.Delivery.Id;
+            //            IdOfSenderCustomerInMyDrone = MyDrone.Delivery.Sender.Id;
+            //            IdOfReceiverCustomerInMyDrone = MyDrone.Delivery.Receiver.Id;
+
+
+            //            //update list of parcels
+            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == MyDrone.Delivery.Id));
+            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == MyDrone.Delivery.Id);
+
+            //            GRIDparcelInDelivery.Visibility = Visibility.Visible;
+            //            TBnotAssigned.Visibility = Visibility.Hidden;
+            //        }
+            //        else if (AccessIbl.GetParcel(MyDrone.Delivery.Id).Delivered == null)
+            //        {
+            //            //update the parcels list
+            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == MyDrone.Delivery.Id));
+            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == MyDrone.Delivery.Id);
+            //            //update spasice customer in the Customer list (sender)
+            //            indexOfSenderCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == MyDrone.Delivery.Sender.Id));
+            //            listWindow.CustomerToLists[indexOfSenderCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == MyDrone.Delivery.Sender.Id);
+            //            //update the reciver
+            //            indexOfReceiverCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == MyDrone.Delivery.Receiver.Id));
+            //            listWindow.CustomerToLists[indexOfReceiverCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == MyDrone.Delivery.Receiver.Id);
+            //        }
+            //        break;
+
+            //    default:
+            //        break;
+            //}
+
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            bl.simula(Convert.ToInt32(iDLabel.Content), reportPro, IsTimeRun);
+        }
+        public void reportPro()
+        {
+            worker.ReportProgress(0);
+        }
+        public bool IsTimeRun()
+        {
+            return worker.CancellationPending;
+        }
+        private void simu_Click(object sender, RoutedEventArgs e)
+        {
+            simulator();
+            worker.RunWorkerAsync();
+        }
+        #endregion
+
+        private void cancelSimu_Click(object sender, RoutedEventArgs e)
+        {
+            worker.CancelAsync();
+
         }
     }
 }

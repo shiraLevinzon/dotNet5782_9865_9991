@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 using DalApi;
+using System.Runtime.CompilerServices;
 namespace Dal
 {
      partial class DalObject : DalApi.IDal
@@ -15,6 +16,7 @@ namespace Dal
         /// </summary>
         /// <param name="p"></param>
         /// <returns>spesific Parcel</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int id)
         {
             if (!CheckDrone(id))
@@ -22,11 +24,12 @@ namespace Dal
             Drone d = DataSource.drones.FirstOrDefault(par => par.ID == id);
             return d;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public bool CheckDrone(int id)
         {
             return DataSource.drones.Any(par => par.ID == id && par.Deleted== false);
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdDrone(Drone tmp)
         {
             int count = DataSource.drones.Count(par => tmp.ID == par.ID && par.Deleted == false);
@@ -41,12 +44,16 @@ namespace Dal
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDrone(Drone tmp)
         {
             if (CheckDrone(tmp.ID))
                 throw new DuplicateIdException(tmp.ID, "Drone");
             DataSource.drones.Add(tmp);
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<Drone> GetAllDrones(Predicate<Drone> predicate=null)
         {
             if (predicate != null)
@@ -59,6 +66,7 @@ namespace Dal
                    where d.Deleted== false
                    select d;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int dID)
         {
             int index1 = DataSource.drones.FindIndex(x => x.ID == dID);

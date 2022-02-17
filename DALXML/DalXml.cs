@@ -53,7 +53,8 @@ namespace Dal
             List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
             if (!CheckDrone(tmp.ID))
                 throw new MissingIdException(tmp.ID, "Drone");
-            ListDrones.Remove(tmp);
+            Drone drone = ListDrones.Find(c => c.ID == tmp.ID);
+            ListDrones.Remove(drone);
             ListDrones.Add(tmp);
 
             XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
@@ -210,7 +211,7 @@ namespace Dal
                     new XElement("FreeChargingSlots", tmp.FreeChargingSlots.ToString()),
                     new XElement("Longitude", tmp.Longitude.ToString()),
                     new XElement("Latitude", tmp.Latitude.ToString()),
-                    new XElement("Deleted", tmp.Deleted.ToString()));
+                    new XElement("Deleted", tmp.Deleted.ToString().ToLower()));
             BaseStationRootElem.Add(bases);
             XMLTools.SaveListToXMLElement(BaseStationRootElem, BaseStationsPath);
         }
@@ -224,7 +225,8 @@ namespace Dal
             List<Customer> ListCustomers = XMLTools.LoadListFromXMLSerializer<Customer>(CustonersPath);
             if (!CheckCustomer(tmp.ID))
                 throw new MissingIdException(tmp.ID, "Customer");
-            ListCustomers.Remove(tmp);
+            Customer customer = ListCustomers.Find(c => c.ID == tmp.ID);
+            ListCustomers.Remove(customer);
             ListCustomers.Add(tmp);
 
             XMLTools.SaveListToXMLSerializer(ListCustomers, CustonersPath);
@@ -290,7 +292,8 @@ namespace Dal
             List<Parcel> ListParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(ParcelsPath);
             if (!CheckParcel(tmp.ID))
                 throw new MissingIdException(tmp.ID, "Parcel");
-            ListParcels.Remove(tmp);
+            Parcel par = ListParcels.Find(c => c.ID == tmp.ID);
+            ListParcels.Remove(par);
             ListParcels.Add(tmp);
 
             XMLTools.SaveListToXMLSerializer(ListParcels, ParcelsPath);

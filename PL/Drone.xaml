@@ -42,7 +42,7 @@
         </Grid>
 
 
-        <Grid x:Name="actMode" Margin="197,37,9,0">
+        <Grid x:Name="actMode" Margin="197,37,9,-47">
             <Grid x:Name="UPDATEgrid" HorizontalAlignment="Left" Margin="90,63,0,0" VerticalAlignment="Top" Height="236">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

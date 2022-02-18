@@ -419,7 +419,7 @@ namespace BL
         {
             try
             {
-                BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id&& x.Deleted==false);
+                BO.DroneToList drone = dronesToList.FirstOrDefault(x => x.ID == id && x.Deleted == false);
                 DO.Parcel parcel = dalLayer.GetAllParcels(x => x.DroneId == id).FirstOrDefault();
                 if (parcel.Delivered != DateTime.MinValue || parcel.PickedUp == DateTime.MinValue)
                     throw new BO.PackageTimesException(id, "PackageTimesException", "Parcel can't be Delivered- Time Problem");
@@ -436,7 +436,7 @@ namespace BL
                 dalLayer.DeliveryParcelToCustomer(parcel.ID, drone.ID);
                 drone.PackagNumberOnTransferred = 0;
                 parcel.DroneId = 0;
-                parcel.Delivered = DateTime.Now;
+               // parcel.Delivered = DateTime.Now;
             }
             catch (DO.DuplicateIdException ex)
             {
@@ -475,13 +475,15 @@ namespace BL
 
         public int helpbasestation(BO.DroneToList drone, IEnumerable<BO.BaseStation> baseStationsBL)
         {
-            double distance = DistanceTo(baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
+          //  double distance = DistanceTo(baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
+            double distance = DistanceTo(drone.location.Longitude, drone.location.Longitude,baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude);
             int idbasetation = 0;
             foreach (var item in baseStationsBL)
             {
-                if (DistanceTo(item.BaseStationLocation.Latitude, item.BaseStationLocation.Longitude, drone.location.Latitude, drone.location.Longitude) < distance)
+                if (Math.Abs( DistanceTo(drone.location.Longitude, drone.location.Longitude, baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude))< distance)
                 {
-                    distance = DistanceTo(item.BaseStationLocation.Latitude, item.BaseStationLocation.Longitude, drone.location.Latitude, drone.location.Longitude);
+                    distance = Math.Abs(DistanceTo(drone.location.Longitude, drone.location.Longitude, baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude));
+
                     idbasetation = item.ID;
                 }
             }

@@ -20,6 +20,8 @@ namespace BL
                 user.Name = u.Name;
                 user.Password = u.Password;
                 user.Phone = u.Phone;
+                user.Deleted = u.Deleted;
+                return user;
             }
             catch (DO.MissingIdException ex)
             {
@@ -29,7 +31,6 @@ namespace BL
             {
                 throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
-            return user;
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdUser(User tmp)

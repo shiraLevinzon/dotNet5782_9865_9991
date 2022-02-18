@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PL.Drone"
         mc:Ignorable="d"
-        Title="Drone" Height="600" Width="600">
+        Title="Drone" Height="650" Width="600">
 
     <Grid x:Name="timepicker">
 

@@ -392,8 +392,7 @@ namespace BL
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id,"Drone", "Drone condition is not correct");
-                int a = (int)(DO.WeightCategories)drone.PackageInTransfer.Weight;
-                double d = dalLayer.RequestPowerConsumptionByDrone()[a + 1];
+                double d = dalLayer.RequestPowerConsumptionByDrone()[Convert.ToInt32(drone.PackageInTransfer.Weight) + 1];
                 drone.BatteryStatus -= d * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
                 drone.location.Latitude = drone.PackageInTransfer.Collection.Latitude;
                 drone.location.Longitude = drone.PackageInTransfer.Collection.Longitude;

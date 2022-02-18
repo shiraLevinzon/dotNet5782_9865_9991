@@ -119,7 +119,7 @@ namespace Dal
             public static double lightWeight = 0.02;
             public static double mediumWeight = 0.03;
             public static double heavyWeight = 0.04;
-            public static double DroneLoadingRate = 7.8;
+            public static double DroneLoadingRate = 2.8;
         }
     }
     

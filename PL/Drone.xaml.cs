@@ -26,9 +26,11 @@ namespace PL
         ListView listViewWin;
          IBL  bl;
         int temp;
+        int idDrone;
         public Drone(DroneToList d, BlApi.IBL blobject,ListView l=null)
         {
             InitializeComponent();
+            idDrone = d.ID;
             listViewWin = l;
             bl = blobject;
             addMode.Visibility = Visibility.Hidden;
@@ -348,14 +350,18 @@ namespace PL
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //שינויים בתצוגה
-            BO.Drone myDrone = bl.GetDrone(Convert.ToInt32(iDLabel.Content));
-            DataContext = myDrone;
+            BO.DroneToList myDrone = bl.GetAllDrones().First(dro=> dro.ID== idDrone);
+            //UPDATEgrid.DataContext = myDrone;//לא עובד משום מה ממש מוזר
+            batteryStatusLabel.Text =Convert.ToString(myDrone.BatteryStatus);
+            conditionsLabel.Content = (BO.DroneConditions)myDrone.Conditions;
+            packagNumberOnTransferred.Content = myDrone.PackagNumberOnTransferred;
+            latitudeLabel.Text = Convert.ToString(myDrone.location.Latitude);
+            longitudeLabel.Text = Convert.ToString(myDrone.location.Longitude);
 
             listViewWin.FilterByCombiBoxOfDrone();
             listViewWin.FilterByCombiBoxOfBaseStation();
             listViewWin.FilterByCombiBoxOfParcel();
             listViewWin.listOfCostumer.ItemsSource = bl.GetAllCustomer();
-
 
             switch (myDrone.Conditions)
             {
@@ -381,113 +387,12 @@ namespace PL
                     break;
             }
 
-
-
-
-
-            //////to update conect the binding to set the value of my drone to the proprtis.
-            ////            MyDrone = bl.GetDrone(MyDrone.Id);
-            ////            DataContext = MyDrone;
-
-
-            ////            // to find the index when the fanc need to find in the observer collaction and update.
-            ////            int indexOfParcelInTheObservable;
-            ////            int indexOfSenderCustomerInTheObservable;
-            ////            int indexOfReceiverCustomerInTheObservable;
-
-            ////switch betwen drone status and according to that update the display.
-
-            //switch (myDrone.Statuses)
-            //{
-            //    case DroneStatuses.free:
-            //        if (GRIDparcelInDelivery.Visibility == Visibility.Visible) //the drone is free cuse he just done (we know that becuse the grid is opend) it is affter deliverd.
-            //        {
-            //            //update the parcels list
-            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == IdOfDeliveryInMyDrone));
-            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == IdOfDeliveryInMyDrone);
-
-            //            //update spasice customer in the Customer list (sender)
-            //            indexOfSenderCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == IdOfSenderCustomerInMyDrone));
-            //            listWindow.CustomerToLists[indexOfSenderCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == IdOfSenderCustomerInMyDrone);
-
-            //            //update the reciver
-            //            indexOfReceiverCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == IdOfReceiverCustomerInMyDrone));
-            //            listWindow.CustomerToLists[indexOfReceiverCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == IdOfReceiverCustomerInMyDrone);
-
-            //            //display changes for thois stage
-            //            GRIDparcelInDelivery.Visibility = Visibility.Hidden;
-            //            TBnotAssigned.Visibility = Visibility.Visible;
-            //        }
-            //        else //the drone is in a free state that has come out of charge and not like before (not affter deliver).
-            //        {
-            //            //Update the list observer of BaseStations.
-            //            listWindow.BaseStationToLists.Clear();
-            //            List<BO.BaseStationsToList> baseStations1 = AccessIbl.GetBaseStationList().ToList();
-            //            foreach (var item in baseStations1)
-            //            {
-            //                listWindow.BaseStationToLists.Add(item);
-            //            }
-            //        }
-
-            //        break;
-
-            //    case DroneStatuses.inMaintenance:
-            //        //Update the list observer of BaseStations.
-            //        listWindow.BaseStationToLists.Clear();
-            //        List<BO.BaseStationsToList> baseStations = AccessIbl.GetBaseStationList().ToList();
-            //        foreach (var item in baseStations)
-            //        {
-            //            listWindow.BaseStationToLists.Add(item);
-            //        }
-            //        break;
-
-            //    case DroneStatuses.busy:
-            //        IdOfDeliveryInMyDrone = MyDrone.Delivery.Id;
-            //        IdOfSenderCustomerInMyDrone = MyDrone.Delivery.Sender.Id;
-            //        IdOfReceiverCustomerInMyDrone = MyDrone.Delivery.Receiver.Id;
-
-            //        if (AccessIbl.GetParcel(MyDrone.Delivery.Id).PickedUp == null)
-            //        {
-            //            IdOfDeliveryInMyDrone = MyDrone.Delivery.Id;
-            //            IdOfSenderCustomerInMyDrone = MyDrone.Delivery.Sender.Id;
-            //            IdOfReceiverCustomerInMyDrone = MyDrone.Delivery.Receiver.Id;
-
-
-            //            //update list of parcels
-            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == MyDrone.Delivery.Id));
-            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == MyDrone.Delivery.Id);
-
-            //            GRIDparcelInDelivery.Visibility = Visibility.Visible;
-            //            TBnotAssigned.Visibility = Visibility.Hidden;
-            //        }
-            //        else if (AccessIbl.GetParcel(MyDrone.Delivery.Id).Delivered == null)
-            //        {
-            //            //update the parcels list
-            //            indexOfParcelInTheObservable = listWindow.ParcelToLists.IndexOf(listWindow.ParcelToLists.First(x => x.Id == MyDrone.Delivery.Id));
-            //            listWindow.ParcelToLists[indexOfParcelInTheObservable] = AccessIbl.GetParcelList().First(x => x.Id == MyDrone.Delivery.Id);
-            //            //update spasice customer in the Customer list (sender)
-            //            indexOfSenderCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == MyDrone.Delivery.Sender.Id));
-            //            listWindow.CustomerToLists[indexOfSenderCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == MyDrone.Delivery.Sender.Id);
-            //            //update the reciver
-            //            indexOfReceiverCustomerInTheObservable = listWindow.CustomerToLists.IndexOf(listWindow.CustomerToLists.First(x => x.Id == MyDrone.Delivery.Receiver.Id));
-            //            listWindow.CustomerToLists[indexOfReceiverCustomerInTheObservable] = AccessIbl.GetCustomerList().First(x => x.Id == MyDrone.Delivery.Receiver.Id);
-            //        }
-            //        break;
-
-            //    default:
-            //        break;
-            //}
-
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            bl.simula(Convert.ToInt32(iDLabel.Content), reportPro, IsTimeRun);
-            Bottun1.Visibility = Visibility.Hidden;
-            Bottun2.Visibility = Visibility.Hidden;
-            updateBottun.Visibility = Visibility.Hidden;
-            deleteDrone.Visibility = Visibility.Hidden;
-            CancelBottun.Visibility = Visibility.Hidden;
+            bl.simula(idDrone, reportPro, IsTimeRun);
+            
 
         }
         public void reportPro()
@@ -502,6 +407,12 @@ namespace PL
         {
             simulator();
             worker.RunWorkerAsync();
+
+            Bottun1.Visibility = Visibility.Hidden;
+            Bottun2.Visibility = Visibility.Hidden;
+            updateBottun.Visibility = Visibility.Hidden;
+            deleteDrone.Visibility = Visibility.Hidden;
+            CancelBottun.Visibility = Visibility.Hidden;
         }
         #endregion
 

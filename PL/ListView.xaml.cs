@@ -197,6 +197,13 @@ namespace PL
                 }
             }
             listOfDrones.ItemsSource = droneList;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listOfDrones.ItemsSource);
+            if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Conditions");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
 
         private void groupParcels_Click(object sender, RoutedEventArgs e)
@@ -212,6 +219,13 @@ namespace PL
                 }
             }
             listOfParcel.ItemsSource = parcels;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listOfParcel.ItemsSource);
+            if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderID");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
 
         private void groupStation_Click(object sender, RoutedEventArgs e)
@@ -227,6 +241,13 @@ namespace PL
                 }
             }
             listOfBaseStation.ItemsSource = BaseStationList;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listOfBaseStation.ItemsSource);
+            if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("FreeChargingSlots");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
         private void groupParcels1_Click(object sender, RoutedEventArgs e)
         {
@@ -241,6 +262,13 @@ namespace PL
                 }
             }
             listOfParcel.ItemsSource = parcels;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listOfParcel.ItemsSource);
+            if (view.GroupDescriptions.Count < 1) // prevent from do it more then once 
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("RecieverID");
+                view.GroupDescriptions.Add(groupDescription);
+            }
         }
         private void listOfCostumer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

@@ -11,7 +11,7 @@
   <BaseStation>
     <ID>8674</ID>
     <StationName>Station 1</StationName>
-    <FreeChargingSlots>8</FreeChargingSlots>
+    <FreeChargingSlots>7</FreeChargingSlots>
     <Longitude>31.622495702711166</Longitude>
     <Latitude>35.62579528397219</Latitude>
     <Deleted>false</Deleted>

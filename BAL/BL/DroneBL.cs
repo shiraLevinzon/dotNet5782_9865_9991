@@ -162,8 +162,7 @@ namespace BL
                 throw new BO.EntityHasBeenDeleted(id, "Drone", "This Drone has already been deleted", ex);
             }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
-
+      
         public void simula(int droneId , Action reportProgress,Func<bool> IsTimeRun)
         {
             new Simulator(this, droneId, reportProgress, IsTimeRun);

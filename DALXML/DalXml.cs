@@ -79,16 +79,16 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
 
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public bool CheckDrone(int id)
         {
             List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
             return ListDrone.Any(par => par.ID == id && par.Deleted == false);
 
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int dID)
         {
             List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);
@@ -101,8 +101,8 @@ namespace Dal
             ListDrones[index1] = cs;
             XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
         }
+       
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<Drone> GetAllDrones(Predicate<Drone> predicate = null)
         {
             List<Drone> ListDrones = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);

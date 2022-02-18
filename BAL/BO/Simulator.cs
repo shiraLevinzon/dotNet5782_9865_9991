@@ -56,10 +56,15 @@ namespace BO
                             while (droneToList.BatteryStatus < 100)
                             {
                                 droneToList.BatteryStatus += bL.droneLoadingRate;
+                                if (droneToList.BatteryStatus >= 100)
+                                {
+                                    droneToList.BatteryStatus = 100;
+                                }
                                 reportProgress();
                                 Thread.Sleep(500);
                             }
                             TimeSpan t = new TimeSpan(100, 0, 0);
+                            
                             bL.ReleaseDroneFromCharging(droneId,t);
                             reportProgress();
                         }
@@ -79,7 +84,7 @@ namespace BO
                                 droneToList.BatteryStatus -= dal.RequestPowerConsumptionByDrone()[Convert.ToInt32(parcelInTransfer.Weight) + 1];
                                 reportProgress();
                                 dis -= 1;
-                                Thread.Sleep(500);
+                                Thread.Sleep(50);
                             }
                             droneToList.BatteryStatus = batrry;
                             bL.CollectParcelByDrone(droneId);
@@ -92,7 +97,7 @@ namespace BO
                                 droneToList.BatteryStatus -= dal.RequestPowerConsumptionByDrone()[Convert.ToInt32(parcelInTransfer.Weight) + 1];
                                 reportProgress();
                                 dis -= 1;
-                                Thread.Sleep(500);
+                                Thread.Sleep(50);
                             }
                             droneToList.BatteryStatus = batrry;
                             bL.DeliveryOfPackageByDrone(droneId);

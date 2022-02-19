@@ -88,36 +88,4 @@
     <Latitude>32</Latitude>
     <Deleted>false</Deleted>
   </Customer>
-  <Customer>
-    <ID>212829865</ID>
-    <Name>שירה לוינזון</Name>
-    <Phone>2;323</Phone>
-    <Longitude>32</Longitude>
-    <Latitude>32</Latitude>
-    <Deleted>false</Deleted>
-  </Customer>
-  <Customer>
-    <ID>213124</ID>
-    <Name>fsdaf</Name>
-    <Phone>2</Phone>
-    <Longitude>34</Longitude>
-    <Latitude>34</Latitude>
-    <Deleted>false</Deleted>
-  </Customer>
-  <Customer>
-    <ID>876853018</ID>
-    <Name>Customer 90</Name>
-    <Phone>0537951799</Phone>
-    <Longitude>29.904573503045633</Longitude>
-    <Latitude>36.075748602289586</Latitude>
-    <Deleted>false</Deleted>
-  </Customer>
-  <Customer>
-    <ID>377561280</ID>
-    <Name>Customer 30</Name>
-    <Phone>0529153598</Phone>
-    <Longitude>29.90838809041697</Longitude>
-    <Latitude>35.35496101260882</Latitude>
-    <Deleted>false</Deleted>
-  </Customer>
 </ArrayOfCustomer>

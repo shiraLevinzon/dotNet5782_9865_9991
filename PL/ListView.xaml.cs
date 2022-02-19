@@ -75,7 +75,7 @@ namespace PL
         private void listOfDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DroneToList d = (DroneToList)listOfDrones.SelectedItem;
-            new Drone(d, bl,this).ShowDialog();
+            new Drone(d, bl,this).Show();
         }
         #endregion
         #region BaseStation

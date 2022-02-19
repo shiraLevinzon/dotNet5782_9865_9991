@@ -420,6 +420,9 @@ namespace PL
         {
             worker.CancelAsync();
 
+            temp = Convert.ToInt32(conditionsLabel.Content);
+            Refresh();
+
         }
     }
 }

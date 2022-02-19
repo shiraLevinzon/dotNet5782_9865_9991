@@ -32,11 +32,11 @@
     <TargetID>377561280</TargetID>
     <Weight>light</Weight>
     <priority>normal</priority>
-    <DroneId>2</DroneId>
+    <DroneId>0</DroneId>
     <Requested>2022-01-12T11:50:33.0008137+02:00</Requested>
     <Scheduled>2022-01-14T12:26:50.6429429+02:00</Scheduled>
-    <PickedUp>2022-01-14T12:26:56.3959958+02:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
+    <PickedUp>2022-02-18T17:00:29.372035+02:00</PickedUp>
+    <Delivered>2022-02-18T17:00:41.739606+02:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
@@ -63,7 +63,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>6</ID>
@@ -76,7 +76,7 @@
     <Scheduled>2022-01-14T09:38:01.5949642+02:00</Scheduled>
     <PickedUp>2022-01-14T09:38:30.2523456+02:00</PickedUp>
     <Delivered>2022-01-14T09:38:33.6171882+02:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>7</ID>
@@ -141,7 +141,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>100001</ID>
@@ -162,11 +162,11 @@
     <TargetID>377561280</TargetID>
     <Weight>normal</Weight>
     <priority>low</priority>
-    <DroneId>5</DroneId>
+    <DroneId>0</DroneId>
     <Requested>2022-01-17T11:40:33.7779574+02:00</Requested>
     <Scheduled>2022-02-15T11:58:54.4772443+02:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
+    <PickedUp>2022-02-18T16:53:39.4770628+02:00</PickedUp>
+    <Delivered>2022-02-18T16:53:41.9827754+02:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
@@ -180,7 +180,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>100004</ID>
@@ -193,7 +193,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>100005</ID>
@@ -206,7 +206,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>100006</ID>
@@ -219,7 +219,7 @@
     <Scheduled>0001-01-01T00:00:00</Scheduled>
     <PickedUp>0001-01-01T00:00:00</PickedUp>
     <Delivered>0001-01-01T00:00:00</Delivered>
-    <Deleted>true</Deleted>
+    <Deleted>false</Deleted>
   </Parcel>
   <Parcel>
     <ID>100007</ID>

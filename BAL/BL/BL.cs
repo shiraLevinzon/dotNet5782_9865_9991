@@ -352,11 +352,19 @@ namespace BL
                     }
                 }
                 int a = (int)(DO.WeightCategories)parcel.Weight;
-                double d = dalLayer.RequestPowerConsumptionByDrone()[a + 1];
+                double d = dalLayer.RequestPowerConsumptionByDrone()[0];
+                BO.DroneToList Dro = new DroneToList()
+                {
+                    location = new Location()
+                    {
+                        Latitude = dalLayer.GetCostumer(parcel.TargetID).Latitude,
+                        Longitude = dalLayer.GetCostumer(parcel.TargetID).Longitude
+                    }
+                };
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(a++);
                 decrease = d * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
                     + decrease * DistanceTo(dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude, dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude)
-                    + d * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(drone,GetBaseStations())).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(drone,GetBaseStations())).BaseStationLocation.Longitude);
+                    + d * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(Dro, GetBaseStations())).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(drone,GetBaseStations())).BaseStationLocation.Longitude);
                 if (decrease > drone.BatteryStatus)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone's battery too low ");
                 drone.BatteryStatus -= d * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);

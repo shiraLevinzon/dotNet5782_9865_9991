@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -8,9 +9,9 @@ using DalApi;
 using DO;
 namespace Dal
 {
-   
 
-    public class DalXml:IDal
+
+    public class DalXml : IDal
     {
         #region Singelton
         static readonly IDal instance = new DalXml();
@@ -27,7 +28,7 @@ namespace Dal
 
 
         #endregion
-        static DalXml() {  }
+        static DalXml() { }
         #endregion  
 
         public double[] RequestPowerConsumptionByDrone()
@@ -69,8 +70,8 @@ namespace Dal
             XMLTools.SaveListToXMLSerializer(ListDrones, DronesPath);
 
         }
-        
-        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        [MethodImpl (MethodImplOptions.Synchronized)]
         public bool CheckDrone(int id)
         {
             List<Drone> ListDrone = XMLTools.LoadListFromXMLSerializer<Drone>(DronesPath);

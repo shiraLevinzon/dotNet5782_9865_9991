@@ -81,7 +81,7 @@ namespace BO
                             dis = bL.DistanceTo(droneToList.location.Latitude, droneToList.location.Longitude,parcelInTransfer.Collection.Latitude,parcelInTransfer.Collection.Longitude);
                             while (dis > 0)
                             {
-                                droneToList.BatteryStatus -= dal.RequestPowerConsumptionByDrone()[Convert.ToInt32(parcelInTransfer.Weight) + 1];
+                                droneToList.BatteryStatus -= bL.free;
                                 reportProgress();
                                 dis -= 1;
                                 Thread.Sleep(50);

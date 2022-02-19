@@ -1,7 +1,37 @@
 <?xml version="1.0"?>
 <ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DroneCharge>
-    <DroneID>1</DroneID>
+    <DroneID>12</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>5</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>32</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>12</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>32</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>5</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>12</DroneID>
     <StationID>8674</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
@@ -11,18 +41,38 @@
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
-    <DroneID>12</DroneID>
+    <DroneID>32</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>3</DroneID>
     <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
     <DroneID>4</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>5</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>32</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>3</DroneID>
     <StationID>8674</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
-    <DroneID>12</DroneID>
-    <StationID>8674</StationID>
+    <DroneID>4</DroneID>
+    <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
@@ -37,11 +87,11 @@
   </DroneCharge>
   <DroneCharge>
     <DroneID>32</DroneID>
-    <StationID>8674</StationID>
+    <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
-    <DroneID>4</DroneID>
+    <DroneID>3</DroneID>
     <StationID>8674</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
@@ -57,17 +107,7 @@
   </DroneCharge>
   <DroneCharge>
     <DroneID>2</DroneID>
-    <StationID>8674</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneID>5</DroneID>
-    <StationID>8674</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneID>32</DroneID>
-    <StationID>8674</StationID>
+    <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
@@ -76,23 +116,33 @@
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
-    <DroneID>3</DroneID>
+    <DroneID>4</DroneID>
     <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
     <DroneID>4</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>4</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>2</DroneID>
+    <StationID>1134</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>1</DroneID>
     <StationID>1134</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
   <DroneCharge>
     <DroneID>12</DroneID>
     <StationID>1134</StationID>
-    <Deleted>false</Deleted>
-  </DroneCharge>
-  <DroneCharge>
-    <DroneID>32</DroneID>
-    <StationID>8674</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
 </ArrayOfDroneCharge>

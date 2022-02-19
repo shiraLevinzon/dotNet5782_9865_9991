@@ -486,9 +486,9 @@ namespace BL
             int idbasetation = 0;
             foreach (var item in baseStationsBL)
             {
-                if (Math.Abs( DistanceTo(drone.location.Longitude, drone.location.Longitude, baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude))< distance)
+                if (DistanceTo(item.BaseStationLocation.Latitude, item.BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude) < distance)
                 {
-                    distance = Math.Abs(DistanceTo(drone.location.Longitude, drone.location.Longitude, baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude));
+                    distance = DistanceTo(item.BaseStationLocation.Latitude,item.BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
 
                     idbasetation = item.ID;
                 }

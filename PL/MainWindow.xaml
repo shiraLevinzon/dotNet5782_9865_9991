@@ -67,7 +67,7 @@
 
 
                 </TabItem>
-                <TabItem>
+                <TabItem Width="105">
                     <TabItem.Header>
                         <StackPanel Height="auto" Width="auto">
                             <materialDesign:PackIcon Kind="NewBox" Width="24" Height="24" HorizontalAlignment="Center" />

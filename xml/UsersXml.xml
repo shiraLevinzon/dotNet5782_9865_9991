@@ -28,4 +28,11 @@
     <Phone>0528608110</Phone>
     <Deleted>false</Deleted>
   </User>
+  <User>
+    <Id>211729991</Id>
+    <Name>avigail</Name>
+    <Password>5555</Password>
+    <Phone>0507468073</Phone>
+    <Deleted>false</Deleted>
+  </User>
 </ArrayOfUser>

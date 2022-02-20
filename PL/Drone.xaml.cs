@@ -199,8 +199,8 @@ namespace PL
                     case 0:
                         TimeSpan t;
                         bool tmp= TimeSpan.TryParse(WithSecondsTimePicker1.Text,out t);
-                        TimeSpan s=new TimeSpan(t.Minutes,t.Seconds,0);
-                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), s);
+                      //  TimeSpan s=new TimeSpan(t.Minutes,t.Seconds,0);
+                        bl.ReleaseDroneFromCharging(Convert.ToInt32(iDLabel.Content), t);
                         temp = 1;
                         Refresh();
                         MessageBox.Show("relese drone from charge sucess");

@@ -264,8 +264,12 @@ namespace BL
                 if (free * distance > drone.BatteryStatus || GetBaseStation(idbasetation).FreeChargingSlots == 0)
                     throw new BO.ImproperMaintenanceCondition(id, "ImproperMaintenanceCondition", "There is not enough battery to get to the station or there is no space available at the station to recharge");
                 BO.BaseStation basestation = GetBaseStation(idbasetation);
+                BO.DroneInCharging dron = new DroneInCharging();
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == drone.ID);
                 dro.BatteryStatus = dro.BatteryStatus - free * distance;
+                dalLayer.GetDroneInCharging(drone.ID).CopyPropertiesTo(dron);
+                dron.BatteryStatus = dro.BatteryStatus;
+                basestation.DronesInCharge.ToList().Add(dron);
                 dro.location.Latitude = basestation.BaseStationLocation.Latitude;
                 dro.location.Longitude = basestation.BaseStationLocation.Longitude;
                 dro.Conditions = (DroneConditions)0;
@@ -298,13 +302,14 @@ namespace BL
                 BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
                 IEnumerable<BO.BaseStation> baseStations = from b in GetAllBaseStation()
                                                            select GetBaseStation(b.ID);
-                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.BaseStationLocation.Latitude == dro.location.Latitude && bas.BaseStationLocation.Longitude == dro.location.Longitude);
-                bases.DronesInCharge.ToList().RemoveAll(dr => dr.ID == dro.ID);
+                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.BaseStationLocation.Latitude== dro.location.Latitude&& bas.BaseStationLocation.Longitude == dro.location.Longitude);
+                //int index = bases.DronesInCharge.ToList().FindIndex(dr => dr.ID == drone.ID);
+                bases.DronesInCharge.ToList().RemoveAll(dro => dro.ID ==drone.ID);
                 dro.Conditions = (DroneConditions)1;
-                if (dro.BatteryStatus + droneLoadingRate * time.TotalHours > 100)
+                if (dro.BatteryStatus+ droneLoadingRate * time.TotalHours > 100)
                     dro.BatteryStatus = 100;
                 else
-                    dro.BatteryStatus = dro.BatteryStatus + droneLoadingRate * time.TotalHours;
+                    dro.BatteryStatus = dro.BatteryStatus + droneLoadingRate*100 * time.TotalHours;
                 dalLayer.ReleaseDroneFromChargingAtBaseStation(bases.ID, dro.ID);
             }
             catch (DO.DuplicateIdException ex)

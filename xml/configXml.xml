@@ -5,7 +5,7 @@
     <LightBatteryUsing>0.02</LightBatteryUsing>
     <MediumBatteryUsing>0.03</MediumBatteryUsing>
     <HeavyBatteryUsing>0.04</HeavyBatteryUsing>
-    <ChargingRate>1.5</ChargingRate>
+    <ChargingRate>0.3</ChargingRate>
   </BatteryUsages>
   <RowNumbers>
     <NewParcelId>100011</NewParcelId>

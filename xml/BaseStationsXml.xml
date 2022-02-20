@@ -11,7 +11,7 @@
   <BaseStation>
     <ID>8674</ID>
     <StationName>Station 1</StationName>
-    <FreeChargingSlots>5</FreeChargingSlots>
+    <FreeChargingSlots>3</FreeChargingSlots>
     <Longitude>31.622495702711166</Longitude>
     <Latitude>35.62579528397219</Latitude>
     <Deleted>false</Deleted>
@@ -19,7 +19,7 @@
   <BaseStation>
     <ID>90</ID>
     <StationName>esfw</StationName>
-    <FreeChargingSlots>4</FreeChargingSlots>
+    <FreeChargingSlots>3</FreeChargingSlots>
     <Longitude>33</Longitude>
     <Latitude>32</Latitude>
     <Deleted>false</Deleted>
@@ -27,7 +27,7 @@
   <BaseStation>
     <ID>6546</ID>
     <StationName>esfw</StationName>
-    <FreeChargingSlots>5</FreeChargingSlots>
+    <FreeChargingSlots>4</FreeChargingSlots>
     <Longitude>34</Longitude>
     <Latitude>29</Latitude>
     <Deleted>false</Deleted>

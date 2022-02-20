@@ -90,4 +90,24 @@
     <StationID>8674</StationID>
     <Deleted>false</Deleted>
   </DroneCharge>
+  <DroneCharge>
+    <DroneID>1</DroneID>
+    <StationID>6546</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>4</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>32</DroneID>
+    <StationID>8674</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneID>2</DroneID>
+    <StationID>90</StationID>
+    <Deleted>false</Deleted>
+  </DroneCharge>
 </ArrayOfDroneCharge>

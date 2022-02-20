@@ -216,9 +216,9 @@
     <priority>hight</priority>
     <DroneId>0</DroneId>
     <Requested>2022-02-15T12:39:00.8917151+02:00</Requested>
-    <Scheduled>0001-01-01T00:00:00</Scheduled>
-    <PickedUp>0001-01-01T00:00:00</PickedUp>
-    <Delivered>0001-01-01T00:00:00</Delivered>
+    <Scheduled>2022-02-19T22:47:40.4492056+02:00</Scheduled>
+    <PickedUp>2022-02-19T22:47:46.0656128+02:00</PickedUp>
+    <Delivered>2022-02-19T22:47:48.793376+02:00</Delivered>
     <Deleted>false</Deleted>
   </Parcel>
   <Parcel>

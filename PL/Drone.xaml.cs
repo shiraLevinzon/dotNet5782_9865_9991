@@ -357,8 +357,8 @@ namespace PL
             batteryStatusLabel.Text = Convert.ToString(myDrone.BatteryStatus);
             conditionsLabel.Content = (BO.DroneConditions)myDrone.Conditions;
             packagNumberOnTransferred.Content = myDrone.PackagNumberOnTransferred;
-            latitudeLabel.Text = Convert.ToString(myDrone.location.Latitude);
-            longitudeLabel.Text = Convert.ToString(myDrone.location.Longitude);
+            latitudeLabel.Text = Convert.ToString(myDrone.location.Latitude); 
+            longitudeLabel.Text =  Convert.ToString(myDrone.location.Longitude);
 
             listViewWin.FilterByCombiBoxOfDrone();
             listViewWin.FilterByCombiBoxOfBaseStation();

@@ -110,7 +110,7 @@
     <Phone>0537951799</Phone>
     <Longitude>29.904573503045633</Longitude>
     <Latitude>36.075748602289586</Latitude>
-    <Deleted>false</Deleted>
+    <Deleted>true</Deleted>
   </Customer>
   <Customer>
     <ID>377561280</ID>

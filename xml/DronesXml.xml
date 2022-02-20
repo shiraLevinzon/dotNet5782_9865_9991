@@ -34,7 +34,7 @@
     <ID>12</ID>
     <Model>wekf</Model>
     <MaxWeight>light</MaxWeight>
-    <Deleted>false</Deleted>
+    <Deleted>true</Deleted>
   </Drone>
   <Drone>
     <ID>32</ID>

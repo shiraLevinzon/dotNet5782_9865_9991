@@ -74,7 +74,6 @@ namespace Dal
             }
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try

@@ -39,7 +39,7 @@ namespace BO
                                     droneToList.BatteryStatus -= bL.free;
                                     reportProgress();
                                     dis -= 1;
-                                    Thread.Sleep(50);
+                                    Thread.Sleep(100);
                                 }
 
                                 //The SendingDroneforCharging function checks the initial distance and calculates the
@@ -84,7 +84,7 @@ namespace BO
                                 droneToList.BatteryStatus -= bL.free;
                                 reportProgress();
                                 dis -= 1;
-                                Thread.Sleep(50);
+                                Thread.Sleep(100);
                             }
                             droneToList.BatteryStatus = batrry;
                             bL.CollectParcelByDrone(droneId);
@@ -97,7 +97,7 @@ namespace BO
                                 droneToList.BatteryStatus -= dal.RequestPowerConsumptionByDrone()[Convert.ToInt32(parcelInTransfer.Weight) + 1];
                                 reportProgress();
                                 dis -= 1;
-                                Thread.Sleep(50);
+                                Thread.Sleep(100);
                             }
                             droneToList.BatteryStatus = batrry;
                             bL.DeliveryOfPackageByDrone(droneId);

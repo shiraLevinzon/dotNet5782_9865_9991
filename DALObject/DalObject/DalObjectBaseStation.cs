@@ -11,7 +11,11 @@ namespace Dal
      partial class DalObject : DalApi.IDal
      {
 
-
+        /// <summary>
+        /// Get func of base station
+        /// </summary>
+        /// <param name="GetBaseStation"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public BaseStation GetBaseStation(int id)
         {
@@ -22,7 +26,11 @@ namespace Dal
             return b;
         }
 
-
+        /// <summary>
+        /// check func of base station
+        /// </summary>
+        /// <param name="CheckBaseStation"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public bool CheckBaseStation(int id)
         {
@@ -30,6 +38,12 @@ namespace Dal
         }
 
 
+
+        /// <summary>
+        /// update func of base station
+        /// </summary>
+        /// <param name="UpdBaseStation"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdBaseStation(BaseStation tmp)
         {
@@ -39,12 +53,13 @@ namespace Dal
                 throw new MissingIdException(tmp.ID, "BaseStation");
             DataSource.baseStations.Add(tmp);
         }
+
+
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>
         /// <param name="tmp"></param>
         /// 
-
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddBaseStation(BaseStation tmp)
         {
@@ -53,7 +68,11 @@ namespace Dal
             DataSource.baseStations.Add(tmp);
         }
 
-
+        /// <summary>
+        /// Get func of list of base station
+        /// </summary>
+        /// <param name="GetAllBaseStations"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BaseStation> GetAllBaseStations(Predicate<BaseStation> predicate=null)
         {
@@ -67,52 +86,13 @@ namespace Dal
                    where b.Deleted== false
                    select b;
         }
+
+       
         /// <summary>
-        /// Sending Drone To BaseStation
+        /// Delete func of base station
         /// </summary>
-        /// <param name="bsID"></param>
-        /// <param name="dID"></param>
-        /// 
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void SendingDroneToBaseStation(int bsID, int dID)
-        {
-            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted== false);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
-
-            BaseStation bs = DataSource.baseStations[index1];
-            Drone d = DataSource.drones[index2];
-            bs.FreeChargingSlots--;
-            DataSource.baseStations[index1] = bs;
-            DataSource.drones[index2] = d;
-            DroneCharge dc = new DroneCharge();
-            dc.DroneID = dID;
-            dc.StationID = bsID;
-            DataSource.droneCharges.Add(dc);
-        }
-        /// <summary>
-        /// Release Drone From Charging At BaseStation
-        /// </summary>
-        /// <param name="bsID"></param>
-        /// <param name="dID"></param>
-
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
-        {
-            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted== false);
-            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
-            int index3 = DataSource.droneCharges.FindIndex(x => x.DroneID == dID && x.Deleted == false);
-            BaseStation bs = DataSource.baseStations[index1];
-            Drone d = DataSource.drones[index2];
-            bs.FreeChargingSlots++;
-            DataSource.baseStations[index1] = bs;
-            DataSource.drones[index2] = d;
-            //DeleteDroneInCharge(dID);
-            DataSource.droneCharges.RemoveAt(index3);
-        }
-
-
+        /// <param name="DeleteBaseStatin"></param>
+        /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteBaseStatin(int bsID)
         {

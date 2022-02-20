@@ -119,17 +119,7 @@ namespace PL
         }
         private void droneInChargeList_Click(object sender, RoutedEventArgs e)
         {
-            //BO.BaseStation bs = new BO.BaseStation()
-            //{
-            //    ID = Convert.ToInt32(iDTextBlock.Text),
-            //    StationName = Convert.ToString(stationNameTextBox.Text),
-            //    BaseStationLocation = new Location()
-            //    {
-            //        Latitude = Convert.ToDouble(latitudeTextBlock.Text),
-            //        Longitude = Convert.ToDouble(longitudeTextBlock.Text)
-            //    },
-            //    FreeChargingSlots = Convert.ToInt32(freeChargingSlotsTextBox.Text)
-            //};
+            
             BO.BaseStation bs = bl.GetBaseStations().First(b => b.ID == Convert.ToInt32(iDTextBlock.Text));
             new DroneInChargingWindow(bl,bs).ShowDialog();
         }

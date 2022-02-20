@@ -45,7 +45,7 @@ namespace BL
             normalC = arr[2];
             heavyC = arr[3];
             droneLoadingRate = arr[4];
-            #region מילוי רשימת הלקוחות מסוג דאל 
+            #region initial customers list
             List<DO.Customer> TMPcustomer = dalLayer.GetAllCustomers().ToList();
             foreach (var item in TMPcustomer)
             {
@@ -60,7 +60,8 @@ namespace BL
                 customersBL.Add(cust);
             }
             #endregion
-            #region מילוי רשימת רחפנים מסוג דאל
+
+            #region initial drones list
             List<DO.Drone> TMPdrone = dalLayer.GetAllDrones().ToList();
             foreach (var item in TMPdrone)
             {
@@ -79,7 +80,8 @@ namespace BL
 
             }
             #endregion
-            #region מילוי משתמשים 
+
+            #region initial users list 
             List<BO.User> users = new List<BO.User>();
             List<DO.User> TMPusers = dalLayer.GetAllUser().ToList();
             foreach (var item in TMPusers)
@@ -89,7 +91,8 @@ namespace BL
                 users.Add(us);
             }
             #endregion
-            #region מילוי רשימת תחנות בסיס מסוג דאל
+
+            #region initial base stations list
             List<DO.BaseStation> TMPbaseStation = dalLayer.GetAllBaseStations().ToList();
             foreach (var item in TMPbaseStation)
             {
@@ -105,7 +108,7 @@ namespace BL
             }
             #endregion
 
-            #region מילוי רשימת חבילה מסוג דאל
+            #region initial parcels list by targil 2 ruels
             List<DroneToList> ezer = new List<DroneToList>();
             List<DO.Parcel> TMPparcel = dalLayer.GetAllParcels().Where(par => par.DroneId != 0).ToList();
             foreach (var item in TMPparcel)
@@ -170,6 +173,9 @@ namespace BL
 
             }
             #endregion
+
+            #region important updates for the drones
+
             foreach (var item in dronesToList)
             {
                 if (item.Conditions != (BO.DroneConditions)2)
@@ -186,8 +192,6 @@ namespace BL
                 else
                 if (item.Conditions == (BO.DroneConditions)1)
                 {
-                    //  int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-                    //  item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
                     //עדכון מצב בטריה
                     BO.BaseStation basestationHalper = new BO.BaseStation();
                     double mini = double.MaxValue;
@@ -203,10 +207,13 @@ namespace BL
                     item.BatteryStatus = random.Next((int)(mini * free), 100);
                 }
             }
-           
+            #endregion
+
         }
         #endregion
-        #region פונקציית שליחת רחפן לטעינה יש צורך בבדיקה!!
+
+
+        #region Sending Drone To Charge in base station func
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToCharging(int id)
         {
@@ -246,7 +253,8 @@ namespace BL
             }
         }
         #endregion
-        #region פונקציית שחרור רחפן מעמדת טעינה
+
+        #region Release Drone From Charging func
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void ReleaseDroneFromCharging(int id, TimeSpan time)
@@ -259,7 +267,6 @@ namespace BL
                     if (drone.Conditions != (DroneConditions)0)
                         throw new BO.ImproperMaintenanceCondition(id, "The drone is not in maintance");
 
-                    //BO.BaseStation bases = GetBaseStations().FirstOrDefault(bas => bas.BaseStationLocation.Latitude == drone.location.Latitude && bas.BaseStationLocation.Longitude == drone.location.Longitude);
                     BO.BaseStation bases = GetBaseStation(dalLayer.GetDroneInCharging(drone.ID).StationID);
 
                     bases.DronesInCharge.ToList().RemoveAll(dro => dro.ID == drone.ID);
@@ -285,8 +292,9 @@ namespace BL
             }
         }
         #endregion
-        #region פונקציית שיוך חבילה לרחפן
-        //עובדת!!
+
+        #region Assign Package To Drone func
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AssignPackageToDrone(int id)
@@ -353,7 +361,8 @@ namespace BL
             }
         }
         #endregion
-        #region איסוף חבילה עי רחפן
+
+        #region Collect Parcel By Drone func
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void CollectParcelByDrone(int id)//לסדר פונקציה כדי שרשימת הרחפנים תתעדכן
@@ -388,7 +397,8 @@ namespace BL
             }
         }
         #endregion
-        #region אספקת חבילה ע"י רחפן
+
+        #region Delivery Package By Drone to destination func
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void DeliveryOfPackageByDrone(int id)
@@ -431,7 +441,8 @@ namespace BL
             }
         }
         #endregion
-        #region פונקציית עזר לחישוב מרחק
+
+        #region help func to calculte distance between two points
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public double DistanceTo(double lat1, double lon1, double lat2, double lon2)
@@ -449,7 +460,8 @@ namespace BL
             return dist * 1.609344;
         }
         #endregion
-        #region פונקציית עזר למציאת תחנת בסיס קרובה
+
+        #region help function to find the nirest base station 
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public int helpbasestation(BO.DroneToList drone, IEnumerable<BO.BaseStation> baseStationsBL)

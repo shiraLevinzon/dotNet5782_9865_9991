@@ -54,6 +54,7 @@ namespace BL
                 throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
+
         /// <summary>
         /// Functions Add a new field to one of the lists
         /// </summary>

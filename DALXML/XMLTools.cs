@@ -20,6 +20,7 @@ namespace Dal
 
         #region SaveLoadWithXElement
         [MethodImpl(MethodImplOptions.Synchronized)]
+        
 
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {

@@ -23,7 +23,6 @@ namespace BL
                 BO.DroneToList dtl = dronesToList.Find(dro => dro.ID == id && dro.Deleted== false);
                 DO.Drone d = dalLayer.GetDrone(id);
                 d.CopyPropertiesTo(boDrone);
-         //       boDrone.Conditions = dtl.Conditions;
                 boDrone.location = new BO.Location();
                 dtl.CopyPropertiesTo(boDrone);
                 boDrone.location.Latitude = dtl.location.Latitude;
@@ -108,7 +107,6 @@ namespace BL
 
                 dronesToList.Add(droneToListTMP);
                 dalLayer.AddDrone(DroneDO);
-                //dalLayer.SendingDroneToBaseStation(id, drone.ID);
                 DroneToCharging(drone.ID);
             }
             catch(DO.MissingIdException ex)

@@ -364,38 +364,22 @@ namespace PL
             listViewWin.FilterByCombiBoxOfBaseStation();
             listViewWin.FilterByCombiBoxOfParcel();
             listViewWin.listOfCostumer.ItemsSource = bl.GetAllCustomer();
-
-            switch (myDrone.Conditions)
+            if (myDrone.Conditions == DroneConditions.Available)
             {
-                case DroneConditions.Available:
-                    if (showParcel.IsEnabled==true) //the drone is free cuse he just done (we know that becuse the grid is opend) it is affter deliverd.
-                    {
-                        //display changes for thois stage
-                        showParcel.IsEnabled =false;
-                    }
-                    else //the drone is in a free state that has come out of charge and not like before (not affter deliver).
-                    {
-                        //Update the list observer of BaseStations.
-                        
-                    }
-                    break;
-                case DroneConditions.maintenance:
-                    break;
+                if (showParcel.IsEnabled == true)
+                {
 
-                case DroneConditions.delivery:
-                    showParcel.IsEnabled = true;
-                    break;
-                default:
-                    break;
+                    showParcel.IsEnabled = false;
+                }
             }
+            else if (myDrone.Conditions == DroneConditions.delivery)
+            { showParcel.IsEnabled = true; }
 
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             bl.simula(idDrone, reportPro, IsTimeRun);
-            
-
         }
         public void reportPro()
         {
@@ -416,14 +400,15 @@ namespace PL
             deleteDrone.Visibility = Visibility.Hidden;
             CancelBottun.Visibility = Visibility.Hidden;
         }
-        #endregion
-
         private void cancelSimu_Click(object sender, RoutedEventArgs e)
         {
             worker.CancelAsync();
 
-            
+
 
         }
+        #endregion
+
+
     }
 }

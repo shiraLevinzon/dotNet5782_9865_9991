@@ -128,4 +128,12 @@
     <Latitude>35</Latitude>
     <Deleted>true</Deleted>
   </Customer>
+  <Customer>
+    <ID>1234</ID>
+    <Name>גכעגכע</Name>
+    <Phone>435345</Phone>
+    <Longitude>32</Longitude>
+    <Latitude>32</Latitude>
+    <Deleted>false</Deleted>
+  </Customer>
 </ArrayOfCustomer>

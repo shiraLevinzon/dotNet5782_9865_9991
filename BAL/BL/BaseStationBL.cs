@@ -40,12 +40,7 @@ namespace BL
                 boBaseStation.BaseStationLocation.Latitude = doBaseStation.Latitude;
                 boBaseStation.BaseStationLocation.Longitude = doBaseStation.Longitude;
                 boBaseStation.DronesInCharge = new List<DroneInCharging>();
-                //boBaseStation.DronesInCharge = from d in GetAllDrones(dro=> dro.location.Latitude == boBaseStation.BaseStationLocation.Latitude&&dro.location.Longitude == boBaseStation.BaseStationLocation.Longitude)
-                //                               select new BO.DroneInCharging()
-                //                               {
-                //                                   ID = d.ID,
-                //                                   BatteryStatus =d.BatteryStatus,
-                //                               };
+               
                 boBaseStation.DronesInCharge = from d in dalLayer.GetAllDroneCharge()
                                               where d.StationID == id
                                              select new BO.DroneInCharging()

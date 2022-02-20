@@ -22,7 +22,7 @@ namespace Dal
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
         }
-        
+        // Initialize of lists
         #region Initialize
         public static void Initialize()
         {
@@ -101,13 +101,7 @@ namespace Dal
                     // PickedUp =DateTime(2022,r1.Next(1, 31), r1.Next(1, 31)),
                 }) ;
             }
-            //XMLTools.SaveListToXMLSerializer(DataSource.drones, DronesPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.baseStations, BaseStationsPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.customers, CustonersPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.parcels, ParcelsPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.users, UsersPath);
-            //XMLTools.SaveListToXMLSerializer(DataSource.droneCharges, DronesInChargePath);
-            //XMLTools.SaveListToXMLSerializer(RequestPowerConsumptionByDrone().ToList(), configPath);
+            
             
         }
         #endregion Initialize
@@ -126,12 +120,6 @@ namespace Dal
 
      partial class DalObject : DalApi.IDal
      {
-        //static readonly Lazy<IDal> instance = new Lazy<IDal>(() => new DalObject());
-        //public static IDal Instance { get => instance.Value; }
-        // static readonly IDal instance = new DalObject();
-
-        // The public Instance property to use 
-        //  public static IDal Instance { get { return instance; } }
 
         static readonly IDal instance = new DalObject();
         public static IDal Instance { get => instance; }
@@ -148,13 +136,6 @@ namespace Dal
             PowerConsumption[3] = DataSource.Config.heavyWeight;
             PowerConsumption[4] = DataSource.Config.DroneLoadingRate;
             return PowerConsumption;
-        }
-
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<DroneCharge> GetAllDroneCharge()
-        {
-            return DataSource.droneCharges.Take(DataSource.droneCharges.Count);
         }
     }
 }

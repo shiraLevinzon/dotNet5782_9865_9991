@@ -68,9 +68,10 @@ namespace DalApi
         public bool CheckDroneCharge(int id);
         public IEnumerable<DroneCharge> GetAllDroneCharge(Predicate<DroneCharge> predicate = null);
         public void DeleteDroneInCharge(int dgID);
+        public IEnumerable<DroneCharge> GetAllDroneCharge();
+
         #endregion
         public double[] RequestPowerConsumptionByDrone();
-        public IEnumerable<DroneCharge> GetAllDroneCharge();
 
     }
 }

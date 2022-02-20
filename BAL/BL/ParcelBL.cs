@@ -107,22 +107,8 @@ namespace BL
                 throw new BO.MissingIdException(ex.ID, ex.EntityName, "this parcel isnt existe anymore in the system");
             }
         }
-        //public void UpdateParcel(BO.Parcel Parcel)
-        //{
-
-        //    //Update DO.BaseStation            
-        //    IDAL.DO.Parcel ParcelDO = new IDAL.DO.Parcel();
-        //    Parcel.CopyPropertiesTo(ParcelDO);
-        //    try
-        //    {
-        //        dalLayer.UpdParcel(ParcelDO);
-        //    }
-        //    catch (IDAL.DO.DuplicateIdException ex)
-        //    {
-        //        throw new BO.DuplicateIdException(ParcelDO.ID, "Parcel", "Student ID is illegal", ex);
-        //    }
-
-        //}
+      
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
         public int func(DO.Parcel p)
         {

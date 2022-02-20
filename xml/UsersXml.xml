@@ -35,4 +35,11 @@
     <Phone>0507468073</Phone>
     <Deleted>false</Deleted>
   </User>
+  <User>
+    <Id>1234</Id>
+    <Name>רכרכא</Name>
+    <Password>1111</Password>
+    <Phone>32545</Phone>
+    <Deleted>false</Deleted>
+  </User>
 </ArrayOfUser>

@@ -15,8 +15,6 @@ namespace Dal
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
-
-
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignPackageToDrone(int pID, int dID)
         {
@@ -32,12 +30,13 @@ namespace Dal
             DataSource.parcels[index1] = p;
             DataSource.drones[index2] = d;
         }
+
+
         /// <summary>
         /// Parcel Collection By A Drone
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
-
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void ParcelCollectionByDrone(int pID, int dID)
@@ -57,13 +56,13 @@ namespace Dal
             DataSource.drones[index2] = d;
 
         }
+
+
         /// <summary>
         /// Delivery Parcel To Customer
         /// </summary>
         /// <param name="pID"></param>
         /// <param name="dID"></param>
-
-
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeliveryParcelToCustomer(int pID, int dID)
         {
@@ -80,6 +79,50 @@ namespace Dal
             DataSource.parcels[index1] = p;
             DataSource.drones[index2] = d;
 
+        }
+
+        /// <summary>
+        /// Sending Drone To BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
+        /// 
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void SendingDroneToBaseStation(int bsID, int dID)
+        {
+            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted == false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
+
+            BaseStation bs = DataSource.baseStations[index1];
+            Drone d = DataSource.drones[index2];
+            bs.FreeChargingSlots--;
+            DataSource.baseStations[index1] = bs;
+            DataSource.drones[index2] = d;
+            DroneCharge dc = new DroneCharge();
+            dc.DroneID = dID;
+            dc.StationID = bsID;
+            DataSource.droneCharges.Add(dc);
+        }
+
+
+        /// <summary>
+        /// Release Drone From Charging At BaseStation
+        /// </summary>
+        /// <param name="bsID"></param>
+        /// <param name="dID"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void ReleaseDroneFromChargingAtBaseStation(int bsID, int dID)
+        {
+            int index1 = DataSource.baseStations.FindIndex(x => x.ID == bsID && x.Deleted == false);
+            int index2 = DataSource.drones.FindIndex(x => x.ID == dID && x.Deleted == false);
+            int index3 = DataSource.droneCharges.FindIndex(x => x.DroneID == dID && x.Deleted == false);
+            BaseStation bs = DataSource.baseStations[index1];
+            Drone d = DataSource.drones[index2];
+            bs.FreeChargingSlots++;
+            DataSource.baseStations[index1] = bs;
+            DataSource.drones[index2] = d;
+            //DeleteDroneInCharge(dID);
+            DataSource.droneCharges.RemoveAt(index3);
         }
     }
 }

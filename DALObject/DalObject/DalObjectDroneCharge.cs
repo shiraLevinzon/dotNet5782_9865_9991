@@ -52,6 +52,11 @@ namespace Dal
             ps.Deleted = true;
             DataSource.droneCharges[index1] = ps;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<DroneCharge> GetAllDroneCharge()
+        {
+            return DataSource.droneCharges.Take(DataSource.droneCharges.Count);
+        }
         //no need of add and update functions becauese there is no need of them
     }
 }

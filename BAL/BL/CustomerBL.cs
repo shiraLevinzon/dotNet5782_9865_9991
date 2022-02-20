@@ -70,7 +70,6 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<BO.CustomerToList> GetAllCustomer(Predicate<BO.CustomerToList> predicate = null)
         {
-            //אסור להשתשמש בגט פרסל
             IEnumerable<BO.CustomerToList> CustomerToLists = from c in dalLayer.GetAllCustomers()
                    let cu = new BO.Customer()
                    select new BO.CustomerToList()

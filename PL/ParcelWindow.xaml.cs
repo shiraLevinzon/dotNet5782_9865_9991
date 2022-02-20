@@ -75,9 +75,9 @@ namespace PL
             try
             {
                if(priorityComboBox.SelectedIndex==-1|| weightComboBox.SelectedIndex == -1 || ReceiverIDComboBox.SelectedIndex == -1 || SenderIDComboBox.SelectedIndex == -1 )
-                {
+               {
                     MessageBox.Show("You did not fill in all the details", "ERROR", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                }
+               }
                 else
                 {
                     bl.AddParcel(p);

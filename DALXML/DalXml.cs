@@ -246,8 +246,6 @@ namespace Dal
             XMLTools.SaveListToXMLElement(BaseStationRootElem, BaseStationsPath);
         }
         #endregion
-
-
         #region Customer
         [MethodImpl(MethodImplOptions.Synchronized)]
 

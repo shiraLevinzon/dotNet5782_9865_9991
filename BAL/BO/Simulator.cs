@@ -61,7 +61,7 @@ namespace BO
                                     droneToList.BatteryStatus = 100;
                                 }
                                 reportProgress();
-                                Thread.Sleep(50);
+                                Thread.Sleep(500);
                             }
                             TimeSpan t = new TimeSpan(100, 0, 0);
                             
@@ -90,7 +90,7 @@ namespace BO
                             bL.CollectParcelByDrone(droneId);
                             reportProgress();
 
-
+                            batrry = droneToList.BatteryStatus;
                             dis = parcelInTransfer.distance;
                             while (dis > 0)
                             {

@@ -15,7 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 namespace PL
 {
-    public enum numbers { zero,one ,two, Three ,four ,five , seven ,eight ,nine, ten }
     /// <summary>
     /// Interaction logic for ListView.xaml
     /// </summary>
@@ -30,7 +29,7 @@ namespace PL
             listOfDrones.ItemsSource = bl.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneConditions));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            freeChargSlot.ItemsSource=
+            freeChargSlot.ItemsSource = Enum.GetValues(typeof(numbers));
             listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
             listOfCostumer.ItemsSource = bl.GetAllCustomer();
 
@@ -85,7 +84,7 @@ namespace PL
             if (freeChargSlot.SelectedItem == null)
                 listOfBaseStation.ItemsSource = bl.GetAllBaseStation();
             else
-                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases => bases.FreeChargingSlots == (int)freeChargSlot.SelectedIndex);
+                listOfBaseStation.ItemsSource = bl.GetAllBaseStation(bases => bases.FreeChargingSlots ==  freeChargSlot.SelectedIndex);
         }
         private void listOfbaseStation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

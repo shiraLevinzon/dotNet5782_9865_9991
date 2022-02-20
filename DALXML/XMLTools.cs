@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -16,8 +17,10 @@ namespace Dal
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
-     
+
         #region SaveLoadWithXElement
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {
             try
@@ -29,6 +32,7 @@ namespace Dal
                 throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         public static XElement LoadListFromXMLElement(string filePath)
         {
@@ -53,6 +57,8 @@ namespace Dal
         #endregion
 
         #region SaveLoadWithXMLSerializer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
         {
             try
@@ -67,6 +73,8 @@ namespace Dal
                 throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try

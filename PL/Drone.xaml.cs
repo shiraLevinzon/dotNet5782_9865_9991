@@ -344,6 +344,8 @@ namespace PL
             updateBottun.Visibility = Visibility.Visible;
             deleteDrone.Visibility = Visibility.Visible;
             CancelBottun.Visibility = Visibility.Visible;
+            temp = Convert.ToInt32(conditionsLabel.Content);
+            Refresh();
 
         }
 
@@ -352,7 +354,7 @@ namespace PL
             //שינויים בתצוגה
             BO.DroneToList myDrone = bl.GetAllDrones().First(dro=> dro.ID== idDrone);
             //UPDATEgrid.DataContext = myDrone;//לא עובד משום מה ממש מוזר
-            batteryStatusLabel.Text =Convert.ToString(myDrone.BatteryStatus);
+            batteryStatusLabel.Text = Convert.ToString(myDrone.BatteryStatus);
             conditionsLabel.Content = (BO.DroneConditions)myDrone.Conditions;
             packagNumberOnTransferred.Content = myDrone.PackagNumberOnTransferred;
             latitudeLabel.Text = Convert.ToString(myDrone.location.Latitude);
@@ -420,8 +422,7 @@ namespace PL
         {
             worker.CancelAsync();
 
-            temp = Convert.ToInt32(conditionsLabel.Content);
-            Refresh();
+            
 
         }
     }

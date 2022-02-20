@@ -203,51 +203,7 @@ namespace BL
                     item.BatteryStatus = random.Next((int)(mini * free), 100);
                 }
             }
-            //#region 
-            //foreach (var item in dronesToList)
-            //{
-            //    if (item.Conditions != (BO.DroneConditions)2)
-            //    {
-            //        item.Conditions = (BO.DroneConditions)random.Next(0, 2);
-            //    }
-
-            //    if (dalLayer.GetAllDroneCharge().Any(dro => dro.DroneID == item.ID))
-            //    {
-            //        item.Conditions = (BO.DroneConditions)0;
-            //        item.location = GetBaseStation(dalLayer.GetDroneInCharging(item.ID).StationID).BaseStationLocation;
-            //        item.BatteryStatus = (random.Next(0, 21));
-            //    }
-            //    else if ((item.Conditions == (BO.DroneConditions)0))
-            //    {
-            //        item.Conditions = (BO.DroneConditions)1;
-            //        int ran = random.Next(0, baseStationsBL.Count());
-            //        item.location = baseStationsBL[ran].BaseStationLocation;
-            //        dalLayer.SendingDroneToBaseStation(baseStationsBL[ran].ID, item.ID);
-            //        item.BatteryStatus = (random.Next(0, 21));
-            //        //DroneToCharging(item.ID);
-            //    }
-
-
-            //    if (item.Conditions == (BO.DroneConditions)1)
-            //    {
-            //        //int ran = random.Next(0, customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3)).Count);
-            //        //item.location = customersBL.FindAll(cus => cus.PackagesToCustomer.Any(par => par.Situation == (BO.Situations)3))[ran].Location;
-            //        //עדכון מצב בטריה
-            //        BO.BaseStation basestationHalper = new BO.BaseStation();
-            //        double mini = double.MaxValue;
-            //        foreach (var item2 in baseStationsBL)
-            //        {
-            //            double dis = DistanceTo(item2.BaseStationLocation.Latitude, item2.BaseStationLocation.Longitude, item.location.Latitude, item.location.Longitude);
-            //            if (dis < mini)
-            //            {
-            //                mini = dis;
-            //                basestationHalper = item2;
-            //            }
-            //        }
-            //        item.BatteryStatus = random.Next((int)(mini * free), 100);
-            //    }
-            //}
-            //#endregion
+           
         }
         #endregion
         #region פונקציית שליחת רחפן לטעינה יש צורך בבדיקה!!
@@ -259,21 +215,19 @@ namespace BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)1)
                     throw new BO.ImproperMaintenanceCondition(id, "ImproperMaintenanceCondition", "The drone is not available");
+               
                 int idbasetation = helpbasestation(drone, GetBaseStations());
-                double distance = DistanceTo(GetBaseStation(idbasetation).BaseStationLocation.Latitude, GetBaseStation(idbasetation).BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
-                if (free * distance > drone.BatteryStatus || GetBaseStation(idbasetation).FreeChargingSlots == 0)
-                    throw new BO.ImproperMaintenanceCondition(id, "ImproperMaintenanceCondition", "There is not enough battery to get to the station or there is no space available at the station to recharge");
                 BO.BaseStation basestation = GetBaseStation(idbasetation);
-                BO.DroneInCharging dron = new DroneInCharging();
-                BO.DroneToList dro = dronesToList.Find(x => x.ID == drone.ID);
-                dro.BatteryStatus = dro.BatteryStatus - free * distance;
-                dalLayer.GetDroneInCharging(drone.ID).CopyPropertiesTo(dron);
-                dron.BatteryStatus = dro.BatteryStatus;
-                basestation.DronesInCharge.ToList().Add(dron);
-                dro.location.Latitude = basestation.BaseStationLocation.Latitude;
-                dro.location.Longitude = basestation.BaseStationLocation.Longitude;
-                dro.Conditions = (DroneConditions)0;
-                dalLayer.SendingDroneToBaseStation(basestation.ID, dro.ID);
+                double distance = DistanceTo(basestation.BaseStationLocation.Latitude, basestation.BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
+               
+                if (free * distance > drone.BatteryStatus || basestation.FreeChargingSlots == 0)
+                    throw new BO.ImproperMaintenanceCondition(id, "ImproperMaintenanceCondition", "There is not enough battery to get to the station or there is no space available at the station to recharge");
+
+                drone.BatteryStatus = drone.BatteryStatus - free * distance;
+                drone.location.Latitude = basestation.BaseStationLocation.Latitude;
+                drone.location.Longitude = basestation.BaseStationLocation.Longitude;
+                drone.Conditions = (DroneConditions)0;
+                dalLayer.SendingDroneToBaseStation(basestation.ID, drone.ID);
             }
             catch (DO.DuplicateIdException ex)
             {
@@ -299,18 +253,15 @@ namespace BL
                 BO.DroneToList drone = dronesToList.Find(x => x.ID == id && x.Deleted == false);
                 if (drone.Conditions != (DroneConditions)0)
                     throw new BO.ImproperMaintenanceCondition(id, "The drone is not in maintance");
-                BO.DroneToList dro = dronesToList.Find(x => x.ID == id);
-                IEnumerable<BO.BaseStation> baseStations = from b in GetAllBaseStation()
-                                                           select GetBaseStation(b.ID);
-                BO.BaseStation bases = baseStations.FirstOrDefault(bas => bas.BaseStationLocation.Latitude== dro.location.Latitude&& bas.BaseStationLocation.Longitude == dro.location.Longitude);
-                //int index = bases.DronesInCharge.ToList().FindIndex(dr => dr.ID == drone.ID);
+
+                BO.BaseStation bases = GetBaseStations().FirstOrDefault(bas => bas.BaseStationLocation.Latitude== drone.location.Latitude&& bas.BaseStationLocation.Longitude == drone.location.Longitude);
                 bases.DronesInCharge.ToList().RemoveAll(dro => dro.ID ==drone.ID);
-                dro.Conditions = (DroneConditions)1;
-                if (dro.BatteryStatus+ droneLoadingRate * time.TotalHours > 100)
-                    dro.BatteryStatus = 100;
+                drone.Conditions = (DroneConditions)1;
+                if (drone.BatteryStatus+ droneLoadingRate * time.TotalHours > 100)
+                    drone.BatteryStatus = 100;
                 else
-                    dro.BatteryStatus = dro.BatteryStatus + droneLoadingRate*100 * time.TotalHours;
-                dalLayer.ReleaseDroneFromChargingAtBaseStation(bases.ID, dro.ID);
+                    drone.BatteryStatus = drone.BatteryStatus + droneLoadingRate * time.TotalHours;
+                dalLayer.ReleaseDroneFromChargingAtBaseStation(bases.ID, drone.ID);
             }
             catch (DO.DuplicateIdException ex)
             {
@@ -356,7 +307,6 @@ namespace BL
                     }
                 }
                 int a = (int)(DO.WeightCategories)parcel.Weight;
-                double d = dalLayer.RequestPowerConsumptionByDrone()[0];
                 BO.DroneToList Dro = new DroneToList()
                 {
                     location = new Location()
@@ -365,13 +315,14 @@ namespace BL
                         Longitude = dalLayer.GetCostumer(parcel.TargetID).Longitude
                     }
                 };
+               
                 double decrease = (double)dalLayer.RequestPowerConsumptionByDrone().GetValue(++a);
-                decrease = d * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
+                decrease = free * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude)
                     + decrease * DistanceTo(dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude, dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude)
-                    + d * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(Dro, GetBaseStations())).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(Dro, GetBaseStations())).BaseStationLocation.Longitude);
+                    + free * DistanceTo(dalLayer.GetCostumer(parcel.TargetID).Latitude, dalLayer.GetCostumer(parcel.TargetID).Longitude, GetBaseStation(helpbasestation(Dro, GetBaseStations())).BaseStationLocation.Latitude, GetBaseStation(helpbasestation(Dro, GetBaseStations())).BaseStationLocation.Longitude);
+               
                 if (decrease > drone.BatteryStatus)
                     throw new BO.ImproperMaintenanceCondition(drone.ID, "ImproperMaintenanceCondition", "Drone's battery too low ");
-                drone.BatteryStatus -= d * DistanceTo(drone.location.Latitude, drone.location.Longitude, dalLayer.GetCostumer(parcel.SenderID).Latitude, dalLayer.GetCostumer(parcel.SenderID).Longitude);
                 drone.Conditions = (DroneConditions)2;
                 parcel.DroneId = drone.ID;
                 drone.PackagNumberOnTransferred = parcel.ID;
@@ -404,7 +355,7 @@ namespace BL
                 BO.Drone drone = GetDrone(id);
                 if ((drone.Conditions != (DroneConditions)2))
                     throw new BO.TheDroneDnotShip(id, "Drone", "Drone condition is not correct");
-                // double d = dalLayer.RequestPowerConsumptionByDrone()[Convert.ToInt32(drone.PackageInTransfer.Weight)];
+
                 drone.BatteryStatus -= free * DistanceTo(drone.location.Latitude, drone.location.Longitude, drone.PackageInTransfer.Collection.Latitude, drone.PackageInTransfer.Collection.Longitude);
                 drone.location.Latitude = drone.PackageInTransfer.Collection.Latitude;
                 drone.location.Longitude = drone.PackageInTransfer.Collection.Longitude;
@@ -487,7 +438,6 @@ namespace BL
         public int helpbasestation(BO.DroneToList drone, IEnumerable<BO.BaseStation> baseStationsBL)
         {
             double distance = DistanceTo(baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude, drone.location.Longitude, drone.location.Longitude);
-            //double distance = DistanceTo(drone.location.Longitude, drone.location.Longitude,baseStationsBL.First().BaseStationLocation.Latitude, baseStationsBL.First().BaseStationLocation.Longitude);
             int idbasetation = 0;
             foreach (var item in baseStationsBL)
             {

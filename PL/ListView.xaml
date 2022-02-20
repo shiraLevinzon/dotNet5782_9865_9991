@@ -149,10 +149,10 @@
                             <Button x:Name="groupStation" Content="קיבוץ לפי מספר עמדות טעינה פנויות" HorizontalAlignment="Left" Margin="128,0,0,0" VerticalAlignment="Center" Height="56" Click="groupStation_Click" Width="260" Grid.Column="1" />
                             <StackPanel Margin="72,38,144,38"  Grid.Column="0">
                                 <Grid  >
-                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBoxForBaseStation"  IsChecked="True" Margin="41,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593" />
+                                    <CheckBox x:Name="OutlinedComboBoxEnabledCheckBoxForBaseStation"  IsChecked="True" Margin="41,0,0,8" Content="Enabled" RenderTransformOrigin="0.501,0.593"  />
                                     <Button x:Name="Clear3" Content="Clear" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Grid.Column="1" Click="Clear1_Click"  />
                                 </Grid>
-                                <ComboBox x:Name="freeChargSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון לפי עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="StatusSelector_SelectionChanged" />
+                                <ComboBox x:Name="freeChargSlot"  Style="{StaticResource MaterialDesignOutlinedComboBox}" IsEnabled="{Binding IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}" materialDesign:HintAssist.Hint="סינון לפי עמדות טעינה פנויות" ItemsSource="{Binding ShortStringList}" Width="248" Height="51" SelectionChanged="freeChargSlot_SelectionChanged" />
                             </StackPanel>
                         </Grid>
 

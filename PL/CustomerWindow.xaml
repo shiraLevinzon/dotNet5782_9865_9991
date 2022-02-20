@@ -67,6 +67,6 @@
 
         <Button x:Name="PackagesFromCustomer" Content="" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="230" Click="PackagesFromCustomer_Click"/>
         <Button x:Name="PackagesToCustomer" Content="" HorizontalAlignment="Left" Margin="43,328,0,0" VerticalAlignment="Top" Width="230" Click="PackagesToCustomer_Click"/>
-        <Button x:Name="DeleteCustumer" Content="" HorizontalAlignment="Center" Margin="0,361,0,0" VerticalAlignment="Top" Width="142" Click="DeleteCustumer_Click"/>
+        <Button x:Name="DeleteCustumer" Content="delete" HorizontalAlignment="Left" Margin="334,361,0,0" VerticalAlignment="Top" Width="142" Click="DeleteCustumer_Click"/>
     </Grid>
 </Window>

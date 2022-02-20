@@ -126,6 +126,6 @@
     <Phone>057468073</Phone>
     <Longitude>36</Longitude>
     <Latitude>35</Latitude>
-    <Deleted>false</Deleted>
+    <Deleted>true</Deleted>
   </Customer>
 </ArrayOfCustomer>

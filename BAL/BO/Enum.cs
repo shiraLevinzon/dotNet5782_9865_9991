@@ -15,4 +15,6 @@ namespace BO
     //תחזוקה, זמינה, משלוח, טעינה
     public enum Deleted { Uninitialized, False, True }
 
+    public enum numbers { zero, one, two, Three, four, five, seven, eight, nine, ten }
+
 }
